@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     {
         Admin::create([
             'name' => 'Super Admin',
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin@dashboard.com',
             'password' => Hash::make('password123'),
             'is_active' => true,
         ]);

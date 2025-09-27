@@ -2,28 +2,24 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
-class AdminSeeder extends Seeder
+class SudoAdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Primeiro criar o Super Admin
-        $this->call(SudoAdminSeeder::class);
-        
-        // Admin secundário
         Admin::create([
-            'name' => 'Admin Secundário',
-            'email' => 'admin2@dashboard.com',
+            'name' => 'Super Admin',
+            'email' => 'admin@dashboard.com',
             'password' => Hash::make('password123'),
             'is_active' => true,
-            'is_super_admin' => false,
+            'is_super_admin' => true,
         ]);
     }
 }

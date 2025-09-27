@@ -14,7 +14,11 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         
-        
+        Role::create([
+            'slug' => 'super-admin',
+            'name' => 'Super Admin',
+            'description' => 'Super Admin do sistema',
+        ]);
 
         Role::create([
             'slug' => 'admin',

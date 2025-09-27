@@ -24,6 +24,7 @@ class Admin extends Authenticatable implements ChatUser
         'password',
         'is_active',
         'last_login_at',
+        'is_super_admin',
     ];
 
     /**
@@ -47,6 +48,7 @@ class Admin extends Authenticatable implements ChatUser
             'is_active' => 'boolean',
             'last_login_at' => 'datetime',
             'password' => 'hashed',
+            'is_super_admin' => 'boolean',
         ];
     }
 
@@ -69,6 +71,11 @@ class Admin extends Authenticatable implements ChatUser
     public function updateLastLogin(): void
     {
         $this->update(['last_login_at' => now()]);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->is_super_admin;
     }
 
     // Implementação da interface ChatUser

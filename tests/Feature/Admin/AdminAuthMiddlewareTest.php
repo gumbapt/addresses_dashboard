@@ -15,12 +15,12 @@ class AdminAuthMiddlewareTest extends TestCase
     {
         // Arrange
         $admin = Admin::factory()->create([
-            'email' => 'admin@lestjam.com',
+            'email' => 'admin@dashboard_addresses.com',
             'password' => bcrypt('password123')
         ]);
 
         $loginResponse = $this->postJson('/api/admin/login', [
-            'email' => 'admin@lestjam.com',
+            'email' => 'admin@dashboard_addresses.com',
             'password' => 'password123'
         ]);
 
@@ -68,7 +68,7 @@ class AdminAuthMiddlewareTest extends TestCase
     public function test_inactive_admin_cannot_access_protected_route()
     {
         $admin = Admin::factory()->inactive()->create([
-            'email' => 'admin@lestjam.com',
+            'email' => 'admin@dashboard_addresses.com',
             'password' => bcrypt('password123')
         ]);
         $token = $admin->createToken('test-token')->plainTextToken;

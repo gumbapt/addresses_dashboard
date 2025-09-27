@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Configurando ambiente Docker para LestJam..."
+echo "🚀 Configurando ambiente Docker para dashboard_addresses..."
 
 # Copiar arquivo de ambiente
 if [ ! -f .env ]; then

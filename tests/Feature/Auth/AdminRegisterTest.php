@@ -15,7 +15,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
@@ -37,14 +37,14 @@ class AdminRegisterTest extends TestCase
             ->assertJson([
                 'admin' => [
                     'name' => 'New Admin',
-                    'email' => 'newadmin@lestjam.com',
+                    'email' => 'newadmin@dashboard_addresses.com',
                     'is_active' => true
                 ]
             ]);
 
         $this->assertDatabaseHas('admins', [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'is_active' => true
         ]);
     }
@@ -53,12 +53,12 @@ class AdminRegisterTest extends TestCase
     {
         // Arrange
         Admin::factory()->create([
-            'email' => 'existing@lestjam.com'
+            'email' => 'existing@dashboard_addresses.com'
         ]);
 
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'existing@lestjam.com',
+            'email' => 'existing@dashboard_addresses.com',
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
@@ -78,7 +78,7 @@ class AdminRegisterTest extends TestCase
     {
         // Arrange
         $registerData = [
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
@@ -113,7 +113,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password_confirmation' => 'password123'
         ];
 
@@ -130,7 +130,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => 'password123'
         ];
 
@@ -147,7 +147,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => 'password123',
             'password_confirmation' => 'differentpassword'
         ];
@@ -183,7 +183,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => '12345',
             'password_confirmation' => '12345'
         ];
@@ -201,7 +201,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => str_repeat('a', 256),
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
@@ -219,7 +219,7 @@ class AdminRegisterTest extends TestCase
         // Arrange
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'newadmin@lestjam.com',
+            'email' => 'newadmin@dashboard_addresses.com',
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
@@ -230,7 +230,7 @@ class AdminRegisterTest extends TestCase
         // Assert
         $response->assertStatus(201);
 
-        $admin = Admin::where('email', 'newadmin@lestjam.com')->first();
+        $admin = Admin::where('email', 'newadmin@dashboard_addresses.com')->first();
         $this->assertTrue($admin->is_active);
         $this->assertNull($admin->last_login_at);
     }

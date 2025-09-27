@@ -63,7 +63,7 @@ class ListenOpenAIResponses extends Command
     {
         try {
             // Check the specific queue that Python is using
-            // Note: Python sends to 'lestjam_database_openai_responses' but Laravel adds prefix
+            // Note: Python sends to 'dashboard_addresses_database_openai_responses' but Laravel adds prefix
             $queueName = 'openai_responses';
             $queueLength = Redis::llen($queueName);
             

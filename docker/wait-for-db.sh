@@ -8,7 +8,7 @@ for i in {1..60}; do
     # Usa PHP para verificar a conexão com o banco
     if php -r "
         try {
-            \$pdo = new PDO('mysql:host=db;dbname=${DB_DATABASE:-lestjam}', '${DB_USERNAME:-lestjam}', '${DB_PASSWORD:-password}');
+            \$pdo = new PDO('mysql:host=db;dbname=${DB_DATABASE:-dashboard_addresses}', '${DB_USERNAME:-dashboard_addresses}', '${DB_PASSWORD:-password}');
             \$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo 'Database connection successful';
             exit(0);

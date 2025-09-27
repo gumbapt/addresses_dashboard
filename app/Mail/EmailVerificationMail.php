@@ -27,7 +27,7 @@ class EmailVerificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verificação de Email - LestJam',
+            subject: 'Verificação de Email - dashboard_addresses',
         );
     }
 

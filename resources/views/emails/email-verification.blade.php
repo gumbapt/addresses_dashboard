@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Verificação de Email - LestJam</title>
+    <title>Verificação de Email - dashboard_addresses</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,14 +55,14 @@
 </head>
 <body>
     <div class="header">
-        <h1>🎵 LestJam</h1>
+        <h1>🏠 dashboard_addresses</h1>
         <p>Verificação de Email</p>
     </div>
     
     <div class="content">
         <h2>Olá, {{ $userName }}!</h2>
         
-        <p>Obrigado por se registrar no LestJam! Para completar seu cadastro, use o código de verificação abaixo:</p>
+        <p>Obrigado por se registrar no dashboard_addresses! Para completar seu cadastro, use o código de verificação abaixo:</p>
         
         <div class="code">
             {{ $code }}
@@ -75,12 +75,12 @@
         <p>Se você não solicitou este código, pode ignorar este email com segurança.</p>
         
         <p>Atenciosamente,<br>
-        <strong>Equipe LestJam</strong></p>
+        <strong>Equipe dashboard_addresses</strong></p>
     </div>
     
     <div class="footer">
         <p>Este é um email automático, não responda a esta mensagem.</p>
-        <p>&copy; {{ date('Y') }} LestJam. Todos os direitos reservados.</p>
+        <p>&copy; {{ date('Y') }} dashboard_addresses. Todos os direitos reservados.</p>
     </div>
 </body>
 </html> 

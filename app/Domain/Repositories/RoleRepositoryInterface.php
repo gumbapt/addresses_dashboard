@@ -7,9 +7,10 @@ use App\Domain\Entities\Role;
 interface RoleRepositoryInterface
 {
     public function findById(int $id): ?Role;
+    public function findBySlug(string $slug): ?Role;
     public function findByName(string $name): ?Role;
     public function findAll(): array;
-    public function create(string $name, string $description, string $display_name): Role;
-    public function update(int $id, string $name, string $description, string $display_name): void;
+    public function create(string $slug, string $name, string $description): Role;
+    public function update(int $id, string $slug, string $name, string $description): void;
     public function delete(int $id): void;
 }

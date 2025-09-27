@@ -8,9 +8,9 @@ class Role
 {
     public function __construct(
         public readonly int $id,
+        public readonly string $slug,
         public readonly string $name,
         public readonly string $description,
-        public readonly string $display_name,
         public readonly bool $is_active,
         public readonly array $permissions = [],
        

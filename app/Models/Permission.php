@@ -9,4 +9,17 @@ class Permission extends Model
 {
     /** @use HasFactory<\Database\Factories\PermissionFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'slug',
+        'name',
+        'description',
+        'is_active',
+        'resource',
+        'action',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 }

@@ -4,6 +4,7 @@ namespace App\Infrastructure\Repositories;
 
 use App\Domain\Entities\Role;
 use App\Domain\Repositories\RoleRepositoryInterface;
+use App\Models\Role as RoleModel;
 
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -15,7 +16,16 @@ class RoleRepository implements RoleRepositoryInterface
         if (!$role) {
             return null;
         }
-        return new Role($role->id, $role->name, $role->description, $role->display_name, $role->is_active, $role->permissions);
+        return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, $role->permissions);
+    }
+
+    public function findBySlug(string $slug): ?Role
+    {
+        $role = RoleModel::where('slug', $slug)->first();
+        if (!$role) {
+            return null;
+        }
+        return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, $role->permissions);
     }
 
     public function findByName(string $name): ?Role
@@ -24,31 +34,33 @@ class RoleRepository implements RoleRepositoryInterface
         if (!$role) {
             return null;
         }
-        return new Role($role->id, $role->name, $role->description, $role->display_name, $role->is_active, $role->permissions);
+        return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, $role->permissions);
     }
 
     public function findAll(): array
     {
         return RoleModel::all()->map(function ($role) {
-            return new Role($role->id, $role->name, $role->description, $role->display_name, $role->is_active, $role->permissions);
+            return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, $role->permissions);
         })->toArray();
     }
     
-    public function create(string $name, string $description, string $display_name): Role
+    public function create(string $slug, string $name, string $description): Role
     {
         $role = RoleModel::create([
+            'slug' => $slug,
             'name' => $name,
             'description' => $description,
-            'display_name' => $display_name,
         ]);
+        
+        return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, []);
     }
 
-    public function update(int $id, string $name, string $description, string $display_name): void
+    public function update(int $id, string $slug, string $name, string $description): void
     {
         RoleModel::where('id', $id)->update([
+            'slug' => $slug,
             'name' => $name,
             'description' => $description,
-            'display_name' => $display_name,
         ]);
     }
 

@@ -20,9 +20,19 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Executar seeder de usuários de teste
+        // Executar seeders na ordem correta
         $this->call([
+            // Primeiro criar roles e permissões
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            
+            // Depois criar admins
             AdminSeeder::class,
+            
+            // Por último atribuir permissões aos admins
+            AdminRolePermissionSeeder::class,
+            
+            // Outros seeders
             // ChatSeeder::class,
             TestUserSeeder::class,
             AssistantSeeder::class,

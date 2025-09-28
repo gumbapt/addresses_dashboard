@@ -20,4 +20,9 @@ class Role extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'role_permissions');
+    }
 }

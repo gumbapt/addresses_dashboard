@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Domain\Entities\Admin as AdminEntity;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Permission;
+use App\Models\Role;
 
 class Admin extends Authenticatable implements ChatUser
 {
@@ -76,6 +78,18 @@ class Admin extends Authenticatable implements ChatUser
     public function isSuperAdmin(): bool
     {
         return $this->is_super_admin;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'admin_roles')
+                    ->withPivot(['assigned_at', 'assigned_by']);
+    }
+
+    public function permissions()
+    {
+        return $this->roles()->with('permissions')->get()
+                    ->pluck('permissions')->flatten()->unique('id');
     }
 
     // Implementação da interface ChatUser

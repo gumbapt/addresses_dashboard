@@ -52,8 +52,6 @@ class AdminRolePermissionSeeder extends Seeder
                 ]);
                 $this->command->info("✅ Role 'admin' atribuída ao Admin secundário");
             }
-
-            // Atribuir role de super-admin ao super admin
             if ($superAdmin) {
                 $superAdmin->roles()->syncWithPivotValues([$superAdminRole->id], [
                     'assigned_at' => now(),

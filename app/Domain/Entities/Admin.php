@@ -53,5 +53,10 @@ class Admin implements ChatUser
         return 'admin';
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return false;
+    }
+
     // O método isActive() já existe e é compatível com a interface
 } 

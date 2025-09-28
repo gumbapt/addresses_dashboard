@@ -31,36 +31,36 @@ class AdminRolePermissionSeeder extends Seeder
             // Atribuir todas as permissões à role super-admin
             if ($superAdminRole) {
                 $superAdminRole->permissions()->sync($permissions->pluck('id')->toArray());
-                $this->command->info("✅ Todas as permissões atribuídas à role 'super-admin'");
+                $this->command->info("✅ All permissions assigned to 'super-admin' role");
             }
 
-            // Atribuir todas as permissões à role admin
+            // Assign all permissions to admin role
             if ($adminRole) {
                 $adminRole->permissions()->sync($permissions->pluck('id')->toArray());
-                $this->command->info("✅ Todas as permissões atribuídas à role 'admin'");
+                $this->command->info("✅ All permissions assigned to 'admin' role");
             }
         } else {
-            $this->command->warn("⚠️ Nenhuma permissão encontrada. Execute PermissionSeeder primeiro.");
+            $this->command->warn("⚠️ No permissions found. Run PermissionSeeder first.");
         }
 
         if ($adminRole && $superAdminRole) {
-            // Atribuir role de admin ao admin secundário
+            // Assign admin role to secondary admin
             if ($admin) {
                 $admin->roles()->syncWithPivotValues([$adminRole->id], [
                     'assigned_at' => now(),
                     'assigned_by' => $superAdmin->id
                 ]);
-                $this->command->info("✅ Role 'admin' atribuída ao Admin secundário");
+                $this->command->info("✅ 'admin' role assigned to Secondary Admin");
             }
             if ($superAdmin) {
                 $superAdmin->roles()->syncWithPivotValues([$superAdminRole->id], [
                     'assigned_at' => now(),
                     'assigned_by' => $superAdmin->id
                 ]);
-                $this->command->info("✅ Role 'super-admin' atribuída ao Super Admin");
+                $this->command->info("✅ 'super-admin' role assigned to Super Admin");
             }
         } else {
-            $this->command->warn("⚠️ Roles não encontradas. Execute RoleSeeder primeiro.");
+            $this->command->warn("⚠️ Roles not found. Run RoleSeeder first.");
         }
     }
 }

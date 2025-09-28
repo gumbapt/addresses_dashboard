@@ -14,12 +14,12 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // Primeiro criar o Super Admin
+        // First create the Super Admin
         $this->call(SudoAdminSeeder::class);
         
-        // Admin secundário
+        // Secondary admin
         Admin::create([
-            'name' => 'Admin Secundário',
+            'name' => 'Secondary Admin',
             'email' => 'admin2@dashboard.com',
             'password' => Hash::make('password123'),
             'is_active' => true,

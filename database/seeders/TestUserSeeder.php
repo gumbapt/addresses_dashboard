@@ -13,15 +13,15 @@ class TestUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Criar usuário de teste para frontend
+        // Create test user for frontend
         User::create([
-            'name' => 'Usuário Teste',
+            'name' => 'Test User',
             'email' => 'user@dashboard.com',
             'password' => Hash::make('password123'),
             'email_verified_at' => now(),
         ]);
 
-        // Criar alguns usuários adicionais para testes
+        // Create some additional users for testing
         User::create([
             'name' => 'João Silva',
             'email' => 'joao@dashboard.com',
@@ -36,9 +36,9 @@ class TestUserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        $this->command->info('✅ Usuários de teste criados com sucesso!');
-        $this->command->info('📧 Email: user@dashboard.com | Senha: password123');
-        $this->command->info('📧 Email: joao@dashboard.com | Senha: password123');
-        $this->command->info('📧 Email: maria@dashboard.com | Senha: password123');
+        $this->command->info('✅ Test users created successfully!');
+        $this->command->info('📧 Email: user@dashboard.com | Password: password123');
+        $this->command->info('📧 Email: joao@dashboard.com | Password: password123');
+        $this->command->info('📧 Email: maria@dashboard.com | Password: password123');
     }
 } 

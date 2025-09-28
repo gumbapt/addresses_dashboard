@@ -17,19 +17,19 @@ class RoleSeeder extends Seeder
         Role::create([
             'slug' => 'super-admin',
             'name' => 'Super Admin',
-            'description' => 'Super Admin do sistema',
+            'description' => 'System Super Administrator',
         ]);
 
         Role::create([
             'slug' => 'admin',
-            'name' => 'Administrador',
-            'description' => 'Administrador do sistema',
+            'name' => 'Administrator',
+            'description' => 'System Administrator',
         ]);
 
         Role::create([
             'slug' => 'user',
-            'name' => 'Usuário',
-            'description' => 'Usuário comum',
+            'name' => 'User',
+            'description' => 'Regular user',
         ]);
     }
 }

@@ -13,109 +13,109 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        // Permissões de Admin
+        // Admin permissions
         Permission::create([
             'slug' => 'admin-create',
-            'name' => 'Criar Administrador',
-            'description' => 'Permite criar novos administradores',
+            'name' => 'Create Administrator',
+            'description' => 'Allows creating new administrators',
             'resource' => 'admin',
             'action' => 'create',
         ]);
 
         Permission::create([
             'slug' => 'admin-read',
-            'name' => 'Visualizar Administrador',
-            'description' => 'Permite visualizar informações de administradores',
+            'name' => 'View Administrator',
+            'description' => 'Allows viewing administrator information',
             'resource' => 'admin',
             'action' => 'read',
         ]);
 
         Permission::create([
             'slug' => 'admin-update',
-            'name' => 'Editar Administrador',
-            'description' => 'Permite editar informações de administradores',
+            'name' => 'Edit Administrator',
+            'description' => 'Allows editing administrator information',
             'resource' => 'admin',
             'action' => 'update',
         ]);
 
         Permission::create([
             'slug' => 'admin-delete',
-            'name' => 'Excluir Administrador',
-            'description' => 'Permite excluir administradores',
+            'name' => 'Delete Administrator',
+            'description' => 'Allows deleting administrators',
             'resource' => 'admin',
             'action' => 'delete',
         ]);
 
         Permission::create([
             'slug' => 'admin-manage',
-            'name' => 'Gerenciar Administradores',
-            'description' => 'Permite gerenciar todos os aspectos dos administradores',
+            'name' => 'Manage Administrators',
+            'description' => 'Allows managing all aspects of administrators',
             'resource' => 'admin',
             'action' => 'manage',
         ]);
 
         Permission::create([
             'slug' => 'user-create',
-            'name' => 'Criar Usuário',
-            'description' => 'Permite criar novos usuários',
+            'name' => 'Create User',
+            'description' => 'Allows creating new users',
             'resource' => 'user',
             'action' => 'create',
         ]);
 
         Permission::create([
             'slug' => 'user-read',
-            'name' => 'Visualizar Usuário',
-            'description' => 'Permite visualizar informações de usuários',
+            'name' => 'View User',
+            'description' => 'Allows viewing user information',
             'resource' => 'user',
             'action' => 'read',
         ]);
 
         Permission::create([
             'slug' => 'user-update',
-            'name' => 'Editar Usuário',
-            'description' => 'Permite editar informações de usuários',
+            'name' => 'Edit User',
+            'description' => 'Allows editing user information',
             'resource' => 'user',
             'action' => 'update',
         ]);
 
         Permission::create([
             'slug' => 'user-delete',
-            'name' => 'Excluir Usuário',
-            'description' => 'Permite excluir usuários',
+            'name' => 'Delete User',
+            'description' => 'Allows deleting users',
             'resource' => 'user',
             'action' => 'delete',
         ]);
 
-        // Permissões de Chat
+        // Chat permissions
         Permission::create([
             'slug' => 'chat-manage',
-            'name' => 'Gerenciar Chat',
-            'description' => 'Permite gerenciar chats e mensagens',
+            'name' => 'Manage Chat',
+            'description' => 'Allows managing chats and messages',
             'resource' => 'chat',
             'action' => 'manage',
         ]);
 
         Permission::create([
             'slug' => 'chat-read',
-            'name' => 'Visualizar Chat',
-            'description' => 'Permite visualizar chats e mensagens',
+            'name' => 'View Chat',
+            'description' => 'Allows viewing chats and messages',
             'resource' => 'chat',
             'action' => 'read',
         ]);
 
-        // Permissões de Role
+        // Role permissions
         Permission::create([
             'slug' => 'role-assign',
-            'name' => 'Atribuir Roles',
-            'description' => 'Permite atribuir roles a usuários e administradores',
+            'name' => 'Assign Roles',
+            'description' => 'Allows assigning roles to users and administrators',
             'resource' => 'role',
             'action' => 'assign',
         ]);
 
         Permission::create([
             'slug' => 'role-manage',
-            'name' => 'Gerenciar Roles',
-            'description' => 'Permite criar, editar e excluir roles',
+            'name' => 'Manage Roles',
+            'description' => 'Allows creating, editing and deleting roles',
             'resource' => 'role',
             'action' => 'manage',
         ]);

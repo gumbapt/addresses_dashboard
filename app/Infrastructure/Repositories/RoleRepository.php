@@ -5,6 +5,7 @@ namespace App\Infrastructure\Repositories;
 use App\Domain\Entities\Role;
 use App\Domain\Repositories\RoleRepositoryInterface;
 use App\Models\Role as RoleModel;
+use Illuminate\Support\Str;
 
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -44,15 +45,17 @@ class RoleRepository implements RoleRepositoryInterface
         })->toArray();
     }
     
-    public function create(string $slug, string $name, string $description): Role
+    public function create(string $name, string $description): Role
     {
+
+        $slug = Str::slug($name);
         $role = RoleModel::create([
             'slug' => $slug,
             'name' => $name,
             'description' => $description,
+            'is_active' => true,
         ]);
-        
-        return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, []);
+        return $role->toEntity();
     }
 
     public function update(int $id, string $slug, string $name, string $description): void

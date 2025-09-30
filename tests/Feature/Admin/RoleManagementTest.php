@@ -60,4 +60,21 @@ class RoleManagementTest extends TestCase
                 ]
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function an_admin_can_create_a_role(): void
+    {
+        $token = $this->sudoAdminModel->createToken('test-token')->plainTextToken;
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/create', ['name' => 'Test Role', 'description' => 'Test Description']);
+
+        $response->assertStatus(201)
+            ->assertJsonStructure([
+                'success',
+                'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active', 'created_at', 'updated_at']]
+            ]);
+    }
 }

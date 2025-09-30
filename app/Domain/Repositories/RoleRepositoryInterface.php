@@ -10,7 +10,7 @@ interface RoleRepositoryInterface
     public function findBySlug(string $slug): ?Role;
     public function findByName(string $name): ?Role;
     public function findAll(): array;
-    public function create(string $slug, string $name, string $description): Role;
+    public function create(string $name, string $description): Role;
     public function update(int $id, string $slug, string $name, string $description): void;
     public function delete(int $id): void;
 }

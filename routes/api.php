@@ -58,6 +58,7 @@ Route::prefix('admin')->group(function () {
     // Protected admin routes
     Route::middleware(['auth:sanctum', 'admin.auth'])->group(function () {
         Route::get('/roles', [RoleController::class, 'index']);
+        Route::post('/role/create', [RoleController::class, 'create']);
         Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/users/{id}', [UserController::class, 'show']);

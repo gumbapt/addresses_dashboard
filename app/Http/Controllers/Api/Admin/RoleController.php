@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Application\UseCases\Admin\Authorization\CreateRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\GetRolesUseCase;
+use App\Application\UseCases\Admin\Authorization\AttachPermissionsToRoleUseCase;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +15,8 @@ class RoleController extends Controller
     
     public function __construct(
         private GetRolesUseCase $getRolesUseCase,
-        private CreateRoleUseCase $createRoleUseCase
+        private CreateRoleUseCase $createRoleUseCase,
+        private AttachPermissionsToRoleUseCase $attachPermissionsToRoleUseCase
     ) {}
 
     public function index(): JsonResponse
@@ -35,7 +37,12 @@ class RoleController extends Controller
         try {
         $name = $request->input('name');
         $description = $request->input('description');
-            $role = $this->createRoleUseCase->execute($name, $description);
+        $permissionsIds = $request->input('permissions') ?? [];
+        $role = $this->createRoleUseCase->execute($name, $description);
+        if(count($permissionsIds) > 0){
+            $role = $this->attachPermissionsToRoleUseCase->execute($role->getId(), $permissionsIds);
+            dd($role);
+        }
             return response()->json(
                 [
                     'success' => true,

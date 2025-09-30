@@ -18,6 +18,23 @@ class Role
         public readonly ?string $updated_at = null,    
     ) {}
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getPermissions(): array
+    {
+        return $this->permissions;
+    }
+
+    public function setPermissions(array $permissions): void
+    {
+        $this->permissions = $permissions;
+    }
+
+    
+
     public function hasPermission(Permission $permission): bool
     {
         return in_array($permission->id, $this->permissions);

@@ -15,4 +15,9 @@ class Permission
         public readonly ?string $route = null
     ) {}
 
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }  

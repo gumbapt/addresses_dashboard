@@ -11,7 +11,8 @@ class Permission
         public readonly string $description,
         public readonly bool $is_active,
         public readonly string $resource,
-        public readonly string $action
+        public readonly string $action,
+        public readonly ?string $route = null
     ) {}
 
 }  

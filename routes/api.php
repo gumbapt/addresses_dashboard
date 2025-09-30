@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Auth\AdminLoginController;
 use App\Http\Controllers\Api\Auth\AdminRegisterController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Admin\RoleController;
 use App\Http\Controllers\Api\Admin\ChatController as AdminChatController;
 use App\Http\Controllers\Api\Chat\ChatController;
 use Illuminate\Support\Facades\Broadcast;

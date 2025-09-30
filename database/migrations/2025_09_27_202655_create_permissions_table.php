@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('resource');
             $table->string('action');
+            $table->string('route')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

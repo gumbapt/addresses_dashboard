@@ -18,11 +18,12 @@ class RoleManagementTest extends TestCase
     {  
         
         parent::setUp();
-        $this->seed(RoleSeeder::class,PermissionSeeder::class,AdminSeeder::class,AdminRolePermissionSeeder::class);
-        // $this->admin = Admin::factory()->create([
-        //     'email' => 'admin@dashboard_addresses.com',
-        //     'password' => bcrypt('password123')
-        // ]);
+        $this->seed(
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            AdminSeeder::class,
+            AdminRolePermissionSeeder::class
+        );
     }
 
     /**
@@ -30,8 +31,27 @@ class RoleManagementTest extends TestCase
      */
     public function an_admin_can_list_roles(): void
     {
-        $response = $this->get('/api/admin/roles');
+        // Arrange - Get admin token from seeded admin
+        $admin = \App\Models\Admin::first();
+        $token = $admin->createToken('test-token')->plainTextToken;
 
-        $response->assertStatus(200);
+        // Act
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->get('/api/admin/roles');
+
+        // Assert
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                '*' => [
+                    'id',
+                    'name',
+                    'slug',
+                    'description',
+                    'is_active',
+                    'created_at',
+                    'updated_at'
+                ]
+            ]);
     }
 }

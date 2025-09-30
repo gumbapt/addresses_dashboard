@@ -20,6 +20,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows creating new administrators',
             'resource' => 'admin',
             'action' => 'create',
+            'route' => 'admin/create',
         ]);
 
         Permission::create([
@@ -28,6 +29,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows viewing administrator information',
             'resource' => 'admin',
             'action' => 'read',
+            'route' => 'admin/read',
         ]);
 
         Permission::create([
@@ -44,6 +46,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows deleting administrators',
             'resource' => 'admin',
             'action' => 'delete',
+            'route' => 'admin/delete',
         ]);
 
         Permission::create([
@@ -52,6 +55,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows managing all aspects of administrators',
             'resource' => 'admin',
             'action' => 'manage',
+            'route' => 'admin/manage',
         ]);
 
         Permission::create([
@@ -60,6 +64,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows creating new users',
             'resource' => 'user',
             'action' => 'create',
+            'route' => 'user/create',
         ]);
 
         Permission::create([
@@ -68,6 +73,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows viewing user information',
             'resource' => 'user',
             'action' => 'read',
+            'route' => 'user/read',
         ]);
 
         Permission::create([
@@ -84,6 +90,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows deleting users',
             'resource' => 'user',
             'action' => 'delete',
+            'route' => 'user/delete',
         ]);
 
         // Chat permissions
@@ -93,6 +100,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows managing chats and messages',
             'resource' => 'chat',
             'action' => 'manage',
+            'route' => 'chat/manage',
         ]);
 
         Permission::create([
@@ -101,6 +109,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows viewing chats and messages',
             'resource' => 'chat',
             'action' => 'read',
+            'route' => 'chat/read',
         ]);
 
         // Role permissions
@@ -110,6 +119,7 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows assigning roles to users and administrators',
             'resource' => 'role',
             'action' => 'assign',
+            'route' => 'role/assign',
         ]);
 
         Permission::create([
@@ -118,6 +128,54 @@ class PermissionSeeder extends Seeder
             'description' => 'Allows creating, editing and deleting roles',
             'resource' => 'role',
             'action' => 'manage',
+            'route' => 'role/manage',
         ]);
+
+        Permission::create([
+            'slug' => 'role-read',
+            'name' => 'View Role',
+            'description' => 'Allows viewing roles',
+            'resource' => 'role',
+            'action' => 'read',
+            'route' => 'role/read',
+        ]);
+
+        Permission::create([
+            'slug' => 'role-delete',
+            'name' => 'Delete Role',
+            'description' => 'Allows deleting roles',
+            'resource' => 'role',
+            'action' => 'delete',
+            'route' => 'role/delete',
+        ]);
+        Permission::create([
+            'slug' => 'role-create',
+            'name' => 'Create Role',
+            'description' => 'Allows creating roles',
+            'resource' => 'role',
+            'action' => 'create',
+            'route' => 'role/create',
+        ]);
+
+        Permission::create([
+            'slug' => 'role-update',
+            'name' => 'Update Role',
+            'description' => 'Allows updating roles',
+            'resource' => 'role',
+            'action' => 'update',
+            'route' => 'role/update',
+        ]);
+
+
+        Permission::create([
+            'slug' => 'role-unassign',
+            'name' => 'Unassign Role',
+            'description' => 'Allows unassigning roles from users and administrators',
+            'resource' => 'role',
+            'action' => 'unassign',
+            'route' => 'role/unassign',
+        ]);
+
+      
     }
 }

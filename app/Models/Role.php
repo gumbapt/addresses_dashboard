@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Domain\Entities\Role as RoleEntity;
 
 class Role extends Model
 {
@@ -24,5 +25,18 @@ class Role extends Model
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'role_permissions');
+    }
+
+    public function toEntity(): RoleEntity
+    {
+        return new RoleEntity(
+            id: $this->id,
+            slug: $this->slug,
+            name: $this->name,
+            description: $this->description,
+            is_active: $this->is_active,
+            created_at: $this->created_at,
+            updated_at: $this->updated_at,
+        );
     }
 }

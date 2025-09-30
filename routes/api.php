@@ -61,7 +61,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/users/{id}', [UserController::class, 'show']);
-        
         // Admin chat routes
         // Route::prefix('chat')->group(function () {
         //     Route::get('/conversations', [AdminChatController::class, 'getConversations']);

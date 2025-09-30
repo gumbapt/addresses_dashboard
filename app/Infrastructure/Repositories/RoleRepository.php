@@ -40,7 +40,7 @@ class RoleRepository implements RoleRepositoryInterface
     public function findAll(): array
     {
         return RoleModel::all()->map(function ($role) {
-            return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, $role->permissions);
+            return $role->toEntity();
         })->toArray();
     }
     

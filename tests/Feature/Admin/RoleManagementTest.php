@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\Admin;
 use Database\Seeders\AdminRolePermissionSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\PermissionSeeder;
@@ -14,16 +15,22 @@ class RoleManagementTest extends TestCase
 
     use RefreshDatabase;
 
+    private Admin $sudoAdminModel;
+
     public function setUp(): void
     {  
-        
         parent::setUp();
-        $this->seed(
-            RoleSeeder::class,
-            PermissionSeeder::class,
-            AdminSeeder::class,
-            AdminRolePermissionSeeder::class
-        );
+        
+        // Seed the database in the correct order
+        $this->seed(RoleSeeder::class);
+        $this->seed(PermissionSeeder::class);
+        $this->seed(AdminSeeder::class);
+        $this->seed(AdminRolePermissionSeeder::class);
+
+        $this->sudoAdminModel = Admin::where('is_super_admin', true)->first();
+        
+        // Assert that the seeder worked
+        $this->assertNotNull($this->sudoAdminModel, 'Super admin should be created by AdminSeeder');
     }
 
     /**
@@ -32,9 +39,8 @@ class RoleManagementTest extends TestCase
     public function an_admin_can_list_roles(): void
     {
         // Arrange - Get admin token from seeded admin
-        $admin = \App\Models\Admin::first();
-        $token = $admin->createToken('test-token')->plainTextToken;
 
+        $token = $this->sudoAdminModel->createToken('test-token')->plainTextToken;
         // Act
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token

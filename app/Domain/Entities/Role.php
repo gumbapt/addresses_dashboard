@@ -37,7 +37,7 @@ class Role
 
     public function hasPermission(Permission $permission): bool
     {
-        return in_array($permission->id, $this->permissions);
+        return in_array($permission, $this->permissions, true);
     }
 
     public function canAccess(string $resource, string $action): bool
@@ -47,13 +47,14 @@ class Role
 
     public function toDto(): RoleDto
     {
+
         return new RoleDto(
             id: $this->id,
             slug: $this->slug,
             name: $this->name,
             description: $this->description,
             is_active: $this->is_active,
-            permissions: $this->permissions,
+            permissions: array_map(fn($permission) => $permission->toDto()->toArray(), $this->permissions),
             created_at: $this->created_at,
             updated_at: $this->updated_at,
         );

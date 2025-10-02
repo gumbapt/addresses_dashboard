@@ -13,5 +13,5 @@ interface RoleRepositoryInterface
     public function create(string $name, string $description): Role;
     public function update(int $id, string $slug, string $name, string $description): void;
     public function delete(int $id): void;
-    public function attachPermissions(int $id, array $permissions): Role;
+    public function attachPermissions(int $roleId, array $permissionIds): Role;
 }

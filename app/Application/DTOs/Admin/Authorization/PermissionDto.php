@@ -2,7 +2,7 @@
 
 namespace App\Application\DTOs\Admin\Authorization;
 
-class RoleDto
+class PermissionDto
 {
     public function __construct(
         public readonly int $id,
@@ -10,9 +10,9 @@ class RoleDto
         public readonly string $slug,
         public readonly string $description,
         public readonly bool $is_active,
-        public readonly array $permissions = [],
-        public readonly ?string $created_at = null,
-        public readonly ?string $updated_at = null,    
+        public readonly string $resource,
+        public readonly string $action,
+        public readonly ?string $route = null
     ) {}
 
     public function toArray(): array
@@ -23,9 +23,9 @@ class RoleDto
             'slug' => $this->slug,
             'description' => $this->description,
             'is_active' => $this->is_active,
-            'permissions' => $this->permissions,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'resource' => $this->resource,
+            'action' => $this->action,
+            'route' => $this->route
         ];
     }
 }

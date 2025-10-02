@@ -2,6 +2,8 @@
 
 namespace App\Domain\Entities;
 
+use App\Application\DTOs\Admin\Authorization\PermissionDto;
+
 class Permission
 {
     public function __construct(
@@ -19,5 +21,19 @@ class Permission
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function toDto(): PermissionDto
+    {
+        return new PermissionDto(
+            id: $this->id,
+            slug: $this->slug,
+            name: $this->name,
+            description: $this->description,
+            is_active: $this->is_active,
+            resource: $this->resource,
+            action: $this->action,
+            route: $this->route
+        );
     }
 }  

@@ -15,8 +15,11 @@ class AttachPermissionsToRoleUseCase
 
     public function execute(int $roleId, array $permissionIds): Role
     {
-        $permissions = $this->permissionRepository->findByIds($permissionIds);
-        $this->roleRepository->attachPermissions($roleId, $permissions);
-        return $this->roleRepository->findById($roleId);
+        // Valida se todas as permissions existem
+        $existingPermissions = $this->permissionRepository->findByIds($permissionIds);
+        if (count($existingPermissions) !== count($permissionIds)) {
+            throw new \InvalidArgumentException('Some permissions do not exist');
+        }
+        return $this->roleRepository->attachPermissions($roleId, $permissionIds);
     }
 }

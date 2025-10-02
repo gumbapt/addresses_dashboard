@@ -72,13 +72,10 @@ class RoleRepository implements RoleRepositoryInterface
         RoleModel::where('id', $id)->delete();
     }
 
-    public function attachPermissions(int $id, array $permissions): Role
+    public function attachPermissions(int $roleId, array $permissionIds): Role
     {
-        $role = RoleModel::findOrFail($id);
-        $permissionIds = array_map(function ($permission) {
-            return $permission->getId();
-        }, $permissions);
+        $role = RoleModel::findOrFail($roleId);
         $role->permissions()->sync($permissionIds);
-        return RoleModel::findById($id)->toEntity();
+        return $role->refresh()->toEntity();
     }
 }

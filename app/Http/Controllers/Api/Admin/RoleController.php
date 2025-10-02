@@ -24,7 +24,7 @@ class RoleController extends Controller
         try {
             $roles = $this->getRolesUseCase->execute();
             $roles = array_map(function ($role) {
-                return $role->toDto();
+                return $role->toDto()->toArray();
             }, $roles);
             return response()->json($roles, 200);
         } catch (\Exception $e) {
@@ -41,16 +41,18 @@ class RoleController extends Controller
         $role = $this->createRoleUseCase->execute($name, $description);
         if(count($permissionsIds) > 0){
             $role = $this->attachPermissionsToRoleUseCase->execute($role->getId(), $permissionsIds);
-            dd($role);
         }
+
             return response()->json(
                 [
                     'success' => true,
                     'data' => [
-                        'role' => $role->toDto()
+                        'role' => $role->toDto()->toArray()
                     ]
                 ], 201);
         } catch (\Exception $e) {
+
+            dd($e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }

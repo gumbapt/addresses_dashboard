@@ -30,27 +30,14 @@ class Role extends Model
     public function toEntity(): RoleEntity
     {
         $permissions = $this->permissions()->get();
-        if($permissions->count() > 0){
-        $permissionsEntities = [];
-        $permissions->map(function ($permission) use (&$permissionsEntities) {
-                $permissionsEntities[] = $permission->toEntity();
-            });
-            return new RoleEntity(
-                id: $this->id,
-                slug: $this->slug,
-                name: $this->name,
-                description: $this->description,
-                is_active: $this->is_active,
-                created_at: $this->created_at,
-                updated_at: $this->updated_at,
-            );
-        }
+        $permissionsEntities = $permissions->map(fn($permission) => $permission->toEntity())->toArray();
         return new RoleEntity(
             id: $this->id,
             slug: $this->slug,
             name: $this->name,
             description: $this->description,
             is_active: $this->is_active,
+            permissions: $permissionsEntities,
             created_at: $this->created_at,
             updated_at: $this->updated_at,
         );

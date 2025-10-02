@@ -45,18 +45,14 @@ class RoleController extends Controller
         try {
             $admin = $request->user();
             $this->authorizeActionUseCase->execute($admin, 'role-create');
-            
             $name = $request->input('name');
             $description = $request->input('description');
             $permissionsIds = $request->input('permissions') ?? [];
-            
             $role = $this->createRoleUseCase->execute($name, $description);
-            
             if(count($permissionsIds) > 0){
                 $this->authorizeActionUseCase->execute($admin, 'role-manage');
                 $role = $this->attachPermissionsToRoleUseCase->execute($role->getId(), $permissionsIds);
             }
-
             return response()->json(
                 [
                     'success' => true,

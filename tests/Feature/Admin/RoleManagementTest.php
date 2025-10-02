@@ -16,6 +16,7 @@ class RoleManagementTest extends TestCase
     use RefreshDatabase;
 
     private Admin $sudoAdminModel;
+    private Admin $adminModel;
 
     public function setUp(): void
     {  
@@ -27,8 +28,10 @@ class RoleManagementTest extends TestCase
         $this->seed(AdminSeeder::class);
         $this->seed(AdminRolePermissionSeeder::class);
         $this->sudoAdminModel = Admin::where('is_super_admin', true)->first();
+        $this->adminModel = Admin::where('is_super_admin', false)->first();
         // Assert that the seeder worked
         $this->assertNotNull($this->sudoAdminModel, 'Super admin should be created by AdminSeeder');
+        $this->assertNotNull($this->adminModel, 'Admin should be created by AdminSeeder');
     }
 
     /**
@@ -150,5 +153,19 @@ class RoleManagementTest extends TestCase
         $this->assertDatabaseHas('role_permissions', ['role_id' => $roleId, 'permission_id' => 2]);
         $this->assertDatabaseHas('role_permissions', ['role_id' => $roleId, 'permission_id' => 3]);
      }
+
+     /**
+      * @test
+      */
+      public function an_admin_cannot_create_a_role_without_permission(): void
+      {
+        $token = $this->adminModel->createToken('test-token')->plainTextToken;
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/create', ['name' => 'Test Role', 'description' => 'Test Description']);
+
+        $response->assertStatus(403)
+            ->assertJson(['error' => 'Admin ' . $this->sudoAdminModel->id . ' does not have permission to perform this action. Required permission: role-create']);
+      }
 
 }

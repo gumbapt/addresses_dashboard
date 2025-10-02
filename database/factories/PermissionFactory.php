@@ -17,7 +17,13 @@ class PermissionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'slug' => fake()->slug(),
+            'name' => fake()->name(),
+            'description' => fake()->sentence(),
+            'resource' => fake()->word(),
+            'action' => fake()->word(),
+            'is_active' => true,
+            'route' => fake()->url(),
         ];
     }
 }

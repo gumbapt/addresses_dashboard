@@ -57,11 +57,22 @@ Route::prefix('admin')->group(function () {
     
     // Protected admin routes
     Route::middleware(['auth:sanctum', 'admin.auth'])->group(function () {
+        // Role management routes
         Route::get('/roles', [RoleController::class, 'index']);
         Route::post('/role/create', [RoleController::class, 'create']);
-        Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::put('/role/{id}', [RoleController::class, 'update']);
+        Route::delete('/role/{id}', [RoleController::class, 'delete']);
+        Route::post('/role/{id}/permissions', [RoleController::class, 'attachPermissions']);
+        
+        // User management routes
         Route::get('/users', [UserController::class, 'index']);
         Route::get('/users/{id}', [UserController::class, 'show']);
+        Route::post('/users', [UserController::class, 'create']);
+        Route::put('/users/{id}', [UserController::class, 'update']);
+        Route::delete('/users/{id}', [UserController::class, 'delete']);
+        
+        // Dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index']);
         // Admin chat routes
         // Route::prefix('chat')->group(function () {
         //     Route::get('/conversations', [AdminChatController::class, 'getConversations']);

@@ -27,7 +27,6 @@ class RoleController extends Controller
         try {
             $admin = $request->user();
             $this->authorizeActionUseCase->execute($admin, 'role-read');
-            
             $roles = $this->getRolesUseCase->execute();
             $roles = array_map(function ($role) {
                 return $role->toDto()->toArray();
@@ -61,6 +60,20 @@ class RoleController extends Controller
                     ]
                 ], 201);
         } catch (AuthorizationException $e) {
+            return response()->json(['error' => $e->getMessage()], 403);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function update(Request $request): JsonResponse
+    {
+        try {
+            $admin = $request->user();
+            $this->authorizeActionUseCase->execute($admin, 'role-update');
+            $id = $request->input('id');
+
+        }catch (AuthorizationException $e) {
             return response()->json(['error' => $e->getMessage()], 403);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

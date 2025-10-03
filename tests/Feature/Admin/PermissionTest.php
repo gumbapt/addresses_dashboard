@@ -190,4 +190,34 @@ class PermissionTest extends TestCase
                 'error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-manage'
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function admin_can_update_role_when_has_update_permission(): void
+    {
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+
+        $createdRole = Role::create([
+            'name' => 'Test Role',
+            'slug' => 'test-role',
+            'description' => 'Test Description',
+            'is_active' => true
+        ]);
+        // Test role update (admin has all permissions including role-update)
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->put('/api/admin/role/update', [
+            'id' => $createdRole->id,
+            'name' => 'Updated Role name',
+            'description' => 'Updated Role description'
+        ]);
+        
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active', 'created_at', 'updated_at']]
+            ]);
+        
+    }
 }

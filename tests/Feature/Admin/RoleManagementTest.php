@@ -93,6 +93,13 @@ class RoleManagementTest extends TestCase
                 'success',
                 'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active', 'created_at', 'updated_at']]
             ]);
+
+        $this->assertDatabaseHas('roles', [
+            'name' => 'Test Role',
+            'slug' => 'test-role',
+            'description' => 'Test Description',
+            'is_active' => true
+        ]);
     }
     /**
      * @test
@@ -229,13 +236,17 @@ class RoleManagementTest extends TestCase
      /**
       * @test
       */
-      public function an_admin_cannot_create_a_role_without_permission(): void
+      public function an_admin_cannot_update_a_role_without_permission(): void
       {
-        $token = $this->adminModel->createToken('test-token')->plainTextToken;
+        $adminRole = $this->adminWithAllPermissions->roles()->first();
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        $roleUpdatePermission = Permission::where('slug', 'role-update')->first();
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
-        ])->post('/api/admin/role/create', ['name' => 'Test Role', 'description' => 'Test Description']);
-
+        ])->post('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
+        $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
+        $remainingPermissions = array_diff($currentPermissions, [$roleUpdatePermission->id]);
+        $adminRole->permissions()->sync($remainingPermissions);
         $response->assertStatus(403)
             ->assertJson(['error' => 'Admin ' . $this->sudoAdminModel->id . ' does not have permission to perform this action. Required permission: role-create']);
       }

@@ -58,13 +58,14 @@ class RoleRepository implements RoleRepositoryInterface
         return $role->toEntity();
     }
 
-    public function update(int $id, string $slug, string $name, string $description): void
+    public function update(int $id, string $slug, string $name, string $description): Role
     {
-        RoleModel::where('id', $id)->update([
+        $role = RoleModel::where('id', $id)->update([
             'slug' => $slug,
             'name' => $name,
             'description' => $description,
         ]);
+        return $role->refresh()->toEntity();
     }
 
     public function delete(int $id): void
@@ -78,4 +79,5 @@ class RoleRepository implements RoleRepositoryInterface
         $role->permissions()->sync($permissionIds);
         return $role->refresh()->toEntity();
     }
+
 }

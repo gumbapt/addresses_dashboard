@@ -11,7 +11,7 @@ interface RoleRepositoryInterface
     public function findByName(string $name): ?Role;
     public function findAll(): array;
     public function create(string $name, string $description): Role;
-    public function update(int $id, string $slug, string $name, string $description): void;
+    public function update(int $id, string $slug, string $name, string $description): Role;
     public function delete(int $id): void;
     public function attachPermissions(int $roleId, array $permissionIds): Role;
 }

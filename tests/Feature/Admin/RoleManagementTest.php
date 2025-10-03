@@ -181,25 +181,18 @@ class RoleManagementTest extends TestCase
      */
     public function admin_cannot_create_role_without_create_permission(): void
     {
-        // Remove role-create permission from admin's role
         $adminRole = $this->adminWithAllPermissions->roles()->first();
         $roleCreatePermission = Permission::where('slug', 'role-create')->first();
-        
-        // Remove only the role-create permission
         $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
         $remainingPermissions = array_diff($currentPermissions, [$roleCreatePermission->id]);
         $adminRole->permissions()->sync($remainingPermissions);
-        
         $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-        
-        // Test role creation (should fail because we removed role-create permission)
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->post('/api/admin/role/create', [
             'name' => 'Test Role',
             'description' => 'Test Description'
         ]);
-        
         $response->assertStatus(403)
             ->assertJson([
                 'error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-create'
@@ -211,17 +204,12 @@ class RoleManagementTest extends TestCase
      */
     public function admin_cannot_list_roles_without_read_permission(): void
     {
-        // Remove role-read permission from admin's role
         $adminRole = $this->adminWithAllPermissions->roles()->first();
         $roleReadPermission = Permission::where('slug', 'role-read')->first();
-        
-        // Remove only the role-read permission
         $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
         $remainingPermissions = array_diff($currentPermissions, [$roleReadPermission->id]);
         $adminRole->permissions()->sync($remainingPermissions);
-        
         $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-        
         // Test role listing (should fail because we removed role-read permission)
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
@@ -252,6 +240,27 @@ class RoleManagementTest extends TestCase
         $response->assertStatus(403)
             ->assertJson(['error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-update']);
      
+    }
+
+    /**
+     * @test
+     */
+    public function an_admin_can_update_a_role_when_has_update_permission(): void
+    {
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->put('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
+        $response->assertStatus(200)
+            ->assertJsonStructure(['success', 'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active', 'created_at', 'updated_at']]]);
+        $this->assertDatabaseHas('roles', [
+            'id' => 1,
+            'name' => 'Test Role',
+            'slug' => 'test-role',
+            'description' => 'Test Description',
+            'is_active' => true
+        ]);
+    
     }
 
 }

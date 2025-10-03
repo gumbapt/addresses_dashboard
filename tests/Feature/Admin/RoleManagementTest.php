@@ -260,7 +260,85 @@ class RoleManagementTest extends TestCase
             'description' => 'Test Description',
             'is_active' => true
         ]);
-    
     }
+
+    /**
+     * @test
+     */
+    public function an_admin_cannot_update_a_role_when_does_not_have_update_permission(): void
+    {
+        $adminRole = $this->adminWithAllPermissions->roles()->first();
+        $roleUpdatePermission = Permission::where('slug', 'role-update')->first();
+        $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
+        $remainingPermissions = array_diff($currentPermissions, [$roleUpdatePermission->id]);
+        $adminRole->permissions()->sync($remainingPermissions);
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->put('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
+        $response->assertStatus(403)
+            ->assertJson(['error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-update']);
+        $this->assertDatabaseMissing('roles', [
+            'id' => 1,
+            'name' => 'Test Role',
+            'slug' => 'test-role',
+            'description' => 'Test Description',
+            'is_active' => true
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function an_admin_can_delete_a_role_when_has_delete_permission(): void
+    {
+        $testRole = Role::create([
+            'slug' => 'test-delete-role',
+            'name' => 'Test Delete Role',
+            'description' => 'Role for testing deletion',
+            'is_active' => true,
+        ]);
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/delete', ['id' => $testRole->id]); 
+        $response->assertStatus(200)
+            ->assertJson(['success' => true]);
+        $this->assertDatabaseMissing('roles', [
+            'id' => $testRole->id
+        ]);
+
+    }
+
+    /**
+     * @test
+     */
+    public function an_admin_cannot_delete_a_role_without_delete_permission(): void
+    {
+        $testRole = Role::create([
+            'slug' => 'test-no-delete-role',
+            'name' => 'Test No Delete Role',
+            'description' => 'Role for testing no delete permission',
+            'is_active' => true,
+        ]);
+        $adminRole = $this->adminWithAllPermissions->roles()->first();
+        $roleDeletePermission = Permission::where('slug', 'role-delete')->first();
+        $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
+        $remainingPermissions = array_diff($currentPermissions, [$roleDeletePermission->id]);
+        $adminRole->permissions()->sync($remainingPermissions);
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/delete', ['id' => $testRole->id]);
+        
+        $response->assertStatus(403)
+            ->assertJson(['error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-delete']);
+        $this->assertDatabaseHas('roles', [
+            'id' => $testRole->id
+        ]);
+    }
+    
+
+
 
 }

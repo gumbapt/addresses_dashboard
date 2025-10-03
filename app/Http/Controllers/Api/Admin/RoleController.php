@@ -7,6 +7,7 @@ use App\Application\UseCases\Admin\Authorization\GetRolesUseCase;
 use App\Application\UseCases\Admin\Authorization\AttachPermissionsToRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Admin\Authorization\UpdateRoleUseCase;
+use App\Application\UseCases\Admin\Authorization\DeleteRoleUseCase;
 use App\Domain\Exceptions\AuthorizationException;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
@@ -20,6 +21,7 @@ class RoleController extends Controller
         private GetRolesUseCase $getRolesUseCase,
         private CreateRoleUseCase $createRoleUseCase,
         private UpdateRoleUseCase $updateRoleUseCase,
+        private DeleteRoleUseCase $deleteRoleUseCase,
         private AttachPermissionsToRoleUseCase $attachPermissionsToRoleUseCase,
         private AuthorizeActionUseCase $authorizeActionUseCase
     ) {}
@@ -82,6 +84,27 @@ class RoleController extends Controller
                 'data' => [
                     'role' => $role->toDto()->toArray()
                 ]
+            ], 200);
+            
+        } catch (AuthorizationException $e) {
+            return response()->json(['error' => $e->getMessage()], 403);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function delete(Request $request): JsonResponse
+    {
+        try {
+            $admin = $request->user();
+            $this->authorizeActionUseCase->execute($admin, 'role-delete');
+            
+            $id = $request->input('id');
+            $this->deleteRoleUseCase->execute($id);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Role deleted successfully'
             ], 200);
             
         } catch (AuthorizationException $e) {

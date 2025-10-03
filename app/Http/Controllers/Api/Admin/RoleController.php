@@ -6,6 +6,7 @@ use App\Application\UseCases\Admin\Authorization\CreateRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\GetRolesUseCase;
 use App\Application\UseCases\Admin\Authorization\AttachPermissionsToRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
+use App\Application\UseCases\Admin\Authorization\UpdateRoleUseCase;
 use App\Domain\Exceptions\AuthorizationException;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
@@ -18,6 +19,7 @@ class RoleController extends Controller
     public function __construct(
         private GetRolesUseCase $getRolesUseCase,
         private CreateRoleUseCase $createRoleUseCase,
+        private UpdateRoleUseCase $updateRoleUseCase,
         private AttachPermissionsToRoleUseCase $attachPermissionsToRoleUseCase,
         private AuthorizeActionUseCase $authorizeActionUseCase
     ) {}
@@ -72,8 +74,17 @@ class RoleController extends Controller
             $admin = $request->user();
             $this->authorizeActionUseCase->execute($admin, 'role-update');
             $id = $request->input('id');
-
-        }catch (AuthorizationException $e) {
+            $name = $request->input('name');
+            $description = $request->input('description');
+            $role = $this->updateRoleUseCase->execute($id, $name, $description);
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'role' => $role->toDto()->toArray()
+                ]
+            ], 200);
+            
+        } catch (AuthorizationException $e) {
             return response()->json(['error' => $e->getMessage()], 403);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

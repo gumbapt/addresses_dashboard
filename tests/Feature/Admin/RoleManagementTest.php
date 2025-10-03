@@ -199,7 +199,7 @@ class RoleManagementTest extends TestCase
             'name' => 'Test Role',
             'description' => 'Test Description'
         ]);
-        dd($response->json());
+        
         $response->assertStatus(403)
             ->assertJson([
                 'error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-create'
@@ -238,17 +238,20 @@ class RoleManagementTest extends TestCase
       */
       public function an_admin_cannot_update_a_role_without_permission(): void
       {
+        // Remove role-update permission from admin's role BEFORE making the request
         $adminRole = $this->adminWithAllPermissions->roles()->first();
-        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
         $roleUpdatePermission = Permission::where('slug', 'role-update')->first();
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->post('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
         $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
         $remainingPermissions = array_diff($currentPermissions, [$roleUpdatePermission->id]);
         $adminRole->permissions()->sync($remainingPermissions);
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        // Test role update (should fail because we removed role-update permission)
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->put('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
         $response->assertStatus(403)
-            ->assertJson(['error' => 'Admin ' . $this->sudoAdminModel->id . ' does not have permission to perform this action. Required permission: role-create']);
-      }
+            ->assertJson(['error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-update']);
+     
+    }
 
 }

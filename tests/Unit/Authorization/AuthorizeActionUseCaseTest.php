@@ -4,6 +4,7 @@ namespace Tests\Unit\Authorization;
 
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Admin\Authorization\CheckAdminPermissionUseCase;
+use App\Application\Services\UserFactory;
 use App\Domain\Exceptions\AuthorizationException;
 use App\Models\Admin;
 use App\Models\Role;
@@ -24,9 +25,7 @@ class AuthorizeActionUseCaseTest extends TestCase
         parent::setUp();
         
         $this->authorizeActionUseCase = new AuthorizeActionUseCase(
-            new CheckAdminPermissionUseCase(
-                $this->app->make(\App\Domain\Repositories\PermissionRepositoryInterface::class)
-            )
+            new CheckAdminPermissionUseCase()
         );
 
         $this->superAdmin = Admin::factory()->create(['is_super_admin' => true]);
@@ -38,7 +37,8 @@ class AuthorizeActionUseCaseTest extends TestCase
      */
     public function super_admin_can_always_perform_actions(): void
     {
-        $this->authorizeActionUseCase->execute($this->superAdmin, 'any-permission');
+        $sudoAdmin = UserFactory::createFromModel($this->superAdmin);
+        $this->authorizeActionUseCase->execute($sudoAdmin, 'any-permission');
         $this->assertTrue(true); // Se chegou até aqui, não lançou exceção
     }
 
@@ -50,7 +50,8 @@ class AuthorizeActionUseCaseTest extends TestCase
         $this->expectException(AuthorizationException::class);
         $this->expectExceptionMessage('Admin ' . $this->admin->id . ' does not have permission to perform this action. Required permission: test-permission');
         
-        $this->authorizeActionUseCase->execute($this->admin, 'test-permission');
+        $adminEntity = UserFactory::createFromModel($this->admin);
+        $this->authorizeActionUseCase->execute($adminEntity, 'test-permission');
     }
 
     /**
@@ -76,9 +77,13 @@ class AuthorizeActionUseCaseTest extends TestCase
         ]);
 
         $role->permissions()->attach($permission->id);
-        $this->admin->roles()->attach($role->id);
+        $this->admin->roles()->attach($role->id, [
+            'assigned_at' => now(),
+            'assigned_by' => $this->superAdmin->id
+        ]);
 
-        $this->authorizeActionUseCase->execute($this->admin, 'test-permission');
+        $adminEntity = UserFactory::createFromModel($this->admin);
+        $this->authorizeActionUseCase->execute($adminEntity, 'test-permission');
         $this->assertTrue(true); // Se chegou até aqui, não lançou exceção
     }
 }

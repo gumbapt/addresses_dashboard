@@ -19,12 +19,12 @@ class UserManagementTest extends TestCase
         
         // Criar admin e fazer login
         $admin = Admin::factory()->create([
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => bcrypt('password123')
         ]);
 
         $loginResponse = $this->postJson('/api/admin/login', [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => 'password123'
         ]);
 

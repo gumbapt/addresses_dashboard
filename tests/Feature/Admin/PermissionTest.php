@@ -54,7 +54,10 @@ class PermissionTest extends TestCase
         $adminRole = Role::where('slug', 'admin')->first();
         $allPermissions = Permission::all();
         $adminRole->permissions()->sync($allPermissions->pluck('id'));
-        $this->adminWithAllPermissions->roles()->attach($adminRole->id);
+        $this->adminWithAllPermissions->roles()->attach($adminRole->id, [
+            'assigned_at' => now(),
+            'assigned_by' => $this->superAdmin->id
+        ]);
     }
 
     /**

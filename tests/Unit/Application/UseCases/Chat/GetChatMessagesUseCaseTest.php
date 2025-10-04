@@ -10,6 +10,7 @@ use App\Domain\Repositories\ChatRepositoryInterface;
 use App\Domain\Repositories\MessageRepositoryInterface;
 use Tests\TestCase;
 use Mockery;
+use Illuminate\Support\Facades\DB;
 
 class GetChatMessagesUseCaseTest extends TestCase
 {
@@ -46,6 +47,20 @@ class GetChatMessagesUseCaseTest extends TestCase
         $chatId = 1;
         $page = 1;
         $perPage = 50;
+        
+        // Mock DB query for chat_user table
+        DB::shouldReceive('table')
+            ->with('chat_user')
+            ->andReturnSelf()
+            ->shouldReceive('where')
+            ->with('chat_id', $chatId)
+            ->andReturnSelf()
+            ->shouldReceive('where')
+            ->with('user_id', 1)
+            ->andReturnSelf()
+            ->shouldReceive('value')
+            ->with('user_type')
+            ->andReturn('user');
         
         $messages = [
             [
@@ -126,6 +141,20 @@ class GetChatMessagesUseCaseTest extends TestCase
         $chatId = 1;
         $page = 1;
         $perPage = 50;
+        
+        // Mock DB query for chat_user table
+        DB::shouldReceive('table')
+            ->with('chat_user')
+            ->andReturnSelf()
+            ->shouldReceive('where')
+            ->with('chat_id', $chatId)
+            ->andReturnSelf()
+            ->shouldReceive('where')
+            ->with('user_id', 1)
+            ->andReturnSelf()
+            ->shouldReceive('value')
+            ->with('user_type')
+            ->andReturn('user');
         
         $messages = [
             [

@@ -4,6 +4,10 @@ namespace Tests\Feature\Admin;
 
 use App\Models\Admin;
 use App\Models\User;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\AdminRolePermissionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -11,21 +15,34 @@ class AdminAuthMiddlewareTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        
+        // Seed the database
+/*         $this->seed(RoleSeeder::class);
+        $this->seed(PermissionSeeder::class);
+        $this->seed(AdminSeeder::class);
+        $this->seed(AdminRolePermissionSeeder::class); */
+    }
+
     public function test_admin_can_access_protected_route()
     {
-        // Arrange
-        $admin = Admin::factory()->create([
-            'email' => 'admin@dashboard_addresses.com',
-            'password' => bcrypt('password123')
+        $admin = Admin::create([
+            'name' => 'Test Admin',
+            'email' => 'admin2@dashboard.com',
+            'password' => bcrypt('password123'),
+            'is_active' => true,
+            'is_super_admin' => false
         ]);
-
+        // Arrange - Use admin from seeder
         $loginResponse = $this->postJson('/api/admin/login', [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin2@dashboard.com',
             'password' => 'password123'
         ]);
 
+        
         $token = $loginResponse->json('token');
-
         // Act
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
@@ -68,7 +85,7 @@ class AdminAuthMiddlewareTest extends TestCase
     public function test_inactive_admin_cannot_access_protected_route()
     {
         $admin = Admin::factory()->inactive()->create([
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => bcrypt('password123')
         ]);
         $token = $admin->createToken('test-token')->plainTextToken;

@@ -14,12 +14,12 @@ class AdminLoginTest extends TestCase
     {
         // Arrange
         $admin = Admin::factory()->create([
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => bcrypt('password123')
         ]);
 
         $loginData = [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => 'password123'
         ];
 
@@ -72,12 +72,12 @@ class AdminLoginTest extends TestCase
     {
         // Arrange
         Admin::factory()->create([
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => bcrypt('password123')
         ]);
 
         $loginData = [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => 'wrongpassword'
         ];
 
@@ -95,12 +95,12 @@ class AdminLoginTest extends TestCase
     {
         // Arrange
         $admin = Admin::factory()->inactive()->create([
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => bcrypt('password123')
         ]);
 
         $loginData = [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => 'password123'
         ];
 
@@ -133,7 +133,7 @@ class AdminLoginTest extends TestCase
     {
         // Arrange
         $loginData = [
-            'email' => 'admin@dashboard_addresses.com'
+            'email' => 'admin3@dashboard.com'
         ];
 
         // Act
@@ -164,7 +164,7 @@ class AdminLoginTest extends TestCase
     {
         // Arrange
         $loginData = [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => '12345'
         ];
 
@@ -180,13 +180,13 @@ class AdminLoginTest extends TestCase
     {
         // Arrange
         $admin = Admin::factory()->create([
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => bcrypt('password123'),
             'last_login_at' => null
         ]);
 
         $loginData = [
-            'email' => 'admin@dashboard_addresses.com',
+            'email' => 'admin3@dashboard.com',
             'password' => 'password123'
         ];
 

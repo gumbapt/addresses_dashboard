@@ -18,7 +18,7 @@ Autentica um administrador e retorna um token de acesso.
 **Request Body:**
 ```json
 {
-    "email": "admin@dashboard_addresses.com",
+    "email": "admin3@dashboard.com",
     "password": "password123"
 }
 ```
@@ -29,7 +29,7 @@ Autentica um administrador e retorna um token de acesso.
     "admin": {
         "id": 1,
         "name": "Super Admin",
-        "email": "admin@dashboard_addresses.com",
+        "email": "admin3@dashboard.com",
         "is_active": true,
         "last_login_at": "2025-06-27 20:45:30"
     },
@@ -53,7 +53,7 @@ Registra um novo administrador.
 ```json
 {
     "name": "New Admin",
-    "email": "newadmin@dashboard_addresses.com",
+    "email": "newadmin3@dashboard.com",
     "password": "password123",
     "password_confirmation": "password123"
 }
@@ -65,7 +65,7 @@ Registra um novo administrador.
     "admin": {
         "id": 2,
         "name": "New Admin",
-        "email": "newadmin@dashboard_addresses.com",
+        "email": "newadmin3@dashboard.com",
         "is_active": true,
         "created_at": "2025-06-27 20:45:30"
     }
@@ -153,7 +153,7 @@ Authorization: Bearer {token}
 
 Um administrador padrão é criado automaticamente:
 
-- **Email:** admin@dashboard_addresses.com
+- **Email:** admin3@dashboard.com
 - **Password:** password123
 - **Status:** Ativo
 

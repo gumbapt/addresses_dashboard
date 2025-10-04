@@ -174,6 +174,7 @@ class MessageTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem do usuário',
             'sender_id' => $this->user->id,
+            'sender_type' => 'user',
             'message_type' => 'text',
             'is_read' => false
         ]);
@@ -182,15 +183,16 @@ class MessageTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem do admin',
             'sender_id' => $this->admin->id,
+            'sender_type' => 'admin',
             'message_type' => 'text',
             'is_read' => false
         ]);
 
-        $userMessages = Message::where('sender_id', $this->user->id)->get();
+        $userMessages = Message::where('sender_id', $this->user->id)->where('sender_type', 'user')->get();
         $this->assertCount(1, $userMessages);
         $this->assertEquals('Mensagem do usuário', $userMessages->first()->content);
 
-        $adminMessages = Message::where('sender_id', $this->admin->id)->get();
+        $adminMessages = Message::where('sender_id', $this->admin->id)->where('sender_type', 'admin')->get();
         $this->assertCount(1, $adminMessages);
         $this->assertEquals('Mensagem do admin', $adminMessages->first()->content);
     }
@@ -202,6 +204,7 @@ class MessageTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem não lida 1',
             'sender_id' => $this->admin->id,
+            'sender_type' => 'admin',
             'message_type' => 'text',
             'is_read' => false
         ]);
@@ -211,6 +214,7 @@ class MessageTest extends TestCase
             'content' => 'Mensagem lida',
             'sender_id' => $this->admin->id,
             'message_type' => 'text',
+            'sender_type' => 'admin',
             'is_read' => true,
             'read_at' => now()
         ]);
@@ -219,6 +223,7 @@ class MessageTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem não lida 2',
             'sender_id' => $this->admin->id,
+            'sender_type' => 'admin',
             'message_type' => 'text',
             'is_read' => false
         ]);

@@ -58,22 +58,17 @@ class AdminRegisterTest extends TestCase
 
     public function test_admin_cannot_register_with_existing_email()
     {
-        // Arrange
-        Admin::factory()->create([
-            'email' => 'existing@dashboard_addresses.com'
-        ]);
 
+        Admin::factory()->create([
+            'email' => 'existing@dashboard.com'
+        ]);
         $registerData = [
             'name' => 'New Admin',
-            'email' => 'existing@dashboard_addresses.com',
+            'email' => 'existing@dashboard.com',
             'password' => 'password123',
             'password_confirmation' => 'password123'
         ];
-
-        // Act
         $response = $this->postJson('/api/admin/register', $registerData);
-
-        // Assert
         $response->assertStatus(422)
             ->assertJson([
                 'message' => 'Email is already taken'

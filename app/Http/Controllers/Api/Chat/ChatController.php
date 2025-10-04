@@ -193,10 +193,14 @@ class ChatController extends Controller
                 'success' => true, 
                 'data' => $chat->toDto()->toArray()
             ], 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+                'errors' => $e->errors()
+            ], 422);
         } catch (\Exception $e) {
-
-            // dd($e->getMessage());
-            // dd( $e->getLine(), $e->getFile());
             DB::rollBack();
             return response()->json([
                 'success' => false,

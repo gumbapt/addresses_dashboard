@@ -247,17 +247,32 @@ class RoleManagementTest extends TestCase
      */
     public function an_admin_can_update_a_role_when_has_update_permission(): void
     {
+        // Create a test role specifically for updating
+        $testRole = Role::create([
+            'slug' => 'test-update-role',
+            'name' => 'Original Role Name',
+            'description' => 'Original Description',
+            'is_active' => true,
+        ]);
+        
         $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
-        ])->put('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
+        ])->put('/api/admin/role/update', [
+            'id' => $testRole->id, 
+            'name' => 'Updated Role Name', 
+            'description' => 'Updated Description'
+        ]);
+        
         $response->assertStatus(200)
             ->assertJsonStructure(['success', 'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active', 'created_at', 'updated_at']]]);
+            
         $this->assertDatabaseHas('roles', [
-            'id' => 1,
-            'name' => 'Test Role',
-            'slug' => 'test-role',
-            'description' => 'Test Description',
+            'id' => $testRole->id,
+            'name' => 'Updated Role Name',
+            'slug' => 'updated-role-name',
+            'description' => 'Updated Description',
             'is_active' => true
         ]);
     }
@@ -267,23 +282,40 @@ class RoleManagementTest extends TestCase
      */
     public function an_admin_cannot_update_a_role_when_does_not_have_update_permission(): void
     {
+        // Create a test role specifically for this test
+        $testRole = Role::create([
+            'slug' => 'test-no-update-role',
+            'name' => 'Original Role Name',
+            'description' => 'Original Description',
+            'is_active' => true,
+        ]);
+        
+        // Remove role-update permission from admin's role
         $adminRole = $this->adminWithAllPermissions->roles()->first();
         $roleUpdatePermission = Permission::where('slug', 'role-update')->first();
         $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
         $remainingPermissions = array_diff($currentPermissions, [$roleUpdatePermission->id]);
         $adminRole->permissions()->sync($remainingPermissions);
+        
         $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
-        ])->put('/api/admin/role/update', ['id' => 1, 'name' => 'Test Role', 'description' => 'Test Description']);
+        ])->put('/api/admin/role/update', [
+            'id' => $testRole->id, 
+            'name' => 'Updated Role Name', 
+            'description' => 'Updated Description'
+        ]);
+        
         $response->assertStatus(403)
             ->assertJson(['error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-update']);
+            
+        // Verify role was NOT updated in database
         $this->assertDatabaseMissing('roles', [
-            'id' => 1,
-            'name' => 'Test Role',
-            'slug' => 'test-role',
-            'description' => 'Test Description',
-            'is_active' => true
+            'id' => $testRole->id,
+            'name' => 'Updated Role Name',
+            'slug' => 'updated-role-name',
+            'description' => 'Updated Description'
         ]);
     }
 
@@ -337,7 +369,7 @@ class RoleManagementTest extends TestCase
             'id' => $testRole->id
         ]);
     }
-    
+
 
 
 

@@ -60,12 +60,15 @@ class RoleRepository implements RoleRepositoryInterface
 
     public function update(int $id, string $slug, string $name, string $description): Role
     {
-        $role = RoleModel::where('id', $id)->update([
+        RoleModel::where('id', $id)->update([
             'slug' => $slug,
             'name' => $name,
             'description' => $description,
         ]);
-        return $role->refresh()->toEntity();
+        
+        // Find the updated role and return as entity
+        $role = RoleModel::findOrFail($id);
+        return $role->toEntity();
     }
 
     public function delete(int $id): void

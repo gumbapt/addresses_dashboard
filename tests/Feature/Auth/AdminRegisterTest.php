@@ -12,6 +12,7 @@ class AdminRegisterTest extends TestCase
 
     public function test_admin_can_register_with_valid_data()
     {
+        $this->withoutExceptionHandling();
         // Arrange
         $registerData = [
             'name' => 'New Admin',
@@ -22,6 +23,12 @@ class AdminRegisterTest extends TestCase
 
         // Act
         $response = $this->postJson('/api/admin/register', $registerData);
+
+        // Debug 500 error
+        if ($response->status() === 500) {
+            dump('Register Error Status: ' . $response->status());
+            dump('Register Error Response: ' . $response->getContent());
+        }
 
         // Assert
         $response->assertStatus(201)

@@ -52,18 +52,11 @@ class AdminRepository implements AdminRepositoryInterface
             'name' => $name,
             'email' => $email,
             'password' => $password,
+            'is_super_admin'=> false,
             'is_active' => true,
         ]);
 
-        return new Admin(
-            id: $admin->id,
-            name: $admin->name,
-            email: $admin->email,
-            password: $admin->password,
-            isActive: $admin->is_active,
-            isSuperAdmin: $admin->is_super_admin,
-            lastLoginAt: $admin->last_login_at
-        );
+        return $admin->toEntity();  
     }
 
     public function findByIdWithRolesAndPermissions(int $id): ?Admin

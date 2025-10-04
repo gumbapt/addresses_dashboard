@@ -12,15 +12,12 @@ class AdminRegisterUseCase
 
     public function execute(string $name, string $email, string $password): array
     {
-        // Verificar se já existe um admin com este email
         $existingAdmin = $this->adminRepository->findByEmail($email);
-        
         if ($existingAdmin) {
             throw new RegistrationException('Admin with this email already exists');
         }
 
         $admin = $this->adminRepository->create($name, $email, $password);
-
         return [
             'admin' => [
                 'id' => $admin->id,

@@ -44,6 +44,7 @@ class ChatControllerWithChatUserTest extends TestCase
 
     public function test_can_send_message_to_chat_using_chat_user_abstraction()
     {
+        $this->withoutExceptionHandling();
         Sanctum::actingAs($this->user);
         $userChatUser = ChatUserFactory::createFromModel($this->user);
         $adminChatUser = ChatUserFactory::createFromModel($this->admin);

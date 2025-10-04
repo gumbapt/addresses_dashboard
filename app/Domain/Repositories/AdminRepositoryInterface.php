@@ -8,6 +8,7 @@ interface AdminRepositoryInterface
 {
     public function findById(int $id): ?Admin;
     public function findByEmail(string $email): ?Admin;
+    public function findByIdWithRolesAndPermissions(int $id): ?Admin;
     public function create(string $name, string $email, string $password): Admin;
     public function updateLastLogin(int $id): void;
 } 

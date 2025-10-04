@@ -2,26 +2,27 @@
 
 namespace App\Application\UseCases\Admin\Authorization;
 
+use App\Domain\Interfaces\AuthorizableUser;
 use App\Models\Admin;
-use App\Domain\Repositories\PermissionRepositoryInterface;
 
 class CheckAdminPermissionUseCase
 {
-    public function __construct(
-        private PermissionRepositoryInterface $permissionRepository
-    ) {}
-
-    public function execute(Admin $admin, string $permissionSlug): bool
+    public function execute(AuthorizableUser $user, string $permissionSlug): bool
     {
         // Super admin bypass
-        if ($admin->isSuperAdmin()) {
+        if ($user->isSuperAdmin()) {
             return true;
         }
 
-        // Check if admin has the required permission through roles
-        $roles = $admin->roles()->with('permissions')->get();
+        // Get admin model with roles and permissions
+        $adminModel = Admin::with(['roles.permissions'])->find($user->getId());
         
-        foreach ($roles as $role) {
+        if (!$adminModel) {
+            return false;
+        }
+
+        // Check if admin has the required permission through roles
+        foreach ($adminModel->roles as $role) {
             if (!$role->is_active) {
                 continue;
             }
@@ -36,10 +37,10 @@ class CheckAdminPermissionUseCase
         return false;
     }
 
-    public function executeMultiple(Admin $admin, array $permissionSlugs): bool
+    public function executeMultiple(AuthorizableUser $user, array $permissionSlugs): bool
     {
         foreach ($permissionSlugs as $permissionSlug) {
-            if (!$this->execute($admin, $permissionSlug)) {
+            if (!$this->execute($user, $permissionSlug)) {
                 return false;
             }
         }
@@ -47,10 +48,10 @@ class CheckAdminPermissionUseCase
         return true;
     }
 
-    public function executeAny(Admin $admin, array $permissionSlugs): bool
+    public function executeAny(AuthorizableUser $user, array $permissionSlugs): bool
     {
         foreach ($permissionSlugs as $permissionSlug) {
-            if ($this->execute($admin, $permissionSlug)) {
+            if ($this->execute($user, $permissionSlug)) {
                 return true;
             }
         }

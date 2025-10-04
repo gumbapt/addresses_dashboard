@@ -2,9 +2,10 @@
 
 namespace App\Domain\Entities;
 
+use App\Domain\Interfaces\AuthorizableUser;
 use DateTime;
 
-class Admin implements ChatUser
+class Admin implements ChatUser, AuthorizableUser
 {
     public function __construct(
         public readonly int $id,
@@ -12,6 +13,7 @@ class Admin implements ChatUser
         public readonly string $email,
         public readonly string $password,
         public readonly bool $isActive,
+        public readonly bool $isSuperAdmin = false,
         public readonly ?DateTime $lastLoginAt = null
     ) {}
 
@@ -43,7 +45,7 @@ class Admin implements ChatUser
         return $this->name;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -55,6 +57,13 @@ class Admin implements ChatUser
 
     public function isSuperAdmin(): bool
     {
+        return $this->isSuperAdmin;
+    }
+
+    public function hasPermission(string $permissionSlug): bool
+    {
+        // Admin comum não tem permissões diretas
+        // As permissões são verificadas através de roles no UseCase
         return false;
     }
 

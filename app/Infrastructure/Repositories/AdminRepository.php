@@ -22,6 +22,7 @@ class AdminRepository implements AdminRepositoryInterface
             email: $admin->email,
             password: $admin->password,
             isActive: $admin->is_active,
+            isSuperAdmin: $admin->is_super_admin,
             lastLoginAt: $admin->last_login_at
         );
     }
@@ -40,6 +41,7 @@ class AdminRepository implements AdminRepositoryInterface
             email: $admin->email,
             password: $admin->password,
             isActive: $admin->is_active,
+            isSuperAdmin: $admin->is_super_admin,
             lastLoginAt: $admin->last_login_at
         );
     }
@@ -59,6 +61,27 @@ class AdminRepository implements AdminRepositoryInterface
             email: $admin->email,
             password: $admin->password,
             isActive: $admin->is_active,
+            isSuperAdmin: $admin->is_super_admin,
+            lastLoginAt: $admin->last_login_at
+        );
+    }
+
+    public function findByIdWithRolesAndPermissions(int $id): ?Admin
+    {
+        $admin = AdminModel::with(['roles.permissions'])->find($id);
+        
+        if (!$admin) {
+            return null;
+        }
+
+        // For now, return basic admin entity - we'll enhance this later
+        return new Admin(
+            id: $admin->id,
+            name: $admin->name,
+            email: $admin->email,
+            password: $admin->password,
+            isActive: $admin->is_active,
+            isSuperAdmin: $admin->is_super_admin,
             lastLoginAt: $admin->last_login_at
         );
     }

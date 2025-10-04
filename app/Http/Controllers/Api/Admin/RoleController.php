@@ -9,6 +9,7 @@ use App\Application\UseCases\Admin\Authorization\UpdatePermissionsToRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Admin\Authorization\UpdateRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\DeleteRoleUseCase;
+use App\Application\Services\UserFactory;
 use App\Domain\Exceptions\AuthorizationException;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
@@ -31,8 +32,9 @@ class RoleController extends Controller
     public function index(Request $request): JsonResponse
     {
         try {
-            $admin = $request->user();
-            $this->authorizeActionUseCase->execute($admin, 'role-read');
+            $adminModel = $request->user();
+            $user = UserFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($user, 'role-read');
             $roles = $this->getRolesUseCase->execute();
             $roles = array_map(function ($role) {
                 return $role->toDto()->toArray();
@@ -48,14 +50,15 @@ class RoleController extends Controller
     public function create(Request $request): JsonResponse
     {
         try {
-            $admin = $request->user();
-            $this->authorizeActionUseCase->execute($admin, 'role-create');
+            $adminModel = $request->user();
+            $user = UserFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($user, 'role-create');
             $name = $request->input('name');
             $description = $request->input('description');
             $permissionsIds = $request->input('permissions') ?? [];
             $role = $this->createRoleUseCase->execute($name, $description);
             if(count($permissionsIds) > 0){
-                $this->authorizeActionUseCase->execute($admin, 'role-manage');
+                $this->authorizeActionUseCase->execute($user, 'role-manage');
                 $role = $this->attachPermissionsToRoleUseCase->execute($role->getId(), $permissionsIds);
             }
             return response()->json(
@@ -75,8 +78,9 @@ class RoleController extends Controller
     public function update(Request $request): JsonResponse
     {
         try {
-            $admin = $request->user();
-            $this->authorizeActionUseCase->execute($admin, 'role-update');
+            $adminModel = $request->user();
+            $user = UserFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($user, 'role-update');
             $id = $request->input('id');
             $name = $request->input('name');
             $description = $request->input('description');
@@ -99,8 +103,9 @@ class RoleController extends Controller
     public function delete(Request $request): JsonResponse
     {
         try {
-            $admin = $request->user();
-            $this->authorizeActionUseCase->execute($admin, 'role-delete');
+            $adminModel = $request->user();
+            $user = UserFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($user, 'role-delete');
             
             $id = $request->input('id');
             $this->deleteRoleUseCase->execute($id);
@@ -120,8 +125,9 @@ class RoleController extends Controller
     public function updatePermissions(Request $request): JsonResponse
     {
         try {
-            $admin = $request->user();
-            $this->authorizeActionUseCase->execute($admin, 'role-manage');
+            $adminModel = $request->user();
+            $user = UserFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($user, 'role-manage');
             $id = $request->input('id');
             $permissionsIds = $request->input('permissions') ?? [];
             $role = $this->updatePermissionsToRoleUseCase->execute($id, $permissionsIds);

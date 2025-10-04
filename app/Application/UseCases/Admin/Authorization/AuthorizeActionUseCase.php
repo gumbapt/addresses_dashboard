@@ -2,7 +2,7 @@
 
 namespace App\Application\UseCases\Admin\Authorization;
 
-use App\Models\Admin;
+use App\Domain\Interfaces\AuthorizableUser;
 use App\Domain\Exceptions\AuthorizationException;
 
 class AuthorizeActionUseCase
@@ -11,28 +11,33 @@ class AuthorizeActionUseCase
         private CheckAdminPermissionUseCase $checkPermissionUseCase
     ) {}
 
-    public function execute(Admin $admin, string $permissionSlug): void
+    public function execute(AuthorizableUser $user, string $permissionSlug): void
     {
-        if (!$this->checkPermissionUseCase->execute($admin, $permissionSlug)) {
+        // SudoAdmin tem bypass automático
+        if ($user instanceof \App\Domain\Entities\SudoAdmin) {
+            return;
+        }
+
+        if (!$this->checkPermissionUseCase->execute($user, $permissionSlug)) {
             throw new AuthorizationException(
-                "Admin {$admin->id} does not have permission to perform this action. Required permission: {$permissionSlug}"
+                "Admin {$user->getId()} does not have permission to perform this action. Required permission: {$permissionSlug}"
             );
         }
     }
 
-    public function executeMultiple(Admin $admin, array $permissionSlugs): void
+    public function executeMultiple(AuthorizableUser $user, array $permissionSlugs): void
     {
         foreach ($permissionSlugs as $permissionSlug) {
-            $this->execute($admin, $permissionSlug);
+            $this->execute($user, $permissionSlug);
         }
     }
 
-    public function executeAny(Admin $admin, array $permissionSlugs): void
+    public function executeAny(AuthorizableUser $user, array $permissionSlugs): void
     {
-        if (!$this->checkPermissionUseCase->executeAny($admin, $permissionSlugs)) {
+        if (!$this->checkPermissionUseCase->executeAny($user, $permissionSlugs)) {
             $permissionsList = implode(', ', $permissionSlugs);
             throw new AuthorizationException(
-                "Admin {$admin->id} does not have any of the required permissions: {$permissionsList}"
+                "Admin {$user->getId()} does not have any of the required permissions: {$permissionsList}"
             );
         }
     }

@@ -62,7 +62,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/role/create', [RoleController::class, 'create']);
         Route::put('/role/update', [RoleController::class, 'update']);
         Route::post('/role/delete', [RoleController::class, 'delete']);
-        Route::post('/role/{id}/permissions', [RoleController::class, 'attachPermissions']);
+        Route::post('/role/update-permissions', [RoleController::class, 'updatePermissions']);
         
         // User management routes
         Route::get('/users', [UserController::class, 'index']);

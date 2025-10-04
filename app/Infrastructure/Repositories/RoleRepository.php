@@ -17,7 +17,7 @@ class RoleRepository implements RoleRepositoryInterface
         if (!$role) {
             return null;
         }
-        return new Role($role->id, $role->slug, $role->name, $role->description, $role->is_active, $role->permissions);
+        return $role->toEntity();
     }
 
     public function findBySlug(string $slug): ?Role
@@ -76,11 +76,18 @@ class RoleRepository implements RoleRepositoryInterface
         RoleModel::where('id', $id)->delete();
     }
 
-    public function attachPermissions(int $roleId, array $permissionIds): Role
+    public function updatePermissions(int $roleId, array $permissionIds): Role
     {
         $role = RoleModel::findOrFail($roleId);
+        // sync() substitui todas as permissions (remove as antigas e adiciona as novas)
         $role->permissions()->sync($permissionIds);
         return $role->refresh()->toEntity();
+    }
+
+    // Manter o método antigo para compatibilidade
+    public function attachPermissions(int $roleId, array $permissionIds): Role
+    {
+        return $this->updatePermissions($roleId, $permissionIds);
     }
 
 }

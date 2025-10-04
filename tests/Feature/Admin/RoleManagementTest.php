@@ -99,7 +99,7 @@ class RoleManagementTest extends TestCase
             'slug' => 'test-role',
             'description' => 'Test Description',
             'is_active' => true
-        ]);
+            ]);
     }
     /**
      * @test
@@ -372,5 +372,136 @@ class RoleManagementTest extends TestCase
 
 
 
+    /**
+     * @test
+     */
+    public function an_admin_cannot_change_permissions_to_a_role_without_manage_permission(): void
+    {
+        // Create a test role specifically for this test
+        $testRole = Role::create([
+            'slug' => 'test-no-manage-role',
+            'name' => 'Test No Manage Role',
+            'description' => 'Role for testing no manage permission',
+            'is_active' => true,
+        ]);
+        
+        // Remove role-manage permission from admin's role
+        $adminRole = $this->adminWithAllPermissions->roles()->first();
+        $roleManagePermission = Permission::where('slug', 'role-manage')->first();
+        $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
+        $remainingPermissions = array_diff($currentPermissions, [$roleManagePermission->id]);
+        $adminRole->permissions()->sync($remainingPermissions);
+        
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/update-permissions', [
+            'id' => $testRole->id, 
+            'permissions' => [1, 2, 3]
+        ]);
+        
+        $response->assertStatus(403)
+            ->assertJson(['error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-manage']);
+    }
 
+    /**
+     * @test
+     */
+    public function an_admin_can_update_permissions_when_has_manage_permission(): void
+    {
+        // Create a test role specifically for this test
+        $testRole = Role::create([
+            'slug' => 'test-update-perms-role',
+            'name' => 'Test Update Perms Role',
+            'description' => 'Role for testing permission updates',
+            'is_active' => true,
+        ]);
+        
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        
+        // Get some permissions to assign
+        $permissions = Permission::limit(3)->get();
+        $permissionIds = $permissions->pluck('id')->toArray();
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/update-permissions', [
+            'id' => $testRole->id, 
+            'permissions' => $permissionIds
+        ]);
+        
+        $response->assertStatus(200)
+            ->assertJson(['success' => true])
+            ->assertJsonStructure(['success', 'data' => ['role' => ['id', 'name', 'permissions']]]);
+            
+        // Verify permissions were updated in database
+        $this->assertDatabaseHas('role_permissions', [
+            'role_id' => $testRole->id,
+            'permission_id' => $permissionIds[0]
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function an_admin_cannot_update_permissions_with_invalid_permission_ids(): void
+    {
+        // Create a test role specifically for this test
+        $testRole = Role::create([
+            'slug' => 'test-invalid-perms-role',
+            'name' => 'Test Invalid Perms Role',
+            'description' => 'Role for testing invalid permission IDs',
+            'is_active' => true,
+        ]);
+        
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        
+        // Try to assign permissions with invalid IDs
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/update-permissions', [
+            'id' => $testRole->id, 
+            'permissions' => [999, 1000, 1001] // IDs que não existem
+        ]);
+        
+        $response->assertStatus(500)
+            ->assertJson(['error' => 'Some permissions do not exist. Missing permission IDs: 999, 1000, 1001']);
+    }
+
+    /**
+     * @test
+     */
+    public function an_admin_can_remove_all_permissions_from_role(): void
+    {
+        // Create a test role with some permissions
+        $testRole = Role::create([
+            'slug' => 'test-remove-all-perms-role',
+            'name' => 'Test Remove All Perms Role',
+            'description' => 'Role for testing permission removal',
+            'is_active' => true,
+        ]);
+        
+        // First assign some permissions
+        $permissions = Permission::limit(2)->get();
+        $testRole->permissions()->sync($permissions->pluck('id'));
+        
+        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
+        
+        // Now remove all permissions by sending empty array
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->post('/api/admin/role/update-permissions', [
+            'id' => $testRole->id, 
+            'permissions' => [] // Array vazio remove todas as permissions
+        ]);
+        
+        $response->assertStatus(200)
+            ->assertJson(['success' => true]);
+            
+        // Verify no permissions are assigned
+        $this->assertDatabaseMissing('role_permissions', [
+            'role_id' => $testRole->id
+        ]);
+    }
 }

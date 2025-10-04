@@ -18,6 +18,46 @@ class Chat
         public readonly ?DateTime $updatedAt = null
     ) {}
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+    
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+    
+    
+    
+    public function getCreatedBy(): int
+    {
+        return $this->createdBy;
+    }
+    
+    
+    public function getCreatedByType(): ?string
+    {
+        return $this->createdByType;
+    }
+    
+    
+    public function getCreatedAt(): ?DateTime
+    {
+        return $this->createdAt;
+    }
+    
+    
     /**
      * Converte a entidade em DTO
      */

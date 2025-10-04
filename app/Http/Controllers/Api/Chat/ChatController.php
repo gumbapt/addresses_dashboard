@@ -123,7 +123,7 @@ class ChatController extends Controller
             return response()->json(['error' => 'Access denied'], 403);
         }
 
-        // Conta mensagens não lidas
+        // Conta mensagens não lidas (enviadas por outros usuários)
         $unreadCount = $chat->messages()
             ->where('sender_id', '!=', $chatUser->getId())
             ->where('is_read', false)

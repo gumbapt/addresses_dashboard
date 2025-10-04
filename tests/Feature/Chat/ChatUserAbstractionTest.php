@@ -27,8 +27,22 @@ class ChatUserAbstractionTest extends TestCase
     {
         parent::setUp();
         
+        // Criar User primeiro (ID será 1)
         $this->userModel = UserModel::factory()->create();
-        $this->adminModel = AdminModel::factory()->create();
+        
+        // Criar Admin com ID específico usando insert direto
+        \DB::table('admins')->insert([
+            'id' => 2,
+            'name' => 'Test Admin',
+            'email' => 'admin@test.com',
+            'password' => bcrypt('password'),
+            'is_active' => true,
+            'is_super_admin' => false,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        
+        $this->adminModel = AdminModel::find(2);
         
         // Cria entidades de domínio
         $this->user = ChatUserFactory::createUserFromModel($this->userModel);
@@ -162,6 +176,7 @@ class ChatUserAbstractionTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Olá, mundo!',
             'sender_id' => $this->user->getId(),
+            'sender_type' => $this->user->getType(),
             'message_type' => 'text',
             'is_read' => false
         ]);
@@ -188,6 +203,7 @@ class ChatUserAbstractionTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem do usuário',
             'sender_id' => $this->user->getId(),
+            'sender_type' => $this->user->getType(),
             'message_type' => 'text',
             'is_read' => false
         ]);
@@ -196,6 +212,7 @@ class ChatUserAbstractionTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem do admin',
             'sender_id' => $this->admin->getId(),
+            'sender_type' => $this->admin->getType(),
             'message_type' => 'text',
             'is_read' => false
         ]);
@@ -222,6 +239,7 @@ class ChatUserAbstractionTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem não lida 1',
             'sender_id' => $this->admin->getId(),
+            'sender_type' => $this->admin->getType(),
             'message_type' => 'text',
             'is_read' => false
         ]);
@@ -230,6 +248,7 @@ class ChatUserAbstractionTest extends TestCase
             'chat_id' => $this->chat->id,
             'content' => 'Mensagem não lida 2',
             'sender_id' => $this->admin->getId(),
+            'sender_type' => $this->admin->getType(),
             'message_type' => 'text',
             'is_read' => false
         ]);

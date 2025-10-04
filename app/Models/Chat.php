@@ -311,9 +311,11 @@ class Chat extends Model
      */
     public function hasParticipant(ChatUser $chatUser): bool
     {
-        return $this->users()
+        // Verifica diretamente na tabela chat_user para suportar todos os tipos
+        return \DB::table('chat_user')
+            ->where('chat_id', $this->id)
             ->where('user_id', $chatUser->getId())
-            ->wherePivot('user_type', $chatUser->getType())
+            ->where('user_type', $chatUser->getType())
             ->exists();
     }
 

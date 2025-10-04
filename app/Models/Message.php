@@ -206,6 +206,7 @@ class Message extends Model
      */
     public function scopeBySender($query, ChatUser $chatUser)
     {
-        return $query->where('sender_id', $chatUser->getId());
+        return $query->where('sender_id', $chatUser->getId())
+                    ->where('sender_type', $chatUser->getType());
     }
 }

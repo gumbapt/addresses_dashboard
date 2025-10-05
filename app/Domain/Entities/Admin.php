@@ -2,6 +2,7 @@
 
 namespace App\Domain\Entities;
 
+use App\Application\DTOs\Admin\Authorization\AdminDto;
 use App\Domain\Interfaces\AuthorizableUser;
 use DateTime;
 
@@ -67,5 +68,17 @@ class Admin implements ChatUser, AuthorizableUser
         return false;
     }
 
-    // O método isActive() já existe e é compatível com a interface
+    public function toDto(): AdminDto
+    {
+        
+        return new AdminDto(
+            id: $this->id,
+            name: $this->name,
+            email: $this->email,
+            is_active: $this->isActive,
+            is_super_admin: $this->isSuperAdmin,
+            last_login_at: $this->lastLoginAt,
+        );
+    }
+
 } 

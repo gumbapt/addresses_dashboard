@@ -13,16 +13,12 @@ class AdminLoginUseCase
     {
         $admin = $this->adminAuthService->authenticate($email, $password);
         $token = $this->adminAuthService->generateToken($admin);
-
+        $adminPermissions = $this->adminAuthService->getAdminPermissions($admin);
+        
         return [
-            'admin' => [
-                'id' => $admin->id,
-                'name' => $admin->name,
-                'email' => $admin->email,
-                'is_active' => $admin->isActive,
-                'last_login_at' => $admin->lastLoginAt?->format('Y-m-d H:i:s')
-            ],
-            'token' => $token
+            'admin' => $admin->toDto()->toArray(),
+            'token' => $token,
+            'permissions' => $adminPermissions
         ];
     }
 } 

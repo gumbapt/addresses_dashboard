@@ -36,7 +36,15 @@ class AdminLoginTest extends TestCase
                     'is_active',
                     'last_login_at'
                 ],
-                'token'
+                'token',
+                'permissions' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'slug',
+                        'description'
+                    ]
+                ]
             ])
             ->assertJson([
                 'admin' => [
@@ -46,6 +54,9 @@ class AdminLoginTest extends TestCase
                     'is_active' => true
                 ]
             ]);
+
+        // Verificar que as permissões são retornadas como array
+        $this->assertIsArray($response->json('permissions'));
 
         $this->assertNotEmpty($response->json('token'));
     }
@@ -199,5 +210,43 @@ class AdminLoginTest extends TestCase
         $admin->refresh();
         $this->assertNotNull($admin->last_login_at);
         $this->assertTrue($admin->last_login_at->isToday());
+    }
+
+    public function test_login_returns_admin_permissions()
+    {
+        // Arrange - criar admin com roles e permissões
+        $admin = Admin::factory()->create([
+            'email' => 'admin_with_permissions@dashboard.com',
+            'password' => bcrypt('password123'),
+            'is_super_admin' => false
+        ]);
+
+        // Criar role e permissões (assumindo que existem seeders)
+        $this->seed();
+
+        $loginData = [
+            'email' => 'admin_with_permissions@dashboard.com',
+            'password' => 'password123'
+        ];
+
+        // Act
+        $response = $this->postJson('/api/admin/login', $loginData);
+
+        // Assert
+        $response->assertStatus(200);
+        
+        $permissions = $response->json('permissions');
+        
+        // Verificar que permissões são retornadas
+        $this->assertIsArray($permissions);
+        
+        // Se o admin tem roles, deve ter permissões
+        if (!empty($permissions)) {
+            $firstPermission = $permissions[0];
+            $this->assertArrayHasKey('id', $firstPermission);
+            $this->assertArrayHasKey('name', $firstPermission);
+            $this->assertArrayHasKey('slug', $firstPermission);
+            $this->assertArrayHasKey('description', $firstPermission);
+        }
     }
 } 

@@ -44,4 +44,29 @@ class AdminAuthService implements AdminAuthServiceInterface
         // Gerar token usando Sanctum
         return $adminModel->createToken('admin-api')->plainTextToken;
     }
+
+    public function getAdminPermissions(Admin $admin): array
+    {
+        // Buscar o modelo Eloquent para acessar as relações
+        $adminModel = AdminModel::find($admin->getId());
+        
+        if (!$adminModel) {
+            return [];
+        }
+
+        // Obter todas as permissões do admin através das roles
+        $permissions = $adminModel->roles()
+            ->with('permissions')
+            ->get()
+            ->pluck('permissions')
+            ->flatten()
+            ->unique('id')
+            ->map(function ($permission) {
+                return $permission->toDto()->toArray();
+            })
+            ->values()
+            ->toArray();
+
+        return $permissions;
+    }
 } 

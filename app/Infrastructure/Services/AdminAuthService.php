@@ -69,4 +69,32 @@ class AdminAuthService implements AdminAuthServiceInterface
 
         return $permissions;
     }
+
+    public function getAdminRolesWithPermissions(Admin $admin): array
+    {
+        // Buscar o modelo Eloquent para acessar as relações
+        $adminModel = AdminModel::find($admin->getId());
+        
+        if (!$adminModel) {
+            return [];
+        }
+
+        // Obter todas as roles do admin com suas permissions
+        $roles = $adminModel->roles()
+            ->with('permissions')
+            ->get()
+            ->map(function ($role) {
+                return [
+                    'id' => $role->id,
+                    'name' => $role->name,
+                    'description' => $role->description,
+                    'permissions' => $role->permissions->map(function ($permission) {
+                        return $permission->toDto()->toArray();
+                    })->toArray()
+                ];
+            })
+            ->toArray();
+
+        return $roles;
+    }
 } 

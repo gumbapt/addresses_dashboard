@@ -13,12 +13,12 @@ class AdminLoginUseCase
     {
         $admin = $this->adminAuthService->authenticate($email, $password);
         $token = $this->adminAuthService->generateToken($admin);
-        $adminPermissions = $this->adminAuthService->getAdminPermissions($admin);
+        $adminRoles = $this->adminAuthService->getAdminRolesWithPermissions($admin);
         
         return [
             'admin' => $admin->toDto()->toArray(),
             'token' => $token,
-            'permissions' => $adminPermissions
+            'roles' => $adminRoles
         ];
     }
 } 

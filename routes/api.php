@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\PermissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
@@ -63,6 +64,9 @@ Route::prefix('admin')->group(function () {
         Route::put('/role/update', [RoleController::class, 'update']);
         Route::post('/role/delete', [RoleController::class, 'delete']);
         Route::post('/role/update-permissions', [RoleController::class, 'updatePermissions']);
+        
+
+        Route::get('/permissions', [PermissionController::class, 'index']);
         
         // User management routes
         Route::get('/users', [UserController::class, 'index']);

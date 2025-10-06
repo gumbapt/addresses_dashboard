@@ -176,6 +176,5 @@ class PermissionSeeder extends Seeder
             'route' => 'role/unassign',
         ]);
 
-      
     }
 }

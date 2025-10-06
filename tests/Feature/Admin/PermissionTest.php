@@ -16,9 +16,9 @@ class PermissionTest extends TestCase
 {
     use RefreshDatabase;
 
-    private Admin $adminWithAllPermissions;
-    private Admin $adminWithoutPermissions;
     private Admin $superAdmin;
+    private Admin $adminWithRoleManage;
+    private Admin $adminWithoutRoleManage;
 
     public function setUp(): void
     {
@@ -32,195 +32,125 @@ class PermissionTest extends TestCase
         
         $this->superAdmin = Admin::where('is_super_admin', true)->first();
         
-        // Create admin with ALL permissions using factory
-        $this->adminWithAllPermissions = Admin::factory()->create([
-            'name' => 'Admin With All Permissions',
-            'email' => 'allperms@test.com',
+        // Create admin with role-manage
+        $this->adminWithRoleManage = Admin::factory()->create([
+            'name' => 'Admin With Role Manage',
+            'email' => 'admin_with_role_manage@test.com',
             'password' => bcrypt('password'),
             'is_active' => true,
             'is_super_admin' => false,
         ]);
         
-        // Create admin without permissions using factory
-        $this->adminWithoutPermissions = Admin::factory()->create([
-            'name' => 'Admin Without Permissions',
-            'email' => 'noperms@test.com',
+        // Create admin without role-manage
+        $this->adminWithoutRoleManage = Admin::factory()->create([
+            'name' => 'Admin Without Role Manage',
+            'email' => 'admin_without_role_manage@test.com',
             'password' => bcrypt('password'),
             'is_active' => true,
             'is_super_admin' => false,
         ]);
         
-        // Assign role with ALL permissions to adminWithAllPermissions
+        // Assign role-manage to adminWithRoleManage
         $adminRole = Role::where('slug', 'admin')->first();
-        $allPermissions = Permission::all();
-        $adminRole->permissions()->sync($allPermissions->pluck('id'));
-        $this->adminWithAllPermissions->roles()->attach($adminRole->id, [
-            'assigned_at' => now(),
-            'assigned_by' => $this->superAdmin->id
-        ]);
+        $roleManagePermission = Permission::where('slug', 'role-manage')->first();
+        
+        if ($roleManagePermission) {
+            $adminRole->permissions()->syncWithoutDetaching([$roleManagePermission->id]);
+            $this->adminWithRoleManage->roles()->attach($adminRole->id, [
+                'assigned_at' => now(),
+                'assigned_by' => $this->superAdmin->id
+            ]);
+        }
     }
 
     /**
      * @test
      */
-    public function super_admin_can_access_all_endpoints(): void
+    public function super_admin_can_list_all_permissions(): void
     {
         $token = $this->superAdmin->createToken('test-token')->plainTextToken;
         
-        // Test role creation (requires role-create permission)
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
-        ])->post('/api/admin/role/create', [
-            'name' => 'Test Role',
-            'description' => 'Test Description'
-        ]);
-        
-        $response->assertStatus(201);
-    }
-
-    /**
-     * @test
-     */
-    public function admin_with_all_permissions_can_access_authorized_endpoints(): void
-    {
-        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-        
-        // Test role listing (requires role-read permission)
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->get('/api/admin/roles');
-        
-        $response->assertStatus(200);
-    }
-
-    /**
-     * @test
-     */
-    public function admin_without_specific_permission_cannot_access_endpoint(): void
-    {
-        // Remove specific permission from admin's role
-        $adminRole = $this->adminWithAllPermissions->roles()->first();
-        $roleCreatePermission = Permission::where('slug', 'role-create')->first();
-        
-        // Remove only the role-create permission
-        $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
-        $remainingPermissions = array_diff($currentPermissions, [$roleCreatePermission->id]);
-        $adminRole->permissions()->sync($remainingPermissions);
-        
-        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-        
-        // Test role creation (requires role-create permission, which we just removed)
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->post('/api/admin/role/create', [
-            'name' => 'Test Role',
-            'description' => 'Test Description'
-        ]);
-        
-        $response->assertStatus(403)
-            ->assertJson([
-                'error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-create'
-            ]);
-    }
-
-    /**
-     * @test
-     */
-    public function admin_without_permissions_cannot_access_protected_endpoints(): void
-    {
-        $token = $this->adminWithoutPermissions->createToken('test-token')->plainTextToken;
-        
-        // Test role listing (requires role-read permission)
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->get('/api/admin/roles');
-        
-        $response->assertStatus(403)
-            ->assertJson([
-                'error' => 'Admin ' . $this->adminWithoutPermissions->id . ' does not have permission to perform this action. Required permission: role-read'
-            ]);
-    }
-
-    /**
-     * @test
-     */
-    public function admin_can_create_role_when_has_create_permission(): void
-    {
-        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-        
-        // Test role creation (admin has all permissions including role-create)
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->post('/api/admin/role/create', [
-            'name' => 'Test Role',
-            'description' => 'Test Description'
-        ]);
-        
-        $response->assertStatus(201)
-            ->assertJsonStructure([
-                'success',
-                'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active']]
-            ]);
-    }
-
-    /**
-     * @test
-     */
-    public function admin_cannot_attach_permissions_without_manage_permission(): void
-    {
-        // Remove role-manage permission from admin's role
-        $adminRole = $this->adminWithAllPermissions->roles()->first();
-        $roleManagePermission = Permission::where('slug', 'role-manage')->first();
-        
-        // Remove only the role-manage permission
-        $currentPermissions = $adminRole->permissions()->pluck('permission_id')->toArray();
-        $remainingPermissions = array_diff($currentPermissions, [$roleManagePermission->id]);
-        $adminRole->permissions()->sync($remainingPermissions);
-        
-        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-        
-        // Test role creation with permissions (requires role-manage permission for attaching permissions)
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->post('/api/admin/role/create', [
-            'name' => 'Test Role',
-            'description' => 'Test Description',
-            'permissions' => [1, 2, 3]
-        ]);
-        
-        $response->assertStatus(403)
-            ->assertJson([
-                'error' => 'Admin ' . $this->adminWithAllPermissions->id . ' does not have permission to perform this action. Required permission: role-manage'
-            ]);
-    }
-
-    /**
-     * @test
-     */
-    public function admin_can_update_role_when_has_update_permission(): void
-    {
-        $token = $this->adminWithAllPermissions->createToken('test-token')->plainTextToken;
-
-        $createdRole = Role::create([
-            'name' => 'Test Role',
-            'slug' => 'test-role',
-            'description' => 'Test Description',
-            'is_active' => true
-        ]);
-        // Test role update (admin has all permissions including role-update)
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
-        ])->put('/api/admin/role/update', [
-            'id' => $createdRole->id,
-            'name' => 'Updated Role name',
-            'description' => 'Updated Role description'
-        ]);
+        ])->get('/api/admin/permissions');
         
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'success',
-                'data' => ['role' => ['id', 'name', 'slug', 'description', 'is_active', 'created_at', 'updated_at']]
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'slug',
+                        'description',
+                        'resource',
+                        'action'
+                    ]
+                ]
             ]);
         
+        $permissions = $response->json('data');
+        $this->assertNotEmpty($permissions);
+        
+        // Verify it contains the expected permission structure
+        $firstPermission = $permissions[0];
+        $this->assertArrayHasKey('id', $firstPermission);
+        $this->assertArrayHasKey('name', $firstPermission);
+        $this->assertArrayHasKey('slug', $firstPermission);
+        $this->assertArrayHasKey('description', $firstPermission);
+    }
+
+    /**
+     * @test
+     */
+    public function admin_with_role_manage_can_list_all_permissions(): void
+    {
+        $token = $this->adminWithRoleManage->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->get('/api/admin/permissions');
+        
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'slug',
+                        'description',
+                        'resource',
+                        'action'
+                    ]
+                ]
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function admin_without_role_manage_cannot_list_permissions(): void
+    {
+        $token = $this->adminWithoutRoleManage->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->get('/api/admin/permissions');
+        
+        $response->assertStatus(403)
+            ->assertJson([
+                'error' => 'Admin ' . $this->adminWithoutRoleManage->id . ' does not have permission to perform this action. Required permission: role-manage'
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function unauthenticated_user_cannot_access_permissions(): void
+    {
+        $response = $this->getJson('/api/admin/permissions');
+        
+        $response->assertStatus(401);
     }
 }

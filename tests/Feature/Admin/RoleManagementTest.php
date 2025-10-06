@@ -87,7 +87,6 @@ class RoleManagementTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->post('/api/admin/role/create', ['name' => 'Test Role', 'description' => 'Test Description']);
-
         $response->assertStatus(201)
             ->assertJsonStructure([
                 'success',

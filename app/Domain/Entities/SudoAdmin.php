@@ -13,7 +13,9 @@ class SudoAdmin implements SudoAdminInterface
         public readonly string $email,
         public readonly string $password,
         public readonly bool $isActive = true,
-        public readonly ?DateTime $lastLoginAt = null
+        public readonly ?DateTime $lastLoginAt = null,
+        public readonly ?DateTime $createdAt = null,
+        public readonly ?DateTime $updatedAt = null
     ) {}
 
     public function getId(): int

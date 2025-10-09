@@ -11,52 +11,67 @@ class AdminRepository implements AdminRepositoryInterface
     public function findById(int $id): ?Admin
     {
         $admin = AdminModel::find($id);
-        
         if (!$admin) {
             return null;
         }
-
-        return new Admin(
-            id: $admin->id,
-            name: $admin->name,
-            email: $admin->email,
-            password: $admin->password,
-            isActive: $admin->is_active,
-            isSuperAdmin: $admin->is_super_admin,
-            lastLoginAt: $admin->last_login_at
-        );
+        return $admin->toEntity();
     }
 
     public function findByEmail(string $email): ?Admin
     {
         $admin = AdminModel::where('email', $email)->first();
-        
         if (!$admin) {
             return null;
         }
 
-        return new Admin(
-            id: $admin->id,
-            name: $admin->name,
-            email: $admin->email,
-            password: $admin->password,
-            isActive: $admin->is_active,
-            isSuperAdmin: $admin->is_super_admin,
-            lastLoginAt: $admin->last_login_at
-        );
+        return $admin->toEntity();
     }
 
-    public function create(string $name, string $email, string $password): Admin
+    public function findAll(): array
+    {
+        $admins = AdminModel::all();
+        
+        return $admins->map(function ($admin) {
+            return $admin->toEntity();
+        })->toArray();
+    }
+
+    public function create(string $name, string $email, string $password, bool $isActive = true): Admin
     {
         $admin = AdminModel::create([
             'name' => $name,
             'email' => $email,
-            'password' => $password,
+            'password' => bcrypt($password),
             'is_super_admin'=> false,
-            'is_active' => true,
+            'is_active' => $isActive,
         ]);
 
         return $admin->toEntity();  
+    }
+
+    public function update(
+        int $id,
+        ?string $name = null,
+        ?string $email = null,
+        ?string $password = null,
+        ?bool $isActive = null
+    ): Admin {
+        $admin = AdminModel::findOrFail($id);
+        
+        $updateData = [];
+        if ($name !== null) $updateData['name'] = $name;
+        if ($email !== null) $updateData['email'] = $email;
+        if ($password !== null) $updateData['password'] = bcrypt($password);
+        if ($isActive !== null) $updateData['is_active'] = $isActive;
+        
+        $admin->update($updateData);
+        
+        return $admin->fresh()->toEntity();
+    }
+
+    public function delete(int $id): void
+    {
+        AdminModel::findOrFail($id)->delete();
     }
 
     public function findByIdWithRolesAndPermissions(int $id): ?Admin
@@ -67,16 +82,8 @@ class AdminRepository implements AdminRepositoryInterface
             return null;
         }
 
-        // For now, return basic admin entity - we'll enhance this later
-        return new Admin(
-            id: $admin->id,
-            name: $admin->name,
-            email: $admin->email,
-            password: $admin->password,
-            isActive: $admin->is_active,
-            isSuperAdmin: $admin->is_super_admin,
-            lastLoginAt: $admin->last_login_at
-        );
+        return $admin->toEntity();
+
     }
 
     public function updateLastLogin(int $id): void

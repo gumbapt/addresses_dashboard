@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\PermissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,9 +65,14 @@ Route::prefix('admin')->group(function () {
         Route::put('/role/update', [RoleController::class, 'update']);
         Route::post('/role/delete', [RoleController::class, 'delete']);
         Route::post('/role/update-permissions', [RoleController::class, 'updatePermissions']);
-        
-
         Route::get('/permissions', [PermissionController::class, 'index']);
+        
+        
+        // Admin management routes
+        Route::get('/admins', [AdminController::class, 'index']);
+        Route::post('/admins', [AdminController::class, 'create']);
+        Route::put('/admins', [AdminController::class, 'update']);
+        Route::delete('/admins', [AdminController::class, 'delete']);
         
         // User management routes
         Route::get('/users', [UserController::class, 'index']);
@@ -77,13 +83,7 @@ Route::prefix('admin')->group(function () {
         
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index']);
-        // Admin chat routes
-        // Route::prefix('chat')->group(function () {
-        //     Route::get('/conversations', [AdminChatController::class, 'getConversations']);
-        //     Route::get('/conversation', [AdminChatController::class, 'getConversationWithUser']);
-        //     Route::post('/send', [AdminChatController::class, 'sendMessageToUser']);
-        //     Route::post('/create-private', [ChatController::class, 'createPrivateChat']);
-        // });
+
     });
 });
 

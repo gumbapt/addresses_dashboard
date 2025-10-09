@@ -18,7 +18,9 @@ class UserFactory
                 email: $adminModel->email,
                 password: $adminModel->password,
                 isActive: $adminModel->is_active,
-                lastLoginAt: $adminModel->last_login_at
+                lastLoginAt: $adminModel->last_login_at,
+                createdAt: $adminModel->created_at,
+                updatedAt: $adminModel->updated_at
             );
         }
 
@@ -29,7 +31,9 @@ class UserFactory
             password: $adminModel->password,
             isActive: $adminModel->is_active,
             isSuperAdmin: $adminModel->is_super_admin,
-            lastLoginAt: $adminModel->last_login_at
+            lastLoginAt: $adminModel->last_login_at,
+            createdAt: $adminModel->created_at,
+            updatedAt: $adminModel->updated_at
         );
     }
 }

@@ -65,7 +65,8 @@ class Admin extends Authenticatable implements ChatUser
             isActive: $this->is_active,
             isSuperAdmin: $this->is_super_admin,
             lastLoginAt: $this->last_login_at,
-            
+            createdAt: $this->created_at,
+            updatedAt: $this->updated_at
         );
     }
 

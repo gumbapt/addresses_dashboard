@@ -10,6 +10,12 @@ interface AdminRepositoryInterface
     public function findByEmail(string $email): ?Admin;
     public function findByIdWithRolesAndPermissions(int $id): ?Admin;
     public function findAll(): array;
+    public function findAllPaginated(
+        int $page = 1, 
+        int $perPage = 15,
+        ?string $search = null,
+        ?bool $isActive = null
+    ): array;
     public function create(string $name, string $email, string $password, bool $isActive = true): Admin;
     public function update(
         int $id,

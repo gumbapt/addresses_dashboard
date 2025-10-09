@@ -36,6 +36,42 @@ class AdminRepository implements AdminRepositoryInterface
         })->toArray();
     }
 
+    public function findAllPaginated(
+        int $page = 1, 
+        int $perPage = 15,
+        ?string $search = null,
+        ?bool $isActive = null
+    ): array {
+        $query = AdminModel::query();
+        
+        // Aplicar filtro de busca
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+        
+        // Aplicar filtro de status ativo
+        if ($isActive !== null) {
+            $query->where('is_active', $isActive);
+        }
+        
+        // Executar paginação
+        $paginator = $query->orderBy('created_at', 'desc')
+            ->paginate($perPage, ['*'], 'page', $page);
+        
+        return [
+            'data' => $paginator->items() ? array_values(array_map(fn($admin) => $admin->toEntity(), $paginator->items())) : [],
+            'total' => $paginator->total(),
+            'per_page' => $paginator->perPage(),
+            'current_page' => $paginator->currentPage(),
+            'last_page' => $paginator->lastPage(),
+            'from' => $paginator->firstItem(),
+            'to' => $paginator->lastItem(),
+        ];
+    }
+
     public function create(string $name, string $email, string $password, bool $isActive = true): Admin
     {
         $admin = AdminModel::create([

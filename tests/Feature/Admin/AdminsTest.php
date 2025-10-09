@@ -72,6 +72,14 @@ class AdminsTest extends TestCase
                         'created_at',
                         'updated_at'
                     ]
+                ],
+                'pagination' => [
+                    'total',
+                    'per_page',
+                    'current_page',
+                    'last_page',
+                    'from',
+                    'to'
                 ]
             ]);
         $this->assertNotEmpty($response->json('data'));
@@ -97,6 +105,12 @@ class AdminsTest extends TestCase
                         'is_active',
                         'is_super_admin'
                     ]
+                ],
+                'pagination' => [
+                    'total',
+                    'per_page',
+                    'current_page',
+                    'last_page'
                 ]
             ]);
     }
@@ -489,5 +503,237 @@ class AdminsTest extends TestCase
         
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['role_id']);
+    }
+
+    /** @test */
+    public function can_paginate_admins_with_custom_per_page(): void
+    {
+        // Create 30 additional admins
+        Admin::factory()->count(30)->create();
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?page=1&per_page=10');
+        
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'data',
+                'pagination' => [
+                    'total',
+                    'per_page',
+                    'current_page',
+                    'last_page',
+                    'from',
+                    'to'
+                ]
+            ])
+            ->assertJsonPath('pagination.per_page', 10)
+            ->assertJsonPath('pagination.current_page', 1);
+        
+        // Verificar que retornou exatamente 10 itens
+        $this->assertCount(10, $response->json('data'));
+    }
+
+    /** @test */
+    public function can_navigate_to_second_page(): void
+    {
+        // Create 30 additional admins
+        Admin::factory()->count(30)->create();
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?page=2&per_page=10');
+        
+        $response->assertStatus(200)
+            ->assertJsonPath('pagination.current_page', 2)
+            ->assertJsonPath('pagination.per_page', 10);
+        
+        $this->assertCount(10, $response->json('data'));
+    }
+
+    /** @test */
+    public function can_search_admins_by_name(): void
+    {
+        Admin::factory()->create(['name' => 'John Doe', 'email' => 'john@test.com']);
+        Admin::factory()->create(['name' => 'Jane Smith', 'email' => 'jane@test.com']);
+        Admin::factory()->count(10)->create();
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?search=John');
+        
+        $response->assertStatus(200);
+        
+        // Verificar que retornou apenas resultados com "John" no nome
+        $data = $response->json('data');
+        $this->assertNotEmpty($data);
+        
+        $foundJohn = false;
+        foreach ($data as $admin) {
+            if (str_contains(strtolower($admin['name']), 'john')) {
+                $foundJohn = true;
+                break;
+            }
+        }
+        $this->assertTrue($foundJohn, 'Should find admin with "John" in name');
+    }
+
+    /** @test */
+    public function can_search_admins_by_email(): void
+    {
+        Admin::factory()->create(['name' => 'Test Admin', 'email' => 'unique@example.com']);
+        Admin::factory()->count(10)->create();
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?search=unique@example.com');
+        
+        $response->assertStatus(200);
+        
+        $data = $response->json('data');
+        $this->assertNotEmpty($data);
+        
+        // Verificar que encontrou o admin com o email específico
+        $foundAdmin = collect($data)->first(fn($admin) => $admin['email'] === 'unique@example.com');
+        $this->assertNotNull($foundAdmin);
+    }
+
+    /** @test */
+    public function can_filter_admins_by_active_status(): void
+    {
+        Admin::factory()->count(5)->create(['is_active' => true]);
+        Admin::factory()->count(3)->create(['is_active' => false]);
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Filter active admins
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?is_active=true');
+        
+        $response->assertStatus(200);
+        
+        $data = $response->json('data');
+        $this->assertNotEmpty($data);
+        
+        // Verificar que todos são ativos
+        foreach ($data as $admin) {
+            $this->assertTrue($admin['is_active'], 'All admins should be active');
+        }
+    }
+
+    /** @test */
+    public function can_filter_admins_by_inactive_status(): void
+    {
+        Admin::factory()->count(5)->create(['is_active' => true]);
+        Admin::factory()->count(3)->create(['is_active' => false]);
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Filter inactive admins
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?is_active=false');
+        
+        $response->assertStatus(200);
+        
+        $data = $response->json('data');
+        $this->assertNotEmpty($data);
+        
+        // Verificar que todos são inativos
+        foreach ($data as $admin) {
+            $this->assertFalse($admin['is_active'], 'All admins should be inactive');
+        }
+    }
+
+    /** @test */
+    public function can_combine_search_and_filters(): void
+    {
+        Admin::factory()->create([
+            'name' => 'Active John',
+            'email' => 'activejohn@test.com',
+            'is_active' => true
+        ]);
+        Admin::factory()->create([
+            'name' => 'Inactive John',
+            'email' => 'inactivejohn@test.com',
+            'is_active' => false
+        ]);
+        Admin::factory()->count(10)->create(['is_active' => true]);
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?search=John&is_active=true');
+        
+        $response->assertStatus(200);
+        
+        $data = $response->json('data');
+        $this->assertNotEmpty($data);
+        
+        // Verificar que encontrou apenas "Active John"
+        foreach ($data as $admin) {
+            $this->assertTrue($admin['is_active']);
+            $this->assertTrue(
+                str_contains(strtolower($admin['name']), 'john') || 
+                str_contains(strtolower($admin['email']), 'john')
+            );
+        }
+    }
+
+    /** @test */
+    public function pagination_respects_max_per_page_limit(): void
+    {
+        Admin::factory()->count(50)->create();
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Try to request 200 per page (should be limited to 100)
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?per_page=200');
+        
+        $response->assertStatus(200)
+            ->assertJsonPath('pagination.per_page', 100); // Should be limited to 100
+    }
+
+    /** @test */
+    public function pagination_respects_min_per_page_limit(): void
+    {
+        Admin::factory()->count(10)->create();
+        
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Try to request 0 per page (should default to 1)
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins?per_page=0');
+        
+        $response->assertStatus(200)
+            ->assertJsonPath('pagination.per_page', 1); // Should be limited to minimum 1
+    }
+
+    /** @test */
+    public function default_pagination_is_15_items(): void
+    {
+        Admin::factory()->count(30)->create();
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        // Request without specifying per_page
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson('/api/admin/admins');
+        
+        $response->assertStatus(200)
+            ->assertJsonPath('pagination.per_page', 15); // Default should be 15
     }
 }

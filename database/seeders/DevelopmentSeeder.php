@@ -2,23 +2,24 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
-class AdminSeeder extends Seeder
+class DevelopmentSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database with development data.
+     * 
+     * This seeder should only be used in development/testing environments.
+     * Run with: php artisan db:seed --class=DevelopmentSeeder
      */
     public function run(): void
     {
-        // First create the Super Admin
-        $this->call(SudoAdminSeeder::class);
-        
         $faker = Faker::create();
+        
+        $this->command->info('Creating 20 random admins...');
         
         // Create 20 regular admins with Faker
         for ($i = 1; $i <= 20; $i++) {
@@ -30,5 +31,9 @@ class AdminSeeder extends Seeder
                 'is_super_admin' => false,
             ]);
         }
+        
+        $this->command->info('✅ Created 20 random admins successfully!');
+        $this->command->info('Default password for all: password123');
     }
 }
+

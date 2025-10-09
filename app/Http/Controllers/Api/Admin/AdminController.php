@@ -31,14 +31,44 @@ class AdminController extends Controller
         try {
             $adminModel = $request->user();
             $admin = UserFactory::createFromModel($adminModel);
-            
             $this->authorizeActionUseCase->execute($admin, 'admin-read');
             
-            $admins = $this->getAllAdminsUseCase->execute();
+            // Obter parâmetros de paginação da query string
+            $page = (int) $request->query('page', 1);
+            $perPage = (int) $request->query('per_page', 15);
+            $search = $request->query('search');
+            $isActive = $request->query('is_active');
+            
+            // Converter string 'true'/'false' para boolean
+            if ($isActive !== null && $isActive !== '') {
+                $isActive = filter_var($isActive, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+            } else {
+                $isActive = null;
+            }
+            
+            // Validar limites
+            $perPage = min(max($perPage, 1), 100); // Entre 1 e 100
+            $page = max($page, 1);
+            
+            // Executar use case com paginação
+            $result = $this->getAllAdminsUseCase->executePaginated(
+                $page, 
+                $perPage,
+                $search,
+                $isActive
+            );
             
             return response()->json([
                 'success' => true,
-                'data' => $admins
+                'data' => $result['data'],
+                'pagination' => [
+                    'total' => $result['total'],
+                    'per_page' => $result['per_page'],
+                    'current_page' => $result['current_page'],
+                    'last_page' => $result['last_page'],
+                    'from' => $result['from'],
+                    'to' => $result['to']
+                ]
             ], 200);
         } catch (\App\Domain\Exceptions\AuthorizationException $e) {
             return response()->json([

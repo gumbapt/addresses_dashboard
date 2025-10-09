@@ -40,6 +40,11 @@ class AdminLoginUseCaseTest extends TestCase
             ->with($admin)
             ->andReturn('test_token_123');
 
+        $mockAuthService->shouldReceive('getAdminRolesWithPermissions')
+            ->once()
+            ->with($admin)
+            ->andReturn([]);
+
         $useCase = new AdminLoginUseCase($mockAuthService);
 
         // Act
@@ -52,9 +57,11 @@ class AdminLoginUseCaseTest extends TestCase
                 'name' => 'Test Admin',
                 'email' => 'admin@test.com',
                 'is_active' => true,
+                'is_super_admin' => false,
                 'last_login_at' => null
             ],
-            'token' => 'test_token_123'
+            'token' => 'test_token_123',
+            'roles' => []
         ], $result);
     }
 
@@ -117,6 +124,11 @@ class AdminLoginUseCaseTest extends TestCase
             ->once()
             ->with($admin)
             ->andReturn('test_token_123');
+
+        $mockAuthService->shouldReceive('getAdminRolesWithPermissions')
+            ->once()
+            ->with($admin)
+            ->andReturn([]);
 
         $useCase = new AdminLoginUseCase($mockAuthService);
 

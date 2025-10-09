@@ -70,14 +70,13 @@ class Admin implements ChatUser, AuthorizableUser
 
     public function toDto(): AdminDto
     {
-        
         return new AdminDto(
             id: $this->id,
             name: $this->name,
             email: $this->email,
             is_active: $this->isActive,
             is_super_admin: $this->isSuperAdmin,
-            last_login_at: $this->lastLoginAt,
+            last_login_at: $this->lastLoginAt?->format('Y-m-d H:i:s'),
         );
     }
 

@@ -7,7 +7,7 @@ use App\Domain\Entities\SudoAdmin;
 use App\Domain\Interfaces\AuthorizableUser;
 use App\Models\Admin as AdminModel;
 
-class UserFactory
+class AdminFactory
 {
     public static function createFromModel(AdminModel $adminModel): AuthorizableUser
     {

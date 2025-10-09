@@ -26,7 +26,10 @@ class AdminLoginUseCaseTest extends TestCase
             email: 'admin@test.com',
             password: 'hashed_password',
             isActive: true,
-            lastLoginAt: null
+            isSuperAdmin: false,
+            lastLoginAt: null,
+            createdAt: null,
+            updatedAt: null
         );
 
         $mockAuthService = Mockery::mock(AdminAuthServiceInterface::class);
@@ -58,7 +61,9 @@ class AdminLoginUseCaseTest extends TestCase
                 'email' => 'admin@test.com',
                 'is_active' => true,
                 'is_super_admin' => false,
-                'last_login_at' => null
+                'last_login_at' => null,
+                'created_at' => null,
+                'updated_at' => null
             ],
             'token' => 'test_token_123',
             'roles' => []
@@ -105,13 +110,19 @@ class AdminLoginUseCaseTest extends TestCase
     {
         // Arrange
         $lastLoginAt = new \DateTime('2025-06-27 20:45:30');
+        $createdAt = new \DateTime('2025-06-01 10:00:00');
+        $updatedAt = new \DateTime('2025-06-27 20:45:30');
+        
         $admin = new Admin(
             id: 1,
             name: 'Test Admin',
             email: 'admin@test.com',
             password: 'hashed_password',
             isActive: true,
-            lastLoginAt: $lastLoginAt
+            isSuperAdmin: false,
+            lastLoginAt: $lastLoginAt,
+            createdAt: $createdAt,
+            updatedAt: $updatedAt
         );
 
         $mockAuthService = Mockery::mock(AdminAuthServiceInterface::class);
@@ -137,5 +148,7 @@ class AdminLoginUseCaseTest extends TestCase
 
         // Assert
         $this->assertEquals('2025-06-27 20:45:30', $result['admin']['last_login_at']);
+        $this->assertEquals('2025-06-01 10:00:00', $result['admin']['created_at']);
+        $this->assertEquals('2025-06-27 20:45:30', $result['admin']['updated_at']);
     }
 } 

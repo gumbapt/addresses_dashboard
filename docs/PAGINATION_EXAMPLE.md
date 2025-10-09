@@ -214,7 +214,7 @@ class GetPaginatedAdminsUseCase
 
 namespace App\Http\Controllers\Api\Admin;
 
-use App\Application\Services\UserFactory;
+use App\Application\Services\AdminFactory;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Admin\GetAllAdminsUseCase;
 use App\Http\Controllers\Controller;
@@ -233,7 +233,7 @@ class AdminController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $admin = UserFactory::createFromModel($adminModel);
+            $admin = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($admin, 'admin-read');
             
             // Obter parâmetros de paginação da query string

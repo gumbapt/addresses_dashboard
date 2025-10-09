@@ -9,7 +9,7 @@ use App\Application\UseCases\Admin\Authorization\UpdatePermissionsToRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Admin\Authorization\UpdateRoleUseCase;
 use App\Application\UseCases\Admin\Authorization\DeleteRoleUseCase;
-use App\Application\Services\UserFactory;
+use App\Application\Services\AdminFactory;
 use App\Domain\Exceptions\AuthorizationException;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
@@ -33,7 +33,7 @@ class RoleController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $user = UserFactory::createFromModel($adminModel);
+            $user = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($user, 'role-read');
             $roles = $this->getRolesUseCase->execute();
             $roles = array_map(function ($role) {
@@ -51,7 +51,7 @@ class RoleController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $user = UserFactory::createFromModel($adminModel);
+            $user = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($user, 'role-create');
             $name = $request->input('name');
             $description = $request->input('description');
@@ -79,7 +79,7 @@ class RoleController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $user = UserFactory::createFromModel($adminModel);
+            $user = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($user, 'role-update');
             $id = $request->input('id');
             $name = $request->input('name');
@@ -104,7 +104,7 @@ class RoleController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $user = UserFactory::createFromModel($adminModel);
+            $user = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($user, 'role-delete');
             
             $id = $request->input('id');
@@ -126,7 +126,7 @@ class RoleController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $user = UserFactory::createFromModel($adminModel);
+            $user = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($user, 'role-manage');
             $id = $request->input('id');
             $permissionsIds = $request->input('permissions') ?? [];

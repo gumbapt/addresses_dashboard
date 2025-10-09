@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Application\UseCases\Admin\Authorization\GetAllPermissionsUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
-use App\Application\Services\UserFactory;
+use App\Application\Services\AdminFactory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class PermissionController extends Controller
     {
         try {
             $adminModel = $request->user();
-            $admin = UserFactory::createFromModel($adminModel);
+            $admin = AdminFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($admin, 'role-manage');
             $permissions = $this->getAllPermissionsUseCase->execute();
             return response()->json([

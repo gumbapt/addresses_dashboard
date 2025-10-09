@@ -18,16 +18,8 @@ class PermissionController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $adminModel = $request->user();
-        
-        // Verificar se o usuário está autenticado ANTES de qualquer outra lógica
-        if (!$adminModel) {
-            return response()->json([
-                'error' => 'Unauthenticated'
-            ], 401);
-        }
-
         try {
+            $adminModel = $request->user();
             $admin = UserFactory::createFromModel($adminModel);
             $this->authorizeActionUseCase->execute($admin, 'role-manage');
             $permissions = $this->getAllPermissionsUseCase->execute();

@@ -17,7 +17,8 @@ class CreateAdminRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:admins,email|max:255',
             'password' => 'required|string|min:8|confirmed',
-            'is_active' => 'sometimes|boolean'
+            'is_active' => 'sometimes|boolean',
+            'role_id' => 'sometimes|integer|exists:roles,id'
         ];
     }
 
@@ -30,7 +31,8 @@ class CreateAdminRequest extends FormRequest
             'email.unique' => 'This email address is already registered',
             'password.required' => 'The password field is required',
             'password.min' => 'The password must be at least 8 characters',
-            'password.confirmed' => 'The password confirmation does not match'
+            'password.confirmed' => 'The password confirmation does not match',
+            'role_id.exists' => 'The selected role does not exist'
         ];
     }
 }

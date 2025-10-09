@@ -431,4 +431,63 @@ class AdminsTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name', 'email', 'password']);
     }
+
+    /** @test */
+    public function can_create_admin_with_role(): void
+    {
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Obter uma role existente
+        $role = Role::where('slug', 'admin')->first();
+        
+        $adminData = [
+            'name' => 'Admin With Role',
+            'email' => 'adminwithrole@test.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'is_active' => true,
+            'role_id' => $role->id
+        ];
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson('/api/admin/admins', $adminData);
+        
+        $response->assertStatus(201);
+        
+        // Verificar que o admin foi criado
+        $this->assertDatabaseHas('admins', [
+            'email' => 'adminwithrole@test.com'
+        ]);
+        
+        // Verificar que a role foi atribuída
+        $newAdmin = Admin::where('email', 'adminwithrole@test.com')->first();
+        $this->assertDatabaseHas('admin_roles', [
+            'admin_id' => $newAdmin->id,
+            'role_id' => $role->id,
+            'assigned_by' => $this->superAdmin->id
+        ]);
+    }
+
+    /** @test */
+    public function cannot_create_admin_with_invalid_role(): void
+    {
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        $adminData = [
+            'name' => 'Admin With Invalid Role',
+            'email' => 'invalidrole@test.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'is_active' => true,
+            'role_id' => 99999 // Role que não existe
+        ];
+        
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson('/api/admin/admins', $adminData);
+        
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['role_id']);
+    }
 }

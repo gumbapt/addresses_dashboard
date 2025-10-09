@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Application\Services\UserFactory;
+use App\Application\UseCases\Admin\AssignRoleToAdminUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Admin\CreateAdminUseCase;
 use App\Application\UseCases\Admin\DeleteAdminUseCase;
@@ -21,6 +22,7 @@ class AdminController extends Controller
         private CreateAdminUseCase $createAdminUseCase,
         private UpdateAdminUseCase $updateAdminUseCase,
         private DeleteAdminUseCase $deleteAdminUseCase,
+        private AssignRoleToAdminUseCase $assignRoleToAdminUseCase,
         private AuthorizeActionUseCase $authorizeActionUseCase
     ) {}
 
@@ -63,6 +65,15 @@ class AdminController extends Controller
                 $request->input('password'),
                 $request->input('is_active', true)
             );
+            
+            // Se role_id foi fornecido, atribuir a role ao admin
+            if ($request->has('role_id')) {
+                $this->assignRoleToAdminUseCase->execute(
+                    $newAdmin['id'],
+                    $request->input('role_id'),
+                    $adminModel->id
+                );
+            }
             
             return response()->json([
                 'success' => true,

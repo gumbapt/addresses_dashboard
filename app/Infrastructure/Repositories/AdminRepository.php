@@ -45,7 +45,6 @@ class AdminRepository implements AdminRepositoryInterface
             'is_super_admin'=> false,
             'is_active' => $isActive,
         ]);
-
         return $admin->toEntity();  
     }
 

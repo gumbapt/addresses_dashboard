@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Domain;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class DomainSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Domain::factory()->count(5)->create();
     }
 }

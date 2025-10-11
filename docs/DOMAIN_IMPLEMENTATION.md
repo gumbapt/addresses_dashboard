@@ -64,7 +64,7 @@ Sistema completo de gerenciamento de **Domains** (domínios parceiros) implement
   - Busca com filtros (search, is_active)
   - Paginação completa
   - Geração automática de slug
-  - Geração de API keys no formato `sk_live_{64_chars}`
+  - Geração de API keys no formato `dmn_live_{64_chars}`
 
 #### **Models**
 - ✅ `app/Models/Domain.php` (atualizado)
@@ -147,7 +147,7 @@ Lista domínios com paginação.
       "slug": "smarterhome-ai",
       "domain_url": "zip.50g.io",
       "site_id": "wp-prod-zip50gio-001",
-      "api_key": "sk_live_abc123...",
+      "api_key": "dmn_live_abc123...",
       "status": "active",
       "timezone": "America/Los_Angeles",
       "wordpress_version": "6.8.3",
@@ -215,7 +215,7 @@ Cria novo domínio.
     "id": 5,
     "name": "New ISP Platform",
     "slug": "new-isp-platform",
-    "api_key": "sk_live_xyz789abc...",
+    "api_key": "dmn_live_xyz789abc...",
     "is_active": true,
     ...
   }
@@ -272,7 +272,7 @@ Regenera API key do domínio.
   "message": "API key regenerated successfully. Please update your integration immediately.",
   "data": {
     "id": 1,
-    "api_key": "sk_live_new_key_here...",
+    "api_key": "dmn_live_new_key_here...",
     ...
   }
 }
@@ -404,7 +404,7 @@ curl -X POST http://localhost/api/admin/domains \
     "id": 5,
     "name": "InternetFinder.com",
     "slug": "internetfindercom",
-    "api_key": "sk_live_abc123xyz789...",
+    "api_key": "dmn_live_abc123xyz789...",
     "is_active": true,
     ...
   }
@@ -508,11 +508,11 @@ JSON Response
 
 ### API Keys
 
-**Formato:** `sk_live_{64_caracteres_aleatórios}`
+**Formato:** `dmn_live_{64_caracteres_aleatórios}`
 
 **Geração:**
 ```php
-$apiKey = 'sk_live_' . Str::random(64);
+$apiKey = 'dmn_live_' . Str::random(64);
 ```
 
 **Armazenamento:**

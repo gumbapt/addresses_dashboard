@@ -207,7 +207,7 @@ CREATE TABLE domains (
   "slug": "smarterhome-ai",
   "domain_url": "zip.50g.io",
   "site_id": "wp-prod-zip50gio-001",
-  "api_key": "sk_live_abc123...",
+  "api_key": "dmn_live_abc123...",
   "is_active": true,
   "timezone": "America/Los_Angeles"
 }
@@ -446,7 +446,7 @@ CREATE TABLE admin_domain_group_access (
 POST /api/reports/ingest HTTP/1.1
 Host: addresses-dashboard.com
 Content-Type: application/json
-Authorization: Bearer sk_live_abc123...
+Authorization: Bearer dmn_live_abc123...
 
 {
   "source": {
@@ -1189,7 +1189,7 @@ Cria novo domínio.
     "id": 5,
     "name": "InternetFinder.com",
     "slug": "internetfinder-com",
-    "api_key": "sk_live_xyz789...",
+    "api_key": "dmn_live_xyz789...",
     "is_active": true
   }
 }
@@ -1385,7 +1385,7 @@ Type: [ Table ▼ ]
 
 #### 1. **Domain API Keys**
 - Geradas automaticamente na criação do domínio
-- Formato: `sk_live_{64_char_random}`
+- Formato: `dmn_live_{64_char_random}`
 - Armazenadas com hash (bcrypt)
 - Rate limiting: 2 requests/dia
 

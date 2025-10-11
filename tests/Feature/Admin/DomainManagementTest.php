@@ -8,6 +8,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use Database\Seeders\AdminRolePermissionSeeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\DomainSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,6 +30,7 @@ class DomainManagementTest extends TestCase
         $this->seed(PermissionSeeder::class);
         $this->seed(AdminSeeder::class);
         $this->seed(AdminRolePermissionSeeder::class);
+        $this->seed(DomainSeeder::class);
         
         $this->superAdmin = Admin::where('is_super_admin', true)->first();
         
@@ -51,9 +53,11 @@ class DomainManagementTest extends TestCase
     /** @test */
     public function super_admin_can_list_domains(): void
     {
+        $this->withoutExceptionHandling();
         // Arrange
         Domain::factory()->count(5)->create();
         $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+
         
         // Act
         $response = $this->withHeaders([
@@ -308,13 +312,13 @@ class DomainManagementTest extends TestCase
     }
 
     /** @test */
-    public function cannot_create_domain_with_duplicate_slug(): void
+    public function creates_unique_slug_even_with_same_name(): void
     {
         // Arrange
-        Domain::factory()->create(['name' => 'Test Domain']);
+        $firstDomain = Domain::factory()->create(['name' => 'Test Domain', 'slug' => 'test-domain']);
         $token = $this->superAdmin->createToken('test-token')->plainTextToken;
         
-        // Act - Try to create another with same name (same slug)
+        // Act - Create another with same name (should succeed with different slug)
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->postJson('/api/admin/domains', [
@@ -322,8 +326,14 @@ class DomainManagementTest extends TestCase
             'domain_url' => 'different.com'
         ]);
         
-        // Assert
-        $response->assertStatus(500); // Should fail due to unique constraint on slug
+        // Assert - Should create successfully (slug will be auto-generated as unique)
+        $response->assertStatus(201);
+        // Verify second domain has unique slug
+        $secondDomain = Domain::find($response->json('data.id'));
+        $this->assertEquals('test-domain-1', $secondDomain->slug);
+        // Verify both domains exist with different slugs
+        $this->assertDatabaseHas('domains', ['slug' => 'test-domain']);
+        $this->assertDatabaseHas('domains', ['slug' => 'test-domain-1']);
     }
 
     /** @test */

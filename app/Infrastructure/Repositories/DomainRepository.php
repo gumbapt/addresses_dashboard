@@ -106,7 +106,15 @@ class DomainRepository implements DomainRepositoryInterface
         ?string $pluginVersion = null,
         ?array $settings = null
     ): DomainEntity {
-        $slug = Str::slug($name);
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        
+        // Ensure unique slug
+        $counter = 1;
+        while (DomainModel::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
         
         // Generate unique API key
         $apiKey = 'sk_live_' . Str::random(64);

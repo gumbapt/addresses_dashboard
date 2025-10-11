@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Entities\Domain as DomainEntity;
 
 class Domain extends Model
 {
+    use HasFactory;
     
     protected $fillable = [
         'name',

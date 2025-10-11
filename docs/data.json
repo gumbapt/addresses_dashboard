@@ -1,0 +1,2708 @@
+{
+    "source": {
+      "domain": "zip.50g.io",
+      "site_id": "wp-prod-zip50gio-001",
+      "site_name": "SmarterHome.ai",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "2.0.0",
+      "timezone": "America/Los_Angeles"
+    },
+    "metadata": {
+      "report_date": "2025-10-11",
+      "report_period": {
+        "start": "2025-10-11 00:00:00",
+        "end": "2025-10-11 23:59:59"
+      },
+      "generated_at": "2025-10-11 15:21:57",
+      "total_processing_time": 0,
+      "data_version": "2.0.0"
+    },
+    "summary": {
+      "total_requests": 1502,
+      "success_rate": 85.15312916111851,
+      "failed_requests": 223,
+      "avg_requests_per_hour": 1.5645833333333332,
+      "unique_providers": 0,
+      "unique_states": 0,
+      "unique_zip_codes": 0
+    },
+    "providers": {
+      "top_providers": [
+        {
+          "name": "Earthlink",
+          "total_count": 46,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "Mobile"
+        },
+        {
+          "name": "AT&T",
+          "total_count": 39,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "Mobile"
+        },
+        {
+          "name": "Spectrum",
+          "total_count": 20,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "Cable"
+        },
+        {
+          "name": "Xfinity",
+          "total_count": 15,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "Cable"
+        },
+        {
+          "name": "Optimum",
+          "total_count": 10,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "Cable"
+        },
+        {
+          "name": "Consolidated Communications",
+          "total_count": 5,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "DSL"
+        },
+        {
+          "name": "Frontier",
+          "total_count": 4,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "DSL"
+        },
+        {
+          "name": "Cox Communications",
+          "total_count": 2,
+          "success_rate": 0,
+          "avg_speed": 0,
+          "technology": "Cable"
+        }
+      ],
+      "by_state": [],
+      "total_unique": 0
+    },
+    "geographic": {
+      "states": [
+        {
+          "code": "CA",
+          "name": "California",
+          "request_count": 239,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NH",
+          "name": "New Hampshire",
+          "request_count": 4,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NY",
+          "name": "New York",
+          "request_count": 165,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "FL",
+          "name": "Florida",
+          "request_count": 37,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "OH",
+          "name": "Ohio",
+          "request_count": 23,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "TN",
+          "name": "Tennessee",
+          "request_count": 32,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "WI",
+          "name": "Wisconsin",
+          "request_count": 7,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "WV",
+          "name": "West Virginia",
+          "request_count": 4,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MN",
+          "name": "Minnesota",
+          "request_count": 10,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MO",
+          "name": "Missouri",
+          "request_count": 11,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MA",
+          "name": "Massachusetts",
+          "request_count": 10,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "OK",
+          "name": "Oklahoma",
+          "request_count": 25,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "CO",
+          "name": "Colorado",
+          "request_count": 12,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NV",
+          "name": "Nevada",
+          "request_count": 5,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MI",
+          "name": "Michigan",
+          "request_count": 14,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "TX",
+          "name": "Texas",
+          "request_count": 177,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "CT",
+          "name": "Connecticut",
+          "request_count": 3,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "AL",
+          "name": "Alabama",
+          "request_count": 43,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "PA",
+          "name": "Pennsylvania",
+          "request_count": 9,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "WA",
+          "name": "Washington",
+          "request_count": 2,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "AR",
+          "name": "Arkansas",
+          "request_count": 20,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "KY",
+          "name": "Kentucky",
+          "request_count": 19,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "IN",
+          "name": "Indiana",
+          "request_count": 9,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "GA",
+          "name": "Georgia",
+          "request_count": 33,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "KS",
+          "name": "Kansas",
+          "request_count": 1,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "VA",
+          "name": "Virginia",
+          "request_count": 6,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "LA",
+          "name": "Louisiana",
+          "request_count": 16,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NC",
+          "name": "North Carolina",
+          "request_count": 31,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MS",
+          "name": "Mississippi",
+          "request_count": 21,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MT",
+          "name": "Montana",
+          "request_count": 1,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "SF",
+          "name": "SF",
+          "request_count": 3,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "IL",
+          "name": "Illinois",
+          "request_count": 12,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "AZ",
+          "name": "Arizona",
+          "request_count": 5,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NJ",
+          "name": "New Jersey",
+          "request_count": 6,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "SC",
+          "name": "South Carolina",
+          "request_count": 15,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "MD",
+          "name": "Maryland",
+          "request_count": 2,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "ME",
+          "name": "Maine",
+          "request_count": 1,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "DE",
+          "name": "Delaware",
+          "request_count": 1,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "IA",
+          "name": "Iowa",
+          "request_count": 2,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NE",
+          "name": "Nebraska",
+          "request_count": 4,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "ID",
+          "name": "Idaho",
+          "request_count": 2,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "NM",
+          "name": "New Mexico",
+          "request_count": 1,
+          "success_rate": 0,
+          "avg_speed": 0
+        },
+        {
+          "code": "VT",
+          "name": "Vermont",
+          "request_count": 1,
+          "success_rate": 0,
+          "avg_speed": 0
+        }
+      ],
+      "top_cities": [
+        {
+          "name": "Beaumont",
+          "state": "",
+          "request_count": 9,
+          "zip_codes": []
+        },
+        {
+          "name": "Irvine",
+          "state": "",
+          "request_count": 9,
+          "zip_codes": []
+        },
+        {
+          "name": "Hudson",
+          "state": "",
+          "request_count": 4,
+          "zip_codes": []
+        },
+        {
+          "name": "Los Angeles",
+          "state": "",
+          "request_count": 19,
+          "zip_codes": []
+        },
+        {
+          "name": "New York",
+          "state": "",
+          "request_count": 25,
+          "zip_codes": []
+        },
+        {
+          "name": "Miami",
+          "state": "",
+          "request_count": 5,
+          "zip_codes": []
+        },
+        {
+          "name": "Dayton",
+          "state": "",
+          "request_count": 3,
+          "zip_codes": []
+        },
+        {
+          "name": "Santa Clarita",
+          "state": "",
+          "request_count": 3,
+          "zip_codes": []
+        },
+        {
+          "name": "Memphis",
+          "state": "",
+          "request_count": 6,
+          "zip_codes": []
+        },
+        {
+          "name": "Milwaukee",
+          "state": "",
+          "request_count": 4,
+          "zip_codes": []
+        },
+        {
+          "name": "Beckley",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        },
+        {
+          "name": "St Paul",
+          "state": "",
+          "request_count": 2,
+          "zip_codes": []
+        },
+        {
+          "name": "Park Hills",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        },
+        {
+          "name": "Randolph",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        },
+        {
+          "name": "Newburyport",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        },
+        {
+          "name": "Kissimmee",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        },
+        {
+          "name": "Miami Beach",
+          "state": "",
+          "request_count": 2,
+          "zip_codes": []
+        },
+        {
+          "name": "Ardmore",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        },
+        {
+          "name": "Littleton",
+          "state": "",
+          "request_count": 2,
+          "zip_codes": []
+        },
+        {
+          "name": "Mendota",
+          "state": "",
+          "request_count": 1,
+          "zip_codes": []
+        }
+      ],
+      "top_zip_codes": []
+    },
+    "performance": {
+      "hourly_distribution": [
+        {
+          "hour": 0,
+          "count": 50
+        },
+        {
+          "hour": 1,
+          "count": 33
+        },
+        {
+          "hour": 2,
+          "count": 20
+        },
+        {
+          "hour": 5,
+          "count": 2
+        },
+        {
+          "hour": 11,
+          "count": 15
+        },
+        {
+          "hour": 12,
+          "count": 35
+        },
+        {
+          "hour": 13,
+          "count": 78
+        },
+        {
+          "hour": 14,
+          "count": 72
+        },
+        {
+          "hour": 15,
+          "count": 94
+        },
+        {
+          "hour": 16,
+          "count": 130
+        },
+        {
+          "hour": 17,
+          "count": 121
+        },
+        {
+          "hour": 18,
+          "count": 119
+        },
+        {
+          "hour": 19,
+          "count": 120
+        },
+        {
+          "hour": 20,
+          "count": 102
+        },
+        {
+          "hour": 21,
+          "count": 97
+        },
+        {
+          "hour": 22,
+          "count": 93
+        },
+        {
+          "hour": 23,
+          "count": 76
+        },
+        {
+          "hour": 10,
+          "count": 19
+        },
+        {
+          "hour": 3,
+          "count": 5
+        },
+        {
+          "hour": 4,
+          "count": 5
+        },
+        {
+          "hour": 6,
+          "count": 3
+        },
+        {
+          "hour": 7,
+          "count": 1
+        },
+        {
+          "hour": 8,
+          "count": 2
+        },
+        {
+          "hour": 9,
+          "count": 1
+        }
+      ],
+      "response_times": {
+        "avg": 0,
+        "min": 0,
+        "max": 0
+      },
+      "search_types": {
+        "direct": {
+          "count": 1084,
+          "avg_confidence": 0,
+          "avg_response_time": 0
+        },
+        "fallback": {
+          "count": 209,
+          "avg_confidence": 0,
+          "avg_response_time": 0
+        }
+      }
+    },
+    "speed_metrics": {
+      "overall": {
+        "avg": 0,
+        "max": 0,
+        "min": 0
+      },
+      "by_state": [
+        {
+          "state": "New York",
+          "avg_speed": 4560,
+          "sample_count": 0
+        },
+        {
+          "state": "Maine",
+          "avg_speed": 3234,
+          "sample_count": 0
+        },
+        {
+          "state": "Connecticut",
+          "avg_speed": 2282,
+          "sample_count": 0
+        },
+        {
+          "state": "Illinois",
+          "avg_speed": 2018,
+          "sample_count": 0
+        },
+        {
+          "state": "Florida",
+          "avg_speed": 1768,
+          "sample_count": 0
+        },
+        {
+          "state": "Michigan",
+          "avg_speed": 1723,
+          "sample_count": 0
+        },
+        {
+          "state": "Missouri",
+          "avg_speed": 1672,
+          "sample_count": 0
+        },
+        {
+          "state": "Mississippi",
+          "avg_speed": 1659,
+          "sample_count": 0
+        },
+        {
+          "state": "Texas",
+          "avg_speed": 1465,
+          "sample_count": 0
+        },
+        {
+          "state": "California",
+          "avg_speed": 1424,
+          "sample_count": 0
+        }
+      ],
+      "by_provider": [
+        {
+          "provider": "Stealth Communications",
+          "avg_speed": 100000,
+          "sample_count": 0
+        },
+        {
+          "provider": "Cogent Communication",
+          "avg_speed": 66063,
+          "sample_count": 0
+        },
+        {
+          "provider": "Summit Broadband Inc.",
+          "avg_speed": 40000,
+          "sample_count": 0
+        },
+        {
+          "provider": "123.NET Inc",
+          "avg_speed": 25750,
+          "sample_count": 0
+        },
+        {
+          "provider": "ZAYO GROUP LLC",
+          "avg_speed": 25462,
+          "sample_count": 0
+        },
+        {
+          "provider": "Eastern Shore of Virginia Broadband Authority",
+          "avg_speed": 20000,
+          "sample_count": 0
+        },
+        {
+          "provider": "Oxford County Telephone Company d/b/a FirstLight Fiber",
+          "avg_speed": 17147,
+          "sample_count": 0
+        },
+        {
+          "provider": "UPN",
+          "avg_speed": 15480,
+          "sample_count": 0
+        },
+        {
+          "provider": "Pilot Fiber",
+          "avg_speed": 10000,
+          "sample_count": 0
+        },
+        {
+          "provider": "Dobson Fiber",
+          "avg_speed": 10000,
+          "sample_count": 0
+        }
+      ],
+      "distribution": []
+    },
+    "technology_metrics": {
+      "distribution": [
+        {
+          "tech": "Mobile",
+          "count": 18188,
+          "percentage": 46.8
+        },
+        {
+          "tech": "DSL",
+          "count": 6443,
+          "percentage": 16.6
+        },
+        {
+          "tech": "Fiber",
+          "count": 5223,
+          "percentage": 13.4
+        },
+        {
+          "tech": "Satellite",
+          "count": 3858,
+          "percentage": 9.9
+        },
+        {
+          "tech": "Cable",
+          "count": 3521,
+          "percentage": 9.1
+        },
+        {
+          "tech": "Wireless",
+          "count": 1303,
+          "percentage": 3.4
+        },
+        {
+          "tech": "Unknown",
+          "count": 310,
+          "percentage": 0.8
+        }
+      ],
+      "by_state": {
+        "California": {
+          "Cable": 888,
+          "Fiber": 1381,
+          "Mobile": 5349,
+          "Satellite": 1033,
+          "Wireless": 699,
+          "DSL": 2603,
+          "Unknown": 105
+        },
+        "New Hampshire": {
+          "Mobile": 22,
+          "Cable": 4,
+          "DSL": 6,
+          "Fiber": 6,
+          "Satellite": 12
+        },
+        "New York": {
+          "Mobile": 4057,
+          "Cable": 929,
+          "Fiber": 1625,
+          "Satellite": 573,
+          "DSL": 136,
+          "Wireless": 8,
+          "Unknown": 19
+        },
+        "North Carolina": {
+          "DSL": 168,
+          "Mobile": 382,
+          "Cable": 76,
+          "Fiber": 88,
+          "Satellite": 108,
+          "Wireless": 4
+        },
+        "Florida": {
+          "DSL": 342,
+          "Fiber": 226,
+          "Mobile": 673,
+          "Cable": 152,
+          "Satellite": 161,
+          "Wireless": 24,
+          "Unknown": 19
+        },
+        "Ohio": {
+          "DSL": 129,
+          "Fiber": 92,
+          "Mobile": 295,
+          "Cable": 93,
+          "Satellite": 82,
+          "Wireless": 7,
+          "Unknown": 13
+        },
+        "Tennessee": {
+          "Fiber": 90,
+          "Cable": 87,
+          "Mobile": 545,
+          "Satellite": 137,
+          "DSL": 284,
+          "Wireless": 3
+        },
+        "Wisconsin": {
+          "DSL": 56,
+          "Fiber": 33,
+          "Mobile": 135,
+          "Cable": 28,
+          "Satellite": 27,
+          "Unknown": 3,
+          "Wireless": 1
+        },
+        "West Virginia": {
+          "Mobile": 29,
+          "DSL": 8,
+          "Fiber": 8,
+          "Cable": 11,
+          "Satellite": 11
+        },
+        "Minnesota": {
+          "Mobile": 137,
+          "DSL": 57,
+          "Fiber": 69,
+          "Cable": 14,
+          "Satellite": 32,
+          "Wireless": 10
+        },
+        "Missouri": {
+          "Wireless": 11,
+          "Mobile": 166,
+          "Satellite": 42,
+          "DSL": 67,
+          "Fiber": 47,
+          "Cable": 23
+        },
+        "Massachusetts": {
+          "Mobile": 179,
+          "Cable": 24,
+          "Satellite": 33,
+          "Fiber": 18,
+          "Wireless": 7
+        },
+        "Kentucky": {
+          "Cable": 40,
+          "Fiber": 45,
+          "Satellite": 52,
+          "DSL": 60,
+          "Mobile": 159,
+          "Wireless": 4
+        },
+        "Oklahoma": {
+          "DSL": 86,
+          "Cable": 48,
+          "Mobile": 277,
+          "Fiber": 39,
+          "Satellite": 66,
+          "Wireless": 24,
+          "Unknown": 43
+        },
+        "Colorado": {
+          "Mobile": 96,
+          "DSL": 42,
+          "Fiber": 30,
+          "Cable": 14,
+          "Satellite": 30,
+          "Unknown": 4,
+          "Wireless": 6
+        },
+        "Nevada": {
+          "Mobile": 70,
+          "DSL": 40,
+          "Cable": 13,
+          "Fiber": 23,
+          "Satellite": 15,
+          "Wireless": 13,
+          "Unknown": 2
+        },
+        "Michigan": {
+          "DSL": 73,
+          "Fiber": 30,
+          "Mobile": 176,
+          "Cable": 24,
+          "Satellite": 48,
+          "Wireless": 22,
+          "Unknown": 13
+        },
+        "Texas": {
+          "DSL": 1242,
+          "Fiber": 711,
+          "Mobile": 2676,
+          "Cable": 538,
+          "Satellite": 646,
+          "Unknown": 62,
+          "Wireless": 353
+        },
+        "Virginia": {
+          "Satellite": 21,
+          "Mobile": 51,
+          "Cable": 13,
+          "Fiber": 9,
+          "Wireless": 1
+        },
+        "Alabama": {
+          "Mobile": 328,
+          "Cable": 67,
+          "Satellite": 124,
+          "Fiber": 63,
+          "DSL": 150,
+          "Unknown": 3,
+          "Wireless": 7
+        },
+        "Connecticut": {
+          "Mobile": 85,
+          "DSL": 24,
+          "Fiber": 45,
+          "Cable": 16,
+          "Satellite": 17
+        },
+        "Pennsylvania": {
+          "Mobile": 132,
+          "Satellite": 30,
+          "Cable": 27,
+          "DSL": 10,
+          "Fiber": 20,
+          "Unknown": 1,
+          "Wireless": 2
+        },
+        "Washington": {
+          "Mobile": 36,
+          "Cable": 8,
+          "Fiber": 24,
+          "DSL": 10,
+          "Satellite": 6
+        },
+        "Arkansas": {
+          "DSL": 65,
+          "Mobile": 201,
+          "Cable": 31,
+          "Fiber": 26,
+          "Satellite": 63,
+          "Wireless": 8,
+          "Unknown": 3
+        },
+        "Indiana": {
+          "Fiber": 49,
+          "Wireless": 21,
+          "Mobile": 139,
+          "Cable": 30,
+          "Satellite": 39,
+          "Unknown": 3,
+          "DSL": 67
+        },
+        "Maine": {
+          "Mobile": 51,
+          "DSL": 27,
+          "Fiber": 25,
+          "Cable": 8,
+          "Satellite": 9,
+          "Wireless": 6
+        },
+        "Georgia": {
+          "DSL": 219,
+          "Fiber": 110,
+          "Mobile": 467,
+          "Cable": 109,
+          "Satellite": 123,
+          "Unknown": 1
+        },
+        "Kansas": {
+          "DSL": 4,
+          "Mobile": 10,
+          "Cable": 3,
+          "Fiber": 6,
+          "Satellite": 3,
+          "Wireless": 1
+        },
+        "Louisiana": {
+          "DSL": 51,
+          "Mobile": 110,
+          "Satellite": 49,
+          "Cable": 27,
+          "Fiber": 31,
+          "Unknown": 4,
+          "Wireless": 4
+        },
+        "South Carolina": {
+          "Mobile": 212,
+          "Satellite": 66,
+          "Fiber": 46,
+          "Cable": 44,
+          "DSL": 78
+        },
+        "Mississippi": {
+          "DSL": 149,
+          "Mobile": 187,
+          "Satellite": 62,
+          "Fiber": 33,
+          "Cable": 12,
+          "Wireless": 4
+        },
+        "Montana": {
+          "Cable": 3,
+          "Mobile": 5,
+          "Satellite": 1,
+          "Fiber": 1
+        },
+        "Illinois": {
+          "Mobile": 272,
+          "DSL": 100,
+          "Cable": 35,
+          "Satellite": 48,
+          "Fiber": 61,
+          "Wireless": 15,
+          "Unknown": 3
+        },
+        "Arizona": {
+          "Mobile": 62,
+          "DSL": 23,
+          "Cable": 17,
+          "Fiber": 15,
+          "Satellite": 15,
+          "Wireless": 10,
+          "Unknown": 5
+        },
+        "New Jersey": {
+          "Mobile": 152,
+          "Cable": 25,
+          "Fiber": 50,
+          "Satellite": 18,
+          "Unknown": 1
+        },
+        "Maryland": {
+          "Mobile": 42,
+          "Cable": 4,
+          "Fiber": 6,
+          "Satellite": 6,
+          "Wireless": 6
+        },
+        "Delaware": {
+          "Mobile": 12,
+          "Satellite": 3,
+          "Cable": 1,
+          "Fiber": 1
+        },
+        "Iowa": {
+          "DSL": 3,
+          "Fiber": 1,
+          "Mobile": 18,
+          "Satellite": 6,
+          "Cable": 2,
+          "Wireless": 7,
+          "Unknown": 1
+        },
+        "Nebraska": {
+          "Mobile": 74,
+          "DSL": 30,
+          "Cable": 10,
+          "Fiber": 12,
+          "Satellite": 12
+        },
+        "Oregon": {
+          "Mobile": 17,
+          "DSL": 4,
+          "Fiber": 3,
+          "Cable": 1,
+          "Satellite": 3,
+          "Wireless": 2
+        },
+        "Utah": {
+          "Mobile": 11,
+          "DSL": 8,
+          "Fiber": 2,
+          "Cable": 1,
+          "Satellite": 3,
+          "Wireless": 6,
+          "Unknown": 2
+        },
+        "Idaho": {
+          "Cable": 6,
+          "Mobile": 20,
+          "Wireless": 6,
+          "Satellite": 6,
+          "DSL": 4,
+          "Fiber": 4
+        },
+        "Hawaii": {
+          "Mobile": 42,
+          "Cable": 9,
+          "Fiber": 15,
+          "DSL": 12,
+          "Satellite": 6
+        },
+        "New Mexico": {
+          "DSL": 2,
+          "Cable": 3,
+          "Mobile": 9,
+          "Fiber": 1,
+          "Satellite": 2,
+          "Wireless": 1
+        },
+        "Vermont": {
+          "DSL": 4,
+          "Mobile": 6,
+          "Satellite": 6
+        },
+        "District of Columbia": {
+          "Mobile": 14,
+          "Cable": 3,
+          "Fiber": 3,
+          "Satellite": 3
+        }
+      },
+      "by_provider": {
+        "Spectrum": {
+          "Cable": 1928,
+          "Fiber": 606
+        },
+        "Frontier": {
+          "Fiber": 211,
+          "DSL": 270
+        },
+        "T-Mobile": {
+          "Mobile": 4688,
+          "Fiber": 4
+        },
+        "HughesNet": {
+          "Satellite": 1353
+        },
+        "Verizon": {
+          "Mobile": 4122,
+          "Fiber": 368
+        },
+        "Viasat Carrier Services Inc": {
+          "Satellite": 2505
+        },
+        "GeoLinks": {
+          "Mobile": 264
+        },
+        "Southern California Telephone Co": {
+          "Wireless": 9
+        },
+        "Earthlink": {
+          "Fiber": 1318,
+          "Mobile": 4688,
+          "DSL": 2660
+        },
+        "AT&T": {
+          "DSL": 2660,
+          "Fiber": 698,
+          "Mobile": 3256
+        },
+        "Cox Communications": {
+          "Cable": 275,
+          "Fiber": 82
+        },
+        "ZAYO GROUP LLC": {
+          "Fiber": 105,
+          "DSL": 3
+        },
+        "Astound Broadband": {
+          "Fiber": 46,
+          "Cable": 79,
+          "DSL": 3
+        },
+        "TPx Communications": {
+          "DSL": 174
+        },
+        "Cogent Communication": {
+          "Fiber": 63
+        },
+        "BAI Connect": {
+          "Fiber": 64
+        },
+        "Xfinity": {
+          "Cable": 578,
+          "Fiber": 242
+        },
+        "Consolidated Communications": {
+          "DSL": 68,
+          "Fiber": 24
+        },
+        "TDS Telecom": {
+          "Mobile": 358,
+          "DSL": 19,
+          "Fiber": 7
+        },
+        "Consolidated Smart Broadband Systems": {
+          "Cable": 7,
+          "DSL": 3,
+          "Fiber": 1
+        },
+        "Starry Inc": {
+          "Fiber": 65,
+          "Mobile": 371
+        },
+        "Google Fiber": {
+          "Fiber": 44,
+          "Wireless": 33
+        },
+        "Telefonica": {
+          "Fiber": 15
+        },
+        "Skywire Networks": {
+          "Mobile": 73,
+          "DSL": 2
+        },
+        "Stealth Communications": {
+          "Fiber": 36
+        },
+        "Fusion Cloud Services, Inc.": {
+          "DSL": 11,
+          "Fiber": 10
+        },
+        "Nuvisions": {
+          "DSL": 53
+        },
+        "Pilot Fiber": {
+          "Fiber": 42
+        },
+        "Optical Communications Group Inc": {
+          "Fiber": 35
+        },
+        "Snappy Internet & Telecom": {
+          "Wireless": 8
+        },
+        "Breezeline": {
+          "Cable": 21,
+          "Fiber": 2
+        },
+        "Optimum": {
+          "Cable": 479,
+          "Fiber": 334
+        },
+        "Ben Lomand Rural Telephone Coop Inc": {
+          "Fiber": 2
+        },
+        "Everstream": {
+          "Fiber": 8
+        },
+        "CenturyLink": {
+          "DSL": 222,
+          "Fiber": 112
+        },
+        "MN FWA Buyer": {
+          "Wireless": 5
+        },
+        "Big River Broadband": {
+          "Wireless": 5
+        },
+        "Wisper ISP, LLC": {
+          "Mobile": 5,
+          "Wireless": 3
+        },
+        "Summit Broadband Inc.": {
+          "Fiber": 4
+        },
+        "Foothills Communications": {
+          "Fiber": 3
+        },
+        "Windstream Alabama, LLC": {
+          "DSL": 92,
+          "Fiber": 24,
+          "Cable": 3
+        },
+        "Oxford County Telephone Company d/b/a FirstLight Fiber": {
+          "Fiber": 51,
+          "DSL": 2
+        },
+        "Hargray Communications": {
+          "Cable": 18,
+          "Fiber": 6
+        },
+        "Dobson Fiber": {
+          "Fiber": 6
+        },
+        "Arbuckle Communications LLC": {
+          "Wireless": 2,
+          "Mobile": 4,
+          "Unknown": 5
+        },
+        "Cal.net": {
+          "Unknown": 22,
+          "Wireless": 22,
+          "Mobile": 3
+        },
+        "unWired Broadband": {
+          "Wireless": 195,
+          "Unknown": 45
+        },
+        "Rise Broadband": {
+          "Wireless": 82,
+          "Unknown": 12,
+          "Fiber": 1
+        },
+        "isp.net": {
+          "Wireless": 3
+        },
+        "FireServe": {
+          "Wireless": 3
+        },
+        "WOW Internet, Cable & Phone": {
+          "Cable": 24,
+          "Fiber": 8
+        },
+        "Metro Wireless": {
+          "Wireless": 4
+        },
+        "Nextlink": {
+          "Unknown": 21,
+          "Wireless": 23,
+          "Mobile": 96,
+          "Fiber": 1
+        },
+        "Cirra Networks": {
+          "Wireless": 11
+        },
+        "Reach Broadband": {
+          "Cable": 1,
+          "Wireless": 1
+        },
+        "Resound Networks": {
+          "Wireless": 19,
+          "Mobile": 20
+        },
+        "Rural Telecommunications of America": {
+          "Wireless": 11
+        },
+        "Net Ops Communications LLC": {
+          "Unknown": 6
+        },
+        "Cosmo Network Solutions, LLC": {
+          "Wireless": 34
+        },
+        "Smart Way Communications": {
+          "Wireless": 2,
+          "Unknown": 8
+        },
+        "Hawaiian Telcom": {
+          "DSL": 14,
+          "Fiber": 22,
+          "Unknown": 4,
+          "Mobile": 1
+        },
+        "BCI Mississippi Broadband LLC": {
+          "Fiber": 5,
+          "Cable": 3
+        },
+        "Netafy": {
+          "Wireless": 7
+        },
+        "Smart City Telecommunications LLC": {
+          "Fiber": 1
+        },
+        "FlashFiber": {
+          "Fiber": 2
+        },
+        "Zito Media": {
+          "Cable": 7
+        },
+        "Pacific Lightwave": {
+          "Wireless": 3,
+          "Mobile": 1
+        },
+        "Brown Dog Networks": {
+          "Wireless": 3
+        },
+        "Amplex Wireless": {
+          "Mobile": 3
+        },
+        "MetaLINK Technologies Inc": {
+          "Mobile": 1
+        },
+        "Wi-Five Broadband": {
+          "Wireless": 4
+        },
+        "Logix Communications LP": {
+          "Fiber": 15
+        },
+        "Otelco Telephone LLC": {
+          "Fiber": 8,
+          "DSL": 1
+        },
+        "OACYS Technology": {
+          "Wireless": 2,
+          "Mobile": 2
+        },
+        "Wireless Internet Services": {
+          "Wireless": 2
+        },
+        "Point Broadband Fiber Holding LLC": {
+          "Wireless": 10,
+          "Unknown": 6,
+          "Mobile": 3,
+          "Fiber": 7
+        },
+        "GVTC": {
+          "DSL": 2
+        },
+        "Guadalupe Valley Electric Coop": {
+          "Mobile": 2,
+          "Wireless": 1
+        },
+        "Uniti Fiber GulfCo LLC": {
+          "Fiber": 11
+        },
+        "Element8": {
+          "Wireless": 38
+        },
+        "Foremost Telecommunications": {
+          "Fiber": 8
+        },
+        "Gtek Communications": {
+          "Mobile": 2,
+          "Wireless": 1
+        },
+        "Lightcurve": {
+          "Cable": 3,
+          "Fiber": 1
+        },
+        "San Diego Broadband": {
+          "Wireless": 14
+        },
+        "Ritter Communications Inc": {
+          "Fiber": 12
+        },
+        "TCW": {
+          "Wireless": 1
+        },
+        "DuoBroadband": {
+          "Cable": 2,
+          "Fiber": 4
+        },
+        "W A T C H TV": {
+          "Fiber": 1,
+          "Wireless": 3,
+          "Mobile": 5
+        },
+        "Wabash Communications": {
+          "Unknown": 2
+        },
+        "Brightspeed": {
+          "DSL": 109,
+          "Fiber": 47
+        },
+        "Great Works Internet": {
+          "DSL": 6,
+          "Fiber": 4
+        },
+        "Premium Choice Broadband": {
+          "Fiber": 1
+        },
+        "Redzone Wireless LLC": {
+          "Wireless": 6,
+          "Mobile": 6
+        },
+        "City of Cartersville": {
+          "Fiber": 1
+        },
+        "Nex-Tech": {
+          "Fiber": 2,
+          "Mobile": 1
+        },
+        "Eastern Shore of Virginia Broadband Authority": {
+          "Fiber": 2
+        },
+        "ALASKA COMMUNICATIONS": {
+          "Mobile": 5,
+          "Unknown": 2
+        },
+        "Hot Spot Broadband Inc": {
+          "Unknown": 2
+        },
+        "Preferred Networks Inc.": {
+          "Wireless": 4
+        },
+        "Blue Ridge Internet LLC": {
+          "Wireless": 4
+        },
+        "Swyft Connect": {
+          "Cable": 9,
+          "Fiber": 7
+        },
+        "Newport Utilities": {
+          "Fiber": 4
+        },
+        "Rapid Systems": {
+          "Unknown": 19
+        },
+        "Vast Networks": {
+          "Fiber": 20
+        },
+        "Mediacom Xtream": {
+          "Cable": 31,
+          "Fiber": 3
+        },
+        "Ardmore Telephone Company": {
+          "DSL": 1,
+          "Fiber": 2
+        },
+        "Applied Technology Group Inc": {
+          "Wireless": 4
+        },
+        "South Central Connect": {
+          "Fiber": 1
+        },
+        "Mon-Cre Telephone Cooperative Inc": {
+          "Fiber": 2
+        },
+        "West Carolina Rural Telephone Cooperative Inc": {
+          "Fiber": 4
+        },
+        "Vyve Broadband": {
+          "Cable": 3,
+          "Fiber": 5
+        },
+        "TekWav": {
+          "Wireless": 4,
+          "Unknown": 1
+        },
+        "Etex Communications": {
+          "Fiber": 6
+        },
+        "Pine Bluff Cable TV": {
+          "Cable": 10
+        },
+        "Troy Cablevision, Inc.": {
+          "Fiber": 15,
+          "DSL": 1
+        },
+        "Ayera Technologies Inc": {
+          "Mobile": 20
+        },
+        "ezWave": {
+          "Wireless": 33
+        },
+        "Accipiter Communications Inc DBA Zona Wyyerd": {
+          "Fiber": 9
+        },
+        "Valley Telephone Cooperative Inc": {
+          "Wireless": 58,
+          "Mobile": 37,
+          "Fiber": 1
+        },
+        "Spry Air Fiber": {
+          "Wireless": 1
+        },
+        "Atlink Services": {
+          "Unknown": 33,
+          "Wireless": 7
+        },
+        "Airosurf Communications": {
+          "Wireless": 3
+        },
+        "Union City Energy Authority": {
+          "Fiber": 6
+        },
+        "Chisholm Broadband": {
+          "Unknown": 2
+        },
+        "Complete Computers": {
+          "Wireless": 1
+        },
+        "Osage Broadband": {
+          "Unknown": 2
+        },
+        "Mercury Broadband": {
+          "Unknown": 6
+        },
+        "DMCI Broadband LLC": {
+          "Wireless": 8,
+          "Mobile": 4
+        },
+        "ACD.net": {
+          "Fiber": 11
+        },
+        "Prairieburg Telephone Company, Incorporated": {
+          "Fiber": 2
+        },
+        "360 Broadband": {
+          "Mobile": 2,
+          "Wireless": 7,
+          "Unknown": 1
+        },
+        "ETC": {
+          "Cable": 6,
+          "Fiber": 6
+        },
+        "TruVista Communications Inc": {
+          "Cable": 1,
+          "Fiber": 1
+        },
+        "Northland Networks": {
+          "Fiber": 11
+        },
+        "Northern Telephone": {
+          "Fiber": 1
+        },
+        "DFT Communication": {
+          "Wireless": 1
+        },
+        "Tachus Fiber Internet": {
+          "Fiber": 4
+        },
+        "KUB": {
+          "Fiber": 2
+        },
+        "Peoples Telephone Cooperative": {
+          "Fiber": 5,
+          "Wireless": 10,
+          "Mobile": 15
+        },
+        "Vexus Fiber": {
+          "Fiber": 4
+        },
+        "VGI Technology Inc": {
+          "Wireless": 3
+        },
+        "Powernet Wireless, Power Systems Computers": {
+          "Wireless": 3
+        },
+        "SimpleFiber Communications| SimpleFiber": {
+          "Wireless": 25,
+          "Unknown": 6
+        },
+        "Kingsburg Media Foundation": {
+          "Wireless": 3
+        },
+        "Succeed.Net": {
+          "Wireless": 11
+        },
+        "Hillbilly Wireless": {
+          "Wireless": 2
+        },
+        "Unwired Ltd": {
+          "Mobile": 43
+        },
+        "Sonic.net": {
+          "Fiber": 26
+        },
+        "Etheric Networks": {
+          "Wireless": 128,
+          "Mobile": 2,
+          "Unknown": 12
+        },
+        "Smartcom Telephone LLC": {
+          "Fiber": 8
+        },
+        "TWIN": {
+          "Wireless": 5
+        },
+        "Zeta Broadband": {
+          "Wireless": 7
+        },
+        "Ultimate Internet Access Inc": {
+          "Wireless": 16
+        },
+        "Bluebird Network LLC": {
+          "Fiber": 13
+        },
+        "Stratus Networks Inc": {
+          "Fiber": 6
+        },
+        "i3 Broadband": {
+          "Fiber": 5
+        },
+        "Premier Broadband": {
+          "Wireless": 2,
+          "Mobile": 3
+        },
+        "SWATFIRST": {
+          "Fiber": 2
+        },
+        "Hope Water & Light": {
+          "Fiber": 2
+        },
+        "SOUTH ARKANSAS TELEPHONE COMPANY": {
+          "Fiber": 2
+        },
+        "CCT Telecomm": {
+          "Wireless": 2
+        },
+        "UPN": {
+          "Fiber": 16
+        },
+        "Hawk Networks": {
+          "Wireless": 3,
+          "DSL": 1
+        },
+        "Race Communications": {
+          "Fiber": 4
+        },
+        "SBC-Wireless": {
+          "Wireless": 2
+        },
+        "Cosner-Neipp Corporation": {
+          "Unknown": 3
+        },
+        "Inyo Networks Inc": {
+          "Fiber": 2
+        },
+        "IWVISP": {
+          "Wireless": 2
+        },
+        "Wifires Internet": {
+          "Wireless": 10,
+          "Unknown": 10
+        },
+        "Zulu Internet Inc": {
+          "Wireless": 2
+        },
+        "PCs for People": {
+          "Unknown": 5
+        },
+        "Giggle Fiber LLC": {
+          "Cable": 2
+        },
+        "PANGAEA Internet": {
+          "Fiber": 3
+        },
+        "Skyrunner Inc": {
+          "Wireless": 2
+        },
+        "Matrix Broadband": {
+          "Wireless": 14
+        },
+        "Cloudwyze Inc": {
+          "Mobile": 3
+        },
+        "Empire Long Distance Corporation": {
+          "Fiber": 9
+        },
+        "Skynet": {
+          "Wireless": 4
+        },
+        "Central Arkansas Telephone Cooperative": {
+          "Fiber": 2
+        },
+        "Phoenix Internet Inc.": {
+          "Mobile": 3
+        },
+        "AirFiber WISP": {
+          "Wireless": 4
+        },
+        "Triad Wireless LLC": {
+          "Unknown": 5,
+          "Wireless": 1
+        },
+        "SLIC Network Solutions": {
+          "Fiber": 3
+        },
+        "Clear Rate": {
+          "DSL": 3
+        },
+        "123.NET Inc": {
+          "Fiber": 1,
+          "Mobile": 3,
+          "Wireless": 1
+        },
+        "Zoom Telcom LLC": {
+          "Fiber": 2
+        },
+        "On-Ramp Indiana Inc": {
+          "Wireless": 8
+        },
+        "Xiber LLC": {
+          "Wireless": 9
+        },
+        "Razzolink Inc": {
+          "Wireless": 4
+        },
+        "TWN Communications": {
+          "Wireless": 4
+        },
+        "US Signal Company": {
+          "DSL": 2
+        },
+        "WIN LLC": {
+          "Fiber": 2
+        },
+        "RiverStreet": {
+          "Mobile": 4
+        },
+        "Wavelinc Communications": {
+          "Wireless": 5
+        },
+        "Carolina West Wireless": {
+          "Mobile": 1
+        },
+        "TampaBay Fiber": {
+          "Wireless": 4
+        },
+        "Smart Fiber Networks": {
+          "Fiber": 2
+        },
+        "Sail Internet": {
+          "Wireless": 37,
+          "DSL": 5
+        },
+        "Ridge Wireless Inc": {
+          "Wireless": 16
+        },
+        "Andrena": {
+          "DSL": 12
+        },
+        "DigitalPath Inc": {
+          "Mobile": 15,
+          "Unknown": 8
+        },
+        "Softcom Internet Communications Inc": {
+          "Unknown": 5
+        },
+        "Lake County Broadband Solutions": {
+          "Wireless": 6
+        },
+        "Valley Internet": {
+          "Wireless": 6
+        },
+        "EarthLink Business": {
+          "Wireless": 17,
+          "Mobile": 2
+        },
+        "Hankins Information Technology Inc": {
+          "Wireless": 3
+        },
+        "Greenlight Networks": {
+          "Fiber": 6
+        },
+        "Wes Tex Telephone Cooperative Inc": {
+          "Wireless": 1
+        },
+        "Bertram Communications": {
+          "Wireless": 1
+        },
+        "US Internet": {
+          "Fiber": 2
+        },
+        "NetFortris": {
+          "Fiber": 5
+        },
+        "Southern Ohio Communications Inc": {
+          "Mobile": 1
+        },
+        "Quantum Internet & Telephone": {
+          "Wireless": 4
+        },
+        "Believe Broadband": {
+          "Wireless": 2
+        },
+        "BCIT": {
+          "Fiber": 2
+        },
+        "FOCUS BROADBAND": {
+          "Fiber": 1
+        },
+        "CTC": {
+          "Fiber": 1
+        },
+        "PAUL BUNYAN COMMUNICATIONS": {
+          "Fiber": 1
+        },
+        "Tekify Fiber & Wireless": {
+          "Wireless": 40
+        },
+        "RobinsonHSS": {
+          "Wireless": 26
+        },
+        "Simply Bits": {
+          "Wireless": 2
+        },
+        "Bluespan Wireless": {
+          "Wireless": 1
+        },
+        "Metronet Holdings": {
+          "Fiber": 12
+        },
+        "Altitude ISP": {
+          "Wireless": 1
+        },
+        "Hudson Valley Wireless": {
+          "Wireless": 1,
+          "Unknown": 19
+        },
+        "CEO Technologies": {
+          "Wireless": 1
+        },
+        "Accel Wireless": {
+          "Wireless": 1
+        },
+        "Ducor Telephone Company": {
+          "Unknown": 1
+        },
+        "Centric Fiber": {
+          "Fiber": 3
+        },
+        "Gigabit Communications LLC": {
+          "Wireless": 1
+        },
+        "Atherton Fiber": {
+          "Fiber": 3
+        },
+        "Truestream": {
+          "Fiber": 1
+        },
+        "Lumos": {
+          "Fiber": 7
+        },
+        "Ripple Fiber": {
+          "Fiber": 2
+        },
+        "HTC": {
+          "Fiber": 3
+        },
+        "Flint Cable TV, Inc.": {
+          "Mobile": 3
+        },
+        "San Bruno CityNet Services": {
+          "Cable": 1
+        },
+        "Central Link Broadband": {
+          "Wireless": 2
+        },
+        "101Netlink": {
+          "Mobile": 2
+        },
+        "Tristate Wi-Fi by Wi-Fiber": {
+          "Wireless": 2,
+          "Unknown": 4
+        },
+        "SeaKay Broadband": {
+          "Wireless": 2
+        },
+        "Conquest Wireless": {
+          "Wireless": 4
+        },
+        "ElektraFi": {
+          "Unknown": 8,
+          "Mobile": 2,
+          "Wireless": 2
+        },
+        "Glo Internet": {
+          "DSL": 3,
+          "Fiber": 1
+        },
+        "Bloosurf LLC": {
+          "Mobile": 1
+        },
+        "SOS Communications LLC": {
+          "Wireless": 4
+        },
+        "Santa Rosa Telephone Coop. Inc.": {
+          "Unknown": 1,
+          "Wireless": 2
+        },
+        "Texhoma Wireless LLC": {
+          "Wireless": 1
+        },
+        "Advanced Wireless": {
+          "Wireless": 1
+        },
+        "Ranch Wifi LLC": {
+          "Wireless": 1
+        },
+        "Goldfield Telephone Co Inc": {
+          "Fiber": 1
+        },
+        "WMTel": {
+          "Wireless": 2
+        },
+        "5G-X": {
+          "Wireless": 2
+        },
+        "United Electric Cooperative Services": {
+          "Fiber": 2
+        },
+        "Great Plains Broadband LLC": {
+          "Fiber": 4
+        },
+        "Allo Communications LLC": {
+          "Fiber": 4
+        },
+        "Nsight Telservices": {
+          "Mobile": 4
+        },
+        "PearlComm Fiber": {
+          "Fiber": 1
+        },
+        "SmarterBroadband": {
+          "Wireless": 1,
+          "Mobile": 2
+        },
+        "Mark Twain Rural Telephone Company": {
+          "Mobile": 16
+        },
+        "Northeast Missouri Rural Telephone Company": {
+          "Fiber": 4
+        },
+        "Socket Telecom LLC": {
+          "DSL": 4,
+          "Fiber": 8
+        },
+        "Newbreak Communications": {
+          "Wireless": 3
+        },
+        "Glo Fiber": {
+          "Cable": 1,
+          "Fiber": 1
+        },
+        "Velocity Communications Inc": {
+          "Wireless": 1
+        },
+        "Community Telephone": {
+          "Mobile": 1
+        },
+        "Muenster Telephone": {
+          "Fiber": 1
+        },
+        "Fybe": {
+          "Fiber": 2
+        },
+        "Massivemesh Networks": {
+          "Fiber": 2
+        },
+        "Rye Telephone": {
+          "Fiber": 1
+        },
+        "Alenco Communications Inc": {
+          "Wireless": 3
+        },
+        "Autophone": {
+          "Wireless": 4
+        },
+        "Aristotle Unified Communications": {
+          "Unknown": 3
+        },
+        "Farmers Telecommunications Corporation Inc": {
+          "Fiber": 3
+        },
+        "Killians Electronics LLC": {
+          "Wireless": 5
+        },
+        "Weiss Internet": {
+          "Wireless": 2
+        },
+        "Topsham Communications": {
+          "Fiber": 2
+        },
+        "VTel Wireless Inc": {
+          "Mobile": 2
+        },
+        "REV": {
+          "Cable": 2
+        },
+        "DSI Stream": {
+          "Wireless": 1
+        },
+        "WeLink Communications Inc": {
+          "Wireless": 2
+        },
+        "Haywire": {
+          "Fiber": 1
+        },
+        "ITS Telecom": {
+          "Cable": 1
+        },
+        "Marquette Adams Telephone Coop, Inc": {
+          "Fiber": 1
+        },
+        "Bug Tussel Wireless": {
+          "Mobile": 3
+        },
+        "AW Broadband": {
+          "Wireless": 4
+        },
+        "Pathwayz": {
+          "Fiber": 1
+        },
+        "Alyrica": {
+          "Wireless": 2,
+          "Mobile": 3
+        },
+        "Hunter Communications Inc": {
+          "Fiber": 1,
+          "Mobile": 1
+        },
+        "Ziply Fiber": {
+          "Fiber": 5,
+          "DSL": 4
+        },
+        "Planters Rural Telephone Cooperative": {
+          "Fiber": 2
+        },
+        "CBN Inc": {
+          "Wireless": 2
+        },
+        "Sandhill Telephone Cooperative Inc": {
+          "Cable": 3,
+          "Fiber": 4
+        },
+        "PenTeleData": {
+          "Cable": 4,
+          "Fiber": 2
+        },
+        "Service Electric Cable TV": {
+          "Cable": 2
+        },
+        "Jade Communications": {
+          "Fiber": 1,
+          "Wireless": 2
+        },
+        "Viaero Wireless": {
+          "Mobile": 1
+        },
+        "Ciello": {
+          "Wireless": 1
+        },
+        "Rally Networks": {
+          "DSL": 9,
+          "Fiber": 3
+        },
+        "Pine Belt Broadcasting LLC": {
+          "Fiber": 2
+        },
+        "LiveWireNet": {
+          "Unknown": 2
+        },
+        "FastBridge Fiber": {
+          "Fiber": 1
+        },
+        "CNSNext": {
+          "Fiber": 1,
+          "Cable": 2
+        },
+        "Conexon Connect LLC": {
+          "Fiber": 1
+        },
+        "El Reno Fast Connect": {
+          "Fiber": 1
+        },
+        "ResiBridge LLC": {
+          "Fiber": 1
+        },
+        "Crowsnest Broadband LLC": {
+          "Unknown": 1
+        },
+        "Michwave Technologies Inc": {
+          "Wireless": 2,
+          "Unknown": 3
+        },
+        "Echo Broadband": {
+          "Wireless": 1
+        },
+        "Utah Broadband": {
+          "Wireless": 5,
+          "Unknown": 2
+        },
+        "Gibson Connect": {
+          "Fiber": 3
+        },
+        "Kwikbit": {
+          "Wireless": 2
+        },
+        "Western Broadband": {
+          "Wireless": 2
+        },
+        "Moundville Telephone Company": {
+          "Fiber": 3
+        },
+        "First Step Internet LLC": {
+          "Wireless": 6
+        },
+        "All Points Broadband": {
+          "Wireless": 1
+        },
+        "Midco": {
+          "Mobile": 1
+        },
+        "MVTV Wireless": {
+          "Wireless": 1
+        },
+        "LTD Broadband": {
+          "Wireless": 7
+        },
+        "Catskill Mountain Cablevision": {
+          "Cable": 1,
+          "Fiber": 1,
+          "Wireless": 1
+        },
+        "Sea Ranch Connect": {
+          "Fiber": 1
+        },
+        "Ting": {
+          "Fiber": 1
+        },
+        "United Communications Inc": {
+          "Fiber": 1,
+          "Wireless": 2
+        },
+        "Com-Pair Services": {
+          "Wireless": 3
+        },
+        "LakeNet LLC": {
+          "Fiber": 1
+        },
+        "Sun Valley Broadband": {
+          "Mobile": 1
+        },
+        "Velocity.Net Communications Inc": {
+          "Fiber": 1
+        },
+        "TruVista Communications": {
+          "Fiber": 6
+        },
+        "Mainstream Fiber Networks LLC": {
+          "Fiber": 1
+        },
+        "Lightwave Broadband LLC": {
+          "Unknown": 2,
+          "Wireless": 3
+        },
+        "RiverNet Connect": {
+          "Fiber": 1
+        },
+        "FTC DSI": {
+          "DSL": 5,
+          "Fiber": 1
+        },
+        "Salsgiver Inc": {
+          "Fiber": 1
+        },
+        "rNetworks LLC": {
+          "Wireless": 1
+        },
+        "Pigeon Telephone Company": {
+          "Mobile": 1
+        },
+        "Air Advantage": {
+          "Fiber": 1,
+          "Wireless": 4,
+          "Unknown": 5
+        },
+        "M3 Wireless Inc": {
+          "Wireless": 2
+        },
+        "Skyweb Networks Inc": {
+          "Wireless": 1
+        },
+        "Altamaha Fiber": {
+          "Fiber": 2
+        },
+        "SkyNet360": {
+          "Wireless": 7
+        },
+        "LiveOak Fiber": {
+          "Fiber": 2
+        },
+        "TrailWave": {
+          "Fiber": 1
+        },
+        "Servpac": {
+          "Fiber": 6
+        },
+        "North Coast Internet": {
+          "Unknown": 3
+        },
+        "Walnut Hill Telephone Company": {
+          "Fiber": 1
+        },
+        "Faster Cajun Networks": {
+          "Wireless": 2
+        },
+        "Volcano Vision": {
+          "Cable": 6,
+          "Fiber": 4
+        },
+        "Two Rock LAN": {
+          "Wireless": 1
+        },
+        "ArkLaNet": {
+          "Wireless": 2
+        },
+        "Comporium Brevard": {
+          "DSL": 1,
+          "Fiber": 2
+        },
+        "Owensboro Municipal Utilities": {
+          "Fiber": 2
+        },
+        "Federated Rural Electric Association": {
+          "Unknown": 1
+        },
+        "City of LaGrange Telecommunications": {
+          "Fiber": 1
+        },
+        "Aeneas Communications LLC": {
+          "Fiber": 1
+        },
+        "BluegrassNet": {
+          "Wireless": 2
+        },
+        "Nuvera Communications Inc": {
+          "DSL": 2,
+          "Fiber": 2,
+          "Mobile": 4
+        },
+        "Pine Cellular Phones": {
+          "Mobile": 1
+        },
+        "Everfast Fiber": {
+          "Cable": 1,
+          "Fiber": 1
+        },
+        "Fox Valley Internet, Opiquad LLC, Getgoing Infrastructure Group": {
+          "Wireless": 5
+        },
+        "Foresthill Telephone": {
+          "DSL": 2,
+          "Fiber": 1
+        },
+        "Newark Fiber": {
+          "Unknown": 1
+        },
+        "ENMR Telephone Cooperative": {
+          "Fiber": 1,
+          "Mobile": 1
+        },
+        "Garden Valley Technologies": {
+          "Fiber": 1
+        },
+        "Sjobergs": {
+          "Cable": 1,
+          "Fiber": 2
+        },
+        "Wikstrom Telephone Company Inc": {
+          "Wireless": 1
+        },
+        "Lehigh Wifi LLC": {
+          "Wireless": 1
+        },
+        "ZipLink Internet": {
+          "Unknown": 1
+        },
+        "Horizon Broadband LLC": {
+          "Wireless": 1
+        },
+        "BalsamWest FiberNET LLC": {
+          "Wireless": 2
+        },
+        "Mosaic Technologies": {
+          "DSL": 1,
+          "Fiber": 1
+        },
+        "Pioneer Telephone Cooperative, Inc.": {
+          "DSL": 12
+        },
+        "energynet": {
+          "Fiber": 1,
+          "Wireless": 1
+        },
+        "AERUX BROADBAND": {
+          "Wireless": 1
+        },
+        "CoastConnect": {
+          "Fiber": 2
+        },
+        "Columbia Power and Water Systems": {
+          "Cable": 6,
+          "Fiber": 1
+        },
+        "TNT WiFi": {
+          "Wireless": 1
+        },
+        "LUS Fiber": {
+          "Fiber": 2
+        },
+        "Upward Broadband LLC": {
+          "Wireless": 1
+        },
+        "East Mississippi Connect, LLC": {
+          "Fiber": 1
+        },
+        "ARVIG": {
+          "DSL": 1,
+          "Fiber": 1
+        },
+        "Hill Country Telecommunications": {
+          "Wireless": 1
+        },
+        "Ayva Networks": {
+          "Wireless": 1
+        },
+        "ECSIS.NET": {
+          "Fiber": 1
+        },
+        "Hub66 Inc": {
+          "Fiber": 2
+        },
+        "Joink": {
+          "Wireless": 1
+        },
+        "US New Era Internet Corp": {
+          "Wireless": 1
+        },
+        "Towerstream Inc": {
+          "Wireless": 1
+        }
+      }
+    },
+    "exclusion_metrics": {
+      "total_exclusions": 1348,
+      "exclusion_rate": 134800,
+      "top_excluded_providers": [],
+      "exclusion_reasons": [],
+      "by_state": {
+        "CA": {
+          "GeoLinks": 165,
+          "Spectrum": 7,
+          "ZAYO GROUP LLC": 14,
+          "TPx Communications": 64,
+          "Cogent Communication": 4,
+          "BAI Connect": 6,
+          "Verizon": 10,
+          "Consolidated Communications": 2,
+          "CCT Telecomm": 2,
+          "Vast Networks": 14,
+          "Ultimate Internet Access Inc": 11,
+          "EarthLink Business": 9,
+          "AT&T": 7,
+          "Fusion Cloud Services, Inc.": 4,
+          "Advanced Wireless": 1,
+          "Xfinity": 1,
+          "Cox Communications": 1,
+          "NetFortris": 2,
+          "BCI Mississippi Broadband LLC": 1,
+          "Towerstream Inc": 1
+        },
+        "NH": {
+          "AT&T": 2,
+          "Verizon": 2
+        },
+        "NY": {
+          "ZAYO GROUP LLC": 20,
+          "Telefonica": 10,
+          "Cogent Communication": 17,
+          "Viasat Carrier Services Inc": 93,
+          "Stealth Communications": 28,
+          "Fusion Cloud Services, Inc.": 9,
+          "Pilot Fiber": 28,
+          "Optical Communications Group Inc": 26,
+          "AT&T": 27,
+          "BCI Mississippi Broadband LLC": 1,
+          "Xfinity": 4,
+          "TPx Communications": 5,
+          "Northland Networks": 7,
+          "Spectrum": 8,
+          "T-Mobile": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 13,
+          "Verizon": 2
+        },
+        "FL": {
+          "Snappy Internet & Telecom": 5,
+          "Viasat Carrier Services Inc": 12,
+          "Summit Broadband Inc.": 2,
+          "AT&T": 7,
+          "Spectrum": 1,
+          "Verizon": 3,
+          "TampaBay Fiber": 1,
+          "Uniti Fiber GulfCo LLC": 3,
+          "ITS Telecom": 1
+        },
+        "WI": {
+          "Everstream": 3,
+          "Verizon": 1
+        },
+        "WV": {
+          "AT&T": 2,
+          "Verizon": 1,
+          "Viasat Carrier Services Inc": 1
+        },
+        "MN": {
+          "MN FWA Buyer": 5,
+          "Frontier": 1,
+          "Consolidated Communications": 3,
+          "ZAYO GROUP LLC": 1,
+          "AT&T": 1,
+          "Verizon": 1
+        },
+        "MA": {
+          "AT&T": 7
+        },
+        "CO": {
+          "ZAYO GROUP LLC": 1,
+          "Verizon": 3,
+          "AT&T": 4
+        },
+        "NV": {
+          "GeoLinks": 1,
+          "FireServe": 2
+        },
+        "MI": {
+          "Metro Wireless": 4,
+          "Everstream": 2,
+          "Spectrum": 1,
+          "Clear Rate": 2,
+          "123.NET Inc": 4,
+          "Verizon": 1,
+          "ACD.net": 1
+        },
+        "TX": {
+          "TPx Communications": 6,
+          "Logix Communications LP": 7,
+          "Verizon": 12,
+          "Foremost Telecommunications": 4,
+          "AT&T": 10,
+          "Spectrum": 2,
+          "Tachus Fiber Internet": 1,
+          "SimpleFiber Communications| SimpleFiber": 8,
+          "TWIN": 1,
+          "UPN": 8,
+          "Peoples Telephone Cooperative": 2,
+          "Optimum": 4,
+          "Cogent Communication": 2,
+          "Xfinity": 2,
+          "NetFortris": 2,
+          "ZAYO GROUP LLC": 4,
+          "Consolidated Communications": 2,
+          "Fusion Cloud Services, Inc.": 3,
+          "Viasat Carrier Services Inc": 1,
+          "BCI Mississippi Broadband LLC": 1
+        },
+        "OH": {
+          "Verizon": 1,
+          "Everstream": 2,
+          "Viasat Carrier Services Inc": 1,
+          "AT&T": 1
+        },
+        "AL": {
+          "Uniti Fiber GulfCo LLC": 1,
+          "Verizon": 8,
+          "AT&T": 1,
+          "Viasat Carrier Services Inc": 1
+        },
+        "PA": {
+          "AT&T": 3,
+          "Frontier": 1,
+          "Viasat Carrier Services Inc": 3,
+          "PenTeleData": 2
+        },
+        "WA": {
+          "ZAYO GROUP LLC": 1,
+          "TPx Communications": 1
+        },
+        "KY": {
+          "AT&T": 2,
+          "Verizon": 4,
+          "Viasat Carrier Services Inc": 4
+        },
+        "IN": {
+          "AT&T": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "ZAYO GROUP LLC": 1
+        },
+        "KS": {
+          "Verizon": 1
+        },
+        "VA": {
+          "Verizon": 4,
+          "Viasat Carrier Services Inc": 3,
+          "AT&T": 1
+        },
+        "LA": {
+          "Verizon": 4,
+          "AT&T": 2
+        },
+        "MS": {
+          "Troy Cablevision, Inc.": 4,
+          "Verizon": 5,
+          "Spectrum": 1,
+          "WOW Internet, Cable & Phone": 1,
+          "Viasat Carrier Services Inc": 1,
+          "AT&T": 1
+        },
+        "TN": {
+          "Ritter Communications Inc": 1,
+          "ZAYO GROUP LLC": 1,
+          "Verizon": 1
+        },
+        "OK": {
+          "AT&T": 1
+        },
+        "GA": {
+          "Verizon": 6,
+          "Hargray Communications": 2,
+          "City of LaGrange Telecommunications": 1
+        },
+        "SF": {
+          "TPx Communications": 2,
+          "GeoLinks": 3,
+          "ZAYO GROUP LLC": 1
+        },
+        "IL": {
+          "Bluebird Network LLC": 5,
+          "Stratus Networks Inc": 5,
+          "US Signal Company": 2,
+          "WIN LLC": 2,
+          "UPN": 4,
+          "ZAYO GROUP LLC": 2,
+          "Cogent Communication": 1,
+          "T-Mobile": 1
+        },
+        "AR": {
+          "Ritter Communications Inc": 1,
+          "SOUTH ARKANSAS TELEPHONE COMPANY": 1
+        },
+        "NC": {
+          "Verizon": 3,
+          "AT&T": 4,
+          "Viasat Carrier Services Inc": 2,
+          "Lumos": 1
+        },
+        "AZ": {
+          "AT&T": 2,
+          "GeoLinks": 2
+        },
+        "NJ": {
+          "Viasat Carrier Services Inc": 6,
+          "Newark Fiber": 1,
+          "AT&T": 2
+        },
+        "SC": {
+          "AT&T": 1,
+          "Verizon": 3
+        },
+        "ME": {
+          "AT&T": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1
+        },
+        "MO": {
+          "Bluebird Network LLC": 6,
+          "Verizon": 5
+        },
+        "CT": {
+          "AT&T": 1
+        },
+        "NE": {
+          "UPN": 2
+        },
+        "IA": {
+          "Verizon": 1
+        },
+        "NM": {
+          "Viasat Carrier Services Inc": 1
+        },
+        "VT": {
+          "Verizon": 1
+        }
+      }
+    },
+    "health": {
+      "status": "healthy",
+      "uptime_percentage": 99.5,
+      "avg_cpu_usage": 0,
+      "avg_memory_usage": 123,
+      "disk_usage": 15572.5,
+      "last_cron_run": "2025-10-11 15:21:57"
+    }
+  }

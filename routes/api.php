@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\PermissionController;
+use App\Http\Controllers\Api\Admin\DomainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
@@ -80,6 +81,14 @@ Route::prefix('admin')->group(function () {
         Route::post('/users', [UserController::class, 'create']);
         Route::put('/users/{id}', [UserController::class, 'update']);
         Route::delete('/users/{id}', [UserController::class, 'delete']);
+        
+        // Domain management routes
+        Route::get('/domains', [DomainController::class, 'index']);
+        Route::get('/domains/{id}', [DomainController::class, 'show']);
+        Route::post('/domains', [DomainController::class, 'create']);
+        Route::put('/domains/{id}', [DomainController::class, 'update']);
+        Route::delete('/domains/{id}', [DomainController::class, 'destroy']);
+        Route::post('/domains/{id}/regenerate-api-key', [DomainController::class, 'regenerateApiKey']);
         
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index']);

@@ -176,5 +176,51 @@ class PermissionSeeder extends Seeder
             'route' => 'role/unassign',
         ]);
 
+        // Domain permissions
+        Permission::create([
+            'slug' => 'domain-create',
+            'name' => 'Create Domain',
+            'description' => 'Allows creating new domains',
+            'resource' => 'domain',
+            'action' => 'create',
+            'route' => 'domain/create',
+        ]);
+
+        Permission::create([
+            'slug' => 'domain-read',
+            'name' => 'View Domain',
+            'description' => 'Allows viewing domain information',
+            'resource' => 'domain',
+            'action' => 'read',
+            'route' => 'domain/read',
+        ]);
+
+        Permission::create([
+            'slug' => 'domain-update',
+            'name' => 'Update Domain',
+            'description' => 'Allows updating domain information',
+            'resource' => 'domain',
+            'action' => 'update',
+            'route' => 'domain/update',
+        ]);
+
+        Permission::create([
+            'slug' => 'domain-delete',
+            'name' => 'Delete Domain',
+            'description' => 'Allows deleting domains',
+            'resource' => 'domain',
+            'action' => 'delete',
+            'route' => 'domain/delete',
+        ]);
+
+        Permission::create([
+            'slug' => 'domain-manage',
+            'name' => 'Manage Domain',
+            'description' => 'Allows managing all aspects of domains including API keys',
+            'resource' => 'domain',
+            'action' => 'manage',
+            'route' => 'domain/manage',
+        ]);
+
     }
 }

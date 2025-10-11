@@ -3,6 +3,9 @@
 use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\PermissionController;
 use App\Http\Controllers\Api\Admin\DomainController;
+use App\Http\Controllers\Api\Admin\StateController;
+use App\Http\Controllers\Api\Admin\CityController;
+use App\Http\Controllers\Api\Admin\ZipCodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
@@ -89,6 +92,19 @@ Route::prefix('admin')->group(function () {
         Route::put('/domains/{id}', [DomainController::class, 'update']);
         Route::delete('/domains/{id}', [DomainController::class, 'destroy']);
         Route::post('/domains/{id}/regenerate-api-key', [DomainController::class, 'regenerateApiKey']);
+        
+        // Geographic reference data routes
+        Route::get('/states', [StateController::class, 'index']);
+        Route::get('/states/all', [StateController::class, 'all']); // All active states (no pagination)
+        Route::get('/states/{code}', [StateController::class, 'showByCode']);
+        
+        Route::get('/cities', [CityController::class, 'index']);
+        Route::get('/cities/by-state/{stateId}', [CityController::class, 'byState']); // Cities of a specific state
+        
+        Route::get('/zip-codes', [ZipCodeController::class, 'index']);
+        Route::get('/zip-codes/{code}', [ZipCodeController::class, 'show']); // Get ZIP by code
+        Route::get('/zip-codes/by-state/{stateId}', [ZipCodeController::class, 'byState']); // ZIPs of a state
+        Route::get('/zip-codes/by-city/{cityId}', [ZipCodeController::class, 'byCity']); // ZIPs of a city
         
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index']);

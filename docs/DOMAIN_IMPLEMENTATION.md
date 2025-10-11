@@ -30,25 +30,31 @@ Sistema completo de gerenciamento de **Domains** (domínios parceiros) implement
   - Método `toArray()` para serialização
 
 #### **Use Cases**
-- ✅ `app/Application/UseCases/ISP/GetAllDomainsUseCase.php`
+- ✅ `app/Application/UseCases/Domain/GetAllDomainsUseCase.php`
   - Lista todos os domínios
   - Suporta paginação e filtros
+  - Retorna array de Domain entities
   
-- ✅ `app/Application/UseCases/ISP/GetDomainByIdUseCase.php`
+- ✅ `app/Application/UseCases/Domain/GetDomainByIdUseCase.php`
   - Busca domínio por ID
+  - Retorna Domain entity
   
-- ✅ `app/Application/UseCases/ISP/CreateDomainUseCase.php`
+- ✅ `app/Application/UseCases/Domain/CreateDomainUseCase.php`
   - Cria novo domínio
   - Gera API key automaticamente
+  - Retorna Domain entity
   
-- ✅ `app/Application/UseCases/ISP/UpdateDomainUseCase.php`
+- ✅ `app/Application/UseCases/Domain/UpdateDomainUseCase.php`
   - Atualiza informações do domínio
+  - Retorna Domain entity
   
-- ✅ `app/Application/UseCases/ISP/DeleteDomainUseCase.php`
+- ✅ `app/Application/UseCases/Domain/DeleteDomainUseCase.php`
   - Remove domínio do sistema
+  - Retorna void
   
-- ✅ `app/Application/UseCases/ISP/RegenerateApiKeyUseCase.php`
+- ✅ `app/Application/UseCases/Domain/RegenerateApiKeyUseCase.php`
   - Gera nova API key para o domínio
+  - Retorna Domain entity
 
 ### Infrastructure Layer
 

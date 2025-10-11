@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Application\UseCases\ISP;
+namespace App\Application\UseCases\Domain;
 
+use App\Domain\Entities\Domain;
 use App\Domain\Repositories\DomainRepositoryInterface;
 
 class RegenerateApiKeyUseCase
@@ -10,11 +11,9 @@ class RegenerateApiKeyUseCase
         private DomainRepositoryInterface $domainRepository
     ) {}
 
-    public function execute(int $id): array
+    public function execute(int $id): Domain
     {
-        $domain = $this->domainRepository->regenerateApiKey($id);
-        
-        return $domain->toDto()->toArray();
+        return $this->domainRepository->regenerateApiKey($id);
     }
 }
 

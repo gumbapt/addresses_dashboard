@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Application\UseCases\ISP;
+namespace App\Application\UseCases\Domain;
 
+use App\Domain\Entities\Domain;
 use App\Domain\Repositories\DomainRepositoryInterface;
 
 class UpdateDomainUseCase
@@ -20,8 +21,8 @@ class UpdateDomainUseCase
         ?string $wordpressVersion = null,
         ?string $pluginVersion = null,
         ?array $settings = null
-    ): array {
-        $domain = $this->domainRepository->update(
+    ): Domain {
+        return $this->domainRepository->update(
             $id,
             $name,
             $domainUrl,
@@ -32,8 +33,6 @@ class UpdateDomainUseCase
             $pluginVersion,
             $settings
         );
-        
-        return $domain->toDto()->toArray();
     }
 }
 

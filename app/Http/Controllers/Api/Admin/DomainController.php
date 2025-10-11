@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Application\Services\AdminFactory;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
-use App\Application\UseCases\ISP\CreateDomainUseCase;
-use App\Application\UseCases\ISP\DeleteDomainUseCase;
-use App\Application\UseCases\ISP\GetAllDomainsUseCase;
-use App\Application\UseCases\ISP\GetDomainByIdUseCase;
-use App\Application\UseCases\ISP\RegenerateApiKeyUseCase;
-use App\Application\UseCases\ISP\UpdateDomainUseCase;
+use App\Application\UseCases\Domain\CreateDomainUseCase;
+use App\Application\UseCases\Domain\DeleteDomainUseCase;
+use App\Application\UseCases\Domain\GetAllDomainsUseCase;
+use App\Application\UseCases\Domain\GetDomainByIdUseCase;
+use App\Application\UseCases\Domain\RegenerateApiKeyUseCase;
+use App\Application\UseCases\Domain\UpdateDomainUseCase;
 use App\Domain\Exceptions\AuthorizationException;
 use App\Domain\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
@@ -60,6 +60,11 @@ class DomainController extends Controller
                 $isActive
             );
             
+            // Convert entities to DTOs
+            $result['data'] = array_map(function ($domain) {
+                return $domain->toDto()->toArray();
+            }, $result['data']);
+            
             return response()->json([
                 'success' => true,
                 'data' => $result['data'],
@@ -94,7 +99,7 @@ class DomainController extends Controller
             
             return response()->json([
                 'success' => true,
-                'data' => $domain
+                'data' => $domain->toDto()->toArray()
             ], 200);
         } catch (AuthorizationException $e) {
             return response()->json([
@@ -142,7 +147,7 @@ class DomainController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Domain created successfully',
-                'data' => $domain
+                'data' => $domain->toDto()->toArray()
             ], 201);
         } catch (AuthorizationException $e) {
             return response()->json([
@@ -195,7 +200,7 @@ class DomainController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Domain updated successfully',
-                'data' => $domain
+                'data' => $domain->toDto()->toArray()
             ], 200);
         } catch (AuthorizationException $e) {
             return response()->json([
@@ -250,7 +255,7 @@ class DomainController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'API key regenerated successfully. Please update your integration immediately.',
-                'data' => $domain
+                'data' => $domain->toDto()->toArray()
             ], 200);
         } catch (AuthorizationException $e) {
             return response()->json([

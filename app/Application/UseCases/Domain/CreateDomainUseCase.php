@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Application\UseCases\ISP;
+namespace App\Application\UseCases\Domain;
 
+use App\Domain\Entities\Domain;
 use App\Domain\Repositories\DomainRepositoryInterface;
 
 class CreateDomainUseCase
@@ -18,8 +19,8 @@ class CreateDomainUseCase
         ?string $wordpressVersion = null,
         ?string $pluginVersion = null,
         ?array $settings = null
-    ): array {
-        $domain = $this->domainRepository->create(
+    ): Domain {
+        return $this->domainRepository->create(
             $name,
             $domainUrl,
             $siteId,
@@ -28,8 +29,6 @@ class CreateDomainUseCase
             $pluginVersion,
             $settings
         );
-        
-        return $domain->toDto()->toArray();
     }
 }
 

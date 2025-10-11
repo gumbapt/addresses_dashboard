@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\UseCases\ISP;
+namespace App\Application\UseCases\Domain;
 
 use App\Domain\Repositories\DomainRepositoryInterface;
 

@@ -200,7 +200,7 @@ class DomainManagementTest extends TestCase
         ]);
         
         // Verify API key was generated
-        $this->assertStringStartsWith('sk_live_', $response->json('data.api_key'));
+        $this->assertStringStartsWith('dmn_live_', $response->json('data.api_key'));
     }
 
     /** @test */
@@ -278,7 +278,7 @@ class DomainManagementTest extends TestCase
         
         $newApiKey = $response->json('data.api_key');
         $this->assertNotEquals($originalApiKey, $newApiKey);
-        $this->assertStringStartsWith('sk_live_', $newApiKey);
+        $this->assertStringStartsWith('dmn_live_', $newApiKey);
         
         $this->assertDatabaseHas('domains', [
             'id' => $domain->id,

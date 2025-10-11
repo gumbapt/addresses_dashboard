@@ -12,14 +12,23 @@ class DomainFactory extends Factory
 
     public function definition(): array
     {
-        $name = fake()->company() . ' ISP';
+        $name = fake()->unique()->company() . ' ISP';
+        $baseSlug = Str::slug($name);
+        
+        // Ensure unique slug
+        $slug = $baseSlug;
+        $counter = 1;
+        while (\App\Models\Domain::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
         
         return [
             'name' => $name,
-            'slug' => Str::slug($name),
-            'domain_url' => fake()->domainName(),
+            'slug' => $slug,
+            'domain_url' => fake()->unique()->domainName(),
             'site_id' => 'wp-prod-' . Str::random(10),
-            'api_key' => 'sk_live_' . Str::random(64),
+            'api_key' => 'dmn_live_' . Str::random(64),
             'status' => 'active',
             'timezone' => fake()->randomElement([
                 'America/New_York',

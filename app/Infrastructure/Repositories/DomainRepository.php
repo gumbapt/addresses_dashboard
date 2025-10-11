@@ -117,7 +117,7 @@ class DomainRepository implements DomainRepositoryInterface
         }
         
         // Generate unique API key
-        $apiKey = 'sk_live_' . Str::random(64);
+        $apiKey = 'dmn_live_' . Str::random(64);
         
         $domain = DomainModel::create([
             'name' => $name,
@@ -199,7 +199,7 @@ class DomainRepository implements DomainRepositoryInterface
     {
         $domain = DomainModel::findOrFail($id);
         
-        $newApiKey = 'sk_live_' . Str::random(64);
+        $newApiKey = 'dmn_live_' . Str::random(64);
         
         $domain->update(['api_key' => $newApiKey]);
         

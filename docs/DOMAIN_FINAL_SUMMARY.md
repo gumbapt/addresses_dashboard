@@ -319,7 +319,7 @@ Domain {
 
 ### Formato
 ```
-dmn_live_{64_caracteres_aleatórios}
+domain_key_live_{64_caracteres_aleatórios}
 ```
 
 ### Geração

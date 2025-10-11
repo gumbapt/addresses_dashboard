@@ -19,14 +19,23 @@ class CityManagementTest extends TestCase
     {
         parent::setUp();
         
-        $this->admin = Admin::factory()->create([
-            'email' => 'admin@test.com',
-        ]);
+        $this->seed(\Database\Seeders\RoleSeeder::class);
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $this->seed(\Database\Seeders\AdminSeeder::class);
+        $this->seed(\Database\Seeders\AdminRolePermissionSeeder::class);
+        $this->admin = Admin::where('email', 'admin@dashboard.com')->first();
 
-        $this->state = State::factory()->create([
-            'code' => 'CA',
-            'name' => 'California',
-        ]);
+        // Use firstOrCreate to avoid duplicate state codes
+        $this->state = State::firstOrCreate(
+            ['code' => 'CA'],
+            [
+                'name' => 'California',
+                'timezone' => 'America/Los_Angeles',
+                'latitude' => 36.7783,
+                'longitude' => -119.4179,
+                'is_active' => true,
+            ]
+        );
     }
 
     public function test_admin_can_list_cities_paginated(): void
@@ -69,8 +78,8 @@ class CityManagementTest extends TestCase
     public function test_admin_can_get_cities_by_state(): void
     {
         // Arrange
-        $californiaState = State::factory()->create(['code' => 'CA', 'name' => 'California']);
-        $texasState = State::factory()->create(['code' => 'TX', 'name' => 'Texas']);
+        $californiaState = State::firstOrCreate(['code' => 'CA'], ['name' => 'California', 'timezone' => 'America/Los_Angeles', 'latitude' => 36.77, 'longitude' => -119.41, 'is_active' => true]);
+        $texasState = State::firstOrCreate(['code' => 'TX'], ['name' => 'Texas', 'timezone' => 'America/Chicago', 'latitude' => 31.00, 'longitude' => -100.00, 'is_active' => true]);
         
         City::factory()->count(3)->create(['state_id' => $californiaState->id]);
         City::factory()->count(2)->create(['state_id' => $texasState->id]);
@@ -122,8 +131,8 @@ class CityManagementTest extends TestCase
     public function test_can_filter_cities_by_state(): void
     {
         // Arrange
-        $californiaState = State::factory()->create(['code' => 'CA']);
-        $texasState = State::factory()->create(['code' => 'TX']);
+        $californiaState = State::firstOrCreate(['code' => 'CA'], ['name' => 'California', 'timezone' => 'America/Los_Angeles', 'latitude' => 36.77, 'longitude' => -119.41, 'is_active' => true]);
+        $texasState = State::firstOrCreate(['code' => 'TX'], ['name' => 'Texas', 'timezone' => 'America/Chicago', 'latitude' => 31.00, 'longitude' => -100.00, 'is_active' => true]);
         
         City::factory()->count(3)->create(['state_id' => $californiaState->id]);
         City::factory()->count(2)->create(['state_id' => $texasState->id]);
@@ -221,8 +230,8 @@ class CityManagementTest extends TestCase
     public function test_can_combine_search_and_state_filter(): void
     {
         // Arrange
-        $californiaState = State::factory()->create(['code' => 'CA']);
-        $texasState = State::factory()->create(['code' => 'TX']);
+        $californiaState = State::firstOrCreate(['code' => 'CA'], ['name' => 'California', 'timezone' => 'America/Los_Angeles', 'latitude' => 36.77, 'longitude' => -119.41, 'is_active' => true]);
+        $texasState = State::firstOrCreate(['code' => 'TX'], ['name' => 'Texas', 'timezone' => 'America/Chicago', 'latitude' => 31.00, 'longitude' => -100.00, 'is_active' => true]);
         
         City::factory()->create(['name' => 'San Francisco', 'state_id' => $californiaState->id]);
         City::factory()->create(['name' => 'San Diego', 'state_id' => $californiaState->id]);

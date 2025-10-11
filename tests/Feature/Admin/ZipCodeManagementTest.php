@@ -21,14 +21,23 @@ class ZipCodeManagementTest extends TestCase
     {
         parent::setUp();
         
-        $this->admin = Admin::factory()->create([
-            'email' => 'admin@test.com',
-        ]);
+        $this->seed(\Database\Seeders\RoleSeeder::class);
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $this->seed(\Database\Seeders\AdminSeeder::class);
+        $this->seed(\Database\Seeders\AdminRolePermissionSeeder::class);
+        $this->admin = Admin::where('email', 'admin@dashboard.com')->first();
 
-        $this->state = State::factory()->create([
-            'code' => 'CA',
-            'name' => 'California',
-        ]);
+        // Use firstOrCreate to avoid duplicate state codes
+        $this->state = State::firstOrCreate(
+            ['code' => 'CA'],
+            [
+                'name' => 'California',
+                'timezone' => 'America/Los_Angeles',
+                'latitude' => 36.7783,
+                'longitude' => -119.4179,
+                'is_active' => true,
+            ]
+        );
 
         $this->city = City::factory()->create([
             'name' => 'Los Angeles',
@@ -121,8 +130,8 @@ class ZipCodeManagementTest extends TestCase
     public function test_admin_can_get_zip_codes_by_state(): void
     {
         // Arrange
-        $californiaState = State::factory()->create(['code' => 'CA']);
-        $texasState = State::factory()->create(['code' => 'TX']);
+        $californiaState = State::firstOrCreate(['code' => 'CA'], ['name' => 'California', 'timezone' => 'America/Los_Angeles', 'latitude' => 36.77, 'longitude' => -119.41, 'is_active' => true]);
+        $texasState = State::firstOrCreate(['code' => 'TX'], ['name' => 'Texas', 'timezone' => 'America/Chicago', 'latitude' => 31.00, 'longitude' => -100.00, 'is_active' => true]);
         
         ZipCode::factory()->count(3)->create(['state_id' => $californiaState->id]);
         ZipCode::factory()->count(2)->create(['state_id' => $texasState->id]);
@@ -153,8 +162,8 @@ class ZipCodeManagementTest extends TestCase
     public function test_admin_can_get_zip_codes_by_city(): void
     {
         // Arrange
-        $losAngelesCity = City::factory()->create(['state_id' => $this->state->id, 'name' => 'Los Angeles']);
-        $sanFranciscoCity = City::factory()->create(['state_id' => $this->state->id, 'name' => 'San Francisco']);
+        $losAngelesCity = City::firstOrCreate(['name' => 'Los Angeles', 'state_id' => $this->state->id], ['latitude' => 34.05, 'longitude' => -118.24, 'is_active' => true]);
+        $sanFranciscoCity = City::firstOrCreate(['name' => 'San Francisco', 'state_id' => $this->state->id], ['latitude' => 37.77, 'longitude' => -122.41, 'is_active' => true]);
         
         ZipCode::factory()->count(3)->create(['state_id' => $this->state->id, 'city_id' => $losAngelesCity->id]);
         ZipCode::factory()->count(2)->create(['state_id' => $this->state->id, 'city_id' => $sanFranciscoCity->id]);
@@ -199,8 +208,8 @@ class ZipCodeManagementTest extends TestCase
     public function test_can_filter_zip_codes_by_state(): void
     {
         // Arrange
-        $californiaState = State::factory()->create(['code' => 'CA']);
-        $texasState = State::factory()->create(['code' => 'TX']);
+        $californiaState = State::firstOrCreate(['code' => 'CA'], ['name' => 'California', 'timezone' => 'America/Los_Angeles', 'latitude' => 36.77, 'longitude' => -119.41, 'is_active' => true]);
+        $texasState = State::firstOrCreate(['code' => 'TX'], ['name' => 'Texas', 'timezone' => 'America/Chicago', 'latitude' => 31.00, 'longitude' => -100.00, 'is_active' => true]);
         
         ZipCode::factory()->count(3)->create(['state_id' => $californiaState->id]);
         ZipCode::factory()->count(2)->create(['state_id' => $texasState->id]);
@@ -470,8 +479,8 @@ class ZipCodeManagementTest extends TestCase
     public function test_can_combine_multiple_filters(): void
     {
         // Arrange
-        $californiaState = State::factory()->create(['code' => 'CA']);
-        $losAngelesCity = City::factory()->create(['state_id' => $californiaState->id]);
+        $californiaState = State::firstOrCreate(['code' => 'CA'], ['name' => 'California', 'timezone' => 'America/Los_Angeles', 'latitude' => 36.77, 'longitude' => -119.41, 'is_active' => true]);
+        $losAngelesCity = City::firstOrCreate(['name' => 'Los Angeles Test', 'state_id' => $californiaState->id], ['latitude' => 34.05, 'longitude' => -118.24, 'is_active' => true]);
         
         ZipCode::factory()->create(['code' => '90210', 'state_id' => $californiaState->id, 'city_id' => $losAngelesCity->id, 'is_active' => true]);
         ZipCode::factory()->create(['code' => '90211', 'state_id' => $californiaState->id, 'city_id' => $losAngelesCity->id, 'is_active' => true]);

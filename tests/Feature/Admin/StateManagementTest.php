@@ -17,11 +17,11 @@ class StateManagementTest extends TestCase
     {
         parent::setUp();
         
-        $this->seed(RoleSeeder::class);
-        $this->seed(PermissionSeeder::class);
-        $this->seed(AdminSeeder::class);
-        $this->seed(AdminRolePermissionSeeder::class);
-        $this->admin = Admin::where('email', 'admin@test.com')->first();
+        $this->seed(\Database\Seeders\RoleSeeder::class);
+        $this->seed(\Database\Seeders\PermissionSeeder::class);
+        $this->seed(\Database\Seeders\AdminSeeder::class);
+        $this->seed(\Database\Seeders\AdminRolePermissionSeeder::class);
+        $this->admin = Admin::where('email', 'admin@dashboard.com')->first();
     }
 
     public function test_admin_can_list_states_paginated(): void

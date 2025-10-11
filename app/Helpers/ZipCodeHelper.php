@@ -15,6 +15,11 @@ class ZipCodeHelper
         // Convert to string and remove any non-digit characters
         $cleaned = preg_replace('/[^0-9]/', '', (string) $zipCode);
         
+        // Take only first 5 digits if longer (handles ZIP+4 format)
+        if (strlen($cleaned) > 5) {
+            $cleaned = substr($cleaned, 0, 5);
+        }
+        
         // Pad with leading zeros to 5 digits
         return str_pad($cleaned, 5, '0', STR_PAD_LEFT);
     }
@@ -52,6 +57,11 @@ class ZipCodeHelper
      */
     public static function inferStateFromFirstDigit(string $zipCode): ?string
     {
+        // Return null for empty or non-numeric input
+        if (empty($zipCode) || !preg_match('/\d/', $zipCode)) {
+            return null;
+        }
+        
         $firstDigit = substr(self::normalize($zipCode), 0, 1);
         
         // Rough approximation based on ZIP code ranges

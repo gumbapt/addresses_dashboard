@@ -16,6 +16,11 @@ class State
         public readonly bool $isActive = true
     ) {}
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getCode(): string
     {
         return $this->code;
@@ -29,6 +34,16 @@ class State
     public function getTimezone(): string
     {
         return $this->timezone;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
     }
 
     public function isActive(): bool

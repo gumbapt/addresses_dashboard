@@ -31,6 +31,21 @@ class City
         return $this->stateId;
     }
 
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function getPopulation(): ?int
+    {
+        return $this->population;
+    }
+
     public function isActive(): bool
     {
         return $this->isActive;

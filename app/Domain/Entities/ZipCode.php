@@ -38,6 +38,26 @@ class ZipCode
         return $this->cityId;
     }
 
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function getPopulation(): ?int
+    {
+        return $this->population;
+    }
+
     public function isActive(): bool
     {
         return $this->isActive;

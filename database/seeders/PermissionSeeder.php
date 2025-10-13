@@ -222,5 +222,51 @@ class PermissionSeeder extends Seeder
             'route' => 'domain/manage',
         ]);
 
+        // Provider permissions
+        Permission::create([
+            'slug' => 'provider-create',
+            'name' => 'Create Provider',
+            'description' => 'Allows creating new providers',
+            'resource' => 'provider',
+            'action' => 'create',
+            'route' => 'provider/create',
+        ]);
+
+        Permission::create([
+            'slug' => 'provider-read',
+            'name' => 'View Provider',
+            'description' => 'Allows viewing provider information',
+            'resource' => 'provider',
+            'action' => 'read',
+            'route' => 'provider/read',
+        ]);
+
+        Permission::create([
+            'slug' => 'provider-update',
+            'name' => 'Update Provider',
+            'description' => 'Allows updating provider information',
+            'resource' => 'provider',
+            'action' => 'update',
+            'route' => 'provider/update',
+        ]);
+
+        Permission::create([
+            'slug' => 'provider-delete',
+            'name' => 'Delete Provider',
+            'description' => 'Allows deleting providers',
+            'resource' => 'provider',
+            'action' => 'delete',
+            'route' => 'provider/delete',
+        ]);
+
+        Permission::create([
+            'slug' => 'provider-manage',
+            'name' => 'Manage Provider',
+            'description' => 'Allows managing all aspects of providers including technologies',
+            'resource' => 'provider',
+            'action' => 'manage',
+            'route' => 'provider/manage',
+        ]);
+
     }
 }

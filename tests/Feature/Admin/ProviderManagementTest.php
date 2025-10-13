@@ -3,7 +3,14 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Admin;
+use App\Models\Permission;
 use App\Models\Provider;
+use App\Models\Role;
+use Database\Seeders\AdminRolePermissionSeeder;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\ProviderPermissionSeeder;
+use Database\Seeders\RoleSeeder;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -11,22 +18,50 @@ class ProviderManagementTest extends TestCase
 {
     use RefreshDatabase;
 
-    private Admin $admin;
-    private string $token;
+    private Admin $adminWithProviderPermissions;
+    private Admin $adminWithoutProviderPermissions;
+    private string $tokenWithPermissions;
+    private string $tokenWithoutPermissions;
 
     protected function setUp(): void
     {
         parent::setUp();
         
-        // Create admin user for authentication
-        $this->admin = Admin::factory()->create([
-            'email' => 'admin@test.com',
+        // Seed the database with roles and permissions
+        $this->seed(RoleSeeder::class);
+        $this->seed(PermissionSeeder::class);
+        $this->seed(ProviderPermissionSeeder::class);
+        $this->seed(AdminSeeder::class);
+        $this->seed(AdminRolePermissionSeeder::class);
+        
+        // Create admin with provider permissions
+        $this->adminWithProviderPermissions = Admin::factory()->create([
+            'name' => 'Provider Admin',
+            'email' => 'provider-admin@test.com',
             'password' => bcrypt('password'),
             'is_active' => true,
         ]);
         
-        // Create token for API authentication
-        $this->token = $this->admin->createToken('test-token')->plainTextToken;
+        // Assign role with provider permissions
+        $adminRole = Role::where('slug', 'admin')->first();
+        $providerPermissions = Permission::where('resource', 'provider')->get();
+        $adminRole->permissions()->syncWithoutDetaching($providerPermissions->pluck('id'));
+        $this->adminWithProviderPermissions->roles()->attach($adminRole->id, [
+            'assigned_at' => now(),
+            'assigned_by' => 1
+        ]);
+        
+        // Create admin WITHOUT provider permissions
+        $this->adminWithoutProviderPermissions = Admin::factory()->create([
+            'name' => 'Regular Admin',
+            'email' => 'regular-admin@test.com',
+            'password' => bcrypt('password'),
+            'is_active' => true,
+        ]);
+        
+        // Create tokens for authentication
+        $this->tokenWithPermissions = $this->adminWithProviderPermissions->createToken('test-token')->plainTextToken;
+        $this->tokenWithoutPermissions = $this->adminWithoutProviderPermissions->createToken('test-token')->plainTextToken;
     }
 
     public function test_can_list_providers_with_pagination(): void
@@ -47,7 +82,7 @@ class ProviderManagementTest extends TestCase
             'is_active' => true,
         ]);
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers');
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -96,7 +131,7 @@ class ProviderManagementTest extends TestCase
             'technologies' => ['Mobile'],
         ]);
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?search=Search%20Test%20Provider%20AT%26T');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?search=Search%20Test%20Provider%20AT%26T');
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -128,7 +163,7 @@ class ProviderManagementTest extends TestCase
             'technologies' => ['Fiber', 'Mobile', 'DSL'],
         ]);
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?technology=Fiber');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?technology=Fiber');
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -157,7 +192,7 @@ class ProviderManagementTest extends TestCase
             'is_active' => false,
         ]);
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?is_active=true');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?is_active=true');
 
         $response->assertStatus(200);
         $this->assertCount(1, $response->json('data'));
@@ -175,7 +210,7 @@ class ProviderManagementTest extends TestCase
             'technologies' => ['Fiber', 'Cable'],
         ]);
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers/test-provider');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers/test-provider');
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -195,7 +230,7 @@ class ProviderManagementTest extends TestCase
     public function test_get_provider_by_slug_returns_404_for_nonexistent(): void
     {
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers/nonexistent-slug');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers/nonexistent-slug');
 
         $response->assertStatus(404);
         $response->assertJson([
@@ -221,7 +256,7 @@ class ProviderManagementTest extends TestCase
             'technologies' => ['Fiber', 'DSL'],
         ]);
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers/by-technology/Fiber');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers/by-technology/Fiber');
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -239,7 +274,7 @@ class ProviderManagementTest extends TestCase
     public function test_can_get_available_technologies(): void
     {
 
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers/technologies');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers/technologies');
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -276,7 +311,7 @@ class ProviderManagementTest extends TestCase
         }
 
         // Test first page with 10 per page
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?page=1&per_page=10');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?page=1&per_page=10');
 
         $response->assertStatus(200);
         $pagination = $response->json('pagination');
@@ -288,7 +323,7 @@ class ProviderManagementTest extends TestCase
         $this->assertCount(10, $response->json('data'));
 
         // Test second page
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?page=2&per_page=10');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?page=2&per_page=10');
         
         $response->assertStatus(200);
         $pagination = $response->json('pagination');
@@ -309,7 +344,7 @@ class ProviderManagementTest extends TestCase
         }
 
         // Try to request more than max (100)
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?per_page=200');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?per_page=200');
 
         $response->assertStatus(200);
         $pagination = $response->json('pagination');
@@ -352,7 +387,7 @@ class ProviderManagementTest extends TestCase
         ]);
 
         // Search for CombinedTest providers with Fiber technology that are active
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers?search=CombinedTest&technology=Fiber&is_active=true');
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithPermissions])->getJson('/api/admin/providers?search=CombinedTest&technology=Fiber&is_active=true');
 
         $response->assertStatus(200);
         $data = $response->json('data');
@@ -361,5 +396,51 @@ class ProviderManagementTest extends TestCase
         $this->assertEquals('CombinedTest Fiber Service', $data[0]['name']);
         $this->assertContains('Fiber', $data[0]['technologies']);
         $this->assertTrue($data[0]['is_active']);
+    }
+
+    // Permission Tests
+    public function test_admin_without_provider_read_permission_cannot_list_providers(): void
+    {
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithoutPermissions])->getJson('/api/admin/providers');
+        
+        $response->assertStatus(403);
+        $response->assertJson([
+            'error' => 'Admin ' . $this->adminWithoutProviderPermissions->id . ' does not have permission to perform this action. Required permission: provider-read'
+        ]);
+    }
+
+    public function test_admin_without_provider_read_permission_cannot_view_provider_by_slug(): void
+    {
+        Provider::factory()->create([
+            'name' => 'Test Provider',
+            'slug' => 'test-provider',
+        ]);
+
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithoutPermissions])->getJson('/api/admin/providers/test-provider');
+        
+        $response->assertStatus(403);
+        $response->assertJson([
+            'error' => 'Admin ' . $this->adminWithoutProviderPermissions->id . ' does not have permission to perform this action. Required permission: provider-read'
+        ]);
+    }
+
+    public function test_admin_without_provider_read_permission_cannot_get_providers_by_technology(): void
+    {
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithoutPermissions])->getJson('/api/admin/providers/by-technology/Fiber');
+        
+        $response->assertStatus(403);
+        $response->assertJson([
+            'error' => 'Admin ' . $this->adminWithoutProviderPermissions->id . ' does not have permission to perform this action. Required permission: provider-read'
+        ]);
+    }
+
+    public function test_admin_without_provider_read_permission_cannot_get_technologies(): void
+    {
+        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->tokenWithoutPermissions])->getJson('/api/admin/providers/technologies');
+        
+        $response->assertStatus(403);
+        $response->assertJson([
+            'error' => 'Admin ' . $this->adminWithoutProviderPermissions->id . ' does not have permission to perform this action. Required permission: provider-read'
+        ]);
     }
 }

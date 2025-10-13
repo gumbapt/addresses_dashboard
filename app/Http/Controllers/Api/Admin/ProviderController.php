@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Application\Services\AdminFactory;
+use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
 use App\Application\UseCases\Provider\GetAllProvidersUseCase;
 use App\Application\UseCases\Provider\GetProviderBySlugUseCase;
+use App\Domain\Exceptions\AuthorizationException;
 use App\Domain\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +16,8 @@ class ProviderController extends Controller
 {
     public function __construct(
         private GetAllProvidersUseCase $getAllProvidersUseCase,
-        private GetProviderBySlugUseCase $getProviderBySlugUseCase
+        private GetProviderBySlugUseCase $getProviderBySlugUseCase,
+        private AuthorizeActionUseCase $authorizeActionUseCase
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -22,6 +25,7 @@ class ProviderController extends Controller
         try {
             $adminModel = $request->user();
             $admin = AdminFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($admin, 'provider-read');
             
             // Get pagination parameters
             $page = (int) $request->query('page', 1);
@@ -67,6 +71,10 @@ class ProviderController extends Controller
                     'to' => $result['to']
                 ]
             ], 200);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 403);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Internal server error: ' . $e->getMessage()
@@ -79,6 +87,7 @@ class ProviderController extends Controller
         try {
             $adminModel = $request->user();
             $admin = AdminFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($admin, 'provider-read');
             
             $provider = $this->getProviderBySlugUseCase->execute($slug);
             
@@ -90,6 +99,10 @@ class ProviderController extends Controller
             return response()->json([
                 'error' => $e->getMessage()
             ], 404);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 403);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Internal server error: ' . $e->getMessage()
@@ -102,6 +115,7 @@ class ProviderController extends Controller
         try {
             $adminModel = $request->user();
             $admin = AdminFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($admin, 'provider-read');
             
             $providers = $this->getAllProvidersUseCase->executeByTechnology($technology);
             
@@ -114,6 +128,10 @@ class ProviderController extends Controller
                 'success' => true,
                 'data' => $providersArray
             ], 200);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 403);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Internal server error: ' . $e->getMessage()
@@ -126,6 +144,7 @@ class ProviderController extends Controller
         try {
             $adminModel = $request->user();
             $admin = AdminFactory::createFromModel($adminModel);
+            $this->authorizeActionUseCase->execute($admin, 'provider-read');
             
             // Get all unique technologies from providers
             $technologies = [
@@ -141,6 +160,10 @@ class ProviderController extends Controller
                 'success' => true,
                 'data' => $technologies
             ], 200);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 403);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Internal server error: ' . $e->getMessage()

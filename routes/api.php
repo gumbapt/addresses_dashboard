@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\DomainController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\ZipCodeController;
+use App\Http\Controllers\Api\Admin\ProviderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
@@ -105,6 +106,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/zip-codes/{code}', [ZipCodeController::class, 'show']); // Get ZIP by code
         Route::get('/zip-codes/by-state/{stateId}', [ZipCodeController::class, 'byState']); // ZIPs of a state
         Route::get('/zip-codes/by-city/{cityId}', [ZipCodeController::class, 'byCity']); // ZIPs of a city
+        
+        Route::get('/providers', [ProviderController::class, 'index']);
+        Route::get('/providers/technologies', [ProviderController::class, 'technologies']); // Available technologies
+        Route::get('/providers/{slug}', [ProviderController::class, 'show']); // Get provider by slug
+        Route::get('/providers/by-technology/{technology}', [ProviderController::class, 'byTechnology']); // Providers by tech
         
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index']);

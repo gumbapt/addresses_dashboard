@@ -321,7 +321,8 @@ class ProviderManagementTest extends TestCase
 
     public function test_requires_admin_authentication(): void
     {
-        $response = $this->withHeaders(['Authorization' => 'Bearer ' . $this->token])->getJson('/api/admin/providers');
+        // Make request WITHOUT authorization header
+        $response = $this->getJson('/api/admin/providers');
         
         $response->assertStatus(401);
     }

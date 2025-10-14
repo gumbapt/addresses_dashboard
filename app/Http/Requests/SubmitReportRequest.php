@@ -70,7 +70,7 @@ class SubmitReportRequest extends FormRequest
             'geographic.top_cities.*.request_count' => 'required_with:geographic.top_cities|integer|min:0',
             'geographic.top_cities.*.zip_codes' => 'sometimes|array',
             'geographic.top_zip_codes' => 'sometimes|array',
-            'geographic.top_zip_codes.*.zip_code' => 'required_with:geographic.top_zip_codes|string|max:10',
+            'geographic.top_zip_codes.*.zip_code' => 'required_with:geographic.top_zip_codes',
             'geographic.top_zip_codes.*.request_count' => 'required_with:geographic.top_zip_codes|integer|min:0',
             'geographic.top_zip_codes.*.percentage' => 'sometimes|numeric|min:0|max:100',
             

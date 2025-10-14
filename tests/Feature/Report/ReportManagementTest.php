@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Report;
 
 use App\Models\Admin;
 use App\Models\Domain;

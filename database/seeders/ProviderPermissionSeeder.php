@@ -64,6 +64,5 @@ class ProviderPermissionSeeder extends Seeder
             );
         }
 
-        echo "✅ Provider permissions created successfully!\n";
     }
 }

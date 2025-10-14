@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50)->unique(); // "Fiber", "Cable", "Mobile"
             $table->string('display_name', 100); // "Fiber Optic", "Cable Internet"
+            $table->string('slug', 100)->unique(); // "fiber", "cable", "mobile"
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\RoleController;
 use App\Http\Controllers\Api\Admin\ChatController as AdminChatController;
 use App\Http\Controllers\Api\Chat\ChatController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -116,6 +117,20 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
 
     });
+});
+
+// Report Submission API (Domain API Key Authentication)
+Route::prefix('reports')->group(function () {
+    // Public endpoint for domains to submit reports (authenticated via API key)
+    Route::post('/submit', [ReportController::class, 'submit'])
+        ->name('reports.submit');
+});
+
+// Report Management API (Admin Authentication) 
+Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('/recent', [ReportController::class, 'recent'])->name('admin.reports.recent');
+    Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
 });
 
 // Broadcast routes for private channels

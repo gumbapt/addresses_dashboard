@@ -20,6 +20,8 @@ use App\Domain\Repositories\ZipCodeRepositoryInterface;
 use App\Infrastructure\Repositories\ZipCodeRepository;
 use App\Domain\Repositories\ProviderRepositoryInterface;
 use App\Infrastructure\Repositories\ProviderRepository;
+use App\Domain\Repositories\ReportRepositoryInterface;
+use App\Infrastructure\Repositories\ReportRepository;
 use App\Domain\Services\AuthServiceInterface;
 use App\Infrastructure\Services\AuthService;
 use App\Domain\Services\RegistrationServiceInterface;
@@ -41,6 +43,7 @@ class DomainServiceProvider extends ServiceProvider
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(ZipCodeRepositoryInterface::class, ZipCodeRepository::class);
         $this->app->bind(ProviderRepositoryInterface::class, ProviderRepository::class);
+        $this->app->bind(ReportRepositoryInterface::class, ReportRepository::class);
 
          // Services
         $this->app->bind(AuthServiceInterface::class, AuthService::class);

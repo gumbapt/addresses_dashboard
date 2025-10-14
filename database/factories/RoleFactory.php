@@ -16,8 +16,13 @@ class RoleFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->words(2, true);
+        
         return [
-            //
+            'name' => $name,
+            'slug' => str_replace(' ', '-', strtolower($name)),
+            'description' => $this->faker->sentence(),
+            'is_active' => true,
         ];
     }
 }

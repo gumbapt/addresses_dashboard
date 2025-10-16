@@ -37,6 +37,13 @@ interface CityRepositoryInterface
         ?float $longitude = null
     ): City;
     
+    public function findOrCreateByName(
+        string $name,
+        ?int $stateId = null,
+        ?float $latitude = null,
+        ?float $longitude = null
+    ): City;
+    
     public function update(
         int $id,
         ?string $name = null,

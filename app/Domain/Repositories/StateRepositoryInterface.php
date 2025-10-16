@@ -10,6 +10,8 @@ interface StateRepositoryInterface
     
     public function findByCode(string $code): ?State;
     
+    public function findOrCreateByCode(string $code, ?string $name = null): State;
+    
     public function findAll(): array;
     
     public function findAllActive(): array;

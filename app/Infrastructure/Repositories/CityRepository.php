@@ -131,6 +131,35 @@ class CityRepository implements CityRepositoryInterface
         return $city->toEntity();
     }
 
+    public function findOrCreateByName(
+        string $name,
+        ?int $stateId = null,
+        ?float $latitude = null,
+        ?float $longitude = null
+    ): CityEntity {
+        // If stateId is provided, use the regular findOrCreate
+        if ($stateId !== null) {
+            return $this->findOrCreate($name, $stateId, $latitude, $longitude);
+        }
+        
+        // Try to find existing city by name only (first match)
+        $city = CityModel::where('name', $name)->first();
+        
+        if (!$city) {
+            // Create with minimal data (state_id can be null or use first state as placeholder)
+            $firstState = \App\Models\State::where('is_active', true)->first();
+            $city = CityModel::create([
+                'name' => $name,
+                'state_id' => $firstState ? $firstState->id : 1, // Fallback to ID 1
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+                'is_active' => true,
+            ]);
+        }
+        
+        return $city->toEntity();
+    }
+
     public function update(
         int $id,
         ?string $name = null,

@@ -30,6 +30,22 @@ class StateRepository implements StateRepositoryInterface
         return $state->toEntity();
     }
 
+    public function findOrCreateByCode(string $code, ?string $name = null): StateEntity
+    {
+        $state = StateModel::where('code', strtoupper($code))->first();
+        
+        if (!$state) {
+            $state = StateModel::create([
+                'code' => strtoupper($code),
+                'name' => $name ?? strtoupper($code),
+                'timezone' => 'America/New_York', // Default timezone
+                'is_active' => true,
+            ]);
+        }
+        
+        return $state->toEntity();
+    }
+
     public function findAll(): array
     {
         $states = StateModel::orderBy('name')->get();

@@ -43,6 +43,12 @@ interface ZipCodeRepositoryInterface
         ?float $longitude = null
     ): ZipCode;
     
+    public function findOrCreateByCode(
+        string $code,
+        ?int $stateId = null,
+        ?int $cityId = null
+    ): ZipCode;
+    
     public function update(
         int $id,
         ?int $stateId = null,

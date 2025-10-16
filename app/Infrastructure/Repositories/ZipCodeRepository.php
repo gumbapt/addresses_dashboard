@@ -156,6 +156,43 @@ class ZipCodeRepository implements ZipCodeRepositoryInterface
         return $zipCode->toEntity();
     }
 
+    public function findOrCreateByCode(
+        string $code,
+        ?int $stateId = null,
+        ?int $cityId = null
+    ): ZipCodeEntity {
+        $normalizedCode = ZipCodeHelper::normalize($code);
+        
+        // Try to find existing zipCode
+        $zipCode = ZipCodeModel::where('code', $normalizedCode)->first();
+        
+        if (!$zipCode) {
+            // If stateId not provided, try to infer from zip code
+            if (!$stateId) {
+                $inferredStateCode = ZipCodeHelper::inferStateFromFirstDigit($normalizedCode);
+                if ($inferredStateCode) {
+                    $state = \App\Models\State::where('code', $inferredStateCode[0] ?? null)->first();
+                    $stateId = $state ? $state->id : null;
+                }
+            }
+            
+            // If still no stateId, use first available state
+            if (!$stateId) {
+                $firstState = \App\Models\State::where('is_active', true)->first();
+                $stateId = $firstState ? $firstState->id : 1;
+            }
+            
+            $zipCode = ZipCodeModel::create([
+                'code' => $normalizedCode,
+                'state_id' => $stateId,
+                'city_id' => $cityId,
+                'is_active' => true,
+            ]);
+        }
+        
+        return $zipCode->toEntity();
+    }
+
     public function update(
         int $id,
         ?int $stateId = null,

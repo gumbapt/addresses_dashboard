@@ -16,6 +16,7 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Use the 'sanctum' guard which already authenticated the user
         $user = $request->user();
         
         if (!$user) {
@@ -25,12 +26,12 @@ class AdminAuthMiddleware
         // Verificar se o usuário autenticado é um admin
         // Primeiro, verificar se o modelo é Admin
         if (!$user instanceof Admin) {
-            return response()->json(['message' => 'Access denied. Admin privileges required.'], 403);
+            return response()->json(['message' => 'Access denied. Admin privileges required.'], 401);
         }
 
         // Verificar se o admin está ativo
         if (!$user->isActive()) {
-            return response()->json(['message' => 'Access denied. Admin privileges required.'], 403);
+            return response()->json(['message' => 'Access denied. Admin account is inactive.'], 401);
         }
 
         return $next($request);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Application\UseCases\Report\CreateReportUseCase;
 use App\Application\UseCases\Report\GetAllReportsUseCase;
 use App\Application\UseCases\Report\GetReportByIdUseCase;
+use App\Application\UseCases\Report\GetAggregatedReportStatsUseCase;
+use App\Application\UseCases\Report\GetReportWithStatsUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReportRequest;
 use App\Jobs\ProcessReportJob;
@@ -18,7 +20,9 @@ class ReportController extends Controller
     public function __construct(
         private CreateReportUseCase $createReportUseCase,
         private GetAllReportsUseCase $getAllReportsUseCase,
-        private GetReportByIdUseCase $getReportByIdUseCase
+        private GetReportByIdUseCase $getReportByIdUseCase,
+        private GetAggregatedReportStatsUseCase $getAggregatedReportStatsUseCase,
+        private GetReportWithStatsUseCase $getReportWithStatsUseCase
     ) {}
 
     /**
@@ -142,7 +146,7 @@ class ReportController extends Controller
     }
 
     /**
-     * Get a specific report by ID
+     * Get a specific report by ID with processed statistics
      * 
      * @group Reports
      * @urlParam id integer required Report ID Example: 1
@@ -150,9 +154,12 @@ class ReportController extends Controller
      *   "success": true,
      *   "data": {
      *     "id": 1,
-     *     "domain_id": 1,
+     *     "domain": {"id": 1, "name": "zip.50g.io"},
      *     "report_date": "2025-10-13",
      *     "status": "processed",
+     *     "summary": {...},
+     *     "providers": [...],
+     *     "geographic": {...},
      *     "raw_data": {...}
      *   }
      * }
@@ -161,14 +168,14 @@ class ReportController extends Controller
     public function show(int $id): JsonResponse
     {
         try {
-            $report = $this->getReportByIdUseCase->execute($id);
+            $reportData = $this->getReportWithStatsUseCase->execute($id);
             
             return response()->json([
                 'success' => true,
-                'data' => $report->toDto()->toArray()
+                'data' => $reportData
             ]);
             
-        } catch (\App\Domain\Exceptions\NotFoundException $e) {
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Report not found'
@@ -193,6 +200,51 @@ class ReportController extends Controller
             'success' => true,
             'data' => array_map(fn($report) => $report->toDto()->toArray(), $reports)
         ]);
+    }
+
+    /**
+     * Get aggregated statistics for a specific domain
+     * 
+     * @group Admin Reports
+     * @urlParam domain_id integer required The domain ID Example: 1
+     * @response 200 {
+     *   "success": true,
+     *   "data": {
+     *     "domain": {"id": 1, "name": "zip.50g.io"},
+     *     "period": {
+     *       "total_reports": 5,
+     *       "first_report": "2025-10-01",
+     *       "last_report": "2025-10-05",
+     *       "days_covered": 5
+     *     },
+     *     "summary": {...},
+     *     "providers": [...],
+     *     "geographic": {...},
+     *     "trends": [...]
+     *   }
+     * }
+     */
+    public function aggregate(int $domainId): JsonResponse
+    {
+        try {
+            $stats = $this->getAggregatedReportStatsUseCase->execute($domainId);
+
+            return response()->json([
+                'success' => true,
+                'data' => $stats->toArray(),
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Domain not found',
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error aggregating report statistics',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**

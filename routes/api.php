@@ -130,6 +130,7 @@ Route::prefix('reports')->group(function () {
 Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->group(function () {
     Route::get('/', [ReportController::class, 'index'])->name('admin.reports.index');
     Route::get('/recent', [ReportController::class, 'recent'])->name('admin.reports.recent');
+    Route::get('/domain/{domainId}/aggregate', [ReportController::class, 'aggregate'])->name('admin.reports.aggregate');
     Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
 });
 

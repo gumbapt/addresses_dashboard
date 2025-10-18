@@ -7,8 +7,11 @@ use App\Application\UseCases\Report\GetAllReportsUseCase;
 use App\Application\UseCases\Report\GetReportByIdUseCase;
 use App\Application\UseCases\Report\GetAggregatedReportStatsUseCase;
 use App\Application\UseCases\Report\GetReportWithStatsUseCase;
+use App\Application\UseCases\Report\GetDashboardDataUseCase;
+use App\Application\UseCases\Report\CreateDailyReportUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReportRequest;
+use App\Http\Requests\SubmitDailyReportRequest;
 use App\Jobs\ProcessReportJob;
 use App\Models\Domain;
 use Illuminate\Http\JsonResponse;
@@ -22,8 +25,78 @@ class ReportController extends Controller
         private GetAllReportsUseCase $getAllReportsUseCase,
         private GetReportByIdUseCase $getReportByIdUseCase,
         private GetAggregatedReportStatsUseCase $getAggregatedReportStatsUseCase,
-        private GetReportWithStatsUseCase $getReportWithStatsUseCase
+        private GetReportWithStatsUseCase $getReportWithStatsUseCase,
+        private GetDashboardDataUseCase $getDashboardDataUseCase,
+        private CreateDailyReportUseCase $createDailyReportUseCase
     ) {}
+
+    /**
+     * Submit a daily report from a domain (WordPress format)
+     * 
+     * @group Reports
+     * @bodyParam api_version string required API version Example: 1.0
+     * @bodyParam report_type string required Report type Example: daily
+     * @bodyParam timestamp string required Timestamp Example: 2025-10-16T21:24:25Z
+     * @bodyParam source object required Source information
+     * @bodyParam source.site_id string required Site ID Example: wp-zip-daily-test
+     * @bodyParam source.site_name string required Site name Example: SmarterHome.ai
+     * @bodyParam source.site_url string required Site URL Example: http://zip.50g.io
+     * @bodyParam source.wordpress_version string required WordPress version Example: 6.8.3
+     * @bodyParam source.plugin_version string required Plugin version Example: 1.0.0
+     * @bodyParam data object required Daily report data
+     * @bodyParam data.date string required Report date Example: 2025-06-27
+     * @bodyParam data.summary object required Summary statistics
+     * @bodyParam data.geographic object required Geographic data
+     * @bodyParam data.providers object required Provider data
+     * @response 201 {
+     *   "success": true,
+     *   "message": "Daily report submitted successfully",
+     *   "data": {
+     *     "id": 10,
+     *     "domain_id": 1,
+     *     "report_date": "2025-06-27",
+     *     "status": "pending"
+     *   }
+     * }
+     * @response 422 {
+     *   "success": false,
+     *   "message": "Validation failed",
+     *   "errors": {
+     *     "data.date": ["The data.date field is required."]
+     *   }
+     * }
+     */
+    public function submitDaily(SubmitDailyReportRequest $request): JsonResponse
+    {
+        try {
+            $domain = $this->getAuthenticatedDomain($request);
+            $dailyData = $request->validated();
+
+            // Criar relatório diário
+            $report = $this->createDailyReportUseCase->execute($domain->id, $dailyData);
+
+            // Enfileirar processamento
+            ProcessReportJob::dispatch($report->getId(), $dailyData);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Daily report submitted successfully',
+                'data' => [
+                    'id' => $report->getId(),
+                    'domain_id' => $domain->id,
+                    'report_date' => $report->getReportDate()->format('Y-m-d'),
+                    'status' => $report->getStatus(),
+                ]
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error submitting daily report',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 
     /**
      * Submit a new report from a domain
@@ -200,6 +273,48 @@ class ReportController extends Controller
             'success' => true,
             'data' => array_map(fn($report) => $report->toDto()->toArray(), $reports)
         ]);
+    }
+
+    /**
+     * Get dashboard data for a specific domain
+     * 
+     * @group Admin Reports
+     * @urlParam domain_id integer required The domain ID Example: 1
+     * @response 200 {
+     *   "success": true,
+     *   "data": {
+     *     "domain": {"id": 1, "name": "zip.50g.io"},
+     *     "kpis": {...},
+     *     "provider_distribution": [...],
+     *     "top_states": [...],
+     *     "hourly_distribution": [...],
+     *     "speed_by_state": [...],
+     *     "technology_distribution": [...],
+     *     "exclusion_by_provider": [...]
+     *   }
+     * }
+     */
+    public function dashboard(int $domainId): JsonResponse
+    {
+        try {
+            $dashboardData = $this->getDashboardDataUseCase->execute($domainId);
+
+            return response()->json([
+                'success' => true,
+                'data' => $dashboardData,
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Domain not found',
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error loading dashboard data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**

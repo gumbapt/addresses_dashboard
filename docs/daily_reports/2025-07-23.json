@@ -1,0 +1,216 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:42Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-23",
+      "summary": {
+        "total_requests": 57,
+        "successful_requests": 54,
+        "failed_requests": 3,
+        "success_rate": 94.74,
+        "unique_providers": 59,
+        "unique_states": 7,
+        "unique_cities": 21,
+        "unique_zipcodes": 45,
+        "avg_speed_mbps": 964.05,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "TX": 12,
+          "NY": 8,
+          "CA": 5,
+          "CO": 5,
+          "AR": 2,
+          "MA": 1,
+          "FL": 1
+        },
+        "cities": {
+          "Houston": 5,
+          "Star City": 2,
+          "Dillon": 2,
+          "Summit County": 2,
+          "Spring": 2,
+          "Magnolia": 2,
+          "Rochester": 2,
+          "Inglewood": 1,
+          "Bronx": 1,
+          "Colusa": 1,
+          "Troy": 1,
+          "Tomball": 1,
+          "The Woodlands": 1,
+          "Pinehurst": 1,
+          "Mineola": 1,
+          "Uniondale": 1,
+          "Simi Valley": 1,
+          "Long Beach": 1,
+          "Wolcott": 1,
+          "Quincy": 1
+        },
+        "zipcodes": {
+          "10038": 1,
+          "10460": 1,
+          "10467": 1,
+          "11226": 1,
+          "11501": 1,
+          "11553": 1,
+          "11554": 1,
+          "11798": 1,
+          "12182": 1,
+          "13035": 1,
+          "14464": 1,
+          "14590": 1,
+          "14608": 2,
+          "25904": 1,
+          "30531": 1,
+          "31027": 3,
+          "32807": 1,
+          "33032": 1,
+          "33210": 1,
+          "33279": 2,
+          "33614": 1,
+          "37777": 1,
+          "65932": 1,
+          "70506": 1,
+          "71667": 1,
+          "75228": 1,
+          "77004": 1,
+          "77013": 1,
+          "77056": 1,
+          "77070": 1,
+          "77085": 1,
+          "77375": 1,
+          "77386": 1,
+          "78753": 1,
+          "80435": 2,
+          "90301": 1,
+          "90805": 1,
+          "92553": 1,
+          "92660": 2,
+          "92683": 1,
+          "92845": 1,
+          "93065": 1,
+          "94901": 1,
+          "95932": 1,
+          "96055": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.8436674,
+            "lon": -73.8866875
+          },
+          {
+            "lat": 30.1426815,
+            "lon": -95.5569536
+          },
+          {
+            "lat": 39.6332525,
+            "lon": -106.046854
+          },
+          {
+            "lat": 30.1384638,
+            "lon": -95.4448438
+          },
+          {
+            "lat": 39.6332525,
+            "lon": -106.046854
+          },
+          {
+            "lat": 30.1465494,
+            "lon": -95.6631948
+          },
+          {
+            "lat": 30.2282283,
+            "lon": -85.8885797
+          },
+          {
+            "lat": 38.7945952,
+            "lon": -106.5348379
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 54,
+          "Viasat Carrier Services Inc": 54,
+          "T-Mobile": 50,
+          "Earthlink": 50,
+          "Verizon": 49,
+          "AT&T": 48,
+          "Spectrum": 23,
+          "Xfinity": 23,
+          "GeoLinks": 9,
+          "Frontier": 8,
+          "Optimum": 7,
+          "Starry Inc": 6,
+          "CenturyLink": 4,
+          "unWired Broadband": 3,
+          "Astound Broadband": 3,
+          "Logix Communications LP": 3,
+          "ZAYO GROUP LLC": 3,
+          "Cox Communications": 2,
+          "DigitalPath Inc": 2,
+          "Consolidated Communications": 2
+        },
+        "excluded": {
+          "GeoLinks": 9,
+          "Viasat Carrier Services Inc": 9,
+          "AT&T": 6,
+          "Verizon": 5,
+          "Logix Communications LP": 3,
+          "ZAYO GROUP LLC": 3,
+          "Cogent Communication": 2,
+          "Optical Communications Group Inc": 2,
+          "TPx Communications": 1,
+          "Vast Networks": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "BCI Mississippi Broadband LLC": 1,
+          "Consolidated Communications": 1,
+          "Ultimate Internet Access Inc": 1,
+          "TampaBay Fiber": 1,
+          "UPN": 1,
+          "Telefonica": 1,
+          "Stealth Communications": 1,
+          "Fusion Cloud Services, Inc.": 1,
+          "Pilot Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 713,
+        "DSL": 245,
+        "Fiber": 220,
+        "Satellite": 153,
+        "Cable": 150,
+        "Fixed Wireless": 15,
+        "Unknown": 10
+      },
+      "hourly_distribution": {
+        "10": 2,
+        "11": 2,
+        "12": 1,
+        "15": 1,
+        "16": 1,
+        "17": 19,
+        "18": 4,
+        "19": 3,
+        "20": 7,
+        "21": 6,
+        "22": 2,
+        "23": 6,
+        "00": 2,
+        "02": 1
+      },
+      "performance": {
+        "avg_confidence": 0.89
+      }
+    }
+  }

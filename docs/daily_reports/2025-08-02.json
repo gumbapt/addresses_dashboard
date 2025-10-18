@@ -1,0 +1,110 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:49Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-08-02",
+      "summary": {
+        "total_requests": 13,
+        "successful_requests": 13,
+        "failed_requests": 0,
+        "success_rate": 100,
+        "unique_providers": 28,
+        "unique_states": 2,
+        "unique_cities": 3,
+        "unique_zipcodes": 11,
+        "avg_speed_mbps": 651.72,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 3,
+          "NH": 2
+        },
+        "cities": {
+          "Enfield": 1,
+          "Anaheim": 1,
+          "Concord": 1
+        },
+        "zipcodes": {
+          "10457": 1,
+          "11235": 1,
+          "33187": 1,
+          "47842": 1,
+          "77502": 1,
+          "90017": 1,
+          "91107": 1,
+          "91740": 1,
+          "94063": 1,
+          "94518": 1,
+          "03748": 2
+        },
+        "coordinates": [
+          {
+            "lat": 33.8365932,
+            "lon": -117.9143012
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 13,
+          "Viasat Carrier Services Inc": 13,
+          "Verizon": 11,
+          "Earthlink": 11,
+          "AT&T": 10,
+          "T-Mobile": 9,
+          "GeoLinks": 5,
+          "Spectrum": 4,
+          "Starry Inc": 4,
+          "Xfinity": 4,
+          "TPx Communications": 2,
+          "Consolidated Communications": 2,
+          "Hub66 Inc": 2,
+          "Cosmo Network Solutions, LLC": 2,
+          "Optimum": 2,
+          "Vast Networks": 1,
+          "Consolidated Smart Broadband Systems": 1,
+          "BAI Connect": 1,
+          "Joink": 1,
+          "EarthLink Business": 1
+        },
+        "excluded": {
+          "GeoLinks": 4,
+          "Viasat Carrier Services Inc": 3,
+          "TPx Communications": 1,
+          "Vast Networks": 1,
+          "Pilot Fiber": 1,
+          "Optical Communications Group Inc": 1,
+          "Verizon": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 162,
+        "DSL": 74,
+        "Fiber": 50,
+        "Satellite": 36,
+        "Cable": 25,
+        "Fixed Wireless": 14
+      },
+      "hourly_distribution": {
+        "14": 2,
+        "15": 6,
+        "18": 2,
+        "19": 1,
+        "20": 1,
+        "00": 1
+      },
+      "performance": {
+        "avg_confidence": 0.95
+      }
+    }
+  }

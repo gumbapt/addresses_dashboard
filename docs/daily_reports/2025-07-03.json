@@ -1,0 +1,173 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:29Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-03",
+      "summary": {
+        "total_requests": 35,
+        "successful_requests": 32,
+        "failed_requests": 3,
+        "success_rate": 91.43,
+        "unique_providers": 58,
+        "unique_states": 10,
+        "unique_cities": 18,
+        "unique_zipcodes": 32,
+        "avg_speed_mbps": 796.4,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 6,
+          "CA": 5,
+          "TX": 4,
+          "IL": 2,
+          "GA": 2,
+          "FL": 1,
+          "VA": 1,
+          "NC": 1,
+          "OH": 1,
+          "SC": 1
+        },
+        "cities": {
+          "Rockford": 2,
+          "Macon": 2,
+          "Odessa": 2,
+          "Lodi": 1,
+          "Citrus Heights": 1,
+          "Parkland": 1,
+          "Roseville": 1,
+          "Buffalo": 1,
+          "Alberta": 1,
+          "Los Angeles": 1,
+          "Gilroy": 1,
+          "Brooklyn": 1,
+          "Fort Worth": 1,
+          "Rochester": 1,
+          "Big Spring": 1,
+          "Charlotte": 1,
+          "Manchester": 1,
+          "Abbeville": 1
+        },
+        "zipcodes": {
+          "10456": 2,
+          "10801": 1,
+          "11207": 1,
+          "14204": 1,
+          "14304": 1,
+          "23821": 1,
+          "28216": 1,
+          "29620": 1,
+          "31201": 2,
+          "33034": 1,
+          "33076": 1,
+          "33147": 1,
+          "33176": 1,
+          "33325": 1,
+          "34237": 1,
+          "34788": 1,
+          "45144": 1,
+          "54980": 1,
+          "61107": 2,
+          "63106": 1,
+          "76164": 1,
+          "77632": 1,
+          "79720": 1,
+          "79762": 1,
+          "90057": 1,
+          "91755": 1,
+          "95020": 1,
+          "95240": 1,
+          "95422": 1,
+          "95482": 1,
+          "95610": 1,
+          "95747": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.6654455,
+            "lon": -73.8886628
+          },
+          {
+            "lat": 31.8938014,
+            "lon": -102.3525984
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 32,
+          "HughesNet": 32,
+          "Viasat Carrier Services Inc": 32,
+          "Earthlink": 32,
+          "Verizon": 31,
+          "AT&T": 28,
+          "Spectrum": 12,
+          "Xfinity": 10,
+          "Optimum": 5,
+          "Frontier": 5,
+          "Starry Inc": 4,
+          "TDS Telecom": 4,
+          "GeoLinks": 3,
+          "Bluebird Network LLC": 3,
+          "Hargray Communications": 3,
+          "DigitalPath Inc": 2,
+          "Cal.net": 2,
+          "Consolidated Communications": 2,
+          "Andrena": 2,
+          "Rise Broadband": 2
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 8,
+          "AT&T": 6,
+          "GeoLinks": 3,
+          "Bluebird Network LLC": 3,
+          "Stratus Networks Inc": 2,
+          "UPN": 2,
+          "Verizon": 2,
+          "Hargray Communications": 2,
+          "CCT Telecomm": 1,
+          "Snappy Internet & Telecom": 1,
+          "ZAYO GROUP LLC": 1,
+          "TPx Communications": 1,
+          "Vast Networks": 1,
+          "Optimum": 1,
+          "NetFortris": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 474,
+        "DSL": 160,
+        "Fiber": 134,
+        "Satellite": 88,
+        "Cable": 81,
+        "Fixed Wireless": 34,
+        "Unknown": 14
+      },
+      "hourly_distribution": {
+        "10": 3,
+        "11": 3,
+        "12": 1,
+        "14": 1,
+        "15": 5,
+        "16": 8,
+        "17": 4,
+        "18": 2,
+        "19": 4,
+        "21": 2,
+        "00": 1,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

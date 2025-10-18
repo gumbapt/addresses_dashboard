@@ -1,0 +1,156 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:48Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-31",
+      "summary": {
+        "total_requests": 28,
+        "successful_requests": 27,
+        "failed_requests": 1,
+        "success_rate": 96.43,
+        "unique_providers": 48,
+        "unique_states": 7,
+        "unique_cities": 4,
+        "unique_zipcodes": 24,
+        "avg_speed_mbps": 1441.4,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "TX": 4,
+          "FL": 3,
+          "CA": 2,
+          "TN": 2,
+          "MI": 1,
+          "VT": 1,
+          "NY": 1
+        },
+        "cities": {
+          "Maryville": 2,
+          "Pontiac": 1,
+          "Katy": 1,
+          "Suffern": 1
+        },
+        "zipcodes": {
+          "10038": 2,
+          "10468": 1,
+          "10901": 1,
+          "10950": 1,
+          "10977": 1,
+          "11221": 1,
+          "20954": 1,
+          "22111": 1,
+          "32583": 1,
+          "32778": 1,
+          "33126": 1,
+          "33594": 1,
+          "37801": 1,
+          "48342": 1,
+          "75220": 1,
+          "76105": 1,
+          "76932": 1,
+          "77076": 1,
+          "83843": 1,
+          "90810": 1,
+          "93702": 1,
+          "94019": 1,
+          "95820": 1,
+          "05065": 2
+        },
+        "coordinates": [
+          {
+            "lat": 29.8454807,
+            "lon": -95.7381262
+          },
+          {
+            "lat": 35.671269,
+            "lon": -84.095635
+          },
+          {
+            "lat": 41.1135807,
+            "lon": -74.1545787
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 27,
+          "Viasat Carrier Services Inc": 27,
+          "Verizon": 26,
+          "Earthlink": 25,
+          "T-Mobile": 22,
+          "AT&T": 21,
+          "Spectrum": 10,
+          "Xfinity": 8,
+          "Optimum": 5,
+          "Starry Inc": 4,
+          "Frontier": 4,
+          "Skywire Networks": 3,
+          "Optical Communications Group Inc": 3,
+          "Nextlink": 3,
+          "Consolidated Communications": 3,
+          "Pilot Fiber": 3,
+          "TDS Telecom": 3,
+          "Astound Broadband": 2,
+          "ZAYO GROUP LLC": 2,
+          "Telefonica": 2
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 7,
+          "Verizon": 6,
+          "Optical Communications Group Inc": 3,
+          "Pilot Fiber": 3,
+          "ZAYO GROUP LLC": 2,
+          "Telefonica": 2,
+          "Cogent Communication": 2,
+          "Stealth Communications": 2,
+          "Fusion Cloud Services, Inc.": 2,
+          "GeoLinks": 2,
+          "AT&T": 1,
+          "Clear Rate": 1,
+          "123.NET Inc": 1,
+          "EarthLink Business": 1,
+          "Vast Networks": 1,
+          "UPN": 1,
+          "SimpleFiber Communications| SimpleFiber": 1,
+          "Snappy Internet & Telecom": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 282,
+        "Fiber": 114,
+        "DSL": 112,
+        "Satellite": 74,
+        "Cable": 66,
+        "Fixed Wireless": 29,
+        "Unknown": 11
+      },
+      "hourly_distribution": {
+        "13": 2,
+        "14": 4,
+        "15": 3,
+        "16": 5,
+        "17": 3,
+        "18": 2,
+        "20": 1,
+        "21": 3,
+        "22": 1,
+        "23": 2,
+        "00": 1,
+        "03": 1
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

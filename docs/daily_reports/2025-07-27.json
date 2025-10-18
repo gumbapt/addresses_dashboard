@@ -1,0 +1,177 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:45Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-27",
+      "summary": {
+        "total_requests": 33,
+        "successful_requests": 33,
+        "failed_requests": 0,
+        "success_rate": 100,
+        "unique_providers": 48,
+        "unique_states": 13,
+        "unique_cities": 26,
+        "unique_zipcodes": 28,
+        "avg_speed_mbps": 768.22,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 5,
+          "TX": 5,
+          "CA": 4,
+          "AR": 3,
+          "MN": 2,
+          "OK": 2,
+          "MO": 2,
+          "AL": 2,
+          "KY": 1,
+          "SC": 1,
+          "IL": 1,
+          "NJ": 1,
+          "OH": 1
+        },
+        "cities": {
+          "Houston": 2,
+          "Louisville": 1,
+          "New Ulm": 1,
+          "Long Beach": 1,
+          "Poway": 1,
+          "Timmonsville": 1,
+          "Lonoke": 1,
+          "Middle Island": 1,
+          "Mesquite": 1,
+          "Atoka": 1,
+          "Atoka County": 1,
+          "Sealy": 1,
+          "KCMO": 1,
+          "Lancaster": 1,
+          "Los Angeles": 1,
+          "Little Rock": 1,
+          "Elgin": 1,
+          "Centre": 1,
+          "Cherokee County": 1,
+          "Pasadena": 1
+        },
+        "zipcodes": {
+          "10452": 1,
+          "10704": 1,
+          "11203": 1,
+          "11226": 1,
+          "11550": 2,
+          "11901": 1,
+          "11953": 1,
+          "12440": 1,
+          "14086": 1,
+          "14810": 2,
+          "29161": 1,
+          "35960": 1,
+          "40203": 1,
+          "43221": 1,
+          "56262": 1,
+          "60120": 1,
+          "64131": 1,
+          "64854": 1,
+          "71730": 1,
+          "72086": 1,
+          "74525": 1,
+          "75150": 1,
+          "77075": 1,
+          "77474": 1,
+          "77504": 1,
+          "90802": 1,
+          "93630": 1,
+          "07108": 1
+        },
+        "coordinates": [
+          {
+            "lat": 44.3144394,
+            "lon": -94.4593018
+          },
+          {
+            "lat": 29.9327922,
+            "lon": -95.3129356
+          },
+          {
+            "lat": 34.27262,
+            "lon": -95.8834422
+          },
+          {
+            "lat": 34.1179979,
+            "lon": -85.4685137
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 33,
+          "Viasat Carrier Services Inc": 33,
+          "T-Mobile": 32,
+          "Earthlink": 32,
+          "Verizon": 30,
+          "AT&T": 25,
+          "Spectrum": 12,
+          "Xfinity": 8,
+          "Optimum": 8,
+          "TDS Telecom": 4,
+          "TPx Communications": 3,
+          "Starry Inc": 3,
+          "Nextlink": 3,
+          "Consolidated Communications": 2,
+          "Nuvera Communications Inc": 2,
+          "LTD Broadband": 2,
+          "Frontier": 2,
+          "GeoLinks": 2,
+          "Aristotle Unified Communications": 2,
+          "Resound Networks": 2
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 7,
+          "Verizon": 3,
+          "AT&T": 2,
+          "TPx Communications": 2,
+          "GeoLinks": 2,
+          "Spectrum": 2,
+          "Fusion Cloud Services, Inc.": 1,
+          "EarthLink Business": 1,
+          "Bluebird Network LLC": 1,
+          "Newark Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 449,
+        "DSL": 147,
+        "Fiber": 115,
+        "Satellite": 93,
+        "Cable": 76,
+        "Fixed Wireless": 27,
+        "Unknown": 4
+      },
+      "hourly_distribution": {
+        "13": 1,
+        "15": 1,
+        "16": 6,
+        "17": 4,
+        "18": 3,
+        "19": 3,
+        "20": 4,
+        "21": 3,
+        "22": 2,
+        "23": 2,
+        "00": 3,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.92
+      }
+    }
+  }

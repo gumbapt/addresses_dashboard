@@ -1,0 +1,228 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:33Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-09",
+      "summary": {
+        "total_requests": 61,
+        "successful_requests": 60,
+        "failed_requests": 1,
+        "success_rate": 98.36,
+        "unique_providers": 80,
+        "unique_states": 15,
+        "unique_cities": 38,
+        "unique_zipcodes": 49,
+        "avg_speed_mbps": 938.97,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 11,
+          "TX": 11,
+          "NY": 8,
+          "AL": 4,
+          "OH": 3,
+          "MS": 2,
+          "FL": 2,
+          "MO": 2,
+          "NC": 2,
+          "TN": 1,
+          "VA": 1,
+          "AR": 1,
+          "OK": 1,
+          "CO": 1,
+          "LA": 1
+        },
+        "cities": {
+          "New York": 3,
+          "Laredo": 3,
+          "Vicksburg": 2,
+          "Nocona": 2,
+          "Kirksville": 2,
+          "Santa Clarita": 2,
+          "Fairborn": 2,
+          "Redwood": 2,
+          "Montevallo": 2,
+          "Cleveland": 1,
+          "Selma": 1,
+          "Hanford": 1,
+          "Ocala": 1,
+          "Buffalo": 1,
+          "Antioch": 1,
+          "Fontana": 1,
+          "Sacramento": 1,
+          "Sherman": 1,
+          "Chico": 1,
+          "Windsor": 1
+        },
+        "zipcodes": {
+          "10011": 3,
+          "10023": 1,
+          "10440": 1,
+          "11213": 1,
+          "11433": 1,
+          "12208": 1,
+          "12845": 1,
+          "12923": 1,
+          "12962": 1,
+          "13001": 1,
+          "14215": 1,
+          "16413": 1,
+          "23845": 1,
+          "24474": 1,
+          "27320": 1,
+          "27407": 1,
+          "27983": 1,
+          "31904": 1,
+          "34689": 1,
+          "35961": 1,
+          "37311": 1,
+          "37321": 3,
+          "37866": 1,
+          "39183": 1,
+          "43273": 2,
+          "44460": 1,
+          "45014": 1,
+          "45324": 1,
+          "63501": 2,
+          "70084": 1,
+          "72211": 1,
+          "73132": 1,
+          "75002": 1,
+          "75092": 1,
+          "76036": 1,
+          "76255": 1,
+          "77469": 1,
+          "77657": 1,
+          "78040": 2,
+          "80123": 1,
+          "90002": 1,
+          "91962": 1,
+          "92335": 1,
+          "92376": 1,
+          "93230": 1,
+          "93650": 1,
+          "94509": 1,
+          "95826": 1,
+          "95973": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.35399,
+            "lon": -90.8731677
+          },
+          {
+            "lat": 33.8337144,
+            "lon": -97.6571299
+          },
+          {
+            "lat": 32.6042098,
+            "lon": -97.403151
+          },
+          {
+            "lat": 39.7796188,
+            "lon": -83.9960051
+          },
+          {
+            "lat": 27.5082211,
+            "lon": -99.5150091
+          },
+          {
+            "lat": 34.245245,
+            "lon": -85.844206
+          },
+          {
+            "lat": 44.294316,
+            "lon": -75.8000614
+          },
+          {
+            "lat": 33.0701979,
+            "lon": -86.8708079
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 60,
+          "Viasat Carrier Services Inc": 60,
+          "Earthlink": 60,
+          "T-Mobile": 59,
+          "Verizon": 57,
+          "AT&T": 53,
+          "Spectrum": 34,
+          "Xfinity": 10,
+          "Starry Inc": 8,
+          "GeoLinks": 8,
+          "TDS Telecom": 7,
+          "Rise Broadband": 6,
+          "Astound Broadband": 5,
+          "ZAYO GROUP LLC": 4,
+          "Skywire Networks": 4,
+          "Stealth Communications": 4,
+          "Nuvisions": 4,
+          "Pilot Fiber": 4,
+          "TPx Communications": 4,
+          "Frontier": 4
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 9,
+          "GeoLinks": 8,
+          "Verizon": 7,
+          "ZAYO GROUP LLC": 4,
+          "Stealth Communications": 4,
+          "Pilot Fiber": 4,
+          "TPx Communications": 4,
+          "AT&T": 4,
+          "Cogent Communication": 3,
+          "Optical Communications Group Inc": 3,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 2,
+          "Ultimate Internet Access Inc": 2,
+          "Bluebird Network LLC": 2,
+          "Vast Networks": 2,
+          "Foremost Telecommunications": 2,
+          "Troy Cablevision, Inc.": 1,
+          "BAI Connect": 1,
+          "Spectrum": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 819,
+        "DSL": 294,
+        "Fiber": 227,
+        "Satellite": 171,
+        "Cable": 170,
+        "Fixed Wireless": 51,
+        "Unknown": 27
+      },
+      "hourly_distribution": {
+        "10": 4,
+        "11": 1,
+        "12": 3,
+        "13": 1,
+        "14": 3,
+        "15": 5,
+        "16": 7,
+        "17": 6,
+        "18": 8,
+        "19": 6,
+        "20": 4,
+        "21": 4,
+        "22": 5,
+        "00": 2,
+        "01": 1,
+        "02": 1
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

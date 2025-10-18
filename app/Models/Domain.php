@@ -42,7 +42,7 @@ class Domain extends Model
             timezone: $this->timezone,
             wordpress_version: $this->wordpress_version,
             plugin_version: $this->plugin_version,
-            settings: $this->settings,
+            settings: is_array($this->settings) ? $this->settings : json_decode($this->settings, true) ?? [],
             is_active: $this->is_active,
         );
     }

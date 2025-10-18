@@ -1,0 +1,250 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:27Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-01",
+      "summary": {
+        "total_requests": 77,
+        "successful_requests": 62,
+        "failed_requests": 15,
+        "success_rate": 80.52,
+        "unique_providers": 88,
+        "unique_states": 12,
+        "unique_cities": 31,
+        "unique_zipcodes": 39,
+        "avg_speed_mbps": 841.52,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "TX": 17,
+          "CA": 10,
+          "AR": 6,
+          "NY": 6,
+          "NC": 4,
+          "OH": 2,
+          "TN": 2,
+          "MS": 2,
+          "GA": 1,
+          "WI": 1,
+          "AZ": 1,
+          "MI": 1
+        },
+        "cities": {
+          "Houston": 5,
+          "Paris": 4,
+          "Cedar Creek": 4,
+          "Hope": 2,
+          "Ridgecrest": 2,
+          "Temple City": 2,
+          "Springfield": 2,
+          "Tracy": 2,
+          "Memphis": 2,
+          "Elmira": 2,
+          "Alvin": 2,
+          "Malvern": 2,
+          "Hot Spring County": 2,
+          "Mendenhall": 2,
+          "Beacon": 1,
+          "Stockton": 1,
+          "Dallas": 1,
+          "Newnan": 1,
+          "Milwaukee": 1,
+          "Fort Plain": 1
+        },
+        "zipcodes": {
+          "10038": 1,
+          "11757": 1,
+          "11901": 1,
+          "12508": 1,
+          "13339": 1,
+          "13662": 1,
+          "14206": 1,
+          "14215": 2,
+          "14901": 2,
+          "14907": 1,
+          "27350": 2,
+          "27891": 1,
+          "28756": 1,
+          "30263": 1,
+          "38107": 1,
+          "39114": 1,
+          "45504": 1,
+          "48208": 1,
+          "53202": 1,
+          "71801": 1,
+          "75228": 1,
+          "75237": 1,
+          "75462": 2,
+          "76010": 1,
+          "77051": 1,
+          "77075": 1,
+          "77092": 2,
+          "77511": 1,
+          "78612": 2,
+          "79762": 1,
+          "85041": 1,
+          "91780": 1,
+          "92506": 1,
+          "92660": 1,
+          "93555": 1,
+          "94014": 1,
+          "95203": 1,
+          "95376": 1,
+          "95822": 1
+        },
+        "coordinates": [
+          {
+            "lat": 33.6651222,
+            "lon": -93.5730529
+          },
+          {
+            "lat": 35.6453698,
+            "lon": -117.6737924
+          },
+          {
+            "lat": 33.6779294,
+            "lon": -95.5224877
+          },
+          {
+            "lat": 30.072921,
+            "lon": -97.4384251
+          },
+          {
+            "lat": 30.072921,
+            "lon": -97.4384251
+          },
+          {
+            "lat": 33.6779294,
+            "lon": -95.5224877
+          },
+          {
+            "lat": 34.1063691,
+            "lon": -118.0522658
+          },
+          {
+            "lat": 39.9700441,
+            "lon": -83.8361944
+          },
+          {
+            "lat": 35.3573611,
+            "lon": -82.2445021
+          },
+          {
+            "lat": 37.7534999,
+            "lon": -121.4417396
+          },
+          {
+            "lat": 36.1380452,
+            "lon": -77.6927944
+          },
+          {
+            "lat": 35.1658395,
+            "lon": -90.0420142
+          },
+          {
+            "lat": 29.4463695,
+            "lon": -95.2656192
+          },
+          {
+            "lat": 34.3270603,
+            "lon": -92.8353604
+          },
+          {
+            "lat": 29.8071947,
+            "lon": -95.4472879
+          },
+          {
+            "lat": 31.9597404,
+            "lon": -89.8749411
+          },
+          {
+            "lat": 34.3270603,
+            "lon": -92.8353604
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 62,
+          "Verizon": 62,
+          "Viasat Carrier Services Inc": 62,
+          "T-Mobile": 60,
+          "Earthlink": 60,
+          "AT&T": 56,
+          "Spectrum": 24,
+          "Xfinity": 15,
+          "Optimum": 10,
+          "GeoLinks": 8,
+          "Rise Broadband": 6,
+          "TPx Communications": 5,
+          "Pine Bluff Cable TV": 4,
+          "unWired Broadband": 4,
+          "Wifires Internet": 4,
+          "Vyve Broadband": 4,
+          "TDS Telecom": 4,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 4,
+          "Frontier": 3,
+          "Astound Broadband": 3
+        },
+        "excluded": {
+          "GeoLinks": 7,
+          "AT&T": 5,
+          "Verizon": 4,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 4,
+          "TPx Communications": 3,
+          "Viasat Carrier Services Inc": 3,
+          "Peoples Telephone Cooperative": 2,
+          "Everstream": 2,
+          "Cogent Communication": 2,
+          "Ritter Communications Inc": 1,
+          "SOUTH ARKANSAS TELEPHONE COMPANY": 1,
+          "CCT Telecomm": 1,
+          "Vast Networks": 1,
+          "UPN": 1,
+          "SimpleFiber Communications| SimpleFiber": 1,
+          "ZAYO GROUP LLC": 1,
+          "Telefonica": 1,
+          "Stealth Communications": 1,
+          "Fusion Cloud Services, Inc.": 1,
+          "Pilot Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 807,
+        "DSL": 337,
+        "Fiber": 205,
+        "Satellite": 183,
+        "Cable": 152,
+        "Fixed Wireless": 82,
+        "Unknown": 24
+      },
+      "hourly_distribution": {
+        "11": 1,
+        "12": 3,
+        "13": 5,
+        "15": 8,
+        "16": 3,
+        "17": 10,
+        "18": 5,
+        "19": 4,
+        "20": 3,
+        "21": 4,
+        "22": 16,
+        "23": 11,
+        "00": 4
+      },
+      "performance": {
+        "avg_confidence": 0.89
+      }
+    }
+  }

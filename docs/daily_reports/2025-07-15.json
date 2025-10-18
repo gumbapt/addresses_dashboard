@@ -1,0 +1,164 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:37Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-15",
+      "summary": {
+        "total_requests": 34,
+        "successful_requests": 33,
+        "failed_requests": 1,
+        "success_rate": 97.06,
+        "unique_providers": 37,
+        "unique_states": 8,
+        "unique_cities": 17,
+        "unique_zipcodes": 28,
+        "avg_speed_mbps": 766.14,
+        "max_speed_mbps": 8000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 7,
+          "TX": 5,
+          "NY": 4,
+          "AL": 2,
+          "KY": 2,
+          "WA": 1,
+          "MA": 1,
+          "NC": 1
+        },
+        "cities": {
+          "San Diego": 4,
+          "La Quinta": 2,
+          "Pflugerville": 2,
+          "Royse City": 2,
+          "Seattle": 1,
+          "Merrick": 1,
+          "Salem": 1,
+          "Lee County": 1,
+          "Ludlow": 1,
+          "Weldon": 1,
+          "Indio": 1,
+          "Moriches": 1,
+          "Beaumont": 1,
+          "Bridgehampton": 1,
+          "Liberty": 1,
+          "Casey County": 1,
+          "Port Washington": 1
+        },
+        "zipcodes": {
+          "11050": 1,
+          "11212": 1,
+          "11566": 1,
+          "11932": 1,
+          "11955": 2,
+          "13202": 1,
+          "27890": 1,
+          "33430": 1,
+          "36874": 1,
+          "42050": 1,
+          "42539": 1,
+          "57655": 1,
+          "57660": 1,
+          "75189": 1,
+          "77090": 1,
+          "77701": 1,
+          "78653": 2,
+          "78660": 2,
+          "78665": 1,
+          "81600": 1,
+          "84010": 1,
+          "92105": 1,
+          "92111": 1,
+          "92115": 1,
+          "92117": 1,
+          "98106": 1,
+          "01056": 1,
+          "06830": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.4931546,
+            "lon": -85.3273361
+          },
+          {
+            "lat": 33.630057,
+            "lon": -116.258107
+          },
+          {
+            "lat": 37.2708815,
+            "lon": -85.0316632
+          },
+          {
+            "lat": 32.9004196,
+            "lon": -96.3487025
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 33,
+          "Verizon": 33,
+          "Viasat Carrier Services Inc": 33,
+          "Earthlink": 30,
+          "AT&T": 29,
+          "T-Mobile": 27,
+          "Spectrum": 21,
+          "Optimum": 11,
+          "Rise Broadband": 7,
+          "GeoLinks": 5,
+          "Xfinity": 3,
+          "Point Broadband Fiber Holding LLC": 3,
+          "Cox Communications": 3,
+          "Frontier": 3,
+          "CenturyLink": 2,
+          "San Diego Broadband": 2,
+          "Astound Broadband": 2,
+          "Western Broadband": 2,
+          "Valley Telephone Cooperative Inc": 2,
+          "DuoBroadband": 2
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 9,
+          "GeoLinks": 5,
+          "AT&T": 4,
+          "Verizon": 4,
+          "Optimum": 2,
+          "Spectrum": 1,
+          "Cox Communications": 1,
+          "EarthLink Business": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 354,
+        "Fiber": 126,
+        "Cable": 102,
+        "DSL": 100,
+        "Satellite": 89,
+        "Fixed Wireless": 45,
+        "Unknown": 5
+      },
+      "hourly_distribution": {
+        "12": 1,
+        "13": 5,
+        "16": 1,
+        "18": 2,
+        "19": 7,
+        "20": 1,
+        "22": 7,
+        "23": 9,
+        "02": 1
+      },
+      "performance": {
+        "avg_confidence": 0.95
+      }
+    }
+  }

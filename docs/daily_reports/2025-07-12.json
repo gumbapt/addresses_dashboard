@@ -1,0 +1,100 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:35Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-12",
+      "summary": {
+        "total_requests": 7,
+        "successful_requests": 7,
+        "failed_requests": 0,
+        "success_rate": 100,
+        "unique_providers": 15,
+        "unique_states": 5,
+        "unique_cities": 5,
+        "unique_zipcodes": 7,
+        "avg_speed_mbps": 1021.17,
+        "max_speed_mbps": 8000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "OH": 1,
+          "LA": 1,
+          "SC": 1,
+          "WV": 1,
+          "CA": 1
+        },
+        "cities": {
+          "Dayton": 1,
+          "Bogalusa": 1,
+          "Bennettsville": 1,
+          "Tunnelton": 1,
+          "Pomona": 1
+        },
+        "zipcodes": {
+          "10469": 1,
+          "11003": 1,
+          "26444": 1,
+          "29512": 1,
+          "45417": 1,
+          "70427": 1,
+          "91767": 1
+        },
+        "coordinates": []
+      },
+      "providers": {
+        "available": {
+          "AT&T": 7,
+          "HughesNet": 7,
+          "Viasat Carrier Services Inc": 7,
+          "T-Mobile": 6,
+          "Verizon": 6,
+          "Earthlink": 6,
+          "Spectrum": 4,
+          "Optimum": 2,
+          "Frontier": 2,
+          "Sandhill Telephone Cooperative Inc": 1,
+          "RiverStreet": 1,
+          "TDS Telecom": 1,
+          "Breezeline": 1,
+          "GeoLinks": 1,
+          "Ultimate Internet Access Inc": 1
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 2,
+          "Verizon": 1,
+          "AT&T": 1,
+          "GeoLinks": 1,
+          "Ultimate Internet Access Inc": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 85,
+        "Fiber": 40,
+        "DSL": 20,
+        "Cable": 20,
+        "Satellite": 19,
+        "Fixed Wireless": 1
+      },
+      "hourly_distribution": {
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "16": 1,
+        "19": 1,
+        "20": 1,
+        "22": 1
+      },
+      "performance": {
+        "avg_confidence": 0.94
+      }
+    }
+  }

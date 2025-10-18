@@ -1,0 +1,159 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:44Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-26",
+      "summary": {
+        "total_requests": 23,
+        "successful_requests": 21,
+        "failed_requests": 2,
+        "success_rate": 91.3,
+        "unique_providers": 39,
+        "unique_states": 11,
+        "unique_cities": 17,
+        "unique_zipcodes": 19,
+        "avg_speed_mbps": 591.61,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 3,
+          "GA": 2,
+          "MI": 2,
+          "KY": 2,
+          "IL": 2,
+          "TX": 2,
+          "TN": 2,
+          "NC": 2,
+          "IA": 1,
+          "NY": 1,
+          "FL": 1
+        },
+        "cities": {
+          "Chicago": 2,
+          "East Point": 1,
+          "Sonoma County": 1,
+          "Caledonia": 1,
+          "Owensboro": 1,
+          "Spirit Lake": 1,
+          "Odessa": 1,
+          "Highland Falls": 1,
+          "LaGrange": 1,
+          "San Antonio": 1,
+          "Eads": 1,
+          "Los Angeles": 1,
+          "Hope Mills": 1,
+          "Fayetteville": 1,
+          "Miami": 1,
+          "Flint": 1,
+          "Louisville": 1
+        },
+        "zipcodes": {
+          "10928": 1,
+          "18445": 1,
+          "26740": 1,
+          "28348": 1,
+          "30240": 1,
+          "30344": 1,
+          "33193": 1,
+          "38028": 1,
+          "40203": 1,
+          "42301": 1,
+          "48503": 1,
+          "49316": 1,
+          "60632": 2,
+          "78201": 1,
+          "79762": 1,
+          "93215": 1,
+          "93307": 1,
+          "95008": 1,
+          "95450": 1
+        },
+        "coordinates": [
+          {
+            "lat": 38.453803,
+            "lon": -123.0550013
+          },
+          {
+            "lat": 35.2055828,
+            "lon": -89.5814757
+          },
+          {
+            "lat": 34.9628856,
+            "lon": -79.0045841
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 21,
+          "Viasat Carrier Services Inc": 21,
+          "AT&T": 19,
+          "T-Mobile": 19,
+          "Verizon": 19,
+          "Earthlink": 19,
+          "Xfinity": 9,
+          "Spectrum": 9,
+          "ZAYO GROUP LLC": 5,
+          "GeoLinks": 3,
+          "TPx Communications": 2,
+          "Metronet Holdings": 2,
+          "Brightspeed": 2,
+          "Sonic.net": 1,
+          "Michwave Technologies Inc": 1,
+          "W A T C H TV": 1,
+          "Owensboro Municipal Utilities": 1,
+          "Mediacom Xtream": 1,
+          "TDS Telecom": 1,
+          "LTD Broadband": 1
+        },
+        "excluded": {
+          "ZAYO GROUP LLC": 5,
+          "GeoLinks": 3,
+          "TPx Communications": 2,
+          "Verizon": 1,
+          "Optimum": 1,
+          "NetFortris": 1,
+          "City of LaGrange Telecommunications": 1,
+          "AT&T": 1,
+          "Viasat Carrier Services Inc": 1,
+          "123.NET Inc": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 278,
+        "DSL": 139,
+        "Fiber": 79,
+        "Satellite": 64,
+        "Cable": 49,
+        "Fixed Wireless": 20,
+        "Unknown": 4
+      },
+      "hourly_distribution": {
+        "12": 1,
+        "13": 1,
+        "14": 2,
+        "15": 1,
+        "16": 2,
+        "18": 4,
+        "20": 2,
+        "21": 3,
+        "22": 2,
+        "23": 1,
+        "00": 1,
+        "01": 3
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

@@ -1,0 +1,146 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:36Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-13",
+      "summary": {
+        "total_requests": 24,
+        "successful_requests": 19,
+        "failed_requests": 5,
+        "success_rate": 79.17,
+        "unique_providers": 31,
+        "unique_states": 7,
+        "unique_cities": 15,
+        "unique_zipcodes": 14,
+        "avg_speed_mbps": 690.94,
+        "max_speed_mbps": 8000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "AL": 5,
+          "NY": 4,
+          "CA": 2,
+          "CO": 2,
+          "MO": 2,
+          "WI": 1,
+          "PA": 1
+        },
+        "cities": {
+          "Redondo Beach": 2,
+          "Syracuse": 2,
+          "Milwaukee": 1,
+          "Huntington Station": 1,
+          "Central Islip": 1,
+          "Shamokin": 1,
+          "Opelika": 1,
+          "Lee County": 1,
+          "Fort Payne": 1,
+          "DeKalb County": 1,
+          "Center": 1,
+          "Goodman": 1,
+          "Erie Goodman": 1,
+          "Selma": 1,
+          "Denver": 1
+        },
+        "zipcodes": {
+          "11355": 1,
+          "11722": 1,
+          "11746": 1,
+          "13203": 2,
+          "17872": 1,
+          "30046": 1,
+          "35967": 1,
+          "36703": 1,
+          "53206": 1,
+          "64843": 1,
+          "80231": 1,
+          "81125": 1,
+          "90277": 1,
+          "92544": 1
+        },
+        "coordinates": [
+          {
+            "lat": 33.8127086,
+            "lon": -118.3897824
+          },
+          {
+            "lat": 32.5986218,
+            "lon": -85.3755867
+          },
+          {
+            "lat": 34.3183886,
+            "lon": -85.7555479
+          },
+          {
+            "lat": 36.7251788,
+            "lon": -94.4279073
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 19,
+          "Verizon": 19,
+          "Viasat Carrier Services Inc": 19,
+          "T-Mobile": 18,
+          "Earthlink": 18,
+          "AT&T": 15,
+          "Spectrum": 11,
+          "TDS Telecom": 3,
+          "Frontier": 2,
+          "GeoLinks": 2,
+          "Optimum": 2,
+          "Northland Networks": 2,
+          "Xfinity": 2,
+          "Point Broadband Fiber Holding LLC": 2,
+          "Farmers Telecommunications Corporation Inc": 2,
+          "CenturyLink": 2,
+          "Mediacom Xtream": 2,
+          "Rally Networks": 2,
+          "PCs for People": 1,
+          "Astound Broadband": 1
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 4,
+          "AT&T": 2,
+          "Northland Networks": 2,
+          "Verizon": 2,
+          "GeoLinks": 1,
+          "PenTeleData": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 262,
+        "Fiber": 68,
+        "DSL": 54,
+        "Satellite": 53,
+        "Cable": 51,
+        "Unknown": 5,
+        "Fixed Wireless": 4
+      },
+      "hourly_distribution": {
+        "13": 6,
+        "14": 1,
+        "16": 1,
+        "17": 2,
+        "18": 2,
+        "20": 1,
+        "21": 7,
+        "22": 1,
+        "23": 1,
+        "04": 2
+      },
+      "performance": {
+        "avg_confidence": 0.9
+      }
+    }
+  }

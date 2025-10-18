@@ -1,0 +1,165 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:44Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-25",
+      "summary": {
+        "total_requests": 31,
+        "successful_requests": 29,
+        "failed_requests": 2,
+        "success_rate": 93.55,
+        "unique_providers": 47,
+        "unique_states": 11,
+        "unique_cities": 19,
+        "unique_zipcodes": 25,
+        "avg_speed_mbps": 765.23,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 7,
+          "GA": 3,
+          "TX": 2,
+          "LA": 2,
+          "KY": 2,
+          "FL": 2,
+          "SC": 1,
+          "IL": 1,
+          "MI": 1,
+          "NY": 1,
+          "OH": 1
+        },
+        "cities": {
+          "Long Beach": 2,
+          "Columbus": 2,
+          "Pensacola": 2,
+          "Sonoma": 1,
+          "Falfurrias": 1,
+          "Bastrop": 1,
+          "Morehouse Parish": 1,
+          "Batesburg-Leesville": 1,
+          "Sedalia": 1,
+          "Graves County": 1,
+          "Chicago Heights": 1,
+          "Romulus": 1,
+          "Richmond": 1,
+          "East Palestine": 1,
+          "Dallas": 1,
+          "Thermal": 1,
+          "Roswell": 1,
+          "Anaheim": 1,
+          "Hayward": 1
+        },
+        "zipcodes": {
+          "11211": 1,
+          "11520": 1,
+          "11763": 1,
+          "14220": 1,
+          "17263": 1,
+          "29006": 1,
+          "30076": 1,
+          "31903": 2,
+          "32505": 2,
+          "39104": 1,
+          "42079": 1,
+          "44413": 1,
+          "60411": 1,
+          "71220": 1,
+          "75229": 1,
+          "78355": 1,
+          "78572": 2,
+          "78744": 1,
+          "85663": 1,
+          "90802": 2,
+          "92805": 1,
+          "94541": 1,
+          "94545": 1,
+          "94801": 1,
+          "07018": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.7605527,
+            "lon": -91.940962
+          },
+          {
+            "lat": 36.5603145,
+            "lon": -88.5654386
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 29,
+          "Verizon": 29,
+          "Viasat Carrier Services Inc": 29,
+          "AT&T": 28,
+          "T-Mobile": 28,
+          "Earthlink": 28,
+          "Spectrum": 13,
+          "Xfinity": 8,
+          "Optimum": 6,
+          "GeoLinks": 6,
+          "Frontier": 4,
+          "Starry Inc": 3,
+          "Smartcom Telephone LLC": 3,
+          "Valley Telephone Cooperative Inc": 3,
+          "Uniti Fiber GulfCo LLC": 3,
+          "TPx Communications": 2,
+          "Fusion Cloud Services, Inc.": 2,
+          "BAI Connect": 2,
+          "ArkLaNet": 2,
+          "Ardmore Telephone Company": 2
+        },
+        "excluded": {
+          "GeoLinks": 6,
+          "Viasat Carrier Services Inc": 4,
+          "TPx Communications": 2,
+          "Fusion Cloud Services, Inc.": 2,
+          "AT&T": 2,
+          "Verizon": 2,
+          "Uniti Fiber GulfCo LLC": 2,
+          "Foremost Telecommunications": 2,
+          "TWIN": 2,
+          "123.NET Inc": 1,
+          "Metro Wireless": 1,
+          "Optical Communications Group Inc": 1,
+          "UPN": 1,
+          "SimpleFiber Communications| SimpleFiber": 1,
+          "ZAYO GROUP LLC": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 422,
+        "DSL": 144,
+        "Fiber": 125,
+        "Cable": 98,
+        "Satellite": 83,
+        "Fixed Wireless": 37,
+        "Unknown": 6
+      },
+      "hourly_distribution": {
+        "12": 2,
+        "13": 5,
+        "16": 5,
+        "17": 1,
+        "18": 7,
+        "19": 3,
+        "21": 4,
+        "22": 2,
+        "00": 2
+      },
+      "performance": {
+        "avg_confidence": 0.96
+      }
+    }
+  }

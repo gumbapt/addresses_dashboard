@@ -1,0 +1,156 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:38Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-17",
+      "summary": {
+        "total_requests": 31,
+        "successful_requests": 29,
+        "failed_requests": 2,
+        "success_rate": 93.55,
+        "unique_providers": 33,
+        "unique_states": 7,
+        "unique_cities": 14,
+        "unique_zipcodes": 24,
+        "avg_speed_mbps": 1127.02,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 7,
+          "TX": 3,
+          "NC": 2,
+          "CA": 2,
+          "MA": 1,
+          "CT": 1,
+          "GA": 1
+        },
+        "cities": {
+          "Port Arthur": 1,
+          "Worcester": 1,
+          "Arlington": 1,
+          "Bronx": 1,
+          "Quincy": 1,
+          "Frisco": 1,
+          "West Hartford": 1,
+          "Atlanta": 1,
+          "Greensboro": 1,
+          "La Habra": 1,
+          "Hudson": 1,
+          "Inglewood": 1,
+          "Port Washington": 1,
+          "Charlotte": 1
+        },
+        "zipcodes": {
+          "10034": 2,
+          "10452": 2,
+          "10459": 1,
+          "10460": 1,
+          "10462": 2,
+          "11050": 1,
+          "11355": 1,
+          "12197": 1,
+          "12534": 1,
+          "12974": 2,
+          "27410": 1,
+          "28213": 1,
+          "30318": 1,
+          "33903": 1,
+          "43203": 1,
+          "75033": 1,
+          "76017": 1,
+          "77047": 1,
+          "77642": 1,
+          "90301": 1,
+          "90631": 1,
+          "92020": 2,
+          "94513": 1,
+          "06107": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.8419428,
+            "lon": -73.9220665
+          },
+          {
+            "lat": 33.1585643,
+            "lon": -96.8324201
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 29,
+          "Verizon": 29,
+          "Viasat Carrier Services Inc": 29,
+          "T-Mobile": 27,
+          "Earthlink": 27,
+          "AT&T": 25,
+          "Spectrum": 14,
+          "Starry Inc": 10,
+          "Optimum": 7,
+          "Xfinity": 5,
+          "Astound Broadband": 4,
+          "GeoLinks": 4,
+          "Andrena": 3,
+          "TPx Communications": 3,
+          "Frontier": 2,
+          "Pilot Fiber": 2,
+          "Cox Communications": 2,
+          "EarthLink Business": 2,
+          "Accipiter Communications Inc DBA Zona Wyyerd": 2,
+          "Unwired Ltd": 1
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 10,
+          "AT&T": 6,
+          "Verizon": 4,
+          "GeoLinks": 4,
+          "TPx Communications": 3,
+          "Pilot Fiber": 2,
+          "EarthLink Business": 2,
+          "Accipiter Communications Inc DBA Zona Wyyerd": 2,
+          "Spectrum": 1,
+          "Stealth Communications": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 449,
+        "Fiber": 135,
+        "DSL": 108,
+        "Cable": 84,
+        "Satellite": 77,
+        "Fixed Wireless": 12,
+        "Unknown": 4
+      },
+      "hourly_distribution": {
+        "10": 1,
+        "11": 1,
+        "13": 2,
+        "14": 1,
+        "15": 3,
+        "16": 2,
+        "17": 2,
+        "19": 7,
+        "20": 2,
+        "21": 2,
+        "22": 3,
+        "23": 2,
+        "00": 2,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.92
+      }
+    }
+  }

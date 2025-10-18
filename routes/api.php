@@ -124,12 +124,16 @@ Route::prefix('reports')->group(function () {
     // Public endpoint for domains to submit reports (authenticated via API key)
     Route::post('/submit', [ReportController::class, 'submit'])
         ->name('reports.submit');
+    // Daily report endpoint (WordPress format)
+    Route::post('/submit-daily', [ReportController::class, 'submitDaily'])
+        ->name('reports.submit-daily');
 });
 
 // Report Management API (Admin Authentication) 
 Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->group(function () {
     Route::get('/', [ReportController::class, 'index'])->name('admin.reports.index');
     Route::get('/recent', [ReportController::class, 'recent'])->name('admin.reports.recent');
+    Route::get('/domain/{domainId}/dashboard', [ReportController::class, 'dashboard'])->name('admin.reports.dashboard');
     Route::get('/domain/{domainId}/aggregate', [ReportController::class, 'aggregate'])->name('admin.reports.aggregate');
     Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
 });

@@ -1,0 +1,180 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:38Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-16",
+      "summary": {
+        "total_requests": 36,
+        "successful_requests": 29,
+        "failed_requests": 7,
+        "success_rate": 80.56,
+        "unique_providers": 54,
+        "unique_states": 10,
+        "unique_cities": 19,
+        "unique_zipcodes": 30,
+        "avg_speed_mbps": 2468.63,
+        "max_speed_mbps": 500000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 7,
+          "CA": 5,
+          "LA": 3,
+          "TX": 2,
+          "ID": 2,
+          "MN": 1,
+          "GA": 1,
+          "TN": 1,
+          "VA": 1,
+          "MA": 1
+        },
+        "cities": {
+          "New York": 2,
+          "Moscow": 2,
+          "Los Angeles": 2,
+          "Leesville": 1,
+          "Vernon Parish": 1,
+          "Reserve": 1,
+          "Houston": 1,
+          "Minneapolis": 1,
+          "Marietta": 1,
+          "Nashville": 1,
+          "Sacramento": 1,
+          "Roanoke": 1,
+          "Palestine": 1,
+          "Brooklyn": 1,
+          "Batavia": 1,
+          "Buffalo": 1,
+          "Quincy": 1,
+          "Stockton": 1,
+          "Turlock": 1
+        },
+        "zipcodes": {
+          "10014": 1,
+          "10029": 1,
+          "10453": 1,
+          "10468": 1,
+          "11099": 1,
+          "11229": 1,
+          "11350": 1,
+          "13905": 1,
+          "14020": 1,
+          "14215": 1,
+          "14521": 1,
+          "24019": 1,
+          "30065": 1,
+          "31705": 1,
+          "33605": 2,
+          "37203": 1,
+          "55426": 1,
+          "56273": 1,
+          "70084": 1,
+          "71446": 1,
+          "75231": 1,
+          "75803": 1,
+          "77023": 1,
+          "77423": 1,
+          "83843": 2,
+          "91750": 2,
+          "95209": 1,
+          "95382": 1,
+          "95823": 1,
+          "02169": 1
+        },
+        "coordinates": [
+          {
+            "lat": 31.186204,
+            "lon": -93.3505
+          },
+          {
+            "lat": 33.9065044,
+            "lon": -84.4883861
+          },
+          {
+            "lat": 40.607645,
+            "lon": -73.952633
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 29,
+          "HughesNet": 29,
+          "Viasat Carrier Services Inc": 29,
+          "Earthlink": 29,
+          "Verizon": 28,
+          "AT&T": 24,
+          "Spectrum": 16,
+          "Xfinity": 10,
+          "Starry Inc": 6,
+          "Optimum": 5,
+          "ZAYO GROUP LLC": 4,
+          "TPx Communications": 4,
+          "Frontier": 3,
+          "Pilot Fiber": 3,
+          "GeoLinks": 3,
+          "unWired Broadband": 3,
+          "Swyft Connect": 2,
+          "Rapid Systems": 2,
+          "TampaBay Fiber": 2,
+          "Consolidated Communications": 2
+        },
+        "excluded": {
+          "AT&T": 7,
+          "Viasat Carrier Services Inc": 5,
+          "ZAYO GROUP LLC": 4,
+          "TPx Communications": 4,
+          "Pilot Fiber": 3,
+          "GeoLinks": 3,
+          "TampaBay Fiber": 2,
+          "Consolidated Communications": 2,
+          "Xfinity": 2,
+          "Stealth Communications": 2,
+          "Optical Communications Group Inc": 2,
+          "Verizon": 2,
+          "MN FWA Buyer": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "Telefonica": 1,
+          "Cogent Communication": 1,
+          "Fusion Cloud Services, Inc.": 1,
+          "UPN": 1,
+          "Spectrum": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 431,
+        "Fiber": 151,
+        "DSL": 94,
+        "Cable": 92,
+        "Satellite": 83,
+        "Fixed Wireless": 24,
+        "Unknown": 9
+      },
+      "hourly_distribution": {
+        "12": 1,
+        "13": 10,
+        "14": 1,
+        "16": 2,
+        "17": 3,
+        "18": 3,
+        "19": 5,
+        "20": 4,
+        "21": 2,
+        "23": 2,
+        "00": 2,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

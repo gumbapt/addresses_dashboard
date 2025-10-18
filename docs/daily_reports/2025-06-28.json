@@ -1,0 +1,218 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:25Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-06-28",
+      "summary": {
+        "total_requests": 47,
+        "successful_requests": 44,
+        "failed_requests": 3,
+        "success_rate": 93.62,
+        "unique_providers": 56,
+        "unique_states": 16,
+        "unique_cities": 28,
+        "unique_zipcodes": 32,
+        "avg_speed_mbps": 651.95,
+        "max_speed_mbps": 90000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "TX": 8,
+          "KY": 4,
+          "AL": 4,
+          "TN": 4,
+          "IN": 2,
+          "GA": 2,
+          "LA": 2,
+          "CA": 2,
+          "NY": 2,
+          "AR": 1,
+          "KS": 1,
+          "VA": 1,
+          "NV": 1,
+          "FL": 1,
+          "MA": 1,
+          "NC": 1
+        },
+        "cities": {
+          "Portland": 2,
+          "Butler": 2,
+          "Midland": 2,
+          "Houston": 2,
+          "Hessmer": 2,
+          "Newport": 2,
+          "Cocke County": 2,
+          "Corpus Christi": 2,
+          "Morrilton": 1,
+          "Columbia": 1,
+          "Adair County": 1,
+          "Cartersville": 1,
+          "Bartow County": 1,
+          "Great Bend": 1,
+          "Onancock": 1,
+          "Reno": 1,
+          "West Blocton": 1,
+          "McCalla": 1,
+          "Austin": 1,
+          "Auburndale": 1
+        },
+        "zipcodes": {
+          "10460": 1,
+          "20748": 1,
+          "21761": 1,
+          "28213": 1,
+          "28383": 2,
+          "29649": 1,
+          "30120": 1,
+          "33823": 1,
+          "35184": 1,
+          "36069": 2,
+          "37821": 2,
+          "41006": 1,
+          "42728": 1,
+          "47371": 1,
+          "67530": 1,
+          "71341": 1,
+          "71743": 1,
+          "72110": 1,
+          "77016": 1,
+          "77530": 1,
+          "77583": 1,
+          "77703": 1,
+          "78408": 1,
+          "78731": 1,
+          "79706": 1,
+          "89512": 1,
+          "90011": 1,
+          "91724": 1,
+          "92120": 2,
+          "93308": 1,
+          "93703": 1,
+          "02130": 1
+        },
+        "coordinates": [
+          {
+            "lat": 37.0171918,
+            "lon": -85.3831581
+          },
+          {
+            "lat": 40.4217187,
+            "lon": -84.9754049
+          },
+          {
+            "lat": 34.285742,
+            "lon": -84.872622
+          },
+          {
+            "lat": 38.8045574,
+            "lon": -84.3501571
+          },
+          {
+            "lat": 33.2197645,
+            "lon": -87.1177486
+          },
+          {
+            "lat": 31.9460391,
+            "lon": -102.1276886
+          },
+          {
+            "lat": 29.8214235,
+            "lon": -95.3331033
+          },
+          {
+            "lat": 31.0580792,
+            "lon": -92.1158471
+          },
+          {
+            "lat": 35.9183283,
+            "lon": -83.2101224
+          },
+          {
+            "lat": 27.7990167,
+            "lon": -97.4448752
+          },
+          {
+            "lat": 35.9183283,
+            "lon": -83.2101224
+          },
+          {
+            "lat": 34.9042985,
+            "lon": -86.8150714
+          },
+          {
+            "lat": 40.834786,
+            "lon": -73.8955415
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 44,
+          "Viasat Carrier Services Inc": 44,
+          "Verizon": 42,
+          "T-Mobile": 41,
+          "Earthlink": 41,
+          "AT&T": 39,
+          "Spectrum": 15,
+          "Xfinity": 11,
+          "TDS Telecom": 5,
+          "Optimum": 4,
+          "GeoLinks": 4,
+          "Cox Communications": 3,
+          "Starry Inc": 3,
+          "DuoBroadband": 2,
+          "Brightspeed": 2,
+          "Nextlink": 2,
+          "Resound Networks": 2,
+          "Swyft Connect": 2,
+          "Newport Utilities": 2,
+          "Frontier": 2
+        },
+        "excluded": {
+          "Verizon": 9,
+          "GeoLinks": 4,
+          "AT&T": 3,
+          "Viasat Carrier Services Inc": 3,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "Foremost Telecommunications": 1,
+          "Vast Networks": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 515,
+        "DSL": 249,
+        "Fiber": 131,
+        "Satellite": 129,
+        "Cable": 88,
+        "Fixed Wireless": 32,
+        "Unknown": 11
+      },
+      "hourly_distribution": {
+        "12": 2,
+        "13": 5,
+        "14": 3,
+        "15": 5,
+        "16": 5,
+        "17": 4,
+        "18": 8,
+        "19": 4,
+        "20": 3,
+        "23": 1,
+        "00": 1,
+        "01": 4,
+        "02": 2
+      },
+      "performance": {
+        "avg_confidence": 0.84
+      }
+    }
+  }

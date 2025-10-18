@@ -1,0 +1,265 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:27Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-06-30",
+      "summary": {
+        "total_requests": 70,
+        "successful_requests": 61,
+        "failed_requests": 9,
+        "success_rate": 87.14,
+        "unique_providers": 83,
+        "unique_states": 17,
+        "unique_cities": 35,
+        "unique_zipcodes": 49,
+        "avg_speed_mbps": 1342.73,
+        "max_speed_mbps": 650000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "TX": 13,
+          "GA": 8,
+          "OK": 6,
+          "CA": 4,
+          "FL": 3,
+          "TN": 3,
+          "NY": 3,
+          "MS": 2,
+          "MI": 2,
+          "AR": 2,
+          "KY": 1,
+          "OH": 1,
+          "CO": 1,
+          "MT": 1,
+          "NV": 1,
+          "SF": 1,
+          "IL": 1
+        },
+        "cities": {
+          "Ball Ground": 6,
+          "Syracuse": 3,
+          "Charleston": 2,
+          "Sand Springs": 2,
+          "Hillsdale": 2,
+          "Chickasha": 2,
+          "Knoxville": 2,
+          "El Cajon": 2,
+          "San Angelo": 2,
+          "Corpus Christi": 2,
+          "Henderson": 1,
+          "Fort Lauderdale": 1,
+          "Memphis": 1,
+          "Columbus": 1,
+          "Tifton": 1,
+          "Tift County": 1,
+          "Cut Bank": 1,
+          "Humble": 1,
+          "Houston": 1,
+          "Riverside": 1
+        },
+        "zipcodes": {
+          "10013": 1,
+          "10038": 1,
+          "10313": 1,
+          "10460": 1,
+          "11763": 1,
+          "12225": 1,
+          "12655": 2,
+          "13203": 1,
+          "13206": 1,
+          "13224": 1,
+          "13326": 1,
+          "14701": 1,
+          "14818": 2,
+          "15834": 2,
+          "29003": 1,
+          "30107": 1,
+          "31794": 1,
+          "32526": 1,
+          "33308": 1,
+          "33598": 1,
+          "37821": 1,
+          "37917": 1,
+          "38127": 1,
+          "38921": 1,
+          "42420": 1,
+          "43223": 1,
+          "49242": 1,
+          "59427": 1,
+          "72143": 1,
+          "73018": 1,
+          "74063": 2,
+          "75455": 1,
+          "76901": 1,
+          "77338": 1,
+          "77627": 1,
+          "78250": 1,
+          "78412": 1,
+          "78602": 1,
+          "89511": 3,
+          "90002": 1,
+          "92020": 2,
+          "92376": 2,
+          "92505": 1,
+          "92622": 1,
+          "93673": 1,
+          "94133": 1,
+          "95326": 1,
+          "95348": 1,
+          "95678": 1
+        },
+        "coordinates": [
+          {
+            "lat": 34.006595,
+            "lon": -90.0571471
+          },
+          {
+            "lat": 36.1741867,
+            "lon": -96.2068006
+          },
+          {
+            "lat": 36.1734924,
+            "lon": -96.2091457
+          },
+          {
+            "lat": 41.9318459,
+            "lon": -84.6482242
+          },
+          {
+            "lat": 35.0587227,
+            "lon": -97.9526185
+          },
+          {
+            "lat": 34.341283,
+            "lon": -84.370846
+          },
+          {
+            "lat": 34.341283,
+            "lon": -84.370846
+          },
+          {
+            "lat": 34.341283,
+            "lon": -84.370846
+          },
+          {
+            "lat": 38.7945952,
+            "lon": -106.5348379
+          },
+          {
+            "lat": 31.4027097,
+            "lon": -83.4830357
+          },
+          {
+            "lat": 30.0066686,
+            "lon": -95.2853693
+          },
+          {
+            "lat": 36.0141033,
+            "lon": -83.9196449
+          },
+          {
+            "lat": 31.4490956,
+            "lon": -100.4630095
+          },
+          {
+            "lat": 32.8194612,
+            "lon": -97.089668
+          },
+          {
+            "lat": 35.190923,
+            "lon": -91.708297
+          },
+          {
+            "lat": 26.328111,
+            "lon": -98.0699263
+          },
+          {
+            "lat": 27.6956465,
+            "lon": -97.3668599
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 61,
+          "T-Mobile": 60,
+          "Viasat Carrier Services Inc": 60,
+          "Earthlink": 60,
+          "Verizon": 57,
+          "AT&T": 49,
+          "Spectrum": 24,
+          "Xfinity": 20,
+          "TDS Telecom": 15,
+          "GeoLinks": 9,
+          "Atlink Services": 6,
+          "ETC": 6,
+          "Cox Communications": 5,
+          "Optimum": 5,
+          "Nextlink": 5,
+          "Valley Telephone Cooperative Inc": 4,
+          "Brightspeed": 4,
+          "Cal.net": 4,
+          "unWired Broadband": 4,
+          "WOW Internet, Cable & Phone": 3
+        },
+        "excluded": {
+          "GeoLinks": 9,
+          "Viasat Carrier Services Inc": 4,
+          "Spectrum": 3,
+          "AT&T": 3,
+          "Northland Networks": 3,
+          "TPx Communications": 3,
+          "ZAYO GROUP LLC": 2,
+          "Telefonica": 2,
+          "Cogent Communication": 2,
+          "Stealth Communications": 2,
+          "Pilot Fiber": 2,
+          "Optical Communications Group Inc": 2,
+          "Ultimate Internet Access Inc": 2,
+          "WOW Internet, Cable & Phone": 1,
+          "Verizon": 1,
+          "Tachus Fiber Internet": 1,
+          "T-Mobile": 1,
+          "SimpleFiber Communications| SimpleFiber": 1,
+          "Consolidated Communications": 1,
+          "TWIN": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 882,
+        "DSL": 301,
+        "Fiber": 220,
+        "Satellite": 177,
+        "Cable": 169,
+        "Fixed Wireless": 79,
+        "Unknown": 16
+      },
+      "hourly_distribution": {
+        "12": 6,
+        "13": 5,
+        "14": 5,
+        "15": 10,
+        "16": 5,
+        "17": 5,
+        "18": 5,
+        "19": 7,
+        "20": 4,
+        "21": 4,
+        "23": 7,
+        "01": 1,
+        "02": 6
+      },
+      "performance": {
+        "avg_confidence": 0.86
+      }
+    }
+  }

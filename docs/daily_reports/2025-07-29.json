@@ -1,0 +1,206 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:46Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-29",
+      "summary": {
+        "total_requests": 46,
+        "successful_requests": 39,
+        "failed_requests": 7,
+        "success_rate": 84.78,
+        "unique_providers": 48,
+        "unique_states": 13,
+        "unique_cities": 22,
+        "unique_zipcodes": 29,
+        "avg_speed_mbps": 747.66,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 5,
+          "MS": 5,
+          "OK": 4,
+          "NY": 3,
+          "TX": 2,
+          "NJ": 2,
+          "TN": 2,
+          "AL": 2,
+          "IL": 1,
+          "FL": 1,
+          "KY": 1,
+          "IN": 1,
+          "CO": 1
+        },
+        "cities": {
+          "Pearl River County": 3,
+          "Oakwood": 2,
+          "Dewey County": 2,
+          "Newark": 2,
+          "Hancock County": 2,
+          "Albany": 1,
+          "Chicago": 1,
+          "Long Beach": 1,
+          "Miami": 1,
+          "Hopkinsville": 1,
+          "Vidor": 1,
+          "Riverhead": 1,
+          "Houston": 1,
+          "Arvin": 1,
+          "Poland": 1,
+          "Mastic Beach": 1,
+          "Richmond": 1,
+          "Thornton": 1,
+          "San Pablo": 1,
+          "Columbia": 1
+        },
+        "zipcodes": {
+          "11030": 2,
+          "11753": 1,
+          "11901": 1,
+          "11951": 1,
+          "12030": 5,
+          "12207": 1,
+          "33634": 1,
+          "35967": 1,
+          "38401": 3,
+          "42240": 1,
+          "47868": 1,
+          "60617": 1,
+          "61101": 1,
+          "63701": 1,
+          "74437": 2,
+          "75061": 1,
+          "77074": 1,
+          "77662": 1,
+          "80241": 1,
+          "90631": 1,
+          "90806": 1,
+          "91732": 2,
+          "92084": 1,
+          "93060": 1,
+          "93203": 1,
+          "94111": 1,
+          "94801": 1,
+          "94806": 1,
+          "07107": 2
+        },
+        "coordinates": [
+          {
+            "lat": 35.9356269,
+            "lon": -98.6903387
+          },
+          {
+            "lat": 35.9356269,
+            "lon": -98.6903387
+          },
+          {
+            "lat": 30.6242807,
+            "lon": -89.5121822
+          },
+          {
+            "lat": 30.6242807,
+            "lon": -89.5121822
+          },
+          {
+            "lat": 30.6166573,
+            "lon": -89.6521016
+          },
+          {
+            "lat": 35.6882824,
+            "lon": -86.9850784
+          },
+          {
+            "lat": 30.6166573,
+            "lon": -89.6521016
+          },
+          {
+            "lat": 30.6166573,
+            "lon": -89.6521016
+          },
+          {
+            "lat": 34.3227877,
+            "lon": -85.7544278
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 39,
+          "Viasat Carrier Services Inc": 39,
+          "T-Mobile": 37,
+          "Earthlink": 37,
+          "Verizon": 36,
+          "AT&T": 32,
+          "Spectrum": 15,
+          "Xfinity": 9,
+          "GeoLinks": 8,
+          "Pioneer Telephone Cooperative, Inc.": 4,
+          "Frontier": 4,
+          "TPx Communications": 4,
+          "Optimum": 4,
+          "Unwired Ltd": 3,
+          "Troy Cablevision, Inc.": 3,
+          "Uniti Fiber GulfCo LLC": 3,
+          "Swyft Connect": 3,
+          "Columbia Power and Water Systems": 3,
+          "Mediacom Xtream": 2,
+          "Astound Broadband": 2
+        },
+        "excluded": {
+          "GeoLinks": 8,
+          "Viasat Carrier Services Inc": 5,
+          "TPx Communications": 4,
+          "AT&T": 4,
+          "Troy Cablevision, Inc.": 3,
+          "Uniti Fiber GulfCo LLC": 3,
+          "ZAYO GROUP LLC": 2,
+          "Verizon": 2,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "EarthLink Business": 1,
+          "Ritter Communications Inc": 1,
+          "NetFortris": 1,
+          "Bluebird Network LLC": 1,
+          "SimpleFiber Communications| SimpleFiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 491,
+        "DSL": 204,
+        "Fiber": 125,
+        "Satellite": 114,
+        "Cable": 93,
+        "Fixed Wireless": 25,
+        "Unknown": 7
+      },
+      "hourly_distribution": {
+        "11": 1,
+        "12": 1,
+        "13": 2,
+        "14": 2,
+        "15": 1,
+        "16": 3,
+        "17": 2,
+        "18": 3,
+        "19": 4,
+        "20": 2,
+        "21": 14,
+        "23": 4,
+        "00": 4,
+        "01": 1,
+        "02": 1,
+        "04": 1
+      },
+      "performance": {
+        "avg_confidence": 0.8
+      }
+    }
+  }

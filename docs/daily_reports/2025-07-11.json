@@ -1,0 +1,169 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:34Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-11",
+      "summary": {
+        "total_requests": 31,
+        "successful_requests": 31,
+        "failed_requests": 0,
+        "success_rate": 100,
+        "unique_providers": 35,
+        "unique_states": 8,
+        "unique_cities": 18,
+        "unique_zipcodes": 27,
+        "avg_speed_mbps": 816.57,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 10,
+          "GA": 2,
+          "CA": 2,
+          "PA": 2,
+          "VA": 2,
+          "TN": 2,
+          "MA": 1,
+          "OH": 1
+        },
+        "cities": {
+          "Buffalo": 2,
+          "Rincon": 1,
+          "Effingham County": 1,
+          "Newport Beach": 1,
+          "Medford": 1,
+          "Groton": 1,
+          "Reading": 1,
+          "Seneca Falls": 1,
+          "Chillicothe": 1,
+          "Syracuse": 1,
+          "Thaxton": 1,
+          "Bedford County": 1,
+          "Marina Del Rey": 1,
+          "Philadelphia": 1,
+          "Menands": 1,
+          "Yonkers": 1,
+          "Newport": 1,
+          "Cocke County": 1
+        },
+        "zipcodes": {
+          "10031": 1,
+          "10458": 1,
+          "10459": 1,
+          "10462": 1,
+          "10467": 1,
+          "10701": 1,
+          "11214": 1,
+          "11215": 1,
+          "11375": 1,
+          "11411": 1,
+          "11427": 1,
+          "11763": 1,
+          "12204": 1,
+          "13126": 1,
+          "13148": 1,
+          "13208": 1,
+          "14224": 2,
+          "14613": 1,
+          "19104": 1,
+          "19602": 1,
+          "20271": 1,
+          "24174": 1,
+          "31326": 1,
+          "37821": 1,
+          "45601": 1,
+          "90292": 1,
+          "01450": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.221401,
+            "lon": -81.2619162
+          },
+          {
+            "lat": 37.3686229,
+            "lon": -79.6296477
+          },
+          {
+            "lat": 35.9183283,
+            "lon": -83.2101224
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 31,
+          "HughesNet": 31,
+          "Verizon": 31,
+          "Viasat Carrier Services Inc": 31,
+          "Earthlink": 31,
+          "AT&T": 28,
+          "Spectrum": 17,
+          "Optimum": 9,
+          "Starry Inc": 9,
+          "Xfinity": 7,
+          "TDS Telecom": 4,
+          "Frontier": 3,
+          "Windstream Alabama, LLC": 2,
+          "ZAYO GROUP LLC": 2,
+          "TPx Communications": 2,
+          "GeoLinks": 2,
+          "Astound Broadband": 2,
+          "Pilot Fiber": 2,
+          "Hargray Communications": 1,
+          "Planters Rural Telephone Cooperative": 1
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 14,
+          "AT&T": 6,
+          "ZAYO GROUP LLC": 2,
+          "TPx Communications": 2,
+          "GeoLinks": 2,
+          "Pilot Fiber": 2,
+          "Frontier": 1,
+          "Optical Communications Group Inc": 1,
+          "Northland Networks": 1,
+          "Verizon": 1,
+          "Cogent Communication": 1,
+          "EarthLink Business": 1,
+          "Spectrum": 1,
+          "Stealth Communications": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 505,
+        "Fiber": 132,
+        "Cable": 95,
+        "Satellite": 78,
+        "DSL": 51,
+        "Fixed Wireless": 2,
+        "Unknown": 2
+      },
+      "hourly_distribution": {
+        "13": 5,
+        "14": 3,
+        "15": 2,
+        "16": 6,
+        "17": 2,
+        "18": 2,
+        "20": 1,
+        "21": 2,
+        "22": 4,
+        "23": 1,
+        "00": 2,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.94
+      }
+    }
+  }

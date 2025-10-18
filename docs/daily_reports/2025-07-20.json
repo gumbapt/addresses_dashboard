@@ -1,0 +1,149 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:40Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-20",
+      "summary": {
+        "total_requests": 23,
+        "successful_requests": 20,
+        "failed_requests": 3,
+        "success_rate": 86.96,
+        "unique_providers": 32,
+        "unique_states": 7,
+        "unique_cities": 15,
+        "unique_zipcodes": 20,
+        "avg_speed_mbps": 908.43,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 8,
+          "CA": 3,
+          "FL": 2,
+          "MA": 1,
+          "TN": 1,
+          "TX": 1,
+          "AL": 1
+        },
+        "cities": {
+          "Glendale": 1,
+          "Bronx": 1,
+          "Quincy": 1,
+          "Ocoee": 1,
+          "Freeport": 1,
+          "Rialto": 1,
+          "Nashville": 1,
+          "Huntington Park": 1,
+          "Houston": 1,
+          "Brooklyn": 1,
+          "Yonkers": 1,
+          "Hollywood": 1,
+          "Birmingham": 1,
+          "Utica": 1,
+          "New York": 1
+        },
+        "zipcodes": {
+          "10025": 1,
+          "10467": 1,
+          "10705": 1,
+          "11234": 1,
+          "11520": 1,
+          "13501": 1,
+          "13502": 1,
+          "31792": 1,
+          "33023": 1,
+          "34761": 1,
+          "35208": 1,
+          "37217": 2,
+          "43609": 1,
+          "90255": 1,
+          "91204": 1,
+          "91763": 1,
+          "92376": 1,
+          "93705": 1,
+          "94565": 1,
+          "95354": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.8798882,
+            "lon": -73.8773738
+          },
+          {
+            "lat": 40.6216279,
+            "lon": -73.9343059
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "AT&T": 20,
+          "T-Mobile": 20,
+          "HughesNet": 20,
+          "Verizon": 20,
+          "Viasat Carrier Services Inc": 20,
+          "Earthlink": 20,
+          "Spectrum": 10,
+          "Xfinity": 7,
+          "GeoLinks": 6,
+          "Starry Inc": 5,
+          "Optimum": 4,
+          "Vast Networks": 3,
+          "Cal.net": 2,
+          "unWired Broadband": 2,
+          "Ultimate Internet Access Inc": 2,
+          "Amplex Wireless": 1,
+          "BCI Mississippi Broadband LLC": 1,
+          "ACD.net": 1,
+          "TPx Communications": 1,
+          "Netafy": 1
+        },
+        "excluded": {
+          "GeoLinks": 6,
+          "Viasat Carrier Services Inc": 6,
+          "Vast Networks": 3,
+          "AT&T": 3,
+          "Spectrum": 2,
+          "Ultimate Internet Access Inc": 2,
+          "TPx Communications": 1,
+          "ZAYO GROUP LLC": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "Northland Networks": 1,
+          "Stealth Communications": 1,
+          "Pilot Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 353,
+        "DSL": 124,
+        "Fiber": 86,
+        "Cable": 55,
+        "Satellite": 54,
+        "Fixed Wireless": 18,
+        "Unknown": 1
+      },
+      "hourly_distribution": {
+        "13": 2,
+        "14": 4,
+        "16": 2,
+        "17": 1,
+        "19": 6,
+        "20": 3,
+        "21": 2,
+        "22": 1,
+        "00": 2
+      },
+      "performance": {
+        "avg_confidence": 0.9
+      }
+    }
+  }

@@ -1,0 +1,150 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:31Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-06",
+      "summary": {
+        "total_requests": 25,
+        "successful_requests": 22,
+        "failed_requests": 3,
+        "success_rate": 88,
+        "unique_providers": 45,
+        "unique_states": 5,
+        "unique_cities": 17,
+        "unique_zipcodes": 23,
+        "avg_speed_mbps": 811.52,
+        "max_speed_mbps": 30000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 8,
+          "TX": 6,
+          "WI": 1,
+          "NY": 1,
+          "FL": 1
+        },
+        "cities": {
+          "Milwaukee": 1,
+          "Zavalla": 1,
+          "Hayward": 1,
+          "Emeryville": 1,
+          "Oakland": 1,
+          "Tomball": 1,
+          "Harris County": 1,
+          "Santa Monica": 1,
+          "Porterville": 1,
+          "Valley Stream": 1,
+          "Conroe": 1,
+          "Palm Coast": 1,
+          "San Antonio": 1,
+          "Stockton": 1,
+          "Pasadena": 1,
+          "Redwood City": 1,
+          "Vista": 1
+        },
+        "zipcodes": {
+          "11552": 1,
+          "11580": 1,
+          "13639": 1,
+          "15818": 1,
+          "20327": 1,
+          "24878": 1,
+          "29924": 1,
+          "32164": 1,
+          "34743": 1,
+          "53209": 1,
+          "75980": 1,
+          "77502": 1,
+          "78240": 1,
+          "90404": 1,
+          "92084": 1,
+          "93257": 1,
+          "93706": 1,
+          "94063": 1,
+          "94544": 1,
+          "94608": 1,
+          "95121": 1,
+          "95210": 1,
+          "96084": 1
+        },
+        "coordinates": [
+          {
+            "lat": 37.8275901,
+            "lon": -122.2805119
+          },
+          {
+            "lat": 30.0605891,
+            "lon": -95.7195782
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 22,
+          "HughesNet": 22,
+          "Verizon": 22,
+          "Viasat Carrier Services Inc": 22,
+          "Earthlink": 22,
+          "AT&T": 19,
+          "Xfinity": 12,
+          "GeoLinks": 9,
+          "Spectrum": 6,
+          "TPx Communications": 5,
+          "Etheric Networks": 5,
+          "Sail Internet": 4,
+          "Unwired Ltd": 3,
+          "Optimum": 3,
+          "Tekify Fiber & Wireless": 2,
+          "RobinsonHSS": 2,
+          "Google Fiber": 2,
+          "Sonic.net": 2,
+          "Cal.net": 2,
+          "unWired Broadband": 2
+        },
+        "excluded": {
+          "GeoLinks": 8,
+          "TPx Communications": 4,
+          "Viasat Carrier Services Inc": 2,
+          "Everstream": 1,
+          "AT&T": 1,
+          "ZAYO GROUP LLC": 1,
+          "Cogent Communication": 1,
+          "BAI Connect": 1,
+          "Vast Networks": 1,
+          "Verizon": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 317,
+        "DSL": 159,
+        "Fiber": 92,
+        "Fixed Wireless": 68,
+        "Satellite": 64,
+        "Cable": 55,
+        "Unknown": 15
+      },
+      "hourly_distribution": {
+        "14": 2,
+        "15": 2,
+        "16": 2,
+        "17": 5,
+        "18": 4,
+        "19": 3,
+        "20": 3,
+        "21": 2,
+        "02": 2
+      },
+      "performance": {
+        "avg_confidence": 0.97
+      }
+    }
+  }

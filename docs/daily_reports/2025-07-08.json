@@ -1,0 +1,220 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:32Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-08",
+      "summary": {
+        "total_requests": 65,
+        "successful_requests": 60,
+        "failed_requests": 5,
+        "success_rate": 92.31,
+        "unique_providers": 76,
+        "unique_states": 14,
+        "unique_cities": 33,
+        "unique_zipcodes": 54,
+        "avg_speed_mbps": 584.99,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 14,
+          "TX": 6,
+          "NY": 5,
+          "NE": 4,
+          "WI": 2,
+          "MS": 2,
+          "MO": 2,
+          "MI": 1,
+          "DE": 1,
+          "NC": 1,
+          "SC": 1,
+          "IA": 1,
+          "SF": 1,
+          "FL": 1
+        },
+        "cities": {
+          "Godley": 2,
+          "Pasadena": 2,
+          "Papillion Second I": 2,
+          "Los Angeles": 2,
+          "Kirksville": 2,
+          "Orchard Park": 1,
+          "Detroit": 1,
+          "Corona": 1,
+          "Roseville": 1,
+          "Bronx": 1,
+          "Fairfield": 1,
+          "Millsboro": 1,
+          "Houston": 1,
+          "Fayetteville": 1,
+          "Anderson": 1,
+          "Santa Maria": 1,
+          "Eagle Grove": 1,
+          "Dallas": 1,
+          "Fresno": 1,
+          "Austin": 1
+        },
+        "zipcodes": {
+          "10453": 1,
+          "10470": 1,
+          "10601": 1,
+          "11951": 1,
+          "12226": 2,
+          "13480": 1,
+          "14120": 3,
+          "14127": 1,
+          "14779": 1,
+          "18492": 1,
+          "19966": 1,
+          "28303": 1,
+          "29512": 1,
+          "29624": 1,
+          "33147": 1,
+          "39577": 1,
+          "45601": 1,
+          "50533": 1,
+          "63501": 2,
+          "68128": 2,
+          "75034": 1,
+          "75237": 1,
+          "76001": 1,
+          "76044": 1,
+          "76365": 1,
+          "77055": 1,
+          "77081": 1,
+          "78681": 1,
+          "78724": 1,
+          "90003": 2,
+          "90011": 1,
+          "90241": 1,
+          "91106": 1,
+          "91107": 1,
+          "91405": 1,
+          "91711": 1,
+          "92036": 1,
+          "92105": 1,
+          "92506": 1,
+          "92802": 1,
+          "92879": 1,
+          "93305": 1,
+          "93458": 1,
+          "93705": 1,
+          "94134": 1,
+          "94533": 1,
+          "95210": 1,
+          "95401": 1,
+          "95747": 1,
+          "95945": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.9036717,
+            "lon": -73.8518492
+          },
+          {
+            "lat": 32.4544735,
+            "lon": -97.5505994
+          },
+          {
+            "lat": 41.1761814,
+            "lon": -96.0732146
+          },
+          {
+            "lat": 41.1761814,
+            "lon": -96.0732146
+          },
+          {
+            "lat": 45.352715,
+            "lon": -88.210099
+          },
+          {
+            "lat": 30.9351637,
+            "lon": -88.9586226
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 60,
+          "Viasat Carrier Services Inc": 60,
+          "T-Mobile": 58,
+          "Earthlink": 58,
+          "Verizon": 57,
+          "AT&T": 53,
+          "Spectrum": 32,
+          "GeoLinks": 17,
+          "Xfinity": 12,
+          "TPx Communications": 10,
+          "Starry Inc": 9,
+          "TDS Telecom": 8,
+          "Cox Communications": 5,
+          "CenturyLink": 5,
+          "Optimum": 4,
+          "Frontier": 4,
+          "Nextlink": 4,
+          "Great Plains Broadband LLC": 4,
+          "Allo Communications LLC": 4,
+          "Cal.net": 3
+        },
+        "excluded": {
+          "GeoLinks": 17,
+          "TPx Communications": 10,
+          "AT&T": 6,
+          "Viasat Carrier Services Inc": 5,
+          "Verizon": 3,
+          "Spectrum": 2,
+          "Vast Networks": 2,
+          "UPN": 2,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 2,
+          "Bluebird Network LLC": 2,
+          "Metro Wireless": 1,
+          "T-Mobile": 1,
+          "Earthlink": 1,
+          "Advanced Wireless": 1,
+          "EarthLink Business": 1,
+          "BAI Connect": 1,
+          "Ultimate Internet Access Inc": 1,
+          "Snappy Internet & Telecom": 1,
+          "Optical Communications Group Inc": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 871,
+        "DSL": 401,
+        "Fiber": 197,
+        "Satellite": 175,
+        "Cable": 141,
+        "Fixed Wireless": 58,
+        "Unknown": 10
+      },
+      "hourly_distribution": {
+        "10": 1,
+        "13": 7,
+        "14": 1,
+        "15": 5,
+        "16": 3,
+        "17": 4,
+        "18": 4,
+        "19": 4,
+        "20": 8,
+        "21": 8,
+        "22": 9,
+        "23": 6,
+        "00": 3,
+        "01": 1,
+        "03": 1
+      },
+      "performance": {
+        "avg_confidence": 0.93
+      }
+    }
+  }

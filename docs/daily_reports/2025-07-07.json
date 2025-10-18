@@ -1,0 +1,216 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:31Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-07",
+      "summary": {
+        "total_requests": 53,
+        "successful_requests": 53,
+        "failed_requests": 0,
+        "success_rate": 100,
+        "unique_providers": 56,
+        "unique_states": 14,
+        "unique_cities": 40,
+        "unique_zipcodes": 43,
+        "avg_speed_mbps": 502.14,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 11,
+          "TX": 9,
+          "AL": 7,
+          "KY": 2,
+          "IN": 2,
+          "GA": 2,
+          "TN": 2,
+          "MD": 1,
+          "MO": 1,
+          "NC": 1,
+          "NY": 1,
+          "FL": 1,
+          "CT": 1,
+          "LA": 1
+        },
+        "cities": {
+          "Los Angeles": 2,
+          "Cleveland": 2,
+          "Somerset": 1,
+          "Pulaski County": 1,
+          "Baltimore": 1,
+          "Shelbyville": 1,
+          "Shelby County": 1,
+          "University City": 1,
+          "Gastonia": 1,
+          "Amityville": 1,
+          "McCalla": 1,
+          "Jefferson County": 1,
+          "Indianapolis": 1,
+          "Washington": 1,
+          "Thomaston": 1,
+          "Dos Palos": 1,
+          "Newport": 1,
+          "Cocke County": 1,
+          "Ocala": 1,
+          "Keyes": 1
+        },
+        "zipcodes": {
+          "10092": 1,
+          "10755": 2,
+          "11701": 1,
+          "16405": 1,
+          "18815": 1,
+          "20820": 1,
+          "21217": 1,
+          "21221": 1,
+          "21229": 1,
+          "27700": 1,
+          "28054": 1,
+          "28326": 1,
+          "28574": 1,
+          "29072": 1,
+          "29527": 1,
+          "30286": 1,
+          "30296": 1,
+          "34479": 1,
+          "35111": 1,
+          "35645": 1,
+          "35748": 2,
+          "36804": 1,
+          "37821": 1,
+          "37840": 1,
+          "42503": 1,
+          "46135": 2,
+          "49349": 1,
+          "63130": 1,
+          "71064": 1,
+          "75973": 1,
+          "76266": 1,
+          "77030": 1,
+          "77505": 1,
+          "77590": 1,
+          "90062": 1,
+          "91776": 1,
+          "92008": 1,
+          "92154": 1,
+          "94066": 1,
+          "95008": 1,
+          "95328": 1,
+          "07018": 1,
+          "06776": 1
+        },
+        "coordinates": [
+          {
+            "lat": 37.1190415,
+            "lon": -84.6133104
+          },
+          {
+            "lat": 31.6776198,
+            "lon": -93.9585819
+          },
+          {
+            "lat": 33.3013156,
+            "lon": -87.0664478
+          },
+          {
+            "lat": 39.7998602,
+            "lon": -86.3444602
+          },
+          {
+            "lat": 35.9183283,
+            "lon": -83.2101224
+          },
+          {
+            "lat": 34.831634,
+            "lon": -87.480972
+          },
+          {
+            "lat": 39.3105328,
+            "lon": -123.3054436
+          },
+          {
+            "lat": 30.3444048,
+            "lon": -95.2311417
+          },
+          {
+            "lat": 32.5986218,
+            "lon": -85.3755867
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 53,
+          "Viasat Carrier Services Inc": 53,
+          "T-Mobile": 47,
+          "Earthlink": 47,
+          "Verizon": 47,
+          "AT&T": 43,
+          "Spectrum": 23,
+          "Xfinity": 16,
+          "GeoLinks": 9,
+          "Optimum": 6,
+          "Windstream Alabama, LLC": 4,
+          "TDS Telecom": 4,
+          "Point Broadband Fiber Holding LLC": 3,
+          "Brightspeed": 3,
+          "Frontier": 3,
+          "Nextlink": 3,
+          "Starry Inc": 2,
+          "Cal.net": 2,
+          "unWired Broadband": 2,
+          "Cox Communications": 2
+        },
+        "excluded": {
+          "AT&T": 9,
+          "Verizon": 9,
+          "GeoLinks": 9,
+          "Viasat Carrier Services Inc": 4,
+          "TPx Communications": 2,
+          "Fusion Cloud Services, Inc.": 2,
+          "Bluebird Network LLC": 1,
+          "Consolidated Communications": 1,
+          "ZAYO GROUP LLC": 1,
+          "T-Mobile": 1,
+          "Earthlink": 1,
+          "Logix Communications LP": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 605,
+        "DSL": 273,
+        "Satellite": 154,
+        "Fiber": 133,
+        "Cable": 103,
+        "Fixed Wireless": 43,
+        "Unknown": 11
+      },
+      "hourly_distribution": {
+        "10": 1,
+        "13": 6,
+        "14": 4,
+        "15": 8,
+        "16": 5,
+        "17": 3,
+        "18": 8,
+        "19": 4,
+        "20": 2,
+        "21": 4,
+        "22": 4,
+        "23": 2,
+        "03": 2
+      },
+      "performance": {
+        "avg_confidence": 0.9
+      }
+    }
+  }

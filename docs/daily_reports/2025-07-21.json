@@ -1,0 +1,138 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:41Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-21",
+      "summary": {
+        "total_requests": 21,
+        "successful_requests": 19,
+        "failed_requests": 2,
+        "success_rate": 90.48,
+        "unique_providers": 32,
+        "unique_states": 5,
+        "unique_cities": 8,
+        "unique_zipcodes": 19,
+        "avg_speed_mbps": 721.34,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "SC": 4,
+          "CA": 3,
+          "NY": 2,
+          "OH": 1,
+          "GA": 1
+        },
+        "cities": {
+          "Cheraw": 2,
+          "Galion": 1,
+          "Escondido": 1,
+          "South Fallsburg": 1,
+          "Bishopville": 1,
+          "Lee County": 1,
+          "Duluth": 1,
+          "Hollister": 1
+        },
+        "zipcodes": {
+          "10458": 1,
+          "10460": 1,
+          "11378": 1,
+          "11572": 1,
+          "12203": 1,
+          "12779": 1,
+          "13224": 1,
+          "29010": 1,
+          "29520": 1,
+          "30097": 1,
+          "36545": 1,
+          "44833": 1,
+          "77328": 1,
+          "79520": 1,
+          "79705": 1,
+          "92025": 1,
+          "92356": 1,
+          "92376": 1,
+          "95023": 1
+        },
+        "coordinates": [
+          {
+            "lat": 34.705084,
+            "lon": -79.9272168
+          },
+          {
+            "lat": 34.1934804,
+            "lon": -80.3140161
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 19,
+          "Verizon": 19,
+          "Viasat Carrier Services Inc": 19,
+          "T-Mobile": 18,
+          "Earthlink": 18,
+          "AT&T": 17,
+          "Spectrum": 12,
+          "GeoLinks": 4,
+          "Optimum": 4,
+          "Frontier": 2,
+          "RiverStreet": 2,
+          "Starry Inc": 2,
+          "Resound Networks": 2,
+          "FTC DSI": 2,
+          "W A T C H TV": 1,
+          "Wavelinc Communications": 1,
+          "Cox Communications": 1,
+          "TPx Communications": 1,
+          "San Diego Broadband": 1,
+          "EarthLink Business": 1
+        },
+        "excluded": {
+          "GeoLinks": 4,
+          "Viasat Carrier Services Inc": 4,
+          "AT&T": 3,
+          "Verizon": 3,
+          "TPx Communications": 1,
+          "EarthLink Business": 1,
+          "Spectrum": 1,
+          "Pilot Fiber": 1,
+          "Ultimate Internet Access Inc": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 236,
+        "Fiber": 62,
+        "DSL": 58,
+        "Satellite": 53,
+        "Cable": 52,
+        "Fixed Wireless": 12,
+        "Unknown": 1
+      },
+      "hourly_distribution": {
+        "12": 2,
+        "14": 2,
+        "15": 3,
+        "16": 1,
+        "17": 2,
+        "18": 3,
+        "19": 2,
+        "20": 3,
+        "22": 1,
+        "01": 1,
+        "03": 1
+      },
+      "performance": {
+        "avg_confidence": 0.93
+      }
+    }
+  }

@@ -1,0 +1,171 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:47Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-30",
+      "summary": {
+        "total_requests": 44,
+        "successful_requests": 34,
+        "failed_requests": 10,
+        "success_rate": 77.27,
+        "unique_providers": 45,
+        "unique_states": 7,
+        "unique_cities": 5,
+        "unique_zipcodes": 33,
+        "avg_speed_mbps": 815.65,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "AL": 6,
+          "OK": 5,
+          "CO": 1,
+          "NJ": 1,
+          "FL": 1,
+          "LA": 1,
+          "CA": 1
+        },
+        "cities": {
+          "Tulsa": 2,
+          "Lineville": 2,
+          "Coosa County": 1,
+          "Jersey City": 1,
+          "Whittier": 1
+        },
+        "zipcodes": {
+          "10701": 1,
+          "11008": 1,
+          "11372": 1,
+          "12473": 1,
+          "13021": 1,
+          "17543": 1,
+          "23947": 1,
+          "32808": 1,
+          "32909": 2,
+          "33024": 1,
+          "33144": 1,
+          "35046": 1,
+          "36266": 2,
+          "39339": 1,
+          "46953": 1,
+          "59686": 1,
+          "61008": 1,
+          "70503": 1,
+          "74106": 2,
+          "75231": 1,
+          "90221": 1,
+          "91730": 1,
+          "92804": 1,
+          "93204": 1,
+          "94590": 1,
+          "94801": 1,
+          "94806": 1,
+          "95389": 1,
+          "95442": 1,
+          "95492": 1,
+          "95765": 1,
+          "06790": 2,
+          "07306": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.9556612,
+            "lon": -86.5126177
+          },
+          {
+            "lat": 38.7945952,
+            "lon": -106.5348379
+          },
+          {
+            "lat": 36.185246,
+            "lon": -95.9841406
+          },
+          {
+            "lat": 36.185246,
+            "lon": -95.9841406
+          },
+          {
+            "lat": 33.3102715,
+            "lon": -85.7338444
+          },
+          {
+            "lat": 33.3102715,
+            "lon": -85.7338444
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 34,
+          "Viasat Carrier Services Inc": 34,
+          "Verizon": 32,
+          "Earthlink": 31,
+          "AT&T": 30,
+          "T-Mobile": 27,
+          "Spectrum": 13,
+          "Xfinity": 12,
+          "GeoLinks": 7,
+          "Frontier": 5,
+          "TDS Telecom": 4,
+          "Cox Communications": 3,
+          "Unwired Ltd": 3,
+          "Optimum": 3,
+          "Rise Broadband": 2,
+          "Astound Broadband": 2,
+          "ZAYO GROUP LLC": 2,
+          "Brightspeed": 2,
+          "Sonic.net": 2,
+          "Cosmo Network Solutions, LLC": 1
+        },
+        "excluded": {
+          "GeoLinks": 7,
+          "Viasat Carrier Services Inc": 6,
+          "Verizon": 3,
+          "AT&T": 3,
+          "T-Mobile": 2,
+          "ZAYO GROUP LLC": 2,
+          "Snappy Internet & Telecom": 1,
+          "Stratus Networks Inc": 1,
+          "TPx Communications": 1,
+          "Ultimate Internet Access Inc": 1,
+          "EarthLink Business": 1,
+          "Consolidated Communications": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 337,
+        "DSL": 137,
+        "Fiber": 115,
+        "Satellite": 97,
+        "Cable": 79,
+        "Fixed Wireless": 19,
+        "Unknown": 3
+      },
+      "hourly_distribution": {
+        "11": 3,
+        "12": 1,
+        "14": 2,
+        "16": 5,
+        "17": 6,
+        "18": 7,
+        "19": 7,
+        "20": 2,
+        "21": 2,
+        "22": 2,
+        "23": 3,
+        "00": 4
+      },
+      "performance": {
+        "avg_confidence": 0.85
+      }
+    }
+  }

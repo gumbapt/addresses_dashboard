@@ -1,0 +1,179 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:42Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-22",
+      "summary": {
+        "total_requests": 37,
+        "successful_requests": 34,
+        "failed_requests": 3,
+        "success_rate": 91.89,
+        "unique_providers": 46,
+        "unique_states": 9,
+        "unique_cities": 25,
+        "unique_zipcodes": 30,
+        "avg_speed_mbps": 904.03,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 11,
+          "TX": 11,
+          "NY": 3,
+          "MI": 2,
+          "MS": 1,
+          "PA": 1,
+          "SC": 1,
+          "OK": 1,
+          "NV": 1
+        },
+        "cities": {
+          "Santa Rosa": 3,
+          "California City": 2,
+          "New York": 2,
+          "Call": 2,
+          "Newton County": 2,
+          "San Antonio": 2,
+          "Selma": 1,
+          "Gulfport": 1,
+          "El Cajon": 1,
+          "Tarentum": 1,
+          "Hondo": 1,
+          "Medina County": 1,
+          "Fairgrove": 1,
+          "Wisner": 1,
+          "Newberry": 1,
+          "Yukon": 1,
+          "Waco": 1,
+          "Galveston": 1,
+          "Anaheim": 1,
+          "Fullerton": 1
+        },
+        "zipcodes": {
+          "10031": 1,
+          "10040": 1,
+          "11553": 1,
+          "12037": 1,
+          "13847": 1,
+          "15084": 1,
+          "21791": 2,
+          "29108": 1,
+          "35633": 1,
+          "39501": 1,
+          "48733": 1,
+          "73099": 1,
+          "75210": 1,
+          "75428": 1,
+          "75933": 1,
+          "76712": 1,
+          "77550": 1,
+          "78213": 1,
+          "78861": 1,
+          "89031": 1,
+          "91104": 1,
+          "92021": 1,
+          "92103": 1,
+          "92602": 1,
+          "92801": 1,
+          "92832": 1,
+          "93635": 1,
+          "94010": 1,
+          "95403": 3,
+          "95492": 1
+        },
+        "coordinates": [
+          {
+            "lat": 29.3587629,
+            "lon": -99.1187345
+          },
+          {
+            "lat": 43.5857357,
+            "lon": -83.6705905
+          },
+          {
+            "lat": 30.57337,
+            "lon": -93.7561534
+          },
+          {
+            "lat": 30.57337,
+            "lon": -93.7561534
+          },
+          {
+            "lat": 29.4969113,
+            "lon": -98.513139
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 34,
+          "HughesNet": 34,
+          "Viasat Carrier Services Inc": 34,
+          "Earthlink": 34,
+          "Verizon": 30,
+          "AT&T": 28,
+          "GeoLinks": 15,
+          "Spectrum": 12,
+          "Xfinity": 10,
+          "Cox Communications": 5,
+          "Astound Broadband": 4,
+          "Starry Inc": 3,
+          "Google Fiber": 3,
+          "Cal.net": 2,
+          "unWired Broadband": 2,
+          "Valley Telephone Cooperative Inc": 2,
+          "Air Advantage": 2,
+          "M3 Wireless Inc": 2,
+          "Nextlink": 2,
+          "Frontier": 2
+        },
+        "excluded": {
+          "GeoLinks": 15,
+          "Verizon": 4,
+          "Viasat Carrier Services Inc": 3,
+          "Stealth Communications": 2,
+          "Pilot Fiber": 2,
+          "Spectrum": 1,
+          "FireServe": 1,
+          "Vast Networks": 1,
+          "TPx Communications": 1,
+          "UPN": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 426,
+        "DSL": 185,
+        "Fiber": 112,
+        "Satellite": 100,
+        "Cable": 80,
+        "Fixed Wireless": 32,
+        "Unknown": 11
+      },
+      "hourly_distribution": {
+        "10": 1,
+        "15": 1,
+        "16": 6,
+        "17": 3,
+        "18": 3,
+        "19": 4,
+        "20": 5,
+        "21": 7,
+        "22": 2,
+        "23": 2,
+        "00": 2,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.9
+      }
+    }
+  }

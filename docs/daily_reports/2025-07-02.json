@@ -1,0 +1,226 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:28Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-02",
+      "summary": {
+        "total_requests": 64,
+        "successful_requests": 57,
+        "failed_requests": 7,
+        "success_rate": 89.06,
+        "unique_providers": 78,
+        "unique_states": 14,
+        "unique_cities": 38,
+        "unique_zipcodes": 53,
+        "avg_speed_mbps": 893.13,
+        "max_speed_mbps": 219000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 13,
+          "TX": 10,
+          "NY": 4,
+          "GA": 3,
+          "AZ": 3,
+          "NC": 3,
+          "IN": 2,
+          "IL": 2,
+          "KY": 2,
+          "OH": 1,
+          "FL": 1,
+          "WV": 1,
+          "NJ": 1,
+          "AR": 1
+        },
+        "cities": {
+          "Austin": 3,
+          "Wrightsville": 2,
+          "Surprise": 2,
+          "Indianapolis": 2,
+          "Rockford": 2,
+          "San Bernardino": 2,
+          "Charlotte": 1,
+          "Carmel Hamlet": 1,
+          "Carmel": 1,
+          "Salinas": 1,
+          "Sweetwater": 1,
+          "Dallas": 1,
+          "Laurinburg": 1,
+          "Galion": 1,
+          "Santa Rosa": 1,
+          "Phoenix": 1,
+          "Irvine": 1,
+          "Tulare": 1,
+          "Farmersville": 1,
+          "Sitka": 1
+        },
+        "zipcodes": {
+          "10457": 1,
+          "10512": 1,
+          "12727": 1,
+          "14043": 1,
+          "14870": 1,
+          "15248": 1,
+          "22746": 1,
+          "22916": 1,
+          "25514": 1,
+          "28269": 1,
+          "28352": 1,
+          "28638": 1,
+          "29536": 1,
+          "31096": 1,
+          "31217": 1,
+          "41255": 1,
+          "44833": 1,
+          "46202": 1,
+          "54865": 1,
+          "61104": 2,
+          "64865": 1,
+          "72500": 1,
+          "75243": 1,
+          "75442": 1,
+          "75474": 2,
+          "76104": 1,
+          "77550": 1,
+          "78577": 1,
+          "78744": 1,
+          "78745": 1,
+          "78751": 1,
+          "79556": 1,
+          "85040": 1,
+          "91750": 1,
+          "92374": 1,
+          "92408": 2,
+          "92614": 1,
+          "92805": 1,
+          "93274": 1,
+          "93907": 1,
+          "94014": 1,
+          "94401": 1,
+          "94520": 1,
+          "94590": 1,
+          "95112": 1,
+          "95407": 1,
+          "95422": 2,
+          "95624": 1,
+          "95835": 1,
+          "07103": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.7311721,
+            "lon": -82.7171833
+          },
+          {
+            "lat": 33.6923155,
+            "lon": -112.45223
+          },
+          {
+            "lat": 39.7964102,
+            "lon": -86.1865663
+          },
+          {
+            "lat": 41.4571339,
+            "lon": -73.755344
+          },
+          {
+            "lat": 37.9139963,
+            "lon": -82.8491663
+          },
+          {
+            "lat": 32.8851053,
+            "lon": -96.082225
+          },
+          {
+            "lat": 40.847628,
+            "lon": -73.8890693
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 57,
+          "Viasat Carrier Services Inc": 57,
+          "T-Mobile": 56,
+          "Earthlink": 56,
+          "Verizon": 52,
+          "AT&T": 48,
+          "Xfinity": 24,
+          "Spectrum": 20,
+          "GeoLinks": 16,
+          "Frontier": 11,
+          "TPx Communications": 9,
+          "Astound Broadband": 7,
+          "Optimum": 6,
+          "Rise Broadband": 6,
+          "Cox Communications": 5,
+          "Nextlink": 5,
+          "Unwired Ltd": 5,
+          "CenturyLink": 4,
+          "Etheric Networks": 4,
+          "Mediacom Xtream": 4
+        },
+        "excluded": {
+          "GeoLinks": 15,
+          "TPx Communications": 9,
+          "Viasat Carrier Services Inc": 4,
+          "ZAYO GROUP LLC": 3,
+          "Ultimate Internet Access Inc": 3,
+          "AT&T": 2,
+          "US Signal Company": 2,
+          "Bluebird Network LLC": 2,
+          "WIN LLC": 2,
+          "Stratus Networks Inc": 2,
+          "UPN": 2,
+          "Xfinity": 2,
+          "SimpleFiber Communications| SimpleFiber": 1,
+          "Spectrum": 1,
+          "Cogent Communication": 1,
+          "BAI Connect": 1,
+          "TampaBay Fiber": 1,
+          "Logix Communications LP": 1,
+          "Verizon": 1,
+          "EarthLink Business": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 782,
+        "DSL": 302,
+        "Fiber": 229,
+        "Satellite": 167,
+        "Cable": 138,
+        "Fixed Wireless": 121,
+        "Unknown": 17
+      },
+      "hourly_distribution": {
+        "11": 1,
+        "12": 2,
+        "13": 5,
+        "14": 2,
+        "15": 5,
+        "16": 5,
+        "17": 6,
+        "18": 5,
+        "19": 7,
+        "20": 5,
+        "21": 2,
+        "22": 9,
+        "00": 5,
+        "01": 2,
+        "02": 2,
+        "05": 1
+      },
+      "performance": {
+        "avg_confidence": 0.92
+      }
+    }
+  }

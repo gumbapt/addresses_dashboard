@@ -1,0 +1,144 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:36Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-14",
+      "summary": {
+        "total_requests": 20,
+        "successful_requests": 20,
+        "failed_requests": 0,
+        "success_rate": 100,
+        "unique_providers": 41,
+        "unique_states": 9,
+        "unique_cities": 15,
+        "unique_zipcodes": 16,
+        "avg_speed_mbps": 986.92,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 5,
+          "CA": 3,
+          "GA": 2,
+          "SC": 2,
+          "NC": 1,
+          "OK": 1,
+          "AL": 1,
+          "TX": 1,
+          "PA": 1
+        },
+        "cities": {
+          "Big Bear Lake": 2,
+          "Buffalo": 1,
+          "Penn Yan": 1,
+          "Yonkers": 1,
+          "Meigs": 1,
+          "Mitchell County": 1,
+          "Los Angeles": 1,
+          "Mt Gilead": 1,
+          "El Reno": 1,
+          "Hartsville": 1,
+          "North Hartsville": 1,
+          "Montgomery": 1,
+          "New York": 1,
+          "Paris": 1,
+          "Everett": 1
+        },
+        "zipcodes": {
+          "10037": 1,
+          "10466": 1,
+          "10701": 1,
+          "13208": 2,
+          "14222": 1,
+          "14527": 1,
+          "15537": 1,
+          "27306": 1,
+          "27407": 1,
+          "29550": 1,
+          "31765": 1,
+          "36116": 1,
+          "73036": 1,
+          "75460": 1,
+          "90004": 1,
+          "92315": 2
+        },
+        "coordinates": [
+          {
+            "lat": 31.1065697,
+            "lon": -84.0752018
+          },
+          {
+            "lat": 34.3923176,
+            "lon": -80.0652228
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 20,
+          "Viasat Carrier Services Inc": 20,
+          "T-Mobile": 19,
+          "Verizon": 19,
+          "Earthlink": 19,
+          "AT&T": 17,
+          "Spectrum": 12,
+          "Frontier": 3,
+          "Optimum": 3,
+          "Northland Networks": 2,
+          "Mediacom Xtream": 2,
+          "CNSNext": 2,
+          "Xfinity": 2,
+          "Starry Inc": 2,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "Greenlight Networks": 1,
+          "FastBridge Fiber": 1,
+          "Windstream Alabama, LLC": 1,
+          "Conexon Connect LLC": 1,
+          "ZAYO GROUP LLC": 1
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 4,
+          "Northland Networks": 2,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "Verizon": 1,
+          "Xfinity": 1,
+          "ZAYO GROUP LLC": 1,
+          "TPx Communications": 1,
+          "GeoLinks": 1,
+          "Stealth Communications": 1,
+          "Pilot Fiber": 1,
+          "AT&T": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 276,
+        "Fiber": 73,
+        "Cable": 60,
+        "Satellite": 56,
+        "DSL": 56,
+        "Unknown": 7,
+        "Fixed Wireless": 2
+      },
+      "hourly_distribution": {
+        "15": 1,
+        "16": 2,
+        "17": 1,
+        "19": 7,
+        "21": 5,
+        "22": 2,
+        "23": 2
+      },
+      "performance": {
+        "avg_confidence": 0.94
+      }
+    }
+  }

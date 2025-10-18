@@ -1,0 +1,182 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:29Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-04",
+      "summary": {
+        "total_requests": 31,
+        "successful_requests": 29,
+        "failed_requests": 2,
+        "success_rate": 93.55,
+        "unique_providers": 47,
+        "unique_states": 12,
+        "unique_cities": 22,
+        "unique_zipcodes": 27,
+        "avg_speed_mbps": 752.1,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 6,
+          "TX": 5,
+          "NY": 4,
+          "NC": 3,
+          "FL": 2,
+          "KY": 1,
+          "MS": 1,
+          "MD": 1,
+          "MN": 1,
+          "TN": 1,
+          "AZ": 1,
+          "SC": 1
+        },
+        "cities": {
+          "Houston": 3,
+          "Cloverdale": 2,
+          "Carrollton": 1,
+          "Gloster": 1,
+          "Baltimore": 1,
+          "Whiteville": 1,
+          "Columbus County": 1,
+          "Los Banos": 1,
+          "Aitkin": 1,
+          "Pensacola": 1,
+          "Staten Island": 1,
+          "Zephyrhills": 1,
+          "Fresno": 1,
+          "Fremont": 1,
+          "Memphis": 1,
+          "Tucson": 1,
+          "Greenwood": 1,
+          "Fayetteville": 1,
+          "Vallejo": 1,
+          "Irving": 1
+        },
+        "zipcodes": {
+          "10306": 1,
+          "10456": 1,
+          "21217": 1,
+          "28306": 1,
+          "28472": 1,
+          "29649": 1,
+          "32502": 1,
+          "33540": 1,
+          "38031": 1,
+          "38127": 1,
+          "39638": 1,
+          "41008": 1,
+          "56431": 1,
+          "75062": 1,
+          "76087": 1,
+          "76549": 1,
+          "77025": 1,
+          "77057": 1,
+          "77076": 1,
+          "85701": 1,
+          "93635": 1,
+          "93646": 1,
+          "93704": 1,
+          "93921": 1,
+          "94589": 1,
+          "94903": 1,
+          "95425": 1
+        },
+        "coordinates": [
+          {
+            "lat": 29.6836967,
+            "lon": -95.4306141
+          },
+          {
+            "lat": 34.3645853,
+            "lon": -78.7199462
+          },
+          {
+            "lat": 40.5659,
+            "lon": -74.1365206
+          },
+          {
+            "lat": 38.7948583,
+            "lon": -123.0202202
+          },
+          {
+            "lat": 40.8394941,
+            "lon": -73.9127286
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 29,
+          "Viasat Carrier Services Inc": 29,
+          "Verizon": 28,
+          "T-Mobile": 27,
+          "Earthlink": 27,
+          "AT&T": 26,
+          "Xfinity": 13,
+          "Spectrum": 10,
+          "Brightspeed": 5,
+          "GeoLinks": 5,
+          "unWired Broadband": 3,
+          "Frontier": 3,
+          "Consolidated Communications": 2,
+          "TDS Telecom": 2,
+          "Cal.net": 2,
+          "CenturyLink": 2,
+          "Cox Communications": 2,
+          "Nextlink": 2,
+          "DigitalPath Inc": 2,
+          "Unwired Ltd": 2
+        },
+        "excluded": {
+          "Verizon": 5,
+          "GeoLinks": 5,
+          "AT&T": 3,
+          "Viasat Carrier Services Inc": 2,
+          "Frontier": 1,
+          "Consolidated Communications": 1,
+          "Uniti Fiber GulfCo LLC": 1,
+          "ZAYO GROUP LLC": 1,
+          "UPN": 1,
+          "SimpleFiber Communications| SimpleFiber": 1,
+          "Spectrum": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 383,
+        "DSL": 137,
+        "Satellite": 85,
+        "Fiber": 83,
+        "Cable": 62,
+        "Fixed Wireless": 46,
+        "Unknown": 4
+      },
+      "hourly_distribution": {
+        "10": 1,
+        "12": 1,
+        "13": 2,
+        "14": 3,
+        "15": 2,
+        "16": 3,
+        "17": 3,
+        "18": 4,
+        "19": 3,
+        "20": 4,
+        "22": 2,
+        "23": 1,
+        "01": 1,
+        "02": 1
+      },
+      "performance": {
+        "avg_confidence": 0.83
+      }
+    }
+  }

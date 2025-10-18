@@ -1,0 +1,184 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:30Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-05",
+      "summary": {
+        "total_requests": 43,
+        "successful_requests": 41,
+        "failed_requests": 2,
+        "success_rate": 95.35,
+        "unique_providers": 54,
+        "unique_states": 9,
+        "unique_cities": 24,
+        "unique_zipcodes": 35,
+        "avg_speed_mbps": 683.95,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 11,
+          "NY": 5,
+          "TX": 4,
+          "MS": 3,
+          "NC": 3,
+          "AL": 2,
+          "ME": 1,
+          "OH": 1,
+          "FL": 1
+        },
+        "cities": {
+          "Daly City": 2,
+          "Greensboro": 2,
+          "San Leandro": 2,
+          "Castro Valley": 2,
+          "Glens Falls": 1,
+          "Tuscumbia": 1,
+          "Colbert County": 1,
+          "Portland": 1,
+          "Forest": 1,
+          "Spring": 1,
+          "Pittsburg": 1,
+          "Columbus": 1,
+          "Indio": 1,
+          "Mt Dora": 1,
+          "Center": 1,
+          "Los Angeles": 1,
+          "Hayward": 1,
+          "Mt Morris": 1,
+          "Staten Island": 1,
+          "Poplarville": 1
+        },
+        "zipcodes": {
+          "10301": 1,
+          "10461": 1,
+          "10468": 1,
+          "12801": 1,
+          "14510": 1,
+          "16560": 4,
+          "17703": 1,
+          "25787": 1,
+          "27320": 1,
+          "27406": 2,
+          "32757": 1,
+          "35674": 1,
+          "38016": 1,
+          "39074": 1,
+          "39470": 1,
+          "43222": 1,
+          "45702": 1,
+          "54480": 1,
+          "75144": 1,
+          "75935": 1,
+          "77080": 1,
+          "77340": 1,
+          "77386": 1,
+          "77493": 1,
+          "78666": 1,
+          "88240": 1,
+          "90731": 2,
+          "91605": 1,
+          "92543": 1,
+          "94014": 1,
+          "94015": 1,
+          "94401": 1,
+          "94565": 1,
+          "95422": 1,
+          "04103": 1
+        },
+        "coordinates": [
+          {
+            "lat": 34.6673664,
+            "lon": -87.6990949
+          },
+          {
+            "lat": 37.6986935,
+            "lon": -122.1028486
+          },
+          {
+            "lat": 37.6986935,
+            "lon": -122.1028486
+          },
+          {
+            "lat": 40.6462322,
+            "lon": -74.0893541
+          },
+          {
+            "lat": 30.8300507,
+            "lon": -89.5173973
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 41,
+          "HughesNet": 41,
+          "Viasat Carrier Services Inc": 41,
+          "Earthlink": 41,
+          "AT&T": 39,
+          "Verizon": 39,
+          "Xfinity": 18,
+          "Spectrum": 17,
+          "GeoLinks": 13,
+          "Unwired Ltd": 9,
+          "Etheric Networks": 8,
+          "TPx Communications": 7,
+          "Sonic.net": 6,
+          "Optimum": 4,
+          "Astound Broadband": 4,
+          "Frontier": 4,
+          "Consolidated Communications": 3,
+          "TDS Telecom": 3,
+          "Starry Inc": 3,
+          "ZAYO GROUP LLC": 3
+        },
+        "excluded": {
+          "GeoLinks": 11,
+          "AT&T": 6,
+          "TPx Communications": 5,
+          "Verizon": 3,
+          "Viasat Carrier Services Inc": 3,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 2,
+          "Troy Cablevision, Inc.": 1,
+          "Pilot Fiber": 1,
+          "Everstream": 1,
+          "ZAYO GROUP LLC": 1,
+          "Optical Communications Group Inc": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 586,
+        "DSL": 277,
+        "Fiber": 147,
+        "Satellite": 122,
+        "Cable": 109,
+        "Fixed Wireless": 62,
+        "Unknown": 10
+      },
+      "hourly_distribution": {
+        "12": 2,
+        "13": 3,
+        "14": 2,
+        "15": 9,
+        "16": 5,
+        "17": 5,
+        "18": 8,
+        "19": 4,
+        "20": 2,
+        "22": 2,
+        "02": 1
+      },
+      "performance": {
+        "avg_confidence": 0.93
+      }
+    }
+  }

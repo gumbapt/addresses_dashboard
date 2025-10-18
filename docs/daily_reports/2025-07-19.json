@@ -1,0 +1,203 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:40Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-19",
+      "summary": {
+        "total_requests": 44,
+        "successful_requests": 43,
+        "failed_requests": 1,
+        "success_rate": 97.73,
+        "unique_providers": 48,
+        "unique_states": 10,
+        "unique_cities": 22,
+        "unique_zipcodes": 32,
+        "avg_speed_mbps": 783.25,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 15,
+          "NY": 7,
+          "GA": 3,
+          "SC": 2,
+          "PA": 2,
+          "TN": 2,
+          "MI": 1,
+          "MA": 1,
+          "NJ": 1,
+          "MN": 1
+        },
+        "cities": {
+          "Rosamond": 6,
+          "Hayward": 2,
+          "Buffalo": 2,
+          "Commerce": 2,
+          "Athens": 2,
+          "La Quinta": 2,
+          "Gresham": 1,
+          "Marion County": 1,
+          "Beaverton": 1,
+          "Quincy": 1,
+          "Brawley": 1,
+          "Roselle": 1,
+          "Redlands": 1,
+          "Bronx": 1,
+          "Erie": 1,
+          "Summit": 1,
+          "Stony Point": 1,
+          "San Mateo": 1,
+          "St Paul": 1,
+          "Tucker": 1
+        },
+        "zipcodes": {
+          "10457": 1,
+          "10458": 1,
+          "10701": 1,
+          "10980": 1,
+          "11226": 1,
+          "14204": 1,
+          "14208": 1,
+          "14211": 1,
+          "16509": 1,
+          "20148": 1,
+          "21600": 1,
+          "29546": 1,
+          "30084": 2,
+          "30529": 2,
+          "37303": 2,
+          "41665": 1,
+          "47711": 1,
+          "48612": 1,
+          "53106": 2,
+          "55105": 1,
+          "60620": 1,
+          "77060": 1,
+          "92227": 1,
+          "92374": 1,
+          "93271": 1,
+          "93560": 3,
+          "94401": 1,
+          "94541": 1,
+          "94577": 1,
+          "95358": 1,
+          "02170": 1,
+          "07203": 1
+        },
+        "coordinates": [
+          {
+            "lat": 33.8698343,
+            "lon": -79.3356414
+          },
+          {
+            "lat": 34.864103,
+            "lon": -118.197431
+          },
+          {
+            "lat": 40.8446092,
+            "lon": -73.892203
+          },
+          {
+            "lat": 42.0649144,
+            "lon": -80.0599988
+          },
+          {
+            "lat": 34.864103,
+            "lon": -118.197431
+          },
+          {
+            "lat": 34.864103,
+            "lon": -118.197431
+          },
+          {
+            "lat": 36.4388364,
+            "lon": -118.9045445
+          },
+          {
+            "lat": 33.662868,
+            "lon": -116.3086612
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 43,
+          "Viasat Carrier Services Inc": 43,
+          "Earthlink": 42,
+          "AT&T": 40,
+          "Verizon": 40,
+          "T-Mobile": 39,
+          "Spectrum": 21,
+          "Xfinity": 17,
+          "GeoLinks": 8,
+          "Astound Broadband": 5,
+          "Unwired Ltd": 4,
+          "Etheric Networks": 4,
+          "Starry Inc": 4,
+          "Optimum": 4,
+          "ZAYO GROUP LLC": 4,
+          "Frontier": 3,
+          "TPx Communications": 3,
+          "unWired Broadband": 3,
+          "HTC": 2,
+          "Sonic.net": 2
+        },
+        "excluded": {
+          "GeoLinks": 8,
+          "Viasat Carrier Services Inc": 7,
+          "Verizon": 6,
+          "ZAYO GROUP LLC": 4,
+          "TPx Communications": 3,
+          "ACD.net": 1,
+          "Ultimate Internet Access Inc": 1,
+          "Logix Communications LP": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "Consolidated Communications": 1,
+          "MN FWA Buyer": 1,
+          "Xfinity": 1,
+          "Stealth Communications": 1,
+          "Pilot Fiber": 1,
+          "Optical Communications Group Inc": 1,
+          "Mainstream Fiber Networks LLC": 1,
+          "AT&T": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 547,
+        "Fiber": 148,
+        "DSL": 135,
+        "Satellite": 121,
+        "Cable": 95,
+        "Fixed Wireless": 23,
+        "Unknown": 2
+      },
+      "hourly_distribution": {
+        "12": 2,
+        "13": 1,
+        "14": 4,
+        "15": 3,
+        "16": 7,
+        "17": 6,
+        "18": 2,
+        "19": 5,
+        "20": 5,
+        "21": 1,
+        "22": 2,
+        "23": 2,
+        "00": 3,
+        "01": 1
+      },
+      "performance": {
+        "avg_confidence": 0.89
+      }
+    }
+  }

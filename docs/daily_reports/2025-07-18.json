@@ -1,0 +1,140 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:39Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-18",
+      "summary": {
+        "total_requests": 21,
+        "successful_requests": 19,
+        "failed_requests": 2,
+        "success_rate": 90.48,
+        "unique_providers": 26,
+        "unique_states": 5,
+        "unique_cities": 12,
+        "unique_zipcodes": 19,
+        "avg_speed_mbps": 786.99,
+        "max_speed_mbps": 8000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 6,
+          "NC": 3,
+          "NY": 3,
+          "TX": 2,
+          "TN": 1
+        },
+        "cities": {
+          "Gastonia": 2,
+          "Fullerton": 1,
+          "Marina Del Rey": 1,
+          "La Vergne": 1,
+          "Charlotte": 1,
+          "Brooklyn": 1,
+          "Houston": 1,
+          "Montclair": 1,
+          "La Puente": 1,
+          "Huntington Park": 1,
+          "Dallas": 1,
+          "Compton": 1
+        },
+        "zipcodes": {
+          "10935": 1,
+          "11206": 1,
+          "11208": 1,
+          "28052": 2,
+          "28205": 1,
+          "30078": 1,
+          "30314": 1,
+          "33463": 1,
+          "37086": 1,
+          "75223": 1,
+          "77385": 1,
+          "90221": 1,
+          "90255": 1,
+          "90292": 1,
+          "91744": 1,
+          "91763": 1,
+          "92831": 1,
+          "93535": 1,
+          "96022": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.6968873,
+            "lon": -73.9460316
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "T-Mobile": 19,
+          "HughesNet": 19,
+          "Viasat Carrier Services Inc": 19,
+          "Earthlink": 19,
+          "AT&T": 18,
+          "Verizon": 18,
+          "Spectrum": 12,
+          "Xfinity": 6,
+          "GeoLinks": 5,
+          "Frontier": 3,
+          "TPx Communications": 3,
+          "Starry Inc": 3,
+          "Optimum": 2,
+          "Sea Ranch Connect": 1,
+          "Cosmo Network Solutions, LLC": 1,
+          "Ting": 1,
+          "BAI Connect": 1,
+          "TDS Telecom": 1,
+          "United Communications Inc": 1,
+          "Google Fiber": 1
+        },
+        "excluded": {
+          "GeoLinks": 5,
+          "TPx Communications": 3,
+          "Viasat Carrier Services Inc": 3,
+          "AT&T": 2,
+          "BAI Connect": 1,
+          "Optical Communications Group Inc": 1,
+          "Ultimate Internet Access Inc": 1,
+          "NetFortris": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 307,
+        "DSL": 118,
+        "Fiber": 86,
+        "Cable": 55,
+        "Satellite": 54,
+        "Fixed Wireless": 8,
+        "Unknown": 1
+      },
+      "hourly_distribution": {
+        "10": 2,
+        "12": 2,
+        "13": 1,
+        "14": 2,
+        "15": 2,
+        "16": 1,
+        "19": 1,
+        "20": 1,
+        "21": 2,
+        "22": 3,
+        "23": 1,
+        "00": 1,
+        "02": 1,
+        "04": 1
+      },
+      "performance": {
+        "avg_confidence": 0.94
+      }
+    }
+  }

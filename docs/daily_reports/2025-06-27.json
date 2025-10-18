@@ -1,0 +1,285 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:25Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-06-27",
+      "summary": {
+        "total_requests": 114,
+        "successful_requests": 103,
+        "failed_requests": 11,
+        "success_rate": 90.35,
+        "unique_providers": 84,
+        "unique_states": 20,
+        "unique_cities": 49,
+        "unique_zipcodes": 70,
+        "avg_speed_mbps": 1502.89,
+        "max_speed_mbps": 219000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 32,
+          "NY": 14,
+          "TX": 9,
+          "FL": 8,
+          "OH": 7,
+          "NH": 2,
+          "TN": 2,
+          "MO": 2,
+          "MA": 2,
+          "NV": 2,
+          "AL": 2,
+          "WI": 1,
+          "WV": 1,
+          "MN": 1,
+          "OK": 1,
+          "CO": 1,
+          "MI": 1,
+          "CT": 1,
+          "PA": 1,
+          "WA": 1
+        },
+        "cities": {
+          "New York": 9,
+          "Beaumont": 8,
+          "Irvine": 8,
+          "Los Angeles": 6,
+          "Spring Valley": 3,
+          "Hudson": 2,
+          "Miami": 2,
+          "Dayton": 2,
+          "Memphis": 2,
+          "Miami Beach": 2,
+          "El Monte": 2,
+          "Fort Worth": 2,
+          "San Diego": 2,
+          "Birmingham": 2,
+          "Corpus Christi": 2,
+          "Santa Clarita": 1,
+          "Milwaukee": 1,
+          "Beckley": 1,
+          "St Paul": 1,
+          "Park Hills": 1
+        },
+        "zipcodes": {
+          "10001": 1,
+          "10012": 1,
+          "10019": 1,
+          "10038": 6,
+          "10304": 1,
+          "10467": 1,
+          "10600": 8,
+          "10977": 3,
+          "11201": 1,
+          "12304": 1,
+          "12399": 1,
+          "13739": 1,
+          "14542": 1,
+          "18109": 1,
+          "24541": 1,
+          "25631": 1,
+          "25801": 1,
+          "27320": 1,
+          "33137": 1,
+          "33139": 1,
+          "34744": 1,
+          "35603": 2,
+          "37211": 1,
+          "38109": 1,
+          "38583": 2,
+          "41146": 1,
+          "44312": 1,
+          "45176": 1,
+          "45429": 2,
+          "53210": 1,
+          "55106": 1,
+          "56562": 1,
+          "63601": 1,
+          "73401": 1,
+          "76102": 1,
+          "76504": 1,
+          "79763": 1,
+          "80122": 1,
+          "89121": 1,
+          "90007": 3,
+          "91732": 1,
+          "92612": 1,
+          "92614": 1,
+          "92618": 4,
+          "92683": 2,
+          "92867": 1,
+          "93640": 1,
+          "03051": 2,
+          "01950": 1,
+          "02021": 1
+        },
+        "coordinates": [
+          {
+            "lat": 33.9684276,
+            "lon": -116.9446404
+          },
+          {
+            "lat": 33.69355,
+            "lon": -117.8399649
+          },
+          {
+            "lat": 34.0179268,
+            "lon": -118.2950029
+          },
+          {
+            "lat": 34.0179268,
+            "lon": -118.2950029
+          },
+          {
+            "lat": 34.0179268,
+            "lon": -118.2950029
+          },
+          {
+            "lat": 33.9684276,
+            "lon": -116.9446404
+          },
+          {
+            "lat": 25.8244243,
+            "lon": -80.1913364
+          },
+          {
+            "lat": 35.0253531,
+            "lon": -90.0729524
+          },
+          {
+            "lat": 37.8708077,
+            "lon": -90.5907276
+          },
+          {
+            "lat": 25.7827732,
+            "lon": -80.1418712
+          },
+          {
+            "lat": 36.0998289,
+            "lon": -115.0767864
+          },
+          {
+            "lat": 34.0873898,
+            "lon": -118.0167353
+          },
+          {
+            "lat": 32.7579389,
+            "lon": -97.323673
+          },
+          {
+            "lat": 31.8439491,
+            "lon": -102.4175936
+          },
+          {
+            "lat": 33.6931755,
+            "lon": -117.7082345
+          },
+          {
+            "lat": 39.1613862,
+            "lon": -84.0405006
+          },
+          {
+            "lat": 33.9676693,
+            "lon": -116.941628
+          },
+          {
+            "lat": 33.9676693,
+            "lon": -116.941628
+          },
+          {
+            "lat": 33.4930469,
+            "lon": -86.8053907
+          },
+          {
+            "lat": 27.7990167,
+            "lon": -97.4448752
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 103,
+          "Viasat Carrier Services Inc": 103,
+          "Verizon": 100,
+          "T-Mobile": 98,
+          "Earthlink": 98,
+          "AT&T": 86,
+          "Spectrum": 54,
+          "GeoLinks": 29,
+          "Xfinity": 23,
+          "ZAYO GROUP LLC": 18,
+          "Starry Inc": 17,
+          "Cox Communications": 13,
+          "Astound Broadband": 13,
+          "Cogent Communication": 13,
+          "Frontier": 11,
+          "TPx Communications": 11,
+          "Skywire Networks": 10,
+          "Stealth Communications": 10,
+          "Optical Communications Group Inc": 10,
+          "Nuvisions": 9
+        },
+        "excluded": {
+          "GeoLinks": 22,
+          "Viasat Carrier Services Inc": 18,
+          "ZAYO GROUP LLC": 13,
+          "AT&T": 11,
+          "Cogent Communication": 10,
+          "Verizon": 10,
+          "Stealth Communications": 10,
+          "Optical Communications Group Inc": 10,
+          "Pilot Fiber": 9,
+          "TPx Communications": 8,
+          "Fusion Cloud Services, Inc.": 7,
+          "Telefonica": 6,
+          "Spectrum": 3,
+          "Snappy Internet & Telecom": 2,
+          "Everstream": 2,
+          "Summit Broadband Inc.": 2,
+          "BAI Connect": 1,
+          "MN FWA Buyer": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1,
+          "FireServe": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 1416,
+        "Fiber": 560,
+        "DSL": 453,
+        "Cable": 307,
+        "Satellite": 292,
+        "Fixed Wireless": 51,
+        "Unknown": 16
+      },
+      "hourly_distribution": {
+        "11": 1,
+        "12": 4,
+        "13": 2,
+        "14": 6,
+        "15": 11,
+        "16": 18,
+        "17": 11,
+        "18": 6,
+        "19": 6,
+        "20": 6,
+        "21": 3,
+        "22": 3,
+        "23": 8,
+        "00": 13,
+        "01": 13,
+        "02": 2,
+        "05": 1
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

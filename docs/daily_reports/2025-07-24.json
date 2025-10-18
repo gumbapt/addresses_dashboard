@@ -1,0 +1,169 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:43Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-24",
+      "summary": {
+        "total_requests": 39,
+        "successful_requests": 36,
+        "failed_requests": 3,
+        "success_rate": 92.31,
+        "unique_providers": 51,
+        "unique_states": 7,
+        "unique_cities": 15,
+        "unique_zipcodes": 29,
+        "avg_speed_mbps": 560.19,
+        "max_speed_mbps": 10000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "CA": 8,
+          "TX": 5,
+          "AR": 2,
+          "NY": 1,
+          "LA": 1,
+          "OH": 1,
+          "AL": 1
+        },
+        "cities": {
+          "Houston": 3,
+          "Magnolia": 2,
+          "Ione": 2,
+          "Costa Mesa": 1,
+          "Galveston": 1,
+          "Hidalgo County": 1,
+          "Oswego": 1,
+          "Lakeport": 1,
+          "Kelseyville": 1,
+          "El Monte": 1,
+          "Jennings": 1,
+          "Los Angeles": 1,
+          "Bucyrus": 1,
+          "Marion": 1,
+          "Gilroy": 1
+        },
+        "zipcodes": {
+          "11335": 1,
+          "13126": 1,
+          "13304": 1,
+          "14217": 1,
+          "20430": 1,
+          "24534": 2,
+          "28269": 2,
+          "35014": 1,
+          "36756": 1,
+          "44820": 1,
+          "70546": 1,
+          "71753": 1,
+          "75407": 1,
+          "77550": 1,
+          "90008": 3,
+          "90044": 1,
+          "90631": 1,
+          "90813": 1,
+          "91401": 1,
+          "91402": 1,
+          "92057": 1,
+          "92626": 1,
+          "93274": 2,
+          "93553": 1,
+          "93662": 1,
+          "95020": 1,
+          "95453": 1,
+          "95640": 2,
+          "96797": 2
+        },
+        "coordinates": [
+          {
+            "lat": 26.3720253,
+            "lon": -98.0206658
+          },
+          {
+            "lat": 39.0029436,
+            "lon": -122.8505574
+          },
+          {
+            "lat": 33.246673,
+            "lon": -93.326427
+          },
+          {
+            "lat": 29.616158,
+            "lon": -95.3079837
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "Viasat Carrier Services Inc": 36,
+          "T-Mobile": 34,
+          "Verizon": 34,
+          "Earthlink": 34,
+          "HughesNet": 33,
+          "AT&T": 31,
+          "Spectrum": 23,
+          "GeoLinks": 13,
+          "Starry Inc": 7,
+          "Xfinity": 4,
+          "Frontier": 3,
+          "Hawaiian Telcom": 3,
+          "Servpac": 3,
+          "TPx Communications": 3,
+          "Cal.net": 3,
+          "unWired Broadband": 3,
+          "Google Fiber": 2,
+          "Valley Telephone Cooperative Inc": 2,
+          "TDS Telecom": 2,
+          "DigitalPath Inc": 2
+        },
+        "excluded": {
+          "GeoLinks": 13,
+          "Verizon": 6,
+          "AT&T": 5,
+          "Servpac": 3,
+          "TPx Communications": 2,
+          "TWIN": 1,
+          "ZAYO GROUP LLC": 1,
+          "EarthLink Business": 1,
+          "Vast Networks": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 539,
+        "DSL": 209,
+        "Fiber": 129,
+        "Satellite": 105,
+        "Cable": 99,
+        "Fixed Wireless": 35,
+        "Unknown": 6
+      },
+      "hourly_distribution": {
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 3,
+        "17": 3,
+        "18": 2,
+        "19": 8,
+        "20": 3,
+        "21": 3,
+        "22": 2,
+        "23": 5,
+        "00": 2,
+        "01": 2,
+        "02": 2,
+        "04": 1
+      },
+      "performance": {
+        "avg_confidence": 0.91
+      }
+    }
+  }

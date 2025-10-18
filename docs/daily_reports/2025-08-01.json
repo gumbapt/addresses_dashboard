@@ -1,0 +1,133 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:48Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-08-01",
+      "summary": {
+        "total_requests": 26,
+        "successful_requests": 25,
+        "failed_requests": 1,
+        "success_rate": 96.15,
+        "unique_providers": 41,
+        "unique_states": 2,
+        "unique_cities": 2,
+        "unique_zipcodes": 23,
+        "avg_speed_mbps": 905.4,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 3,
+          "TN": 1
+        },
+        "cities": {
+          "Madisonville": 1,
+          "Rensselaer": 1
+        },
+        "zipcodes": {
+          "10031": 1,
+          "10474": 1,
+          "11206": 1,
+          "11951": 1,
+          "12144": 1,
+          "12170": 1,
+          "12590": 1,
+          "14120": 1,
+          "15678": 1,
+          "20019": 1,
+          "33823": 2,
+          "37354": 1,
+          "38024": 1,
+          "77076": 1,
+          "77511": 1,
+          "79765": 1,
+          "80301": 1,
+          "90802": 1,
+          "92027": 1,
+          "92660": 2,
+          "94063": 1,
+          "94804": 1,
+          "07018": 1
+        },
+        "coordinates": [
+          {
+            "lat": 42.6593069,
+            "lon": -73.7287334
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 25,
+          "Viasat Carrier Services Inc": 25,
+          "Verizon": 24,
+          "Earthlink": 22,
+          "T-Mobile": 20,
+          "AT&T": 19,
+          "Spectrum": 11,
+          "Xfinity": 7,
+          "Optimum": 6,
+          "GeoLinks": 5,
+          "Starry Inc": 4,
+          "Astound Broadband": 4,
+          "Frontier": 3,
+          "TPx Communications": 2,
+          "Cox Communications": 2,
+          "Rural Telecommunications of America": 2,
+          "Hudson Valley Wireless": 2,
+          "Etheric Networks": 2,
+          "Hargray Communications": 2,
+          "Fusion Cloud Services, Inc.": 1
+        },
+        "excluded": {
+          "GeoLinks": 5,
+          "Viasat Carrier Services Inc": 5,
+          "TPx Communications": 2,
+          "Verizon": 2,
+          "AT&T": 2,
+          "Fusion Cloud Services, Inc.": 1,
+          "Stealth Communications": 1,
+          "Pilot Fiber": 1,
+          "Vast Networks": 1,
+          "Optical Communications Group Inc": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 263,
+        "Fiber": 85,
+        "Cable": 72,
+        "Satellite": 70,
+        "DSL": 63,
+        "Fixed Wireless": 19,
+        "Unknown": 6
+      },
+      "hourly_distribution": {
+        "10": 2,
+        "11": 2,
+        "12": 1,
+        "13": 3,
+        "14": 2,
+        "15": 1,
+        "16": 2,
+        "17": 2,
+        "20": 2,
+        "21": 2,
+        "22": 5,
+        "02": 1,
+        "07": 1
+      },
+      "performance": {
+        "avg_confidence": 0.96
+      }
+    }
+  }

@@ -1,0 +1,209 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:46Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-28",
+      "summary": {
+        "total_requests": 40,
+        "successful_requests": 34,
+        "failed_requests": 6,
+        "success_rate": 85,
+        "unique_providers": 62,
+        "unique_states": 14,
+        "unique_cities": 24,
+        "unique_zipcodes": 31,
+        "avg_speed_mbps": 782.86,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 7,
+          "TX": 4,
+          "AL": 4,
+          "NC": 3,
+          "CA": 3,
+          "MN": 2,
+          "AR": 2,
+          "MI": 2,
+          "NM": 1,
+          "KY": 1,
+          "FL": 1,
+          "PA": 1,
+          "MS": 1,
+          "WI": 1
+        },
+        "cities": {
+          "Thief River Falls": 2,
+          "Bronx": 2,
+          "Dallas": 2,
+          "Anniston": 2,
+          "West End-Cobb Town": 2,
+          "Bryson City": 2,
+          "Clovis": 1,
+          "Winchester": 1,
+          "Boca Raton": 1,
+          "Fort Smith": 1,
+          "Walnut Ridge": 1,
+          "Greensboro": 1,
+          "Allentown": 1,
+          "Kemp": 1,
+          "Kaufman County": 1,
+          "Hayward": 1,
+          "Cadillac": 1,
+          "Cherry Grove": 1,
+          "Brooklyn": 1,
+          "Meridian": 1
+        },
+        "zipcodes": {
+          "10031": 1,
+          "10319": 2,
+          "10453": 1,
+          "10466": 1,
+          "10467": 1,
+          "10701": 1,
+          "10838": 2,
+          "11213": 1,
+          "11368": 1,
+          "18102": 1,
+          "19325": 2,
+          "22924": 1,
+          "27409": 1,
+          "28713": 2,
+          "33024": 1,
+          "33486": 1,
+          "36201": 1,
+          "39301": 1,
+          "40391": 1,
+          "49601": 1,
+          "54868": 1,
+          "72476": 1,
+          "72903": 1,
+          "78114": 1,
+          "88101": 1,
+          "90017": 1,
+          "93313": 1,
+          "94541": 1,
+          "94565": 1,
+          "95341": 1,
+          "95363": 1
+        },
+        "coordinates": [
+          {
+            "lat": 48.172695,
+            "lon": -96.266575
+          },
+          {
+            "lat": 32.3684566,
+            "lon": -96.2396935
+          },
+          {
+            "lat": 40.84632,
+            "lon": -73.9167596
+          },
+          {
+            "lat": 44.2326452,
+            "lon": -85.55927
+          },
+          {
+            "lat": 40.8924102,
+            "lon": -73.8599121
+          },
+          {
+            "lat": 40.6722134,
+            "lon": -73.9389213
+          },
+          {
+            "lat": 33.6441885,
+            "lon": -85.8742795
+          },
+          {
+            "lat": 33.6441885,
+            "lon": -85.8742795
+          },
+          {
+            "lat": 37.542324,
+            "lon": -121.2024218
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 34,
+          "T-Mobile": 32,
+          "Verizon": 32,
+          "Viasat Carrier Services Inc": 32,
+          "Earthlink": 32,
+          "AT&T": 24,
+          "Spectrum": 10,
+          "Optimum": 8,
+          "Xfinity": 6,
+          "GeoLinks": 6,
+          "Starry Inc": 5,
+          "CenturyLink": 4,
+          "ZAYO GROUP LLC": 3,
+          "Element8": 3,
+          "Cal.net": 3,
+          "unWired Broadband": 3,
+          "Sjobergs": 2,
+          "Bug Tussel Wireless": 2,
+          "Astound Broadband": 2,
+          "Wi-Five Broadband": 2
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 11,
+          "Verizon": 5,
+          "GeoLinks": 5,
+          "ZAYO GROUP LLC": 3,
+          "AT&T": 2,
+          "Fusion Cloud Services, Inc.": 2,
+          "SimpleFiber Communications| SimpleFiber": 2,
+          "Lumos": 1,
+          "PenTeleData": 1,
+          "T-Mobile": 1,
+          "Earthlink": 1,
+          "Spectrum": 1,
+          "TPx Communications": 1,
+          "Vast Networks": 1,
+          "Stealth Communications": 1,
+          "Pilot Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 432,
+        "DSL": 123,
+        "Fiber": 119,
+        "Satellite": 87,
+        "Cable": 75,
+        "Fixed Wireless": 47,
+        "Unknown": 3
+      },
+      "hourly_distribution": {
+        "10": 1,
+        "13": 1,
+        "14": 6,
+        "15": 7,
+        "16": 3,
+        "17": 2,
+        "18": 1,
+        "20": 7,
+        "21": 2,
+        "22": 2,
+        "23": 2,
+        "00": 1,
+        "01": 3,
+        "06": 2
+      },
+      "performance": {
+        "avg_confidence": 0.8
+      }
+    }
+}

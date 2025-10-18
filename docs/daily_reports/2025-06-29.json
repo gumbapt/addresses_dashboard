@@ -1,0 +1,183 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:26Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-06-29",
+      "summary": {
+        "total_requests": 31,
+        "successful_requests": 29,
+        "failed_requests": 2,
+        "success_rate": 93.55,
+        "unique_providers": 45,
+        "unique_states": 9,
+        "unique_cities": 17,
+        "unique_zipcodes": 23,
+        "avg_speed_mbps": 722.36,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "TX": 9,
+          "OK": 4,
+          "NY": 2,
+          "MS": 2,
+          "CA": 2,
+          "MN": 2,
+          "TN": 2,
+          "LA": 1,
+          "IN": 1
+        },
+        "cities": {
+          "Oklahoma City": 3,
+          "Longview": 2,
+          "Mendenhall": 2,
+          "Minneapolis": 2,
+          "Houston": 2,
+          "Union City": 2,
+          "Shreveport": 1,
+          "Denison": 1,
+          "Ossining": 1,
+          "Turlock": 1,
+          "Modesto": 1,
+          "Indianapolis": 1,
+          "Cedar Creek": 1,
+          "Dale": 1,
+          "Red Oak": 1,
+          "Glenn Heights": 1,
+          "Spencer": 1
+        },
+        "zipcodes": {
+          "10460": 1,
+          "10562": 1,
+          "11220": 1,
+          "12936": 2,
+          "28386": 1,
+          "31750": 1,
+          "34288": 1,
+          "38261": 1,
+          "39114": 1,
+          "46227": 1,
+          "55430": 1,
+          "71107": 1,
+          "73112": 1,
+          "75020": 1,
+          "75154": 1,
+          "75602": 1,
+          "77025": 1,
+          "78612": 1,
+          "91304": 1,
+          "91911": 1,
+          "93201": 1,
+          "95355": 2,
+          "95382": 1
+        },
+        "coordinates": [
+          {
+            "lat": 32.4849291,
+            "lon": -94.7298182
+          },
+          {
+            "lat": 31.9597404,
+            "lon": -89.8749411
+          },
+          {
+            "lat": 30.063236,
+            "lon": -97.612837
+          },
+          {
+            "lat": 35.5030289,
+            "lon": -97.5730575
+          },
+          {
+            "lat": 29.7006711,
+            "lon": -95.4236009
+          },
+          {
+            "lat": 32.5594635,
+            "lon": -96.8331319
+          },
+          {
+            "lat": 36.4090392,
+            "lon": -89.0117399
+          },
+          {
+            "lat": 35.5218305,
+            "lon": -97.3009618
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 29,
+          "Viasat Carrier Services Inc": 29,
+          "AT&T": 28,
+          "T-Mobile": 28,
+          "Verizon": 28,
+          "Earthlink": 28,
+          "Spectrum": 11,
+          "Xfinity": 8,
+          "Rise Broadband": 5,
+          "Cox Communications": 4,
+          "TDS Telecom": 4,
+          "Nextlink": 3,
+          "Hargray Communications": 3,
+          "Optimum": 3,
+          "GeoLinks": 3,
+          "Cal.net": 3,
+          "Ayera Technologies Inc": 3,
+          "unWired Broadband": 3,
+          "Atlink Services": 3,
+          "Airosurf Communications": 3
+        },
+        "excluded": {
+          "Verizon": 3,
+          "Viasat Carrier Services Inc": 3,
+          "GeoLinks": 3,
+          "AT&T": 3,
+          "MN FWA Buyer": 2,
+          "ZAYO GROUP LLC": 1,
+          "Stealth Communications": 1,
+          "Optical Communications Group Inc": 1,
+          "Troy Cablevision, Inc.": 1,
+          "TPx Communications": 1,
+          "Spectrum": 1,
+          "Ritter Communications Inc": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 388,
+        "DSL": 155,
+        "Fiber": 101,
+        "Satellite": 84,
+        "Cable": 67,
+        "Fixed Wireless": 41,
+        "Unknown": 18
+      },
+      "hourly_distribution": {
+        "13": 1,
+        "14": 2,
+        "15": 5,
+        "16": 4,
+        "17": 4,
+        "18": 2,
+        "19": 5,
+        "20": 2,
+        "21": 2,
+        "23": 2,
+        "00": 1,
+        "02": 1
+      },
+      "performance": {
+        "avg_confidence": 0.84
+      }
+    }
+  }

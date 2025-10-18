@@ -1,0 +1,198 @@
+{
+    "api_version": "1.0",
+    "report_type": "daily",
+    "timestamp": "2025-10-16T21:24:34Z",
+    "source": {
+      "site_id": "wp-zip-daily-test",
+      "site_name": "SmarterHome.ai",
+      "site_url": "http://zip.50g.io",
+      "wordpress_version": "6.8.3",
+      "plugin_version": "1.0.0"
+    },
+    "data": {
+      "date": "2025-07-10",
+      "summary": {
+        "total_requests": 57,
+        "successful_requests": 47,
+        "failed_requests": 10,
+        "success_rate": 82.46,
+        "unique_providers": 61,
+        "unique_states": 9,
+        "unique_cities": 28,
+        "unique_zipcodes": 47,
+        "avg_speed_mbps": 895.8,
+        "max_speed_mbps": 100000,
+        "min_speed_mbps": 10
+      },
+      "geographic": {
+        "states": {
+          "NY": 12,
+          "CA": 7,
+          "TX": 5,
+          "FL": 3,
+          "LA": 3,
+          "IN": 1,
+          "WV": 1,
+          "OH": 1,
+          "TN": 1
+        },
+        "cities": {
+          "New York": 2,
+          "The Colony": 2,
+          "Buffalo": 2,
+          "Bronx": 1,
+          "Indianapolis": 1,
+          "Starke": 1,
+          "Bradford County": 1,
+          "San Diego": 1,
+          "Oroville": 1,
+          "New Berlin": 1,
+          "Merced": 1,
+          "Marksville": 1,
+          "Tamarac": 1,
+          "Floydada": 1,
+          "Sugar Land": 1,
+          "Yorktown Heights": 1,
+          "Hinton": 1,
+          "Bakersfield": 1,
+          "Moreauville": 1,
+          "Avoyelles Parish": 1
+        },
+        "zipcodes": {
+          "10023": 1,
+          "10034": 1,
+          "10065": 1,
+          "10458": 1,
+          "10473": 1,
+          "10598": 1,
+          "10994": 1,
+          "11228": 1,
+          "11234": 1,
+          "11648": 1,
+          "11722": 1,
+          "12308": 1,
+          "13411": 1,
+          "13760": 1,
+          "14204": 1,
+          "14221": 2,
+          "16919": 1,
+          "25951": 1,
+          "32091": 1,
+          "33321": 1,
+          "35216": 1,
+          "35217": 1,
+          "37211": 1,
+          "44107": 1,
+          "46237": 1,
+          "53910": 1,
+          "71351": 1,
+          "71355": 1,
+          "75056": 2,
+          "76059": 1,
+          "76111": 1,
+          "76123": 1,
+          "78016": 1,
+          "78382": 1,
+          "79235": 1,
+          "90248": 1,
+          "90813": 1,
+          "92173": 1,
+          "92225": 1,
+          "93308": 1,
+          "93637": 1,
+          "94558": 1,
+          "95348": 1,
+          "95816": 1,
+          "95965": 1,
+          "97477": 1,
+          "04563": 1
+        },
+        "coordinates": [
+          {
+            "lat": 40.8131242,
+            "lon": -73.8615475
+          },
+          {
+            "lat": 30.0186646,
+            "lon": -82.1535344
+          },
+          {
+            "lat": 31.0587717,
+            "lon": -91.9563842
+          },
+          {
+            "lat": 32.6193246,
+            "lon": -97.3894772
+          }
+        ]
+      },
+      "providers": {
+        "available": {
+          "HughesNet": 47,
+          "Viasat Carrier Services Inc": 47,
+          "Earthlink": 44,
+          "T-Mobile": 43,
+          "Verizon": 43,
+          "AT&T": 42,
+          "Spectrum": 21,
+          "Optimum": 10,
+          "Xfinity": 9,
+          "GeoLinks": 6,
+          "Starry Inc": 6,
+          "Astound Broadband": 6,
+          "Frontier": 5,
+          "ZAYO GROUP LLC": 3,
+          "Nextlink": 3,
+          "CenturyLink": 3,
+          "Pilot Fiber": 3,
+          "TPx Communications": 3,
+          "unWired Broadband": 3,
+          "Rise Broadband": 2
+        },
+        "excluded": {
+          "Viasat Carrier Services Inc": 12,
+          "GeoLinks": 6,
+          "Verizon": 6,
+          "AT&T": 5,
+          "ZAYO GROUP LLC": 3,
+          "Pilot Fiber": 3,
+          "TPx Communications": 3,
+          "Stealth Communications": 2,
+          "UPN": 2,
+          "Vast Networks": 1,
+          "ITS Telecom": 1,
+          "TDS Telecom": 1,
+          "Everstream": 1,
+          "Cogent Communication": 1,
+          "Optical Communications Group Inc": 1,
+          "Oxford County Telephone Company d/b/a FirstLight Fiber": 1
+        }
+      },
+      "technologies": {
+        "Mobile Wireless": 618,
+        "DSL": 204,
+        "Fiber": 181,
+        "Satellite": 132,
+        "Cable": 127,
+        "Fixed Wireless": 48,
+        "Unknown": 9
+      },
+      "hourly_distribution": {
+        "13": 2,
+        "14": 2,
+        "15": 3,
+        "16": 7,
+        "17": 9,
+        "18": 11,
+        "19": 5,
+        "20": 6,
+        "21": 7,
+        "22": 2,
+        "23": 2,
+        "04": 1
+      },
+      "performance": {
+        "avg_confidence": 0.94
+      }
+    }
+  }

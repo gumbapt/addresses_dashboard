@@ -198,11 +198,17 @@ class CreateDailyReportUseCase
     {
         $summary = $dailyData['data']['summary'];
         
+        // Se já existem speed_metrics no dailyData (dados sintéticos), use-os
+        if (isset($dailyData['speed_metrics'])) {
+            return $dailyData['speed_metrics'];
+        }
+        
+        // Senão, crie a estrutura básica
         return [
             'overall' => [
-                'avg' => $summary['avg_speed_mbps'],
-                'max' => $summary['max_speed_mbps'],
-                'min' => $summary['min_speed_mbps'],
+                'avg' => $summary['avg_speed_mbps'] ?? 0,
+                'max' => $summary['max_speed_mbps'] ?? 0,
+                'min' => $summary['min_speed_mbps'] ?? 0,
             ],
             'by_state' => [],
             'by_provider' => [],

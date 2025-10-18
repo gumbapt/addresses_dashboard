@@ -29,6 +29,11 @@ class Domain extends Model
         'settings' => 'array',
     ];
     
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+    
     public function toEntity(): DomainEntity
     {
         return new DomainEntity(

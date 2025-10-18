@@ -109,12 +109,18 @@ class CreateDailyReportUseCase
         
         if (isset($dailyData['data']['providers']['available'])) {
             foreach ($dailyData['data']['providers']['available'] as $name => $count) {
+                // Pegar avg_speed do speed_metrics.by_provider se existir
+                $avgSpeed = 0;
+                if (isset($dailyData['speed_metrics']['by_provider'][$name]['avg_speed'])) {
+                    $avgSpeed = $dailyData['speed_metrics']['by_provider'][$name]['avg_speed'];
+                }
+                
                 $providers[] = [
                     'name' => $name,
                     'technology' => $this->inferTechnology($name),
                     'total_count' => $count,
                     'success_rate' => 0,
-                    'avg_speed' => 0,
+                    'avg_speed' => $avgSpeed,
                 ];
             }
         }
@@ -134,12 +140,18 @@ class CreateDailyReportUseCase
         // Converter estados
         if (isset($dailyData['data']['geographic']['states'])) {
             foreach ($dailyData['data']['geographic']['states'] as $code => $count) {
+                // Pegar avg_speed do speed_metrics.by_state se existir
+                $avgSpeed = 0;
+                if (isset($dailyData['speed_metrics']['by_state'][$code]['avg_speed'])) {
+                    $avgSpeed = $dailyData['speed_metrics']['by_state'][$code]['avg_speed'];
+                }
+                
                 $states[] = [
                     'code' => $code,
                     'name' => $this->getStateName($code),
                     'request_count' => $count,
                     'success_rate' => 0,
-                    'avg_speed' => 0,
+                    'avg_speed' => $avgSpeed,
                 ];
             }
         }

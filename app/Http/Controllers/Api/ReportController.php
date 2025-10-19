@@ -9,6 +9,8 @@ use App\Application\UseCases\Report\GetAggregatedReportStatsUseCase;
 use App\Application\UseCases\Report\GetReportWithStatsUseCase;
 use App\Application\UseCases\Report\GetDashboardDataUseCase;
 use App\Application\UseCases\Report\CreateDailyReportUseCase;
+use App\Application\UseCases\Report\Global\GetGlobalDomainRankingUseCase;
+use App\Application\UseCases\Report\Global\CompareDomainsUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReportRequest;
 use App\Http\Requests\SubmitDailyReportRequest;
@@ -27,7 +29,9 @@ class ReportController extends Controller
         private GetAggregatedReportStatsUseCase $getAggregatedReportStatsUseCase,
         private GetReportWithStatsUseCase $getReportWithStatsUseCase,
         private GetDashboardDataUseCase $getDashboardDataUseCase,
-        private CreateDailyReportUseCase $createDailyReportUseCase
+        private CreateDailyReportUseCase $createDailyReportUseCase,
+        private GetGlobalDomainRankingUseCase $getGlobalDomainRankingUseCase,
+        private CompareDomainsUseCase $compareDomainsUseCase
     ) {}
 
     /**
@@ -387,5 +391,123 @@ class ReportController extends Controller
         }
 
         abort(401, 'Invalid or missing API key');
+    }
+
+    /**
+     * Get global domain ranking
+     * 
+     * @group Global Reports
+     * @authenticated
+     */
+    public function globalRanking(Request $request): JsonResponse
+    {
+        try {
+            $sortBy = $request->query('sort_by', 'score');
+            $dateFrom = $request->query('date_from');
+            $dateTo = $request->query('date_to');
+            $minReports = $request->query('min_reports') ? (int) $request->query('min_reports') : null;
+
+            // Validate sort_by parameter
+            if (!in_array($sortBy, ['score', 'volume', 'success', 'speed'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid sort_by parameter. Must be one of: score, volume, success, speed',
+                ], 400);
+            }
+
+            $ranking = $this->getGlobalDomainRankingUseCase->execute(
+                $sortBy,
+                $dateFrom,
+                $dateTo,
+                $minReports
+            );
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'ranking' => array_map(fn($dto) => $dto->toArray(), $ranking),
+                    'sort_by' => $sortBy,
+                    'total_domains' => count($ranking),
+                    'filters' => [
+                        'date_from' => $dateFrom,
+                        'date_to' => $dateTo,
+                        'min_reports' => $minReports,
+                    ],
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error getting global domain ranking',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    /**
+     * Compare domains
+     * 
+     * @group Global Reports
+     * @authenticated
+     */
+    public function compareDomains(Request $request): JsonResponse
+    {
+        try {
+            $domainIdsParam = $request->query('domains');
+            
+            if (!$domainIdsParam) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'domains parameter is required. Example: ?domains=1,2,3',
+                ], 400);
+            }
+
+            // Parse domain IDs
+            $domainIds = array_map('intval', explode(',', $domainIdsParam));
+
+            if (empty($domainIds)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'At least one domain ID is required',
+                ], 400);
+            }
+
+            $metric = $request->query('metric');
+            $dateFrom = $request->query('date_from');
+            $dateTo = $request->query('date_to');
+
+            $comparison = $this->compareDomainsUseCase->execute(
+                $domainIds,
+                $metric,
+                $dateFrom,
+                $dateTo
+            );
+
+            if (empty($comparison)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No data found for the specified domains',
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'domains' => array_map(fn($dto) => $dto->toArray(), $comparison),
+                    'total_compared' => count($comparison),
+                    'filters' => [
+                        'metric' => $metric,
+                        'date_from' => $dateFrom,
+                        'date_to' => $dateTo,
+                    ],
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error comparing domains',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
     }
 }

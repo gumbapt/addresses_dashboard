@@ -136,6 +136,12 @@ Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->grou
     Route::get('/domain/{domainId}/dashboard', [ReportController::class, 'dashboard'])->name('admin.reports.dashboard');
     Route::get('/domain/{domainId}/aggregate', [ReportController::class, 'aggregate'])->name('admin.reports.aggregate');
     Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
+    
+    // Global/Cross-Domain Reports
+    Route::prefix('global')->group(function () {
+        Route::get('/domain-ranking', [ReportController::class, 'globalRanking'])->name('admin.reports.global.ranking');
+        Route::get('/comparison', [ReportController::class, 'compareDomains'])->name('admin.reports.global.comparison');
+    });
 });
 
 // Broadcast routes for private channels

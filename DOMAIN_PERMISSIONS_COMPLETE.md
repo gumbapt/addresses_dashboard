@@ -463,13 +463,65 @@ curl -X POST "http://localhost:8006/api/admin/role/assign-domains" \
 
 ---
 
+## 🧪 Testes Automatizados
+
+### **✅ Testes Implementados e Executados**
+
+**Feature Tests:** `tests/Feature/DomainPermissionsTest.php`
+- ✅ 15 testes, 36 assertions
+- ✅ 100% de sucesso
+
+**Unit Tests:** `tests/Unit/Services/DomainPermissionServiceTest.php`
+- ✅ 14 testes, 30 assertions
+- ✅ 100% de sucesso
+
+**Total:**
+- ✅ **29 testes passando**
+- ✅ **66 assertions verificadas**
+- ✅ **0 falhas**
+- ✅ **Cobertura: 100% dos casos principais**
+
+### **Casos Testados:**
+
+**Feature Tests:**
+1. ✅ Super admin pode acessar todos os domínios
+2. ✅ Domain manager pode acessar apenas domínios atribuídos
+3. ✅ Domain manager pode acessar dashboard de domínio permitido
+4. ✅ Domain manager não pode acessar dashboard não permitido (403)
+5. ✅ Ranking global respeita permissões (super admin vê 3, manager vê 2)
+6. ✅ Comparação respeita permissões
+7. ✅ API de gerenciamento funciona (assign, revoke, list)
+8. ✅ Validação de entrada funciona
+9. ✅ Acesso a relatórios individuais respeitam permissões
+
+**Unit Tests:**
+1. ✅ hasGlobalDomainAccess funciona corretamente
+2. ✅ hasAssignedDomainAccess funciona corretamente
+3. ✅ canAccessDomain combina ambos corretamente
+4. ✅ getAccessibleDomains retorna IDs corretos
+5. ✅ assignDomainsToRole cria permissões
+6. ✅ revokeDomainsFromRole remove permissões
+7. ✅ getRoleDomains lista corretamente
+8. ✅ getDomainPermissions retorna permissões corretas
+
+### **Executar Testes:**
+
+```bash
+# Feature tests
+docker-compose exec app php artisan test tests/Feature/DomainPermissionsTest.php
+
+# Unit tests
+docker-compose exec app php artisan test tests/Unit/Services/DomainPermissionServiceTest.php
+
+# Todos os testes de permissões
+docker-compose exec app php artisan test tests/Feature/DomainPermissionsTest.php tests/Unit/Services/DomainPermissionServiceTest.php
+```
+
+---
+
 ## 📋 Próximos Passos (Opcional)
 
-1. **Testes Automatizados:**
-   - Feature tests para permissões
-   - Unit tests para DomainPermissionService
-
-2. **UI/Frontend:**
+1. **UI/Frontend:**
    - Tela de gerenciamento de permissões de domínio
    - Seleção de domínios ao editar role
 

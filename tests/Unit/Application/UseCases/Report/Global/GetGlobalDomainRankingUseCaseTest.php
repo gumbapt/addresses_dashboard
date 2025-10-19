@@ -25,7 +25,15 @@ class GetGlobalDomainRankingUseCaseTest extends TestCase
     {
         // Create 2 domains with different metrics
         $domain1 = Domain::factory()->create();
-        $report1 = Report::factory()->create(['domain_id' => $domain1->id, 'status' => 'processed']);
+        $report1 = Report::factory()->create([
+            'domain_id' => $domain1->id,
+            'status' => 'processed',
+            'raw_data' => [
+                'speed_metrics' => [
+                    'overall' => ['avg' => 1000],
+                ],
+            ],
+        ]);
         ReportSummary::factory()->create([
             'report_id' => $report1->id,
             'total_requests' => 1000,
@@ -33,7 +41,15 @@ class GetGlobalDomainRankingUseCaseTest extends TestCase
         ]);
 
         $domain2 = Domain::factory()->create();
-        $report2 = Report::factory()->create(['domain_id' => $domain2->id, 'status' => 'processed']);
+        $report2 = Report::factory()->create([
+            'domain_id' => $domain2->id,
+            'status' => 'processed',
+            'raw_data' => [
+                'speed_metrics' => [
+                    'overall' => ['avg' => 2000],
+                ],
+            ],
+        ]);
         ReportSummary::factory()->create([
             'report_id' => $report2->id,
             'total_requests' => 2000,

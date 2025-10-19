@@ -73,6 +73,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/role/update-permissions', [RoleController::class, 'updatePermissions']);
         Route::get('/permissions', [PermissionController::class, 'index']);
         
+        // Domain permissions for roles
+        Route::post('/role/assign-domains', [RoleController::class, 'assignDomains'])->name('admin.role.assign-domains');
+        Route::delete('/role/revoke-domains', [RoleController::class, 'revokeDomains'])->name('admin.role.revoke-domains');
+        Route::get('/role/{roleId}/domains', [RoleController::class, 'getDomains'])->name('admin.role.domains');
+        
         
         // Admin management routes
         Route::get('/admins', [AdminController::class, 'index']);
@@ -115,6 +120,9 @@ Route::prefix('admin')->group(function () {
         
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index']);
+        
+        // Admin's accessible domains
+        Route::get('/my-domains', [AdminController::class, 'getMyDomains'])->name('admin.my-domains');
 
     });
 });
@@ -131,13 +139,18 @@ Route::prefix('reports')->group(function () {
 
 // Report Management API (Admin Authentication) 
 Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->group(function () {
+    // Routes without domain restriction
     Route::get('/', [ReportController::class, 'index'])->name('admin.reports.index');
     Route::get('/recent', [ReportController::class, 'recent'])->name('admin.reports.recent');
-    Route::get('/domain/{domainId}/dashboard', [ReportController::class, 'dashboard'])->name('admin.reports.dashboard');
-    Route::get('/domain/{domainId}/aggregate', [ReportController::class, 'aggregate'])->name('admin.reports.aggregate');
-    Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
     
-    // Global/Cross-Domain Reports
+    // Routes that check domain access
+    Route::middleware('check.domain.access')->group(function () {
+        Route::get('/domain/{domainId}/dashboard', [ReportController::class, 'dashboard'])->name('admin.reports.dashboard');
+        Route::get('/domain/{domainId}/aggregate', [ReportController::class, 'aggregate'])->name('admin.reports.aggregate');
+        Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
+    });
+    
+    // Global/Cross-Domain Reports (filtered by accessible domains)
     Route::prefix('global')->group(function () {
         Route::get('/domain-ranking', [ReportController::class, 'globalRanking'])->name('admin.reports.global.ranking');
         Route::get('/comparison', [ReportController::class, 'compareDomains'])->name('admin.reports.global.comparison');

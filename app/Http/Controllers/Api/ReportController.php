@@ -415,11 +415,16 @@ class ReportController extends Controller
                 ], 400);
             }
 
+            // Get accessible domains for this admin
+            $admin = $request->user();
+            $accessibleDomains = $admin->getAccessibleDomains();
+
             $ranking = $this->getGlobalDomainRankingUseCase->execute(
                 $sortBy,
                 $dateFrom,
                 $dateTo,
-                $minReports
+                $minReports,
+                $accessibleDomains // Filter by accessible domains
             );
 
             return response()->json([
@@ -470,6 +475,20 @@ class ReportController extends Controller
                     'success' => false,
                     'message' => 'At least one domain ID is required',
                 ], 400);
+            }
+
+            // Filter by accessible domains
+            $admin = $request->user();
+            $accessibleDomains = $admin->getAccessibleDomains();
+            
+            // Verify all requested domains are accessible
+            foreach ($domainIds as $domainId) {
+                if (!in_array($domainId, $accessibleDomains)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "Access denied to domain ID {$domainId}",
+                    ], 403);
+                }
             }
 
             $metric = $request->query('metric');

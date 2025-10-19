@@ -27,6 +27,18 @@ class Role extends Model
         return $this->belongsToMany(Permission::class, 'role_permissions');
     }
 
+    public function domainPermissions()
+    {
+        return $this->hasMany(RoleDomainPermission::class);
+    }
+
+    public function domains()
+    {
+        return $this->belongsToMany(Domain::class, 'role_domain_permissions')
+                    ->withPivot(['can_view', 'can_edit', 'can_delete', 'can_submit_reports', 'assigned_at', 'assigned_by', 'is_active'])
+                    ->wherePivot('is_active', true);
+    }
+
     public function toEntity(): RoleEntity
     {
         $permissions = $this->permissions()->get();

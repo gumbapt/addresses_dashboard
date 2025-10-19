@@ -18,16 +18,24 @@ class GetGlobalDomainRankingUseCase
      * @param string|null $dateFrom Filter by date range start
      * @param string|null $dateTo Filter by date range end
      * @param int|null $minReports Minimum number of reports required
+     * @param array|null $accessibleDomainIds Filter by accessible domain IDs (null = all)
      * @return array Array of DomainRankingDTO
      */
     public function execute(
         string $sortBy = 'score',
         ?string $dateFrom = null,
         ?string $dateTo = null,
-        ?int $minReports = null
+        ?int $minReports = null,
+        ?array $accessibleDomainIds = null
     ): array {
-        // Get all active domains
-        $domains = Domain::where('is_active', true)->get();
+        // Get domains (filtered by accessible if provided)
+        $query = Domain::where('is_active', true);
+        
+        if ($accessibleDomainIds !== null && !empty($accessibleDomainIds)) {
+            $query->whereIn('id', $accessibleDomainIds);
+        }
+        
+        $domains = $query->get();
 
         if ($domains->isEmpty()) {
             return [];

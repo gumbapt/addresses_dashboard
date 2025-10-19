@@ -97,6 +97,33 @@ class Admin extends Authenticatable implements ChatUser
                     ->pluck('permissions')->flatten()->unique('id');
     }
 
+    /**
+     * Get accessible domains for this admin
+     */
+    public function getAccessibleDomains(): array
+    {
+        $service = app(\App\Domain\Services\DomainPermissionService::class);
+        return $service->getAccessibleDomains($this);
+    }
+
+    /**
+     * Check if admin can access a specific domain
+     */
+    public function canAccessDomain(int $domainId): bool
+    {
+        $service = app(\App\Domain\Services\DomainPermissionService::class);
+        return $service->canAccessDomain($this, $domainId);
+    }
+
+    /**
+     * Check if admin has global domain access
+     */
+    public function hasGlobalDomainAccess(): bool
+    {
+        $service = app(\App\Domain\Services\DomainPermissionService::class);
+        return $service->hasGlobalDomainAccess($this);
+    }
+
     // Implementação da interface ChatUser
 
     public function getId(): int

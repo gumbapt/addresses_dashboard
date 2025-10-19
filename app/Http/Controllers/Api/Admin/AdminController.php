@@ -9,6 +9,7 @@ use App\Application\UseCases\Admin\CreateAdminUseCase;
 use App\Application\UseCases\Admin\DeleteAdminUseCase;
 use App\Application\UseCases\Admin\GetAllAdminsUseCase;
 use App\Application\UseCases\Admin\UpdateAdminUseCase;
+use App\Domain\Services\DomainPermissionService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
@@ -179,6 +180,36 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Internal server error: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Get domains accessible by the authenticated admin
+     */
+    public function getMyDomains(Request $request): JsonResponse
+    {
+        try {
+            $admin = $request->user();
+
+            $domainPermissionService = app(DomainPermissionService::class);
+            
+            $accessType = $domainPermissionService->hasGlobalDomainAccess($admin) ? 'all' : 'assigned';
+            $domains = $domainPermissionService->getAccessibleDomainsWithDetails($admin);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'access_type' => $accessType,
+                    'domains' => $domains,
+                    'total' => count($domains),
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error getting accessible domains',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }

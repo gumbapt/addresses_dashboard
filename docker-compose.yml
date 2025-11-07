@@ -40,7 +40,7 @@ services:
     container_name: dashboard_addresses_nginx
     restart: unless-stopped
     ports:
-      - "8006:80"
+      - "8007:80"
     volumes:
       - ./public:/var/www/public
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/

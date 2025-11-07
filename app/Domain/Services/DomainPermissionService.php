@@ -14,6 +14,11 @@ class DomainPermissionService
      */
     public function canAccessDomain(Admin $admin, int $domainId): bool
     {
+        // 0. Super Admins têm acesso a TUDO
+        if ($admin->isSuperAdmin()) {
+            return true;
+        }
+
         // 1. Verificar se tem permissão global
         if ($this->hasGlobalDomainAccess($admin)) {
             return true;
@@ -28,6 +33,11 @@ class DomainPermissionService
      */
     public function hasGlobalDomainAccess(Admin $admin): bool
     {
+        // Super Admins têm acesso global automaticamente
+        if ($admin->isSuperAdmin()) {
+            return true;
+        }
+
         foreach ($admin->roles as $role) {
             $permissions = $role->permissions->pluck('slug');
             if ($permissions->contains('domain.access.all')) {
@@ -57,7 +67,12 @@ class DomainPermissionService
      */
     public function getAccessibleDomains(Admin $admin): array
     {
-        // Se tem acesso global, retorna todos
+        // Super Admins têm acesso a TODOS os domínios
+        if ($admin->isSuperAdmin()) {
+            return Domain::where('is_active', true)->pluck('id')->toArray();
+        }
+
+        // Se tem acesso global via permissão, retorna todos
         if ($this->hasGlobalDomainAccess($admin)) {
             return Domain::where('is_active', true)->pluck('id')->toArray();
         }
@@ -107,7 +122,17 @@ class DomainPermissionService
      */
     public function getDomainPermissions(Admin $admin, int $domainId): array
     {
-        // Se tem acesso global, retorna todas as permissões
+        // Super Admins têm TODAS as permissões
+        if ($admin->isSuperAdmin()) {
+            return [
+                'can_view' => true,
+                'can_edit' => true,
+                'can_delete' => true,
+                'can_submit_reports' => true,
+            ];
+        }
+
+        // Se tem acesso global via permissão, retorna todas as permissões
         if ($this->hasGlobalDomainAccess($admin)) {
             return [
                 'can_view' => true,

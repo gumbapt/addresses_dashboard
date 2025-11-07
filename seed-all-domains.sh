@@ -68,28 +68,14 @@ echo ""
 
 # Step 3: Seed reports for all domains
 echo "📊 Passo 3: Populando todos os domínios com relatórios..."
+echo "   Modo: SÍNCRONO (processamento imediato)"
 echo ""
-docker-compose exec app php artisan reports:seed-all-domains $DRY_RUN $FORCE $LIMIT $DATE_FROM $DATE_TO
+docker-compose exec app php artisan reports:seed-all-domains --sync $DRY_RUN $FORCE $LIMIT $DATE_FROM $DATE_TO
 echo ""
 
-# Step 4: Wait for processing (if not dry-run)
+# Step 4: Verificar processamento (modo sync já processou tudo)
 if [ -z "$DRY_RUN" ]; then
-    echo "⏳ Passo 4: Aguardando processamento dos jobs..."
-    echo "   (Verificando a cada 3 segundos)"
-    echo ""
-    
-    for i in {1..20}; do
-        sleep 3
-        TOTAL_REPORTS=$(docker-compose exec -T app php artisan tinker --execute="echo App\Models\Report::count();" 2>/dev/null | tail -n 1)
-        PROCESSED=$(docker-compose exec -T app php artisan tinker --execute="echo App\Models\Report::where('status', 'processed')->count();" 2>/dev/null | tail -n 1)
-        echo "   Relatórios processados: $PROCESSED / $TOTAL_REPORTS"
-        
-        if [ "$PROCESSED" = "$TOTAL_REPORTS" ] && [ "$PROCESSED" != "0" ]; then
-            echo ""
-            echo "✅ Todos os relatórios foram processados!"
-            break
-        fi
-    done
+    echo "✅ Passo 4: Relatórios processados sincronamente (modo --sync)"
     echo ""
 fi
 

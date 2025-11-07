@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Console\Commands\SeedAllDomainsWithReports;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -36,6 +37,9 @@ class DatabaseSeeder extends Seeder
             // ChatSeeder::class,
             TestUserSeeder::class,
             AssistantSeeder::class,
+            DomainPermissionSeeder::class,
+            DomainSeeder::class,
+            //SeedAllDomainsWithReports::class,
         ]);
     }
 }

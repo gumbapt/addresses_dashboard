@@ -24,7 +24,8 @@ class SeedAllDomainsWithReports extends Command
                             {--force : Force submit even if reports already exist}
                             {--date-from= : Start date (YYYY-MM-DD)}
                             {--date-to= : End date (YYYY-MM-DD)}
-                            {--limit= : Maximum number of files to process per domain}';
+                            {--limit= : Maximum number of files to process per domain}
+                            {--sync : Process reports synchronously without using queue}';
 
     protected $description = 'Seed all domains with report data (real data for 50g, synthetic for others)';
 
@@ -37,6 +38,7 @@ class SeedAllDomainsWithReports extends Command
         $dateFrom = $this->option('date-from');
         $dateTo = $this->option('date-to');
         $limit = $this->option('limit');
+        $sync = $this->option('sync');
 
         $this->info('╔════════════════════════════════════════════════════════════════╗');
         $this->info('║  📊 SEED DE RELATÓRIOS PARA TODOS OS DOMÍNIOS                 ║');
@@ -91,6 +93,11 @@ class SeedAllDomainsWithReports extends Command
             $this->newLine();
         }
 
+        if ($sync) {
+            $this->info("━━━ MODO SÍNCRONO ATIVADO (sem queue) ━━━");
+            $this->newLine();
+        }
+
         // 3. Process each domain
         $results = ['total_submitted' => 0, 'total_ignored' => 0, 'total_errors' => 0];
         
@@ -103,7 +110,7 @@ class SeedAllDomainsWithReports extends Command
             $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             $this->newLine();
 
-            $domainResults = $this->processDomain($domain, $filteredFiles, $isRealDomain, $dryRun, $force);
+            $domainResults = $this->processDomain($domain, $filteredFiles, $isRealDomain, $dryRun, $force, $sync);
             
             $results['total_submitted'] += $domainResults['submitted'];
             $results['total_ignored'] += $domainResults['ignored'];
@@ -118,7 +125,7 @@ class SeedAllDomainsWithReports extends Command
         return 0;
     }
 
-    private function processDomain(Domain $domain, array $files, bool $isRealDomain, bool $dryRun, bool $force): array
+    private function processDomain(Domain $domain, array $files, bool $isRealDomain, bool $dryRun, bool $force, bool $sync = false): array
     {
         $results = ['submitted' => 0, 'ignored' => 0, 'errors' => 0];
         $totalFiles = count($files);
@@ -166,7 +173,22 @@ class SeedAllDomainsWithReports extends Command
             // Create report
             try {
                 $report = $this->createDailyReportUseCase->execute($domain->id, $data);
-                ProcessReportJob::dispatch($report->getId(), $data);
+                
+                // Buscar o report do banco para pegar o raw_data convertido
+                $reportModel = \App\Models\Report::find($report->getId());
+                
+                if ($sync) {
+                    // Processar sincronamente (sem queue) - para servidores sem workers
+                    $processor = app(\App\Application\Services\ReportProcessor::class);
+                    $processor->process($reportModel->id, $reportModel->raw_data);
+                    
+                    // Atualizar status para processed
+                    $reportModel->update(['status' => 'processed']);
+                } else {
+                    // Usar queue (modo normal com workers)
+                    ProcessReportJob::dispatch($report->getId(), $reportModel->raw_data);
+                }
+                
                 $results['submitted']++;
                 
                 if (($index + 1) % 10 == 0 || $index == 0 || $index == $totalFiles - 1) {

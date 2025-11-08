@@ -32,6 +32,23 @@ class DomainSeeder extends Seeder
                 'is_active' => true,
             ],
             [
+                'name' => 'fiberfinder.com',
+                'slug' => 'fiberfinder-com',
+                'domain_url' => 'https://fiberfinder.com',
+                'site_id' => 'wp-fiberfinder-prod',
+                'api_key' => Str::random(32),
+                'status' => 'active',
+                'timezone' => 'America/New_York',
+                'wordpress_version' => '6.8.3',
+                'plugin_version' => '1.0.0',
+                'settings' => json_encode([
+                    'enable_notifications' => true,
+                    'auto_submit' => true,
+                    'retention_days' => 90,
+                ]),
+                'is_active' => true,
+            ],
+            [
                 'name' => 'smarterhome.ai',
                 'slug' => 'smarterhome-ai',
                 'domain_url' => 'https://smarterhome.ai',

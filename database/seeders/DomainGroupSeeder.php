@@ -22,66 +22,26 @@ class DomainGroupSeeder extends Seeder
             $this->command->warn('⚠️  Nenhum Super Admin encontrado. Criando grupos sem created_by.');
         }
 
-        // Criar grupos de domínios
+        // Criar grupos de domínios (simples como Google Tag Manager)
         $groups = [
             [
-                'name' => 'Production Domains',
-                'slug' => 'production-domains',
-                'description' => 'Domínios de produção ativos e gerando relatórios reais',
+                'name' => 'Production',
+                'slug' => 'production',
+                'description' => 'Domínios de produção com dados reais',
                 'is_active' => true,
                 'max_domains' => null, // Sem limite
                 'settings' => [
                     'environment' => 'production',
-                    'monitoring' => true,
-                    'alerts_enabled' => true,
                 ],
             ],
             [
-                'name' => 'Staging Domains',
-                'slug' => 'staging-domains',
-                'description' => 'Domínios de teste e homologação',
+                'name' => 'Testing',
+                'slug' => 'testing',
+                'description' => 'Domínios de teste e staging',
                 'is_active' => true,
-                'max_domains' => 10,
+                'max_domains' => null, // Sem limite
                 'settings' => [
-                    'environment' => 'staging',
-                    'monitoring' => false,
-                    'alerts_enabled' => false,
-                ],
-            ],
-            [
-                'name' => 'Development Domains',
-                'slug' => 'development-domains',
-                'description' => 'Domínios de desenvolvimento e testes locais',
-                'is_active' => true,
-                'max_domains' => 5,
-                'settings' => [
-                    'environment' => 'development',
-                    'monitoring' => false,
-                    'alerts_enabled' => false,
-                ],
-            ],
-            [
-                'name' => 'Premium Partners',
-                'slug' => 'premium-partners',
-                'description' => 'Domínios de parceiros premium com recursos avançados',
-                'is_active' => true,
-                'max_domains' => 20,
-                'settings' => [
-                    'tier' => 'premium',
-                    'support' => 'priority',
-                    'custom_branding' => true,
-                ],
-            ],
-            [
-                'name' => 'Trial Domains',
-                'slug' => 'trial-domains',
-                'description' => 'Domínios em período de teste',
-                'is_active' => true,
-                'max_domains' => 3,
-                'settings' => [
-                    'tier' => 'trial',
-                    'trial_days' => 30,
-                    'trial_started_at' => now()->toDateString(),
+                    'environment' => 'testing',
                 ],
             ],
         ];
@@ -105,29 +65,33 @@ class DomainGroupSeeder extends Seeder
      */
     private function associateExistingDomains(): void
     {
-        $productionGroup = DomainGroup::where('slug', 'production-domains')->first();
+        $productionGroup = DomainGroup::where('slug', 'production')->first();
+        $testingGroup = DomainGroup::where('slug', 'testing')->first();
         
         if ($productionGroup) {
-            // Domínios reais vão para Production
-            $realDomains = Domain::whereIn('name', ['zip.50g.io'])->get();
-            foreach ($realDomains as $domain) {
+            // Grupo 1 (Production): zip.50g.io + fiberfinder.com
+            $productionDomains = Domain::whereIn('name', [
+                'zip.50g.io',
+                'fiberfinder.com'
+            ])->get();
+            
+            foreach ($productionDomains as $domain) {
                 $domain->update(['domain_group_id' => $productionGroup->id]);
-                $this->command->info("   → {$domain->name} → Production Domains");
+                $this->command->info("   → {$domain->name} → Production");
             }
+        }
 
-            // Domínios fictícios vão para Staging
-            $stagingGroup = DomainGroup::where('slug', 'staging-domains')->first();
-            if ($stagingGroup) {
-                $fictionalDomains = Domain::whereIn('name', [
-                    'smarterhome.ai',
-                    'ispfinder.net',
-                    'broadbandcheck.io'
-                ])->get();
-                
-                foreach ($fictionalDomains as $domain) {
-                    $domain->update(['domain_group_id' => $stagingGroup->id]);
-                    $this->command->info("   → {$domain->name} → Staging Domains");
-                }
+        if ($testingGroup) {
+            // Grupo 2 (Testing): os 3 domínios de teste
+            $testingDomains = Domain::whereIn('name', [
+                'smarterhome.ai',
+                'ispfinder.net',
+                'broadbandcheck.io'
+            ])->get();
+            
+            foreach ($testingDomains as $domain) {
+                $domain->update(['domain_group_id' => $testingGroup->id]);
+                $this->command->info("   → {$domain->name} → Testing");
             }
         }
     }

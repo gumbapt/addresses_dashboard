@@ -19,7 +19,7 @@ class SeedAllDomainsWithReports extends Command
 
     protected $signature = 'reports:seed-all-domains 
                             {--directory=docs/daily_reports : Directory containing daily report files}
-                            {--real-domain=zip.50g.io : The real domain that gets actual data}
+                            {--real-group=production : The group slug that gets real data without modification}
                             {--dry-run : Show what would be done without actually doing it}
                             {--force : Force submit even if reports already exist}
                             {--date-from= : Start date (YYYY-MM-DD)}
@@ -32,7 +32,7 @@ class SeedAllDomainsWithReports extends Command
     public function handle(): int
     {
         $directory = $this->option('directory');
-        $realDomainName = $this->option('real-domain');
+        $realGroupSlug = $this->option('real-group');
         $dryRun = $this->option('dry-run');
         $force = $this->option('force');
         $dateFrom = $this->option('date-from');
@@ -54,8 +54,9 @@ class SeedAllDomainsWithReports extends Command
 
         $this->info("🌐 Encontrados {$domains->count()} domínios ativos:");
         foreach ($domains as $domain) {
-            $isReal = $domain->name === $realDomainName;
-            $this->line("   • {$domain->name} (ID: {$domain->id}) " . ($isReal ? '📊 REAL DATA' : '🎲 SYNTHETIC'));
+            $isRealGroup = $domain->domainGroup && $domain->domainGroup->slug === $realGroupSlug;
+            $groupName = $domain->domainGroup ? $domain->domainGroup->name : '[sem grupo]';
+            $this->line("   • {$domain->name} (ID: {$domain->id}) - 📁 {$groupName} " . ($isRealGroup ? '📊 REAL' : '🎲 SYNTHETIC'));
         }
         $this->newLine();
 
@@ -102,15 +103,22 @@ class SeedAllDomainsWithReports extends Command
         $results = ['total_submitted' => 0, 'total_ignored' => 0, 'total_errors' => 0];
         
         foreach ($domains as $domain) {
-            $isRealDomain = $domain->name === $realDomainName;
+            // Verificar se é do grupo "real" (production por padrão)
+            $isRealGroup = $domain->domainGroup && $domain->domainGroup->slug === $realGroupSlug;
+            
+            // Mostrar informações do grupo
+            $groupInfo = $domain->domainGroup 
+                ? "📁 Grupo: {$domain->domainGroup->name}" 
+                : "📁 Grupo: [nenhum]";
             
             $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             $this->info("🌐 Processando domínio: {$domain->name}");
-            $this->info("   Tipo: " . ($isRealDomain ? '📊 DADOS REAIS' : '🎲 DADOS SINTÉTICOS'));
+            $this->info("   Tipo: " . ($isRealGroup ? '📊 DADOS REAIS' : '🎲 DADOS SINTÉTICOS'));
+            $this->info("   {$groupInfo}");
             $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             $this->newLine();
 
-            $domainResults = $this->processDomain($domain, $filteredFiles, $isRealDomain, $dryRun, $force, $sync);
+            $domainResults = $this->processDomain($domain, $filteredFiles, $isRealGroup, $dryRun, $force, $sync);
             
             $results['total_submitted'] += $domainResults['submitted'];
             $results['total_ignored'] += $domainResults['ignored'];
@@ -210,38 +218,86 @@ class SeedAllDomainsWithReports extends Command
 
     private function synthesizeData(array $data, Domain $domain): array
     {
-        // Define domain profiles for more divergent data
-        $profiles = [
+        // Carregar o grupo do domínio (se houver)
+        $domainGroup = $domain->domainGroup;
+        
+        // Profiles por GRUPO (simples)
+        $groupProfiles = [
+            'production' => [
+                'volume_multiplier' => 1.0,      // Dados reais (sem modificação)
+                'success_bias' => 0,
+                'state_focus' => [],
+                'tech_preference' => null,
+                'provider_shuffle' => 0,
+            ],
+            'testing' => [
+                'volume_multiplier' => 1.5,      // 150% requests (ambiente de teste)
+                'success_bias' => 0.02,           // +2% success rate
+                'state_focus' => ['CA', 'NY', 'TX', 'FL'],
+                'tech_preference' => 'Mixed',
+                'provider_shuffle' => 0.5,
+            ],
+        ];
+        
+        // Fallback: profiles por nome de domínio (compatibilidade - para domínios sem grupo)
+        $domainProfiles = [
+            'zip.50g.io' => [
+                'volume_multiplier' => 1.0,
+                'success_bias' => 0,
+                'state_focus' => [],
+                'tech_preference' => null,
+                'provider_shuffle' => 0,
+            ],
+            'fiberfinder.com' => [
+                'volume_multiplier' => 1.0,
+                'success_bias' => 0,
+                'state_focus' => [],
+                'tech_preference' => null,
+                'provider_shuffle' => 0,
+            ],
             'smarterhome.ai' => [
-                'volume_multiplier' => 2.5,      // 250% more requests
-                'success_bias' => 0.05,           // +5% success rate
-                'state_focus' => ['CA', 'NY', 'TX'], // Focus on these states
-                'tech_preference' => 'Fiber',     // Prefer fiber
-                'provider_shuffle' => 0.4,        // 40% chance to shuffle providers
+                'volume_multiplier' => 1.5,
+                'success_bias' => 0.02,
+                'state_focus' => ['CA', 'NY', 'TX', 'FL'],
+                'tech_preference' => 'Mixed',
+                'provider_shuffle' => 0.5,
             ],
             'ispfinder.net' => [
-                'volume_multiplier' => 0.6,       // 60% of requests
-                'success_bias' => -0.08,          // -8% success rate
-                'state_focus' => ['FL', 'GA', 'NC'], // Focus on these states
-                'tech_preference' => 'Mobile',    // Prefer mobile
-                'provider_shuffle' => 0.6,        // 60% chance to shuffle providers
+                'volume_multiplier' => 1.5,
+                'success_bias' => 0.02,
+                'state_focus' => ['CA', 'NY', 'TX', 'FL'],
+                'tech_preference' => 'Mixed',
+                'provider_shuffle' => 0.5,
             ],
             'broadbandcheck.io' => [
-                'volume_multiplier' => 1.8,       // 180% requests
-                'success_bias' => 0.03,           // +3% success rate
-                'state_focus' => ['IL', 'OH', 'PA'], // Focus on these states
-                'tech_preference' => 'Cable',     // Prefer cable
-                'provider_shuffle' => 0.5,        // 50% chance to shuffle providers
+                'volume_multiplier' => 1.5,
+                'success_bias' => 0.02,
+                'state_focus' => ['CA', 'NY', 'TX', 'FL'],
+                'tech_preference' => 'Mixed',
+                'provider_shuffle' => 0.5,
             ],
         ];
-
-        $profile = $profiles[$domain->name] ?? [
-            'volume_multiplier' => 1.0,
-            'success_bias' => 0,
-            'state_focus' => [],
-            'tech_preference' => null,
-            'provider_shuffle' => 0,
-        ];
+        
+        // Prioridade: 1) Profile do grupo, 2) Profile do domínio, 3) Default
+        $profileSource = 'default';
+        if ($domainGroup && isset($groupProfiles[$domainGroup->slug])) {
+            $profile = $groupProfiles[$domainGroup->slug];
+            $profileSource = "group:{$domainGroup->name}";
+        } elseif (isset($domainProfiles[$domain->name])) {
+            $profile = $domainProfiles[$domain->name];
+            $profileSource = "domain:{$domain->name}";
+        } else {
+            $profile = [
+                'volume_multiplier' => 1.0,
+                'success_bias' => 0,
+                'state_focus' => [],
+                'tech_preference' => null,
+                'provider_shuffle' => 0,
+            ];
+        }
+        
+        // Armazenar source no profile para debug/logging
+        $profile['_profile_source'] = $profileSource;
 
         // Modify source information
         $data['source']['site_id'] = $domain->site_id;

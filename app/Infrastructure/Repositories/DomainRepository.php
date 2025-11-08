@@ -104,7 +104,8 @@ class DomainRepository implements DomainRepositoryInterface
         string $timezone = 'UTC',
         ?string $wordpressVersion = null,
         ?string $pluginVersion = null,
-        ?array $settings = null
+        ?array $settings = null,
+        ?int $domainGroupId = null
     ): DomainEntity {
         $baseSlug = Str::slug($name);
         $slug = $baseSlug;
@@ -120,6 +121,7 @@ class DomainRepository implements DomainRepositoryInterface
         $apiKey = 'dmn_live_' . Str::random(64);
         
         $domain = DomainModel::create([
+            'domain_group_id' => $domainGroupId,
             'name' => $name,
             'slug' => $slug,
             'domain_url' => $domainUrl,

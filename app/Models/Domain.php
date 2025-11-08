@@ -11,6 +11,7 @@ class Domain extends Model
     use HasFactory;
     
     protected $fillable = [
+        'domain_group_id',
         'name',
         'slug',
         'domain_url',
@@ -32,6 +33,11 @@ class Domain extends Model
     public function reports()
     {
         return $this->hasMany(Report::class);
+    }
+    
+    public function domainGroup()
+    {
+        return $this->belongsTo(DomainGroup::class, 'domain_group_id');
     }
     
     public function toEntity(): DomainEntity

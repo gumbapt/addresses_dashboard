@@ -125,6 +125,7 @@ class DomainController extends Controller
             
             // Validate request
             $validated = $request->validate([
+                'domain_group_id' => 'nullable|exists:domain_groups,id',
                 'name' => 'required|string|max:255',
                 'domain_url' => 'required|string|max:255',
                 'site_id' => 'nullable|string|max:255',
@@ -133,7 +134,22 @@ class DomainController extends Controller
                 'plugin_version' => 'nullable|string|max:20',
                 'settings' => 'nullable|array'
             ]);
+
+            // Validar limite de domínios no grupo (se especificado)
+            if (isset($validated['domain_group_id'])) {
+                $domainGroup = \App\Models\DomainGroup::find($validated['domain_group_id']);
+                
+                if ($domainGroup && $domainGroup->hasReachedMaxDomains()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "Domain group '{$domainGroup->name}' has reached its maximum domains limit.",
+                        'max_domains' => $domainGroup->max_domains,
+                        'current_count' => $domainGroup->domains()->count(),
+                    ], 400);
+                }
+            }
             
+            // Passar domain_group_id se fornecido (precisamos atualizar depois de criar)
             $domain = $this->createDomainUseCase->execute(
                 $validated['name'],
                 $validated['domain_url'],
@@ -143,6 +159,12 @@ class DomainController extends Controller
                 $validated['plugin_version'] ?? null,
                 $validated['settings'] ?? null
             );
+            
+            // Atualizar domain_group_id se fornecido
+            if (isset($validated['domain_group_id'])) {
+                $domainModel = \App\Models\Domain::find($domain->id);
+                $domainModel->update(['domain_group_id' => $validated['domain_group_id']]);
+            }
             
             return response()->json([
                 'success' => true,

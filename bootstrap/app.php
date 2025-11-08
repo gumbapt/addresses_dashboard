@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => \App\Http\Middleware\AdminAuthMiddleware::class,
             'check.domain.access' => \App\Http\Middleware\CheckDomainAccess::class,
+            'super.admin' => \App\Http\Middleware\SuperAdminMiddleware::class,
         ]);
         
         // Adiciona CORS globalmente

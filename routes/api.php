@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Admin\PermissionController;
 use App\Http\Controllers\Api\Admin\DomainController;
+use App\Http\Controllers\Api\Admin\DomainGroupController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\ZipCodeController;
@@ -92,13 +93,25 @@ Route::prefix('admin')->group(function () {
         Route::put('/users/{id}', [UserController::class, 'update']);
         Route::delete('/users/{id}', [UserController::class, 'delete']);
         
-        // Domain management routes
+        // Domain management routes (Super Admin only for create/update/delete)
         Route::get('/domains', [DomainController::class, 'index']);
         Route::get('/domains/{id}', [DomainController::class, 'show']);
-        Route::post('/domains', [DomainController::class, 'create']);
-        Route::put('/domains/{id}', [DomainController::class, 'update']);
-        Route::delete('/domains/{id}', [DomainController::class, 'destroy']);
-        Route::post('/domains/{id}/regenerate-api-key', [DomainController::class, 'regenerateApiKey']);
+        
+        // Domain Groups management routes (Super Admin only)
+        Route::middleware('super.admin')->group(function () {
+            Route::get('/domain-groups', [DomainGroupController::class, 'index']);
+            Route::get('/domain-groups/{id}', [DomainGroupController::class, 'show']);
+            Route::post('/domain-groups', [DomainGroupController::class, 'store']);
+            Route::put('/domain-groups/{id}', [DomainGroupController::class, 'update']);
+            Route::delete('/domain-groups/{id}', [DomainGroupController::class, 'destroy']);
+            Route::get('/domain-groups/{id}/domains', [DomainGroupController::class, 'domains']);
+            
+            // Domain CRUD (Super Admin only)
+            Route::post('/domains', [DomainController::class, 'create']);
+            Route::put('/domains/{id}', [DomainController::class, 'update']);
+            Route::delete('/domains/{id}', [DomainController::class, 'destroy']);
+            Route::post('/domains/{id}/regenerate-api-key', [DomainController::class, 'regenerateApiKey']);
+        });
         
         // Geographic reference data routes
         Route::get('/states', [StateController::class, 'index']);

@@ -55,6 +55,7 @@ class Domain extends Model
             plugin_version: $this->plugin_version,
             settings: is_array($this->settings) ? $this->settings : json_decode($this->settings, true) ?? [],
             is_active: $this->is_active,
+            domain_group_id: $this->domain_group_id,
         );
     }
 }

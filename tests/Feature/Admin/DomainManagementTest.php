@@ -159,9 +159,11 @@ class DomainManagementTest extends TestCase
     public function super_admin_can_create_domain(): void
     {
         // Arrange
+        $group = \App\Models\DomainGroup::factory()->create(['name' => 'Test Group']);
         $token = $this->superAdmin->createToken('test-token')->plainTextToken;
         
         $domainData = [
+            'domain_group_id' => $group->id,
             'name' => 'New ISP Platform',
             'domain_url' => 'api.newisp.com',
             'site_id' => 'wp-prod-newisp-001',
@@ -196,7 +198,8 @@ class DomainManagementTest extends TestCase
         $this->assertDatabaseHas('domains', [
             'name' => 'New ISP Platform',
             'domain_url' => 'api.newisp.com',
-            'slug' => 'new-isp-platform'
+            'slug' => 'new-isp-platform',
+            'domain_group_id' => $group->id,
         ]);
         
         // Verify API key was generated
@@ -385,6 +388,81 @@ class DomainManagementTest extends TestCase
         
         // Assert
         $response->assertStatus(401);
+    }
+
+    /** @test */
+    public function super_admin_can_create_domain_with_group()
+    {
+        // Arrange
+        $group = \App\Models\DomainGroup::factory()->create([
+            'name' => 'Production',
+            'max_domains' => 10,
+        ]);
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Act
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson('/api/admin/domains', [
+            'domain_group_id' => $group->id,
+            'name' => 'Test Domain',
+            'domain_url' => 'https://test.com',
+        ]);
+        
+        // Assert
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('domains', [
+            'name' => 'Test Domain',
+            'domain_group_id' => $group->id,
+        ]);
+    }
+
+    /** @test */
+    public function cannot_create_domain_when_group_limit_reached()
+    {
+        // Arrange
+        $group = \App\Models\DomainGroup::factory()->create(['max_domains' => 2]);
+        Domain::factory()->count(2)->create(['domain_group_id' => $group->id]);
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Act
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson('/api/admin/domains', [
+            'domain_group_id' => $group->id,
+            'name' => 'Third Domain',
+            'domain_url' => 'https://third.com',
+        ]);
+        
+        // Assert
+        $response->assertStatus(400)
+            ->assertJson([
+                'success' => false,
+                'max_domains' => 2,
+                'current_count' => 2,
+            ]);
+    }
+
+    /** @test */
+    public function can_create_domain_in_unlimited_group()
+    {
+        // Arrange
+        $group = \App\Models\DomainGroup::factory()->unlimited()->create();
+        Domain::factory()->count(100)->create(['domain_group_id' => $group->id]);
+        $token = $this->superAdmin->createToken('test-token')->plainTextToken;
+        
+        // Act
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson('/api/admin/domains', [
+            'domain_group_id' => $group->id,
+            'name' => '101st Domain',
+            'domain_url' => 'https://101st.com',
+        ]);
+        
+        // Assert
+        $response->assertStatus(201);
+        $this->assertEquals(101, $group->fresh()->domains()->count());
     }
 }
 

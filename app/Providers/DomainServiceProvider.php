@@ -12,6 +12,8 @@ use App\Domain\Repositories\PermissionRepositoryInterface;
 use App\Infrastructure\Repositories\PermissionRepository;
 use App\Domain\Repositories\DomainRepositoryInterface;
 use App\Infrastructure\Repositories\DomainRepository;
+use App\Domain\Repositories\DomainGroupRepositoryInterface;
+use App\Infrastructure\Repositories\DomainGroupRepository;
 use App\Domain\Repositories\StateRepositoryInterface;
 use App\Infrastructure\Repositories\StateRepository;
 use App\Domain\Repositories\CityRepositoryInterface;
@@ -39,6 +41,7 @@ class DomainServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(PermissionRepositoryInterface::class, PermissionRepository::class);
         $this->app->bind(DomainRepositoryInterface::class, DomainRepository::class);
+        $this->app->bind(DomainGroupRepositoryInterface::class, DomainGroupRepository::class);
         $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(ZipCodeRepositoryInterface::class, ZipCodeRepository::class);

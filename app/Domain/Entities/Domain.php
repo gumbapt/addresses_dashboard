@@ -19,6 +19,7 @@ class Domain
         public readonly string $plugin_version,
         public readonly array $settings,
         public readonly bool $is_active,
+        public readonly ?int $domain_group_id = null,
     ) {}
 
     public function toDto(): DomainDto
@@ -36,6 +37,8 @@ class Domain
             plugin_version: $this->plugin_version,
             settings: $this->settings,
             is_active: $this->is_active,
+            domain_group_id: $this->domain_group_id,
+            
         );
     }
 }

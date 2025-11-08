@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Application\UseCases\DomainGroup\CreateDomainGroupUseCase;
+use App\Application\UseCases\DomainGroup\UpdateDomainGroupUseCase;
+use App\Application\UseCases\DomainGroup\DeleteDomainGroupUseCase;
+use App\Application\UseCases\DomainGroup\GetAllDomainGroupsUseCase;
+use App\Application\UseCases\DomainGroup\GetDomainGroupByIdUseCase;
+use App\Domain\Exceptions\NotFoundException;
+use App\Domain\Exceptions\ValidationException;
 use App\Http\Controllers\Controller;
 use App\Models\DomainGroup;
 use Illuminate\Http\Request;
@@ -10,45 +17,93 @@ use Illuminate\Support\Str;
 
 class DomainGroupController extends Controller
 {
+    public function __construct(
+        private GetAllDomainGroupsUseCase $getAllDomainGroupsUseCase,
+        private GetDomainGroupByIdUseCase $getDomainGroupByIdUseCase,
+        private CreateDomainGroupUseCase $createDomainGroupUseCase,
+        private UpdateDomainGroupUseCase $updateDomainGroupUseCase,
+        private DeleteDomainGroupUseCase $deleteDomainGroupUseCase,
+    ) {}
+
     /**
      * List all domain groups
      */
     public function index(Request $request)
     {
-        $perPage = $request->get('per_page', 15);
-        $search = $request->get('search');
-        $isActive = $request->get('is_active');
+        try {
+            $page = (int) $request->get('page', 1);
+            $perPage = (int) $request->get('per_page', 15);
+            $search = $request->get('search');
+            $isActive = $request->get('is_active');
+            
+            // Convert string 'true'/'false' to boolean
+            if ($isActive !== null && $isActive !== '') {
+                $isActive = filter_var($isActive, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+            } else {
+                $isActive = null;
+            }
+            
+            // Validate limits
+            $perPage = min(max($perPage, 1), 100);
+            $page = max($page, 1);
 
-        $query = DomainGroup::with(['domains', 'creator', 'updater']);
+            $result = $this->getAllDomainGroupsUseCase->executePaginated($page, $perPage, $search, $isActive);
+            
+            // Buscar models com relacionamentos para enriquecer os dados
+            $groupIds = array_column($result['data'], 'id');
+            $groupsWithRelations = DomainGroup::with(['domains', 'creator', 'updater'])
+                ->whereIn('id', $groupIds)
+                ->get()
+                ->keyBy('id');
+            
+            $enrichedData = array_map(function($groupEntity) use ($groupsWithRelations) {
+                $groupModel = $groupsWithRelations[$groupEntity->id] ?? null;
+                $data = $groupEntity->toDto()->toArray();
+                
+                if ($groupModel) {
+                    $data['domains'] = $groupModel->domains->map(fn($d) => [
+                        'id' => $d->id,
+                        'name' => $d->name,
+                        'slug' => $d->slug,
+                        'domain_url' => $d->domain_url,
+                        'is_active' => $d->is_active,
+                    ])->toArray();
+                    
+                    $data['creator'] = $groupModel->creator ? [
+                        'id' => $groupModel->creator->id,
+                        'name' => $groupModel->creator->name,
+                        'email' => $groupModel->creator->email,
+                    ] : null;
+                    
+                    $data['updater'] = $groupModel->updater ? [
+                        'id' => $groupModel->updater->id,
+                        'name' => $groupModel->updater->name,
+                        'email' => $groupModel->updater->email,
+                    ] : null;
+                }
+                
+                return $data;
+            }, $result['data']);
 
-        // Filtro por nome
-        if ($search) {
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
-            });
+            return response()->json([
+                'success' => true,
+                'data' => $enrichedData,
+                'pagination' => [
+                    'total' => $result['total'],
+                    'per_page' => $result['per_page'],
+                    'current_page' => $result['current_page'],
+                    'last_page' => $result['last_page'],
+                    'from' => $result['from'],
+                    'to' => $result['to'],
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve domain groups.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        // Filtro por status
-        if (!is_null($isActive)) {
-            $query->where('is_active', $isActive);
-        }
-
-        $domainGroups = $query->orderBy('created_at', 'desc')->paginate($perPage);
-
-        return response()->json([
-            'success' => true,
-            'data' => $domainGroups->items(),
-            'pagination' => [
-                'total' => $domainGroups->total(),
-                'per_page' => $domainGroups->perPage(),
-                'current_page' => $domainGroups->currentPage(),
-                'last_page' => $domainGroups->lastPage(),
-                'from' => $domainGroups->firstItem(),
-                'to' => $domainGroups->lastItem(),
-            ],
-        ]);
     }
 
     /**
@@ -56,29 +111,24 @@ class DomainGroupController extends Controller
      */
     public function show($id)
     {
-        $domainGroup = DomainGroup::with(['domains', 'creator', 'updater'])->find($id);
-
-        if (!$domainGroup) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Domain group not found.',
-            ], 404);
-        }
-
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'id' => $domainGroup->id,
-                'name' => $domainGroup->name,
-                'slug' => $domainGroup->slug,
-                'description' => $domainGroup->description,
-                'is_active' => $domainGroup->is_active,
-                'settings' => $domainGroup->settings,
-                'max_domains' => $domainGroup->max_domains,
-                'domains_count' => $domainGroup->domains->count(),
-                'available_domains' => $domainGroup->getAvailableDomainsCount(),
-                'has_reached_limit' => $domainGroup->hasReachedMaxDomains(),
-                'domains' => $domainGroup->domains->map(function($domain) {
+        try {
+            $group = $this->getDomainGroupByIdUseCase->execute((int) $id);
+            
+            // Buscar model com relacionamentos
+            $groupModel = DomainGroup::with(['domains', 'creator', 'updater'])->find($id);
+            
+            $data = [
+                'id' => $group->id,
+                'name' => $group->name,
+                'slug' => $group->slug,
+                'description' => $group->description,
+                'is_active' => $group->isActive,
+                'settings' => $group->settings,
+                'max_domains' => $group->maxDomains,
+                'domains_count' => $groupModel->domains->count(),
+                'available_domains' => $groupModel->getAvailableDomainsCount(),
+                'has_reached_limit' => $groupModel->hasReachedMaxDomains(),
+                'domains' => $groupModel->domains->map(function($domain) {
                     return [
                         'id' => $domain->id,
                         'name' => $domain->name,
@@ -87,20 +137,36 @@ class DomainGroupController extends Controller
                         'is_active' => $domain->is_active,
                     ];
                 }),
-                'created_by' => $domainGroup->creator ? [
-                    'id' => $domainGroup->creator->id,
-                    'name' => $domainGroup->creator->name,
-                    'email' => $domainGroup->creator->email,
+                'created_by' => $groupModel->creator ? [
+                    'id' => $groupModel->creator->id,
+                    'name' => $groupModel->creator->name,
+                    'email' => $groupModel->creator->email,
                 ] : null,
-                'updated_by' => $domainGroup->updater ? [
-                    'id' => $domainGroup->updater->id,
-                    'name' => $domainGroup->updater->name,
-                    'email' => $domainGroup->updater->email,
+                'updated_by' => $groupModel->updater ? [
+                    'id' => $groupModel->updater->id,
+                    'name' => $groupModel->updater->name,
+                    'email' => $groupModel->updater->email,
                 ] : null,
-                'created_at' => $domainGroup->created_at,
-                'updated_at' => $domainGroup->updated_at,
-            ],
-        ]);
+                'created_at' => $group->createdAt,
+                'updated_at' => $group->updatedAt,
+            ];
+
+            return response()->json([
+                'success' => true,
+                'data' => $data,
+            ]);
+        } catch (NotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve domain group.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -125,23 +191,37 @@ class DomainGroupController extends Controller
             ], 422);
         }
 
-        $data = $validator->validated();
-        
-        // Gerar slug se não fornecido
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['name']);
+        try {
+            $data = $validator->validated();
+            
+            // Gerar slug se não fornecido
+            $slug = $data['slug'] ?? Str::slug($data['name']);
+
+            $group = $this->createDomainGroupUseCase->execute(
+                name: $data['name'],
+                slug: $slug,
+                description: $data['description'] ?? null,
+                isActive: $data['is_active'] ?? true,
+                settings: $data['settings'] ?? null,
+                maxDomains: $data['max_domains'] ?? null,
+                createdBy: $request->user()->id
+            );
+            
+            // Buscar model para retornar com relacionamentos
+            $groupModel = DomainGroup::with(['domains', 'creator'])->find($group->id);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Domain group created successfully.',
+                'data' => $groupModel,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create domain group.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        // Adicionar created_by
-        $data['created_by'] = $request->user()->id;
-
-        $domainGroup = DomainGroup::create($data);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Domain group created successfully.',
-            'data' => $domainGroup->load(['domains', 'creator']),
-        ], 201);
     }
 
     /**
@@ -149,15 +229,6 @@ class DomainGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $domainGroup = DomainGroup::find($id);
-
-        if (!$domainGroup) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Domain group not found.',
-            ], 404);
-        }
-
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|string|max:255|unique:domain_groups,name,' . $id,
             'slug' => 'nullable|string|max:255|unique:domain_groups,slug,' . $id,
@@ -175,23 +246,48 @@ class DomainGroupController extends Controller
             ], 422);
         }
 
-        $data = $validator->validated();
-        
-        // Atualizar slug se o nome mudou
-        if (isset($data['name']) && empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['name']);
+        try {
+            $data = $validator->validated();
+            
+            // Atualizar slug se o nome mudou
+            $slug = null;
+            if (isset($data['name']) && !isset($data['slug'])) {
+                $slug = Str::slug($data['name']);
+            } elseif (isset($data['slug'])) {
+                $slug = $data['slug'];
+            }
+
+            $group = $this->updateDomainGroupUseCase->execute(
+                id: (int) $id,
+                name: $data['name'] ?? null,
+                slug: $slug,
+                description: $data['description'] ?? null,
+                isActive: $data['is_active'] ?? null,
+                settings: $data['settings'] ?? null,
+                maxDomains: $data['max_domains'] ?? null,
+                updatedBy: $request->user()->id
+            );
+            
+            // Buscar model para retornar com relacionamentos
+            $groupModel = DomainGroup::with(['domains', 'creator', 'updater'])->find($group->id);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Domain group updated successfully.',
+                'data' => $groupModel,
+            ]);
+        } catch (NotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update domain group.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        // Adicionar updated_by
-        $data['updated_by'] = $request->user()->id;
-
-        $domainGroup->update($data);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Domain group updated successfully.',
-            'data' => $domainGroup->fresh()->load(['domains', 'creator', 'updater']),
-        ]);
     }
 
     /**
@@ -199,30 +295,25 @@ class DomainGroupController extends Controller
      */
     public function destroy($id)
     {
-        $domainGroup = DomainGroup::find($id);
+        try {
+            $this->deleteDomainGroupUseCase->execute((int) $id);
 
-        if (!$domainGroup) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Domain group deleted successfully.',
+            ]);
+        } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Domain group not found.',
-            ], 404);
-        }
-
-        // Verificar se tem domínios associados
-        if ($domainGroup->domains()->count() > 0) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Cannot delete domain group with associated domains. Please remove or reassign the domains first.',
-                'domains_count' => $domainGroup->domains()->count(),
+                'message' => $e->getMessage(),
             ], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete domain group.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        $domainGroup->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Domain group deleted successfully.',
-        ]);
     }
 
     /**
@@ -230,24 +321,33 @@ class DomainGroupController extends Controller
      */
     public function domains($id)
     {
-        $domainGroup = DomainGroup::with('domains')->find($id);
+        try {
+            $group = $this->getDomainGroupByIdUseCase->execute((int) $id);
+            
+            // Buscar model com domains
+            $groupModel = DomainGroup::with('domains')->find($id);
 
-        if (!$domainGroup) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'group_name' => $group->name,
+                    'domains' => $groupModel->domains,
+                    'total' => $groupModel->domains->count(),
+                    'max_domains' => $group->maxDomains,
+                    'available' => $groupModel->getAvailableDomainsCount(),
+                ],
+            ]);
+        } catch (NotFoundException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Domain group not found.',
+                'message' => $e->getMessage(),
             ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve domains.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'group_name' => $domainGroup->name,
-                'domains' => $domainGroup->domains,
-                'total' => $domainGroup->domains->count(),
-                'max_domains' => $domainGroup->max_domains,
-                'available' => $domainGroup->getAvailableDomainsCount(),
-            ],
-        ]);
     }
 }

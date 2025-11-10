@@ -7,6 +7,8 @@ use App\Application\UseCases\DomainGroup\UpdateDomainGroupUseCase;
 use App\Application\UseCases\DomainGroup\DeleteDomainGroupUseCase;
 use App\Application\UseCases\DomainGroup\GetAllDomainGroupsUseCase;
 use App\Application\UseCases\DomainGroup\GetDomainGroupByIdUseCase;
+use App\Application\UseCases\DomainGroup\AddDomainsToGroupUseCase;
+use App\Application\UseCases\DomainGroup\RemoveDomainsFromGroupUseCase;
 use App\Domain\Exceptions\NotFoundException;
 use App\Domain\Exceptions\ValidationException;
 use App\Http\Controllers\Controller;
@@ -23,6 +25,8 @@ class DomainGroupController extends Controller
         private CreateDomainGroupUseCase $createDomainGroupUseCase,
         private UpdateDomainGroupUseCase $updateDomainGroupUseCase,
         private DeleteDomainGroupUseCase $deleteDomainGroupUseCase,
+        private AddDomainsToGroupUseCase $addDomainsToGroupUseCase,
+        private RemoveDomainsFromGroupUseCase $removeDomainsFromGroupUseCase,
     ) {}
 
     /**
@@ -346,6 +350,139 @@ class DomainGroupController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to retrieve domains.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Add multiple domains to a group (batch operation)
+     */
+    public function addDomains(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'domain_ids' => 'required|array|min:1',
+            'domain_ids.*' => 'required|integer|exists:domains,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        try {
+            $result = $this->addDomainsToGroupUseCase->execute((int) $id, $request->domain_ids);
+            
+            // Recarregar grupo com novos domínios
+            $groupModel = DomainGroup::with('domains')->find($id);
+
+            // Construir mensagem baseada nos resultados
+            $message = [];
+            if ($result['domains_added'] > 0) {
+                $message[] = "{$result['domains_added']} domain(s) added";
+            }
+            if ($result['domains_moved'] > 0) {
+                $message[] = "{$result['domains_moved']} domain(s) moved from other groups";
+            }
+            $messageStr = implode(', ', $message) . " to group '{$result['group_name']}' successfully.";
+
+            return response()->json([
+                'success' => true,
+                'message' => $messageStr,
+                'data' => [
+                    'group_id' => $result['group_id'],
+                    'group_name' => $result['group_name'],
+                    'domains_added' => $result['domains_added'],
+                    'domains_moved' => $result['domains_moved'],
+                    'moved_from' => $result['moved_from'],
+                    'total_updated' => $result['total_updated'],
+                    'total_requested' => $result['total_requested'],
+                    'total_domains' => $groupModel->domains->count(),
+                    'max_domains' => $groupModel->max_domains,
+                    'available' => $groupModel->getAvailableDomainsCount(),
+                    'domains' => $groupModel->domains->map(fn($d) => [
+                        'id' => $d->id,
+                        'name' => $d->name,
+                        'domain_url' => $d->domain_url,
+                    ]),
+                ],
+            ]);
+        } catch (NotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 404);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to add domains to group.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Remove multiple domains from a group (batch operation)
+     */
+    public function removeDomains(Request $request, $id)
+    {
+        // Accept both JSON body and query params
+        $domainIds = $request->input('domain_ids') ?? $request->query('domain_ids');
+        
+        $validator = Validator::make(['domain_ids' => $domainIds], [
+            'domain_ids' => 'required|array|min:1',
+            'domain_ids.*' => 'required|integer|exists:domains,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        try {
+            $result = $this->removeDomainsFromGroupUseCase->execute((int) $id, $domainIds);
+            
+            // Recarregar grupo
+            $groupModel = DomainGroup::with('domains')->find($id);
+
+            return response()->json([
+                'success' => true,
+                'message' => "{$result['removed']} domain(s) removed from group '{$result['group_name']}' successfully.",
+                'data' => [
+                    'group_id' => $result['group_id'],
+                    'group_name' => $result['group_name'],
+                    'domains_removed' => $result['removed'],
+                    'total_requested' => $result['total_requested'],
+                    'total_domains' => $groupModel->domains->count(),
+                    'max_domains' => $groupModel->max_domains,
+                    'available' => $groupModel->getAvailableDomainsCount(),
+                ],
+            ]);
+        } catch (NotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 404);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to remove domains from group.',
                 'error' => $e->getMessage(),
             ], 500);
         }

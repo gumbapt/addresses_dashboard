@@ -100,10 +100,14 @@ Route::prefix('admin')->group(function () {
         // Domain Groups management routes (Super Admin only)
         Route::middleware('super.admin')->group(function () {
             Route::get('/domain-groups', [DomainGroupController::class, 'index']);
-            Route::get('/domain-groups/{id}', [DomainGroupController::class, 'show']);
             Route::post('/domain-groups', [DomainGroupController::class, 'store']);
+            Route::get('/domain-groups/{id}', [DomainGroupController::class, 'show']);
             Route::put('/domain-groups/{id}', [DomainGroupController::class, 'update']);
             Route::delete('/domain-groups/{id}', [DomainGroupController::class, 'destroy']);
+            
+            // Batch domain operations (must be before GET /domain-groups/{id}/domains)
+            Route::post('/domain-groups/{id}/domains', [DomainGroupController::class, 'addDomains']);
+            Route::delete('/domain-groups/{id}/domains', [DomainGroupController::class, 'removeDomains']);
             Route::get('/domain-groups/{id}/domains', [DomainGroupController::class, 'domains']);
             
             // Domain CRUD (Super Admin only)

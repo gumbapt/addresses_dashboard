@@ -190,6 +190,53 @@ class DomainGroupRepository implements DomainGroupRepositoryInterface
         return $group->domains()->count();
     }
 
+    public function addDomains(int $groupId, array $domainIds): int
+    {
+        return \App\Models\Domain::whereIn('id', $domainIds)
+            ->update(['domain_group_id' => $groupId]);
+    }
+
+    /**
+     * Get domains that are already in other groups
+     * 
+     * @param array $domainIds
+     * @param int $excludeGroupId Current group to exclude from check
+     * @return array [['domain_id' => int, 'current_group_id' => int, 'current_group_name' => string]]
+     */
+    public function getDomainsInOtherGroups(array $domainIds, int $excludeGroupId): array
+    {
+        return \App\Models\Domain::whereIn('id', $domainIds)
+            ->whereNotNull('domain_group_id')
+            ->where('domain_group_id', '!=', $excludeGroupId)
+            ->with('domainGroup:id,name')
+            ->get()
+            ->map(fn($domain) => [
+                'domain_id' => $domain->id,
+                'domain_name' => $domain->name,
+                'current_group_id' => $domain->domain_group_id,
+                'current_group_name' => $domain->domainGroup?->name ?? 'Unknown',
+            ])
+            ->toArray();
+    }
+
+    public function removeDomains(int $groupId, array $domainIds): int
+    {
+        return \App\Models\Domain::whereIn('id', $domainIds)
+            ->where('domain_group_id', $groupId)
+            ->update(['domain_group_id' => null]);
+    }
+
+    public function getAvailableDomainsCount(int $groupId): ?int
+    {
+        $group = DomainGroupModel::find($groupId);
+        
+        if (!$group) {
+            return null;
+        }
+        
+        return $group->getAvailableDomainsCount();
+    }
+
     /**
      * Converte Model para Entity
      */

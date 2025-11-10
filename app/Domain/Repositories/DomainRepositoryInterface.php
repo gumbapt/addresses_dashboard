@@ -8,6 +8,8 @@ interface DomainRepositoryInterface
 {
     public function findById(int $id): ?Domain;
     
+    public function findByIds(array $ids): array;
+    
     public function findBySlug(string $slug): ?Domain;
     
     public function findByApiKey(string $apiKey): ?Domain;

@@ -82,5 +82,40 @@ interface DomainGroupRepositoryInterface
      * Get domains count for a group
      */
     public function getDomainsCount(int $groupId): int;
+
+    /**
+     * Add multiple domains to a group
+     * 
+     * @param int $groupId
+     * @param array $domainIds
+     * @return int Number of domains added
+     */
+    public function addDomains(int $groupId, array $domainIds): int;
+
+    /**
+     * Remove multiple domains from a group
+     * 
+     * @param int $groupId
+     * @param array $domainIds
+     * @return int Number of domains removed
+     */
+    public function removeDomains(int $groupId, array $domainIds): int;
+
+    /**
+     * Get available domains count (max - current)
+     * 
+     * @param int $groupId
+     * @return int|null Null if unlimited
+     */
+    public function getAvailableDomainsCount(int $groupId): ?int;
+
+    /**
+     * Get domains that are already in other groups
+     * 
+     * @param array $domainIds
+     * @param int $excludeGroupId Current group to exclude from check
+     * @return array [['domain_id' => int, 'domain_name' => string, 'current_group_id' => int, 'current_group_name' => string]]
+     */
+    public function getDomainsInOtherGroups(array $domainIds, int $excludeGroupId): array;
 }
 

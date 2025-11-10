@@ -20,6 +20,15 @@ class DomainRepository implements DomainRepositoryInterface
         return $domain->toEntity();
     }
 
+    public function findByIds(array $ids): array
+    {
+        $domains = DomainModel::whereIn('id', $ids)->get();
+        
+        return $domains->map(function ($domain) {
+            return $domain->toEntity();
+        })->toArray();
+    }
+
     public function findBySlug(string $slug): ?DomainEntity
     {
         $domain = DomainModel::where('slug', $slug)->first();

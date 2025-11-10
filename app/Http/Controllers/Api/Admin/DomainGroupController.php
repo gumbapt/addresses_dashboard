@@ -56,6 +56,7 @@ class DomainGroupController extends Controller
             // Buscar models com relacionamentos para enriquecer os dados
             $groupIds = array_column($result['data'], 'id');
             $groupsWithRelations = DomainGroup::with(['domains', 'creator', 'updater'])
+                ->withCount('domains')
                 ->whereIn('id', $groupIds)
                 ->get()
                 ->keyBy('id');
@@ -65,6 +66,9 @@ class DomainGroupController extends Controller
                 $data = $groupEntity->toDto()->toArray();
                 
                 if ($groupModel) {
+                    // Adicionar contador de domínios
+                    $data['domains_count'] = $groupModel->domains_count;
+                    
                     $data['domains'] = $groupModel->domains->map(fn($d) => [
                         'id' => $d->id,
                         'name' => $d->name,

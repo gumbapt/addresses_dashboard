@@ -82,7 +82,7 @@ class Admin extends Authenticatable implements ChatUser
 
     public function isSuperAdmin(): bool
     {
-        return $this->is_super_admin;
+        return (bool) $this->is_super_admin;
     }
 
     public function roles()

@@ -78,6 +78,12 @@ class ProviderRankingTest extends TestCase
         $this->assertEquals('domain1.com', $ranking[0]['domain_name']);
         $this->assertEquals('Spectrum', $ranking[0]['provider_name']);
         $this->assertEquals(100, $ranking[0]['total_requests']);
+        
+        // Verificar novos campos de porcentagem
+        $this->assertArrayHasKey('domain_total_requests', $ranking[0]);
+        $this->assertArrayHasKey('percentage_of_domain', $ranking[0]);
+        $this->assertGreaterThan(0, $ranking[0]['percentage_of_domain']);
+        $this->assertLessThanOrEqual(100, $ranking[0]['percentage_of_domain']);
     }
 
     /** @test */

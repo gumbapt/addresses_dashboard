@@ -19,6 +19,8 @@ class ProviderRankingDTO
         public readonly string $periodStart,
         public readonly string $periodEnd,
         public readonly int $daysCovered,
+        public readonly int $domainTotalRequests,
+        public readonly float $percentageOfDomain,
     ) {}
 
     public function toArray(): array
@@ -38,6 +40,8 @@ class ProviderRankingDTO
             'period_start' => $this->periodStart,
             'period_end' => $this->periodEnd,
             'days_covered' => $this->daysCovered,
+            'domain_total_requests' => $this->domainTotalRequests,
+            'percentage_of_domain' => round($this->percentageOfDomain, 2),
         ];
     }
 }

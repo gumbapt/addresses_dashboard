@@ -78,6 +78,17 @@ class GetProviderRankingUseCase
             ->get()
             ->toArray();
         
+        // Calcular total de requests por domínio (para calcular porcentagem)
+        $domainTotals = $this->getDomainTotalRequests($dateFrom, $dateTo, $accessibleDomainIds);
+        
+        // Adicionar porcentagem a cada ranking
+        $rankings = array_map(function($item) use ($domainTotals) {
+            $domainTotal = $domainTotals[$item->domain_id] ?? 1; // Evitar divisão por zero
+            $item->percentage_of_domain = ($item->total_requests / $domainTotal) * 100;
+            $item->domain_total_requests = $domainTotal;
+            return $item;
+        }, $rankings);
+        
         // Converter para DTOs com rank
         return array_map(function($item, $index) {
             $periodStart = new \DateTime($item->period_start);
@@ -99,8 +110,50 @@ class GetProviderRankingUseCase
                 periodStart: $periodStart->format('Y-m-d'),
                 periodEnd: $periodEnd->format('Y-m-d'),
                 daysCovered: $daysCovered,
+                domainTotalRequests: (int) $item->domain_total_requests,
+                percentageOfDomain: (float) $item->percentage_of_domain,
             );
         }, $rankings, array_keys($rankings));
+    }
+    
+    /**
+     * Get total requests per domain for percentage calculation
+     */
+    private function getDomainTotalRequests(?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds): array
+    {
+        $query = DB::table('report_providers as rp')
+            ->join('reports as r', 'rp.report_id', '=', 'r.id')
+            ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->where('r.status', 'processed')
+            ->where('d.is_active', true);
+        
+        if ($dateFrom) {
+            $query->where('r.report_date', '>=', $dateFrom);
+        }
+        
+        if ($dateTo) {
+            $query->where('r.report_date', '<=', $dateTo);
+        }
+        
+        if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
+            $query->whereIn('d.id', $accessibleDomainIds);
+        }
+        
+        $totals = $query
+            ->select(
+                'd.id as domain_id',
+                DB::raw('SUM(rp.total_count) as total_requests')
+            )
+            ->groupBy('d.id')
+            ->get();
+        
+        // Converter para array [domain_id => total_requests]
+        $result = [];
+        foreach ($totals as $total) {
+            $result[$total->domain_id] = (int) $total->total_requests;
+        }
+        
+        return $result;
     }
     
     /**

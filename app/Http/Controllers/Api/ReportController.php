@@ -511,11 +511,19 @@ class ReportController extends Controller
                 ], 404);
             }
 
+            // Get aggregated provider data
+            $providerData = $this->compareDomainsUseCase->getAggregatedProviderData(
+                $domainIds,
+                $dateFrom,
+                $dateTo
+            );
+
             return response()->json([
                 'success' => true,
                 'data' => [
                     'domains' => array_map(fn($dto) => $dto->toArray(), $comparison),
                     'total_compared' => count($comparison),
+                    'provider_data' => $providerData,
                     'filters' => [
                         'metric' => $metric,
                         'date_from' => $dateFrom,
@@ -543,10 +551,13 @@ class ReportController extends Controller
         try {
             $providerId = $request->query('provider_id') ? (int) $request->query('provider_id') : null;
             $technology = $request->query('technology');
+            $period = $request->query('period'); // today, yesterday, last_week, last_month, last_year, all_time
             $dateFrom = $request->query('date_from');
             $dateTo = $request->query('date_to');
             $sortBy = $request->query('sort_by', 'total_requests');
             $limit = $request->query('limit') ? (int) $request->query('limit') : null;
+            $page = $request->query('page') ? (int) $request->query('page') : 1;
+            $perPage = $request->query('per_page') ? (int) $request->query('per_page') : 15;
 
             // Validate sort_by parameter
             if (!in_array($sortBy, ['total_requests', 'success_rate', 'avg_speed', 'total_reports'])) {
@@ -556,35 +567,107 @@ class ReportController extends Controller
                 ], 400);
             }
 
+            // Convert period to date range
+            if ($period) {
+                $dateRange = $this->getPeriodDateRange($period);
+                if (!$dateRange) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid period parameter. Must be one of: today, yesterday, last_week, last_month, last_year, all_time',
+                    ], 400);
+                }
+                
+                // Period overrides manual dates
+                $dateFrom = $dateRange['from'];
+                $dateTo = $dateRange['to'];
+            }
+
             // Get accessible domains for this admin
             $admin = $request->user();
             $accessibleDomains = $admin->getAccessibleDomains();
 
-            $ranking = $this->getProviderRankingUseCase->execute(
-                $providerId,
-                $technology,
-                $dateFrom,
-                $dateTo,
-                $sortBy,
-                $limit,
-                $accessibleDomains
-            );
-
-            return response()->json([
-                'success' => true,
-                'data' => [
-                    'ranking' => array_map(fn($dto) => $dto->toArray(), $ranking),
-                    'total_entries' => count($ranking),
+            // Get available providers for filtering
+            $availableProviders = $this->getAvailableProviders($accessibleDomains, $dateFrom, $dateTo);
+            
+            // Use pagination if page is specified, otherwise use limit (backward compatible)
+            if ($request->has('page') || $request->has('per_page')) {
+                $result = $this->getProviderRankingUseCase->executePaginated(
+                    $page,
+                    $perPage,
+                    $providerId,
+                    $technology,
+                    $dateFrom,
+                    $dateTo,
+                    $sortBy,
+                    $accessibleDomains
+                );
+                
+                // Calculate aggregated stats
+                $aggregatedStats = $this->calculateAggregatedStats($result['data']);
+                
+                // Calculate global stats if provider is filtered
+                $globalStats = null;
+                if ($providerId) {
+                    $globalStats = $this->calculateGlobalStats($providerId, $dateFrom, $dateTo, $accessibleDomains);
+                }
+                
+                return response()->json([
+                    'success' => true,
+                    'data' => array_map(fn($dto) => $dto->toArray(), $result['data']),
+                    'pagination' => $result['pagination'],
+                    'available_providers' => $availableProviders,
+                    'aggregated_stats' => $aggregatedStats,
+                    'global_stats' => $globalStats,
                     'filters' => [
                         'provider_id' => $providerId,
                         'technology' => $technology,
+                        'period' => $period,
                         'date_from' => $dateFrom,
                         'date_to' => $dateTo,
                         'sort_by' => $sortBy,
-                        'limit' => $limit,
                     ],
-                ],
-            ]);
+                ]);
+            } else {
+                // Backward compatible: use limit
+                $ranking = $this->getProviderRankingUseCase->execute(
+                    $providerId,
+                    $technology,
+                    $dateFrom,
+                    $dateTo,
+                    $sortBy,
+                    $limit,
+                    $accessibleDomains
+                );
+                
+                // Calculate aggregated stats
+                $aggregatedStats = $this->calculateAggregatedStats($ranking);
+                
+                // Calculate global stats if provider is filtered
+                $globalStats = null;
+                if ($providerId) {
+                    $globalStats = $this->calculateGlobalStats($providerId, $dateFrom, $dateTo, $accessibleDomains);
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'data' => [
+                        'ranking' => array_map(fn($dto) => $dto->toArray(), $ranking),
+                        'total_entries' => count($ranking),
+                        'filters' => [
+                            'provider_id' => $providerId,
+                            'technology' => $technology,
+                            'period' => $period,
+                            'date_from' => $dateFrom,
+                            'date_to' => $dateTo,
+                            'sort_by' => $sortBy,
+                            'limit' => $limit,
+                        ],
+                    ],
+                    'available_providers' => $availableProviders,
+                    'aggregated_stats' => $aggregatedStats,
+                    'global_stats' => $globalStats,
+                ]);
+            }
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -593,5 +676,163 @@ class ReportController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Convert period string to date range
+     */
+    private function getPeriodDateRange(string $period): ?array
+    {
+        $now = now();
+        
+        return match($period) {
+            'today' => [
+                'from' => $now->toDateString(),
+                'to' => $now->toDateString(),
+            ],
+            'yesterday' => [
+                'from' => $now->copy()->subDay()->toDateString(),
+                'to' => $now->copy()->subDay()->toDateString(),
+            ],
+            'last_week' => [
+                'from' => $now->copy()->subWeek()->toDateString(),
+                'to' => $now->toDateString(),
+            ],
+            'last_month' => [
+                'from' => $now->copy()->subMonth()->toDateString(),
+                'to' => $now->toDateString(),
+            ],
+            'last_year' => [
+                'from' => $now->copy()->subYear()->toDateString(),
+                'to' => $now->toDateString(),
+            ],
+            'all_time' => [
+                'from' => null,
+                'to' => null,
+            ],
+            default => null,
+        };
+    }
+
+    /**
+     * Get available providers with their IDs
+     */
+    private function getAvailableProviders(?array $accessibleDomainIds, ?string $dateFrom, ?string $dateTo): array
+    {
+        $query = \Illuminate\Support\Facades\DB::table('report_providers as rp')
+            ->join('providers as p', 'rp.provider_id', '=', 'p.id')
+            ->join('reports as r', 'rp.report_id', '=', 'r.id')
+            ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->where('r.status', 'processed')
+            ->where('d.is_active', true);
+        
+        if ($dateFrom) {
+            $query->where('r.report_date', '>=', $dateFrom);
+        }
+        
+        if ($dateTo) {
+            $query->where('r.report_date', '<=', $dateTo);
+        }
+        
+        if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
+            $query->whereIn('d.id', $accessibleDomainIds);
+        }
+        
+        return $query
+            ->select(
+                'p.id',
+                'p.name',
+                'p.slug',
+                \Illuminate\Support\Facades\DB::raw('SUM(rp.total_count) as total_requests')
+            )
+            ->groupBy('p.id', 'p.name', 'p.slug')
+            ->orderBy('total_requests', 'desc')
+            ->get()
+            ->map(fn($item) => [
+                'id' => $item->id,
+                'name' => $item->name,
+                'slug' => $item->slug,
+                'total_requests' => (int) $item->total_requests,
+            ])
+            ->toArray();
+    }
+
+    /**
+     * Calculate aggregated stats from ranking data
+     */
+    private function calculateAggregatedStats(array $rankings): array
+    {
+        if (empty($rankings)) {
+            return [
+                'total_requests' => 0,
+                'avg_success_rate' => 0,
+                'avg_speed' => 0,
+                'unique_domains' => 0,
+                'unique_providers' => 0,
+            ];
+        }
+        
+        $totalRequests = 0;
+        $successRates = [];
+        $speeds = [];
+        $uniqueDomains = [];
+        $uniqueProviders = [];
+        
+        foreach ($rankings as $dto) {
+            $totalRequests += $dto->totalRequests;
+            $successRates[] = $dto->avgSuccessRate;
+            $speeds[] = $dto->avgSpeed;
+            $uniqueDomains[$dto->domainId] = true;
+            $uniqueProviders[$dto->providerId] = true;
+        }
+        
+        return [
+            'total_requests' => $totalRequests,
+            'avg_success_rate' => !empty($successRates) ? array_sum($successRates) / count($successRates) : 0,
+            'avg_speed' => !empty($speeds) ? array_sum($speeds) / count($speeds) : 0,
+            'unique_domains' => count($uniqueDomains),
+            'unique_providers' => count($uniqueProviders),
+        ];
+    }
+
+    /**
+     * Calculate global stats when filtering by specific provider
+     */
+    private function calculateGlobalStats(int $providerId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds): array
+    {
+        $query = \Illuminate\Support\Facades\DB::table('report_providers as rp')
+            ->join('reports as r', 'rp.report_id', '=', 'r.id')
+            ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->where('r.status', 'processed')
+            ->where('d.is_active', true);
+        
+        if ($dateFrom) {
+            $query->where('r.report_date', '>=', $dateFrom);
+        }
+        
+        if ($dateTo) {
+            $query->where('r.report_date', '<=', $dateTo);
+        }
+        
+        if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
+            $query->whereIn('d.id', $accessibleDomainIds);
+        }
+        
+        // Total geral (todos providers)
+        $globalTotal = $query->sum('rp.total_count');
+        
+        // Total do provider específico
+        $providerTotal = (clone $query)
+            ->where('rp.provider_id', $providerId)
+            ->sum('rp.total_count');
+        
+        $percentageOfGlobal = $globalTotal > 0 ? ($providerTotal / $globalTotal) * 100 : 0;
+        
+        return [
+            'provider_total_requests' => (int) $providerTotal,
+            'global_total_requests' => (int) $globalTotal,
+            'percentage_of_global' => round($percentageOfGlobal, 2),
+        ];
+    }
 }
+
 

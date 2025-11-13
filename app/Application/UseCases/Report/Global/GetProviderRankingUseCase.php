@@ -15,7 +15,7 @@ class GetProviderRankingUseCase
      * @param string|null $dateFrom Date range start (YYYY-MM-DD)
      * @param string|null $dateTo Date range end (YYYY-MM-DD)
      * @param string $sortBy Sort criteria: total_requests, success_rate, avg_speed, total_reports
-     * @param int|null $limit Maximum results to return
+     * @param int|null $limit Maximum results to return (deprecated, use pagination)
      * @param array|null $accessibleDomainIds Filter by accessible domain IDs (null = all)
      * @return array Array of ProviderRankingDTO
      */
@@ -114,6 +114,54 @@ class GetProviderRankingUseCase
                 percentageOfDomain: (float) $item->percentage_of_domain,
             );
         }, $rankings, array_keys($rankings));
+    }
+
+    /**
+     * Get provider ranking with pagination
+     * 
+     * @return array ['data' => ProviderRankingDTO[], 'pagination' => [...]]
+     */
+    public function executePaginated(
+        int $page = 1,
+        int $perPage = 15,
+        ?int $providerId = null,
+        ?string $technology = null,
+        ?string $dateFrom = null,
+        ?string $dateTo = null,
+        string $sortBy = 'total_requests',
+        ?array $accessibleDomainIds = null
+    ): array {
+        // Get all results (without limit)
+        $allResults = $this->execute(
+            $providerId,
+            $technology,
+            $dateFrom,
+            $dateTo,
+            $sortBy,
+            null, // No limit
+            $accessibleDomainIds
+        );
+        
+        $total = count($allResults);
+        $perPage = min(max($perPage, 1), 100); // Limit between 1 and 100
+        $page = max($page, 1);
+        $lastPage = (int) ceil($total / $perPage);
+        $page = min($page, max($lastPage, 1));
+        
+        $offset = ($page - 1) * $perPage;
+        $paginatedResults = array_slice($allResults, $offset, $perPage);
+        
+        return [
+            'data' => $paginatedResults,
+            'pagination' => [
+                'total' => $total,
+                'per_page' => $perPage,
+                'current_page' => $page,
+                'last_page' => $lastPage,
+                'from' => $total > 0 ? $offset + 1 : 0,
+                'to' => $total > 0 ? min($offset + $perPage, $total) : 0,
+            ],
+        ];
     }
     
     /**

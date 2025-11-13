@@ -87,6 +87,99 @@ class CompareDomainsUseCase
         return $comparisons;
     }
 
+    /**
+     * Get aggregated provider data across all compared domains
+     */
+    public function getAggregatedProviderData(array $domainIds, ?string $dateFrom = null, ?string $dateTo = null): array
+    {
+        // Get all report IDs for these domains
+        $reportsQuery = Report::whereIn('domain_id', $domainIds)
+            ->where('status', 'processed');
+        
+        if ($dateFrom) {
+            $reportsQuery->where('report_date', '>=', $dateFrom);
+        }
+        if ($dateTo) {
+            $reportsQuery->where('report_date', '<=', $dateTo);
+        }
+        
+        $reportIds = $reportsQuery->pluck('id')->toArray();
+        
+        if (empty($reportIds)) {
+            return [
+                'all_providers' => [],
+                'common_providers' => [],
+                'unique_providers_count' => 0,
+            ];
+        }
+        
+        // Get all providers with aggregated data
+        $allProviders = DB::table('report_providers as rp')
+            ->join('providers as p', 'rp.provider_id', '=', 'p.id')
+            ->whereIn('rp.report_id', $reportIds)
+            ->select(
+                'p.id',
+                'p.name',
+                'rp.technology',
+                DB::raw('SUM(rp.total_count) as total_requests'),
+                DB::raw('AVG(rp.success_rate) as avg_success_rate'),
+                DB::raw('AVG(rp.avg_speed) as avg_speed'),
+                DB::raw('COUNT(DISTINCT rp.report_id) as appearances')
+            )
+            ->groupBy('p.id', 'p.name', 'rp.technology')
+            ->orderByDesc('total_requests')
+            ->get()
+            ->map(fn($p) => [
+                'provider_id' => $p->id,
+                'provider_name' => $p->name,
+                'technology' => $p->technology,
+                'total_requests' => (int) $p->total_requests,
+                'avg_success_rate' => round($p->avg_success_rate, 2),
+                'avg_speed' => round($p->avg_speed, 2),
+                'appearances' => (int) $p->appearances,
+            ])
+            ->toArray();
+        
+        // Find common providers (present in all domains)
+        $domainCount = count($domainIds);
+        $providersByDomain = [];
+        
+        foreach ($domainIds as $domainId) {
+            $domainReportIds = Report::where('domain_id', $domainId)
+                ->where('status', 'processed')
+                ->when($dateFrom, fn($q) => $q->where('report_date', '>=', $dateFrom))
+                ->when($dateTo, fn($q) => $q->where('report_date', '<=', $dateTo))
+                ->pluck('id')
+                ->toArray();
+            
+            if (!empty($domainReportIds)) {
+                $providers = DB::table('report_providers')
+                    ->whereIn('report_id', $domainReportIds)
+                    ->distinct('provider_id')
+                    ->pluck('provider_id')
+                    ->toArray();
+                
+                $providersByDomain[$domainId] = $providers;
+            }
+        }
+        
+        // Find intersection (common providers)
+        $commonProviderIds = !empty($providersByDomain) 
+            ? array_intersect(...array_values($providersByDomain))
+            : [];
+        
+        $commonProviders = collect($allProviders)
+            ->filter(fn($p) => in_array($p['provider_id'], $commonProviderIds))
+            ->values()
+            ->toArray();
+        
+        return [
+            'all_providers' => $allProviders,
+            'common_providers' => $commonProviders,
+            'unique_providers_count' => count(array_unique(array_column($allProviders, 'provider_id'))),
+        ];
+    }
+
     private function aggregateMetrics(array $reportIds, ?string $specificMetric): array
     {
         // Base aggregation

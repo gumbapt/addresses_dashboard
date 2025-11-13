@@ -225,29 +225,77 @@ class GetDashboardDataUseCase
 
     private function getTechnologyDistribution(array $reportIds): array
     {
-        $technologies = DB::table('report_providers')
-            ->whereIn('report_providers.report_id', $reportIds)
-            ->select(
-                'technology',
-                DB::raw('SUM(total_count) as total_count'),
-                DB::raw('COUNT(DISTINCT provider_id) as unique_providers')
-            )
-            ->groupBy('technology')
-            ->orderByDesc('total_count')
-            ->get();
-
-        $totalRequests = $technologies->sum('total_count');
-
-        return $technologies->map(function($t) use ($totalRequests) {
-            $percentage = $totalRequests > 0 ? round(($t->total_count / $totalRequests) * 100, 1) : 0;
+        $technologyData = [];
+        
+        // Buscar dados de technology_metrics.distribution do raw_data
+        $reports = Report::whereIn('id', $reportIds)->get();
+        
+        foreach ($reports as $report) {
+            $rawData = $report->raw_data;
             
-            return [
-                'technology' => $t->technology ?: 'Unknown',
-                'total_count' => (int) $t->total_count,
+            // Prioriza technology_metrics.distribution se existir
+            if (isset($rawData['technology_metrics']['distribution'])) {
+                foreach ($rawData['technology_metrics']['distribution'] as $tech => $count) {
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = 0;
+                    }
+                    $technologyData[$tech] += $count;
+                }
+            }
+            // Fallback: usar tecnologia dos providers se technology_metrics não existir
+            elseif (!empty($technologyData) === false) {
+                // Só usa o fallback se não encontrou nenhum technology_metrics em nenhum report
+                $shouldUseFallback = true;
+                break;
+            }
+        }
+        
+        // Se não encontrou technology_metrics em nenhum report, usa o método antigo
+        if (empty($technologyData)) {
+            $technologies = DB::table('report_providers')
+                ->whereIn('report_providers.report_id', $reportIds)
+                ->select(
+                    'technology',
+                    DB::raw('SUM(total_count) as total_count'),
+                    DB::raw('COUNT(DISTINCT provider_id) as unique_providers')
+                )
+                ->groupBy('technology')
+                ->orderByDesc('total_count')
+                ->get();
+
+            return $technologies->map(function($t) {
+                $totalRequests = DB::table('report_providers')
+                    ->whereIn('report_id', func_get_arg(1))
+                    ->sum('total_count');
+                
+                $percentage = $totalRequests > 0 ? round(($t->total_count / $totalRequests) * 100, 1) : 0;
+                
+                return [
+                    'technology' => $t->technology ?: 'Unknown',
+                    'total_count' => (int) $t->total_count,
+                    'percentage' => $percentage,
+                    'unique_providers' => (int) $t->unique_providers,
+                ];
+            }, $reportIds)->toArray();
+        }
+        
+        // Processar dados de technology_metrics.distribution
+        $totalRequests = array_sum($technologyData);
+        arsort($technologyData);
+        
+        $result = [];
+        foreach ($technologyData as $technology => $count) {
+            $percentage = $totalRequests > 0 ? round(($count / $totalRequests) * 100, 1) : 0;
+            
+            $result[] = [
+                'technology' => $technology,
+                'total_count' => (int) $count,
                 'percentage' => $percentage,
-                'unique_providers' => (int) $t->unique_providers,
+                'unique_providers' => null, // Não disponível no technology_metrics
             ];
-        })->toArray();
+        }
+        
+        return $result;
     }
 
     private function getExclusionByProvider(array $reportIds): array

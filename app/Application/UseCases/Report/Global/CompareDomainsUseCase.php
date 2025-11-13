@@ -179,25 +179,64 @@ class CompareDomainsUseCase
 
     private function getTechnologyDistribution(array $reportIds): array
     {
-        $technologies = DB::table('report_providers')
-            ->whereIn('report_id', $reportIds)
-            ->select(
-                'technology',
-                DB::raw('SUM(total_count) as total_count')
-            )
-            ->groupBy('technology')
-            ->orderByDesc('total_count')
-            ->get();
+        $technologyData = [];
+        
+        // Buscar dados de technology_metrics.distribution do raw_data
+        $reports = \App\Models\Report::whereIn('id', $reportIds)->get();
+        
+        foreach ($reports as $report) {
+            $rawData = $report->raw_data;
+            
+            // Prioriza technology_metrics.distribution se existir
+            if (isset($rawData['technology_metrics']['distribution'])) {
+                foreach ($rawData['technology_metrics']['distribution'] as $tech => $count) {
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = 0;
+                    }
+                    $technologyData[$tech] += $count;
+                }
+            }
+        }
+        
+        // Fallback: usar tecnologia dos providers se technology_metrics não existir
+        if (empty($technologyData)) {
+            $technologies = DB::table('report_providers')
+                ->whereIn('report_id', $reportIds)
+                ->select(
+                    'technology',
+                    DB::raw('SUM(total_count) as total_count')
+                )
+                ->groupBy('technology')
+                ->orderByDesc('total_count')
+                ->get();
 
-        $total = $technologies->sum('total_count');
+            $total = $technologies->sum('total_count');
 
-        return $technologies->map(function($t) use ($total) {
-            return [
-                'technology' => $t->technology ?: 'Unknown',
-                'requests' => (int) $t->total_count,
-                'percentage' => $total > 0 ? round(($t->total_count / $total) * 100, 1) : 0,
+            return $technologies->map(function($t) use ($total) {
+                return [
+                    'technology' => $t->technology ?: 'Unknown',
+                    'requests' => (int) $t->total_count,
+                    'percentage' => $total > 0 ? round(($t->total_count / $total) * 100, 1) : 0,
+                ];
+            })->toArray();
+        }
+        
+        // Processar dados de technology_metrics.distribution
+        $total = array_sum($technologyData);
+        arsort($technologyData);
+        
+        $result = [];
+        foreach ($technologyData as $technology => $count) {
+            $percentage = $total > 0 ? round(($count / $total) * 100, 1) : 0;
+            
+            $result[] = [
+                'technology' => $technology,
+                'requests' => (int) $count,
+                'percentage' => $percentage,
             ];
-        })->toArray();
+        }
+        
+        return $result;
     }
 
     private function calculateDifferences(array $current, array $base): array

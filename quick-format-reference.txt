@@ -1,0 +1,88 @@
+╔════════════════════════════════════════════════════════════════╗
+║  📋 REFERÊNCIA RÁPIDA DE FORMATOS - PLUGIN WORDPRESS           ║
+╚════════════════════════════════════════════════════════════════╝
+
+🔑 API KEY: 5ysoVBU3WLIJSHqXSRA35x0dxZmRQ4qR
+🌐 DOMAIN: zip.50g.io
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ USE ARRAY DE OBJETOS (com []):
+
+  geographic.states:
+    ✅ [{"code": "CA", "name": "California", "request_count": 32}]
+    ❌ {"CA": 32}
+
+  geographic.top_cities:
+    ✅ [{"name": "New York", "request_count": 9}]
+    ❌ {"New York": 9}
+
+  geographic.top_zip_codes:
+    ✅ [{"zip_code": "10600", "request_count": 8}]
+    ❌ {"10600": 8}
+
+  providers.top_providers:
+    ✅ [{"name": "AT&T", "total_count": 86}]
+    ❌ {"AT&T": 86}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ USE OBJETO CHAVE-VALOR (sem []):
+
+  technology_metrics.distribution:
+    ✅ {"Fiber": 560, "Cable": 450, "DSL": 320}
+    ❌ [{"name": "Fiber", "count": 560}]
+
+  performance.hourly_distribution:
+    ✅ {"0": 5, "12": 20, "18": 25}
+    ❌ [{"hour": 12, "count": 20}]
+
+  exclusion_metrics.by_provider:
+    ✅ {"GeoLinks": 22, "Viasat": 18}
+    ❌ [{"name": "GeoLinks", "count": 22}]
+
+  exclusion_metrics.by_state:
+    ✅ {"CA": 15, "NY": 10}
+    ❌ [{"state": "CA", "count": 15}]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 EXEMPLO RÁPIDO - TECHNOLOGIES:
+
+⚠️  IMPORTANTE: Use technology_metrics.distribution (NÃO providers.technology)!
+
+PHP no WordPress:
+  $technologies = [
+    'Fiber' => 560,
+    'Cable' => 450,
+    'DSL' => 320,
+    'Mobile Wireless' => 1416
+  ];
+
+JSON para API:
+  {
+    "technology_metrics": {
+      "distribution": {
+        "Fiber": 560,
+        "Cable": 450,
+        "DSL": 320,
+        "Mobile Wireless": 1416
+      }
+    }
+  }
+
+✅ Não precisa converter! Envie direto!
+✅ Dashboard agora lê technology_metrics.distribution corretamente!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DOCUMENTAÇÃO COMPLETA:
+  • WORDPRESS-PLUGIN-FORMAT-GUIDE.md
+  • REPORT-API-FORMAT.md
+  • TECHNOLOGIES-FORMAT-EXAMPLE.json
+
+🔧 CONVERSOR AUTOMÁTICO:
+  php convert-report-format.php input.json output.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

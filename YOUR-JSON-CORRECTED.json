@@ -1,0 +1,102 @@
+{
+  "api_version": "1.0",
+  "report_type": "daily",
+  "timestamp": "2025-11-12T22:28:16Z",
+  "source": {
+    "domain": "zip.50g.io",
+    "site_id": "wp-zip-50g-io-prod",
+    "site_name": "SmarterHome.ai"
+  },
+  "metadata": {
+    "report_date": "2025-06-27",
+    "report_period": {
+      "start": "2025-06-27 00:00:00",
+      "end": "2025-06-27 23:59:59"
+    },
+    "generated_at": "2025-11-12 22:28:16",
+    "total_processing_time": 0,
+    "data_version": "2.0.0"
+  },
+  "summary": {
+    "total_requests": 114,
+    "success_rate": 90.35,
+    "failed_requests": 11,
+    "unique_providers": 84,
+    "unique_states": 20,
+    "unique_zip_codes": 70
+  },
+  "geographic": {
+    "states": [
+      {
+        "code": "CA",
+        "name": "California",
+        "request_count": 32
+      },
+      {
+        "code": "NY",
+        "name": "New York",
+        "request_count": 14
+      },
+      {
+        "code": "TX",
+        "name": "Texas",
+        "request_count": 9
+      }
+    ],
+    "top_cities": [
+      {
+        "name": "New York",
+        "request_count": 9
+      },
+      {
+        "name": "Los Angeles",
+        "request_count": 6
+      }
+    ],
+    "top_zip_codes": [
+      {
+        "zip_code": "10600",
+        "request_count": 8
+      },
+      {
+        "zip_code": "10038",
+        "request_count": 6
+      }
+    ]
+  },
+  "providers": {
+    "top_providers": [
+      {
+        "name": "AT&T",
+        "total_count": 86
+      },
+      {
+        "name": "Spectrum",
+        "total_count": 54
+      }
+    ]
+  },
+  "technology_metrics": {
+    "distribution": {
+      "Mobile Wireless": 1416,
+      "Fiber": 560,
+      "DSL": 453
+    }
+  },
+  "performance": {
+    "hourly_distribution": {
+      "12": 4,
+      "13": 2,
+      "14": 6
+    },
+    "avg_confidence": 0.91
+  },
+  "exclusion_metrics": {
+    "by_provider": {
+      "GeoLinks": 22,
+      "Viasat": 18
+    }
+  }
+}
+
+

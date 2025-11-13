@@ -1,0 +1,99 @@
+{
+  "_comment": "EXEMPLO: Como enviar dados de tecnologias para a API",
+  "_note": "Este campo é OPCIONAL. Se não tiver dados, não precisa enviar.",
+  
+  "technology_metrics": {
+    "_format": "Objeto chave-valor (não é array!)",
+    
+    "distribution": {
+      "_description": "Total de requests por tecnologia",
+      "Fiber": 560,
+      "Cable": 450,
+      "DSL": 320,
+      "Fixed Wireless": 280,
+      "Mobile Wireless": 1416,
+      "Satellite": 150,
+      "Other": 50
+    },
+    
+    "by_state": {
+      "_description": "Distribuição de tecnologias por estado (opcional)",
+      "CA": {
+        "Fiber": 200,
+        "Cable": 150,
+        "DSL": 100,
+        "Mobile Wireless": 400
+      },
+      "NY": {
+        "Fiber": 180,
+        "Cable": 120,
+        "DSL": 80,
+        "Mobile Wireless": 350
+      },
+      "TX": {
+        "Fiber": 120,
+        "Cable": 100,
+        "DSL": 90,
+        "Fixed Wireless": 80
+      }
+    },
+    
+    "by_provider": {
+      "_description": "Tecnologias oferecidas por provedor (opcional)",
+      "AT&T": {
+        "Fiber": 300,
+        "DSL": 50,
+        "Mobile Wireless": 200
+      },
+      "Spectrum": {
+        "Cable": 250,
+        "Mobile Wireless": 100
+      },
+      "Verizon": {
+        "Fiber": 180,
+        "Mobile Wireless": 150
+      }
+    }
+  },
+  
+  "_wordpress_example": "Como coletar no WordPress e enviar",
+  "_wordpress_code": {
+    "_step_1": "Coletar dados no formato que você já tem",
+    "wp_data": {
+      "Fiber": 560,
+      "Cable": 450,
+      "DSL": 320
+    },
+    
+    "_step_2": "Enviar direto para API (não precisa converter!)",
+    "api_payload": {
+      "technology_metrics": {
+        "distribution": {
+          "Fiber": 560,
+          "Cable": 450,
+          "DSL": 320
+        }
+      }
+    }
+  },
+  
+  "_important_notes": [
+    "✅ Use objeto chave-valor: {\"Fiber\": 560}",
+    "❌ NÃO use array de objetos: [{\"name\": \"Fiber\", \"count\": 560}]",
+    "✅ Nomes de tecnologia podem ter espaços: \"Mobile Wireless\"",
+    "✅ Valores devem ser números inteiros (count de requests)",
+    "✅ Se não tiver dados, simplesmente não envie este campo"
+  ],
+  
+  "_common_technologies": [
+    "Fiber",
+    "Cable",
+    "DSL",
+    "Fixed Wireless",
+    "Mobile Wireless",
+    "Satellite",
+    "Other"
+  ]
+}
+
+

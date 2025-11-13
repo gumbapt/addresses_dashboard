@@ -1,0 +1,118 @@
+{
+  "api_version": "1.0",
+  "report_type": "daily",
+  "timestamp": "2025-11-12T22:28:16Z",
+  "source": {
+    "domain": "zip.50g.io",
+    "site_id": "wp-zip-50g-io-prod",
+    "site_name": "SmarterHome.ai"
+  },
+  "metadata": {
+    "report_date": "2025-06-27",
+    "report_period": {
+      "start": "2025-06-27 00:00:00",
+      "end": "2025-06-27 23:59:59"
+    },
+    "generated_at": "2025-11-12 22:28:16",
+    "total_processing_time": 0,
+    "data_version": "2.0.0"
+  },
+  "summary": {
+    "total_requests": 114,
+    "success_rate": 90.35,
+    "failed_requests": 11,
+    "avg_requests_per_hour": 4.75,
+    "unique_providers": 84,
+    "unique_states": 20,
+    "unique_zip_codes": 70
+  },
+  "geographic": {
+    "states": [
+      {
+        "code": "CA",
+        "name": "California",
+        "request_count": 32,
+        "success_rate": 90.5,
+        "avg_speed": 1500.0
+      },
+      {
+        "code": "NY",
+        "name": "New York",
+        "request_count": 14,
+        "success_rate": 85.0,
+        "avg_speed": 1200.0
+      },
+      {
+        "code": "TX",
+        "name": "Texas",
+        "request_count": 9,
+        "success_rate": 92.0,
+        "avg_speed": 1800.0
+      }
+    ],
+    "top_cities": [
+      {
+        "name": "New York",
+        "request_count": 9,
+        "zip_codes": ["10001", "10038", "10600"]
+      },
+      {
+        "name": "Los Angeles",
+        "request_count": 6,
+        "zip_codes": ["90001", "90012"]
+      }
+    ],
+    "top_zip_codes": [
+      {
+        "zip_code": "10600",
+        "request_count": 8,
+        "percentage": 7.02
+      },
+      {
+        "zip_code": "10038",
+        "request_count": 6,
+        "percentage": 5.26
+      }
+    ]
+  },
+  "providers": {
+    "top_providers": [
+      {
+        "name": "AT&T",
+        "total_count": 86,
+        "technology": "Fiber",
+        "success_rate": 95.0,
+        "avg_speed": 2000.0
+      },
+      {
+        "name": "Spectrum",
+        "total_count": 54,
+        "technology": "Cable",
+        "success_rate": 88.0,
+        "avg_speed": 1500.0
+      }
+    ]
+  },
+  "technology_metrics": {
+    "distribution": {
+      "Mobile Wireless": 1416,
+      "Fiber": 560,
+      "DSL": 453
+    }
+  },
+  "performance": {
+    "hourly_distribution": {
+      "12": 4,
+      "13": 2,
+      "14": 6
+    },
+    "avg_response_time": 0.5
+  },
+  "exclusion_metrics": {
+    "by_provider": {
+      "GeoLinks": 22,
+      "Viasat": 18
+    }
+  }
+}
+

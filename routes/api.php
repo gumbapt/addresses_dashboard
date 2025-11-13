@@ -171,6 +171,7 @@ Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->grou
     Route::prefix('global')->group(function () {
         Route::get('/domain-ranking', [ReportController::class, 'globalRanking'])->name('admin.reports.global.ranking');
         Route::get('/comparison', [ReportController::class, 'compareDomains'])->name('admin.reports.global.comparison');
+        Route::get('/provider-ranking', [ReportController::class, 'providerRanking'])->name('admin.reports.global.provider-ranking');
     });
 });
 

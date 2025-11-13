@@ -11,6 +11,7 @@ use App\Application\UseCases\Report\GetDashboardDataUseCase;
 use App\Application\UseCases\Report\CreateDailyReportUseCase;
 use App\Application\UseCases\Report\Global\GetGlobalDomainRankingUseCase;
 use App\Application\UseCases\Report\Global\CompareDomainsUseCase;
+use App\Application\UseCases\Report\Global\GetProviderRankingUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReportRequest;
 use App\Http\Requests\SubmitDailyReportRequest;
@@ -31,7 +32,8 @@ class ReportController extends Controller
         private GetDashboardDataUseCase $getDashboardDataUseCase,
         private CreateDailyReportUseCase $createDailyReportUseCase,
         private GetGlobalDomainRankingUseCase $getGlobalDomainRankingUseCase,
-        private CompareDomainsUseCase $compareDomainsUseCase
+        private CompareDomainsUseCase $compareDomainsUseCase,
+        private GetProviderRankingUseCase $getProviderRankingUseCase
     ) {}
 
     /**
@@ -529,4 +531,67 @@ class ReportController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Get provider ranking across domains
+     * 
+     * @group Global Reports
+     * @authenticated
+     */
+    public function providerRanking(Request $request): JsonResponse
+    {
+        try {
+            $providerId = $request->query('provider_id') ? (int) $request->query('provider_id') : null;
+            $technology = $request->query('technology');
+            $dateFrom = $request->query('date_from');
+            $dateTo = $request->query('date_to');
+            $sortBy = $request->query('sort_by', 'total_requests');
+            $limit = $request->query('limit') ? (int) $request->query('limit') : null;
+
+            // Validate sort_by parameter
+            if (!in_array($sortBy, ['total_requests', 'success_rate', 'avg_speed', 'total_reports'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid sort_by parameter. Must be one of: total_requests, success_rate, avg_speed, total_reports',
+                ], 400);
+            }
+
+            // Get accessible domains for this admin
+            $admin = $request->user();
+            $accessibleDomains = $admin->getAccessibleDomains();
+
+            $ranking = $this->getProviderRankingUseCase->execute(
+                $providerId,
+                $technology,
+                $dateFrom,
+                $dateTo,
+                $sortBy,
+                $limit,
+                $accessibleDomains
+            );
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'ranking' => array_map(fn($dto) => $dto->toArray(), $ranking),
+                    'total_entries' => count($ranking),
+                    'filters' => [
+                        'provider_id' => $providerId,
+                        'technology' => $technology,
+                        'date_from' => $dateFrom,
+                        'date_to' => $dateTo,
+                        'sort_by' => $sortBy,
+                        'limit' => $limit,
+                    ],
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error getting provider ranking',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
 }
+

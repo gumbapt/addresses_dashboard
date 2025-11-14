@@ -23,7 +23,7 @@ class ReportSubmissionTest extends TestCase
         // Create a test domain with API key
         $this->testDomain = Domain::factory()->create([
             'name' => 'test.domain.com',
-            'api_key' => 'dmn_live_' . str_repeat('a', 64),
+            'api_key' => str_repeat('a', 64),
             'is_active' => true,
         ]);
 

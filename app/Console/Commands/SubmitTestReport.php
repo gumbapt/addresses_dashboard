@@ -84,7 +84,7 @@ class SubmitTestReport extends Command
                         'slug' => str_replace('.', '-', $sourceDomain),
                         'domain_url' => 'https://' . $sourceDomain,
                         'site_id' => $sourceData['site_id'] ?? 'test-site-001',
-                        'api_key' => 'test_' . bin2hex(random_bytes(32)),
+                        'api_key' => bin2hex(random_bytes(32)), // 64 chars
                         'status' => 'active',
                         'timezone' => $sourceData['timezone'] ?? 'America/New_York',
                         'wordpress_version' => $sourceData['wordpress_version'] ?? '6.0.0',

@@ -28,7 +28,7 @@ class DomainFactory extends Factory
             'slug' => $slug,
             'domain_url' => fake()->unique()->domainName(),
             'site_id' => 'wp-prod-' . Str::random(10),
-            'api_key' => 'dmn_live_' . Str::random(64),
+            'api_key' => Str::random(64),
             'status' => 'active',
             'timezone' => fake()->randomElement([
                 'America/New_York',

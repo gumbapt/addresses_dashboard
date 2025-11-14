@@ -28,7 +28,16 @@ class CreateDailyReportUseCase
             ->first();
         
         if ($existingReport) {
-            // ATUALIZAR o relatório existente
+            // Comparar conteúdo para verificar se houve mudança
+            $existingRawData = $existingReport->raw_data ?? [];
+            $hasChanged = $this->hasReportDataChanged($existingRawData, $dailyData);
+            
+            if (!$hasChanged) {
+                // Não houve mudança, retornar report existente sem reprocessar
+                return $existingReport->toEntity();
+            }
+            
+            // Houve mudança, atualizar o relatório existente
             $existingReport->update([
                 'report_period_start' => Carbon::parse($reportDate)->startOfDay(),
                 'report_period_end' => Carbon::parse($reportDate)->endOfDay(),
@@ -320,5 +329,78 @@ class CreateDailyReportUseCase
         ];
 
         return $states[$code] ?? $code;
+    }
+
+    /**
+     * Compara dois reports para verificar se houve mudança no conteúdo
+     * Ignora campos de timestamp e metadados que podem variar
+     */
+    private function hasReportDataChanged(array $existingData, array $newData): bool
+    {
+        // Normalizar dados removendo campos que podem variar sem mudança real
+        $normalizeData = function(array $data) {
+            $normalized = [];
+            
+            // Para daily reports, comparar principalmente data.summary, data.providers, data.geographic
+            if (isset($data['data']['summary'])) {
+                $normalized['data']['summary'] = $data['data']['summary'];
+            }
+            if (isset($data['data']['providers'])) {
+                $normalized['data']['providers'] = $data['data']['providers'];
+            }
+            if (isset($data['data']['geographic'])) {
+                $normalized['data']['geographic'] = $data['data']['geographic'];
+            }
+            
+            // Também comparar speed_metrics e exclusion_metrics se existirem
+            if (isset($data['speed_metrics'])) {
+                $normalized['speed_metrics'] = $data['speed_metrics'];
+            }
+            if (isset($data['exclusion_metrics'])) {
+                $normalized['exclusion_metrics'] = $data['exclusion_metrics'];
+            }
+            
+            // Para reports convertidos, comparar campos do formato do sistema
+            if (isset($data['summary'])) {
+                $normalized['summary'] = $data['summary'];
+            }
+            if (isset($data['providers'])) {
+                $normalized['providers'] = $data['providers'];
+            }
+            if (isset($data['geographic'])) {
+                $normalized['geographic'] = $data['geographic'];
+            }
+            if (isset($data['performance'])) {
+                $normalized['performance'] = $data['performance'];
+            }
+            
+            return $normalized;
+        };
+        
+        $existingNormalized = $normalizeData($existingData);
+        $newNormalized = $normalizeData($newData);
+        
+        // Ordenar arrays recursivamente para comparação consistente
+        $this->ksort_recursive($existingNormalized);
+        $this->ksort_recursive($newNormalized);
+        
+        // Comparar usando hash MD5 para eficiência
+        $existingHash = md5(json_encode($existingNormalized, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $newHash = md5(json_encode($newNormalized, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        
+        return $existingHash !== $newHash;
+    }
+
+    /**
+     * Ordena arrays recursivamente por chave
+     */
+    private function ksort_recursive(array &$array): void
+    {
+        ksort($array);
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $this->ksort_recursive($array[$key]);
+            }
+        }
     }
 }

@@ -26,7 +26,16 @@ class CreateReportUseCase
             ->first();
         
         if ($existingReport) {
-            // ATUALIZAR o relatório existente ao invés de criar um novo
+            // Comparar conteúdo para verificar se houve mudança
+            $existingRawData = $existingReport->raw_data ?? [];
+            $hasChanged = $this->hasReportDataChanged($existingRawData, $reportData);
+            
+            if (!$hasChanged) {
+                // Não houve mudança, retornar report existente sem reprocessar
+                return $existingReport->toEntity();
+            }
+            
+            // Houve mudança, atualizar o relatório existente
             $existingReport->update([
                 'report_period_start' => new DateTime($metadata['report_period']['start']),
                 'report_period_end' => new DateTime($metadata['report_period']['end']),
@@ -78,5 +87,82 @@ class CreateReportUseCase
             rawData: $reportData,
             status: $status
         );
+    }
+
+    /**
+     * Compara dois reports para verificar se houve mudança no conteúdo
+     * Ignora campos de timestamp e metadados que podem variar
+     */
+    private function hasReportDataChanged(array $existingData, array $newData): bool
+    {
+        // Normalizar dados removendo campos que podem variar sem mudança real
+        $normalizeData = function(array $data) {
+            $normalized = [];
+            
+            // Incluir apenas campos relevantes para comparação
+            if (isset($data['summary'])) {
+                $normalized['summary'] = $data['summary'];
+            }
+            if (isset($data['providers'])) {
+                $normalized['providers'] = $data['providers'];
+            }
+            if (isset($data['geographic'])) {
+                $normalized['geographic'] = $data['geographic'];
+            }
+            if (isset($data['performance'])) {
+                $normalized['performance'] = $data['performance'];
+            }
+            if (isset($data['speed_metrics'])) {
+                $normalized['speed_metrics'] = $data['speed_metrics'];
+            }
+            if (isset($data['exclusion_metrics'])) {
+                $normalized['exclusion_metrics'] = $data['exclusion_metrics'];
+            }
+            if (isset($data['technology_metrics'])) {
+                $normalized['technology_metrics'] = $data['technology_metrics'];
+            }
+            if (isset($data['health'])) {
+                $normalized['health'] = $data['health'];
+            }
+            
+            // Para daily reports, comparar data.summary e data.providers
+            if (isset($data['data']['summary'])) {
+                $normalized['data']['summary'] = $data['data']['summary'];
+            }
+            if (isset($data['data']['providers'])) {
+                $normalized['data']['providers'] = $data['data']['providers'];
+            }
+            if (isset($data['data']['geographic'])) {
+                $normalized['data']['geographic'] = $data['data']['geographic'];
+            }
+            
+            return $normalized;
+        };
+        
+        $existingNormalized = $normalizeData($existingData);
+        $newNormalized = $normalizeData($newData);
+        
+        // Ordenar arrays recursivamente para comparação consistente
+        $this->ksort_recursive($existingNormalized);
+        $this->ksort_recursive($newNormalized);
+        
+        // Comparar usando hash MD5 para eficiência
+        $existingHash = md5(json_encode($existingNormalized, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $newHash = md5(json_encode($newNormalized, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        
+        return $existingHash !== $newHash;
+    }
+
+    /**
+     * Ordena arrays recursivamente por chave
+     */
+    private function ksort_recursive(array &$array): void
+    {
+        ksort($array);
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $this->ksort_recursive($array[$key]);
+            }
+        }
     }
 }

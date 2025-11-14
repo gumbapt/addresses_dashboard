@@ -20,6 +20,8 @@ use App\Models\Domain;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class ReportController extends Controller
 {
@@ -80,6 +82,9 @@ class ReportController extends Controller
 
             // Criar relatório diário
             $report = $this->createDailyReportUseCase->execute($domain->id, $dailyData);
+
+            // Salvar report em JSON
+            $this->saveReportToJson($domain->name, $dailyData, $dailyData['data']['date'] ?? null);
 
             // Enfileirar processamento
             ProcessReportJob::dispatch($report->getId(), $dailyData);
@@ -152,6 +157,10 @@ class ReportController extends Controller
                 $domain->id,
                 $request->validated()
             );
+            
+            // Salvar report em JSON
+            $reportDate = $request->input('metadata.report_date') ?? $request->input('metadata.report_period.start');
+            $this->saveReportToJson($domain->name, $request->validated(), $reportDate);
             
             // Queue for async processing
             ProcessReportJob::dispatch($report->getId(), $request->validated());
@@ -393,6 +402,98 @@ class ReportController extends Controller
         }
 
         abort(401, 'Invalid or missing API key');
+    }
+
+    /**
+     * Save report to JSON file organized by domain and date
+     * 
+     * @param string $domainName
+     * @param array $reportData
+     * @param string|null $reportDate
+     * @return void
+     */
+    private function saveReportToJson(string $domainName, array $reportData, ?string $reportDate = null): void
+    {
+        try {
+            // Normalize domain name for filesystem (remove invalid chars for folder names)
+            // Remove characters that are invalid in folder names: / \ : * ? " < > |
+            $safeDomainName = preg_replace('/[\/\\\\:*?"<>|]/', '_', $domainName);
+            
+            // Replace spaces and other special chars with underscore
+            $safeDomainName = preg_replace('/[^a-zA-Z0-9._-]/', '_', $safeDomainName);
+            
+            // Remove leading/trailing dots and underscores
+            $safeDomainName = trim($safeDomainName, '._');
+            
+            // Replace multiple consecutive underscores with single underscore
+            $safeDomainName = preg_replace('/_+/', '_', $safeDomainName);
+            
+            // Ensure it's not empty (fallback to 'unknown_domain')
+            if (empty($safeDomainName)) {
+                $safeDomainName = 'unknown_domain';
+            }
+            
+            // Limit length to avoid filesystem issues (max 255 chars for most systems)
+            if (strlen($safeDomainName) > 200) {
+                $safeDomainName = substr($safeDomainName, 0, 200);
+            }
+            
+            // Extract date from report data if not provided
+            if (!$reportDate) {
+                // Try different date formats
+                $reportDate = $reportData['metadata']['report_date'] 
+                    ?? $reportData['data']['date'] 
+                    ?? $reportData['metadata']['report_period']['start'] 
+                    ?? date('Y-m-d');
+            }
+            
+            // Parse date to ensure Y-m-d format
+            if (strlen($reportDate) > 10) {
+                $reportDate = substr($reportDate, 0, 10);
+            }
+            
+            // Sanitize date to ensure it's safe for filesystem (only Y-m-d format)
+            $reportDate = preg_replace('/[^0-9-]/', '', $reportDate);
+            
+            // Validate date format (should be YYYY-MM-DD)
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $reportDate)) {
+                // If invalid, use current date
+                $reportDate = date('Y-m-d');
+            }
+            
+            // Create directory path: /docs/submited_reports/{domain_name}/{date}/
+            $basePath = base_path('docs/submited_reports');
+            $domainPath = $basePath . '/' . $safeDomainName;
+            $datePath = $domainPath . '/' . $reportDate;
+            
+            // Create directories if they don't exist
+            if (!File::exists($datePath)) {
+                File::makeDirectory($datePath, 0755, true);
+            }
+            
+            // Generate filename with timestamp to avoid conflicts
+            $timestamp = now()->format('His') . '_' . substr(microtime(true) * 10000, -4);
+            $filename = "report_{$timestamp}.json";
+            $filePath = $datePath . '/' . $filename;
+            
+            // Add metadata to the JSON
+            $jsonData = array_merge($reportData, [
+                '_saved_at' => now()->toIso8601String(),
+                '_domain' => $domainName,
+                '_report_date' => $reportDate,
+            ]);
+            
+            // Save JSON file with pretty print
+            File::put($filePath, json_encode($jsonData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+            
+        } catch (\Exception $e) {
+            // Log error but don't fail the request
+            Log::warning('Failed to save report to JSON: ' . $e->getMessage(), [
+                'domain' => $domainName,
+                'date' => $reportDate,
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 
     /**

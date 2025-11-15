@@ -168,12 +168,29 @@ class GetDashboardDataUseCase
             $rawData = $report->raw_data;
             
             if (isset($rawData['performance']['hourly_distribution'])) {
-                foreach ($rawData['performance']['hourly_distribution'] as $hourData) {
-                    $hour = $hourData['hour'];
-                    if (!isset($hourlyData[$hour])) {
-                        $hourlyData[$hour] = 0;
+                $hourlyDist = $rawData['performance']['hourly_distribution'];
+                
+                // Formato 1: Objeto chave-valor {"12": 20, "18": 25}
+                if (is_array($hourlyDist) && !empty($hourlyDist) && !isset($hourlyDist[0])) {
+                    foreach ($hourlyDist as $hour => $count) {
+                        $hour = (int) $hour;
+                        if (!isset($hourlyData[$hour])) {
+                            $hourlyData[$hour] = 0;
+                        }
+                        $hourlyData[$hour] += (int) $count;
                     }
-                    $hourlyData[$hour] += $hourData['count'];
+                }
+                // Formato 2: Array de objetos [{"hour": 12, "count": 20}]
+                elseif (is_array($hourlyDist) && !empty($hourlyDist) && isset($hourlyDist[0])) {
+                    foreach ($hourlyDist as $hourData) {
+                        if (is_array($hourData) && isset($hourData['hour'])) {
+                            $hour = (int) $hourData['hour'];
+                            if (!isset($hourlyData[$hour])) {
+                                $hourlyData[$hour] = 0;
+                            }
+                            $hourlyData[$hour] += (int) ($hourData['count'] ?? 0);
+                        }
+                    }
                 }
             }
         }
@@ -226,6 +243,7 @@ class GetDashboardDataUseCase
     private function getTechnologyDistribution(array $reportIds): array
     {
         $technologyData = [];
+        $technologyProviders = []; // Para rastrear providers únicos por tecnologia
         
         // Buscar dados de technology_metrics.distribution do raw_data
         $reports = Report::whereIn('id', $reportIds)->get();
@@ -233,24 +251,68 @@ class GetDashboardDataUseCase
         foreach ($reports as $report) {
             $rawData = $report->raw_data;
             
-            // Prioriza technology_metrics.distribution se existir
-            if (isset($rawData['technology_metrics']['distribution'])) {
+            // Prioriza technology_metrics.distribution se existir (formato novo)
+            if (isset($rawData['technology_metrics']['distribution']) && is_array($rawData['technology_metrics']['distribution'])) {
                 foreach ($rawData['technology_metrics']['distribution'] as $tech => $count) {
                     if (!isset($technologyData[$tech])) {
                         $technologyData[$tech] = 0;
+                        $technologyProviders[$tech] = [];
                     }
-                    $technologyData[$tech] += $count;
+                    $technologyData[$tech] += (int) $count;
+                    
+                    // Tentar calcular unique_providers a partir de providers.top_providers se disponível
+                    if (isset($rawData['providers']['top_providers']) && is_array($rawData['providers']['top_providers'])) {
+                        foreach ($rawData['providers']['top_providers'] as $provider) {
+                            $providerTech = $provider['technology'] ?? 'Unknown';
+                            $providerName = $provider['name'] ?? null;
+                            if ($providerTech === $tech && $providerName && !in_array($providerName, $technologyProviders[$tech])) {
+                                $technologyProviders[$tech][] = $providerName;
+                            }
+                        }
+                    }
                 }
             }
-            // Fallback: usar tecnologia dos providers se technology_metrics não existir
-            elseif (!empty($technologyData) === false) {
-                // Só usa o fallback se não encontrou nenhum technology_metrics em nenhum report
-                $shouldUseFallback = true;
-                break;
+            // Fallback 1: formato antigo - technologies diretamente (sem .distribution)
+            elseif (isset($rawData['technologies']) && is_array($rawData['technologies'])) {
+                foreach ($rawData['technologies'] as $tech => $count) {
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = 0;
+                    }
+                    $technologyData[$tech] += (int) $count;
+                }
+            }
+            // Fallback 2: formato antigo - data.technologies (formato WordPress antigo)
+            elseif (isset($rawData['data']['technologies']) && is_array($rawData['data']['technologies'])) {
+                foreach ($rawData['data']['technologies'] as $tech => $count) {
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = 0;
+                    }
+                    $technologyData[$tech] += (int) $count;
+                }
+            }
+            // Fallback 3: calcular a partir de providers.top_providers[].technology
+            elseif (isset($rawData['providers']['top_providers']) && is_array($rawData['providers']['top_providers'])) {
+                foreach ($rawData['providers']['top_providers'] as $provider) {
+                    $tech = $provider['technology'] ?? 'Unknown';
+                    $count = (int) ($provider['total_count'] ?? 0);
+                    
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = [
+                            'count' => 0,
+                            'providers' => []
+                        ];
+                    }
+                    $technologyData[$tech]['count'] += $count;
+                    // Contar providers únicos por tecnologia
+                    $providerName = $provider['name'] ?? null;
+                    if ($providerName && !in_array($providerName, $technologyData[$tech]['providers'])) {
+                        $technologyData[$tech]['providers'][] = $providerName;
+                    }
+                }
             }
         }
         
-        // Se não encontrou technology_metrics em nenhum report, usa o método antigo
+        // Se não encontrou technology_metrics em nenhum report, usa o método antigo (report_providers)
         if (empty($technologyData)) {
             $technologies = DB::table('report_providers')
                 ->whereIn('report_providers.report_id', $reportIds)
@@ -263,39 +325,72 @@ class GetDashboardDataUseCase
                 ->orderByDesc('total_count')
                 ->get();
 
-            return $technologies->map(function($t) {
-                $totalRequests = DB::table('report_providers')
-                    ->whereIn('report_id', func_get_arg(1))
-                    ->sum('total_count');
-                
+            $totalRequests = DB::table('report_providers')
+                ->whereIn('report_id', $reportIds)
+                ->sum('total_count');
+
+            return $technologies->map(function($t) use ($totalRequests) {
                 $percentage = $totalRequests > 0 ? round(($t->total_count / $totalRequests) * 100, 1) : 0;
                 
                 return [
                     'technology' => $t->technology ?: 'Unknown',
                     'total_count' => (int) $t->total_count,
                     'percentage' => $percentage,
-                    'unique_providers' => (int) $t->unique_providers,
+                    'unique_providers' => null, // Sempre null para consistência
                 ];
-            }, $reportIds)->toArray();
+            })->toArray();
         }
         
         // Processar dados de technology_metrics.distribution
-        $totalRequests = array_sum($technologyData);
-        arsort($technologyData);
+        // Verificar se $technologyData tem estrutura complexa (do Fallback 3) ou simples
+        $isComplexStructure = !empty($technologyData) && is_array(reset($technologyData)) && isset(reset($technologyData)['count']);
         
-        $result = [];
-        foreach ($technologyData as $technology => $count) {
-            $percentage = $totalRequests > 0 ? round(($count / $totalRequests) * 100, 1) : 0;
+        if ($isComplexStructure) {
+            // Estrutura complexa do Fallback 3: ['count' => X, 'providers' => [...]]
+            $totalRequests = array_sum(array_column($technologyData, 'count'));
+            uasort($technologyData, function($a, $b) {
+                return $b['count'] <=> $a['count'];
+            });
             
-            $result[] = [
-                'technology' => $technology,
-                'total_count' => (int) $count,
-                'percentage' => $percentage,
-                'unique_providers' => null, // Não disponível no technology_metrics
-            ];
+            $result = [];
+            foreach ($technologyData as $technology => $data) {
+                $count = $data['count'];
+                $percentage = $totalRequests > 0 ? round(($count / $totalRequests) * 100, 1) : 0;
+                
+                // Sempre retornar null para unique_providers para manter consistência
+                // (mesmo quando calculado a partir de providers, não é 100% confiável)
+                $result[] = [
+                    'technology' => $technology,
+                    'total_count' => (int) $count,
+                    'percentage' => $percentage,
+                    'unique_providers' => null,
+                ];
+            }
+            
+            return $result;
+        } else {
+            // Estrutura simples: ['technology' => count]
+            $totalRequests = array_sum($technologyData);
+            arsort($technologyData);
+            
+            $result = [];
+            foreach ($technologyData as $technology => $count) {
+                $percentage = $totalRequests > 0 ? round(($count / $totalRequests) * 100, 1) : 0;
+                
+                // Sempre retornar null para unique_providers quando vem de technology_metrics
+                // para manter consistência (já que não temos informação confiável de providers únicos)
+                $uniqueProviders = null;
+                
+                $result[] = [
+                    'technology' => $technology,
+                    'total_count' => (int) $count,
+                    'percentage' => $percentage,
+                    'unique_providers' => $uniqueProviders,
+                ];
+            }
+            
+            return $result;
         }
-        
-        return $result;
     }
 
     private function getExclusionByProvider(array $reportIds): array

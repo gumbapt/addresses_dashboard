@@ -173,7 +173,7 @@ class GetAggregatedReportStatsUseCase
             ->limit(20)
             ->get();
 
-        return $states->map(fn($s) => [
+        $result = $states->map(fn($s) => [
             'state_id' => $s->id,
             'code' => $s->code,
             'name' => $s->name,
@@ -182,6 +182,55 @@ class GetAggregatedReportStatsUseCase
             'avg_speed' => round($s->avg_speed, 2),
             'report_count' => (int) $s->report_count,
         ])->toArray();
+
+        // Se avg_speed for 0 para todos os estados, tentar buscar de speed_metrics.by_state do raw_data
+        $hasSpeedData = array_sum(array_column($result, 'avg_speed')) > 0;
+        
+        if (!$hasSpeedData) {
+            $speedDataByState = [];
+            $reports = Report::whereIn('id', $reportIds)->get();
+            
+            foreach ($reports as $report) {
+                $rawData = $report->raw_data;
+                
+                // Tentar buscar de speed_metrics.by_state
+                if (isset($rawData['speed_metrics']['by_state']) && is_array($rawData['speed_metrics']['by_state'])) {
+                    foreach ($rawData['speed_metrics']['by_state'] as $stateCode => $speedData) {
+                        if (!isset($speedDataByState[$stateCode])) {
+                            $speedDataByState[$stateCode] = [];
+                        }
+                        if (isset($speedData['avg']) && $speedData['avg'] > 0) {
+                            $speedDataByState[$stateCode][] = $speedData['avg'];
+                        }
+                    }
+                }
+                
+                // Tentar buscar de geographic.states[].avg_speed (caso não tenha sido processado)
+                if (isset($rawData['geographic']['states']) && is_array($rawData['geographic']['states'])) {
+                    foreach ($rawData['geographic']['states'] as $stateData) {
+                        $stateCode = $stateData['code'] ?? null;
+                        $avgSpeed = $stateData['avg_speed'] ?? 0;
+                        if ($stateCode && $avgSpeed > 0) {
+                            if (!isset($speedDataByState[$stateCode])) {
+                                $speedDataByState[$stateCode] = [];
+                            }
+                            $speedDataByState[$stateCode][] = $avgSpeed;
+                        }
+                    }
+                }
+            }
+            
+            // Atualizar avg_speed nos resultados se encontramos dados
+            foreach ($result as &$state) {
+                $stateCode = $state['code'];
+                if (isset($speedDataByState[$stateCode]) && !empty($speedDataByState[$stateCode])) {
+                    $state['avg_speed'] = round(array_sum($speedDataByState[$stateCode]) / count($speedDataByState[$stateCode]), 2);
+                }
+            }
+            unset($state);
+        }
+
+        return $result;
     }
 
     private function aggregateCities(array $reportIds): array

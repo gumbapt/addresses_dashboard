@@ -1,0 +1,157 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-09-27",
+        "report_period": {
+            "start": "2025-09-27 00:00:00",
+            "end": "2025-09-27 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:44",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 1,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.04,
+        "unique_providers": 17,
+        "unique_states": 1,
+        "unique_zip_codes": 1
+    },
+    "performance": {
+        "hourly_distribution": {
+            "08": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 22,
+            "Fiber": 19,
+            "Cable": 7,
+            "DSL": 3,
+            "Satellite": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 1,
+                "technology": "Satellite"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Telefonica",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Cogent Communication",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 1,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Stealth Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nuvisions",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optical Communications Group Inc",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 4848.42
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "New York",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10038",
+                "request_count": 1,
+                "percentage": 100
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:45+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-09-27"
+}

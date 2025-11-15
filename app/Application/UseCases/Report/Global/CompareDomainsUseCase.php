@@ -280,9 +280,27 @@ class CompareDomainsUseCase
         foreach ($reports as $report) {
             $rawData = $report->raw_data;
             
-            // Prioriza technology_metrics.distribution se existir
+            // Prioriza technology_metrics.distribution se existir (formato novo)
             if (isset($rawData['technology_metrics']['distribution'])) {
                 foreach ($rawData['technology_metrics']['distribution'] as $tech => $count) {
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = 0;
+                    }
+                    $technologyData[$tech] += $count;
+                }
+            }
+            // Fallback 1: formato antigo - technologies diretamente (sem .distribution)
+            elseif (isset($rawData['technologies']) && is_array($rawData['technologies'])) {
+                foreach ($rawData['technologies'] as $tech => $count) {
+                    if (!isset($technologyData[$tech])) {
+                        $technologyData[$tech] = 0;
+                    }
+                    $technologyData[$tech] += $count;
+                }
+            }
+            // Fallback 2: formato antigo - data.technologies (formato WordPress antigo)
+            elseif (isset($rawData['data']['technologies']) && is_array($rawData['data']['technologies'])) {
+                foreach ($rawData['data']['technologies'] as $tech => $count) {
                     if (!isset($technologyData[$tech])) {
                         $technologyData[$tech] = 0;
                     }

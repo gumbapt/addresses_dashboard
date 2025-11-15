@@ -37,6 +37,9 @@ class CreateDailyReportUseCase
                 return $existingReport->toEntity();
             }
             
+            // Converter formato diário para formato do sistema ANTES de salvar
+            $convertedData = $this->convertDailyToSystemFormat($dailyData);
+            
             // Houve mudança, atualizar o relatório existente
             $existingReport->update([
                 'report_period_start' => Carbon::parse($reportDate)->startOfDay(),
@@ -44,7 +47,7 @@ class CreateDailyReportUseCase
                 'generated_at' => Carbon::parse($dailyData['timestamp']),
                 'total_processing_time' => 0,
                 'data_version' => $dailyData['api_version'],
-                'raw_data' => $dailyData,
+                'raw_data' => $convertedData,
                 'status' => 'pending', // Reset para pending para reprocessar
             ]);
             
@@ -109,6 +112,7 @@ class CreateDailyReportUseCase
             'performance' => $this->convertPerformance($dailyData),
             'speed_metrics' => $this->convertSpeedMetrics($dailyData),
             'exclusion_metrics' => $this->convertExclusionMetrics($dailyData),
+            'technology_metrics' => $this->convertTechnologyMetrics($dailyData),
         ];
     }
 
@@ -249,6 +253,39 @@ class CreateDailyReportUseCase
         return [
             'by_provider' => $exclusions,
             'distribution' => [],
+        ];
+    }
+
+    private function convertTechnologyMetrics(array $dailyData): array
+    {
+        // Se já existe technology_metrics no formato novo, usar direto
+        if (isset($dailyData['technology_metrics'])) {
+            return $dailyData['technology_metrics'];
+        }
+        
+        // Converter formato antigo: data.technologies -> technology_metrics.distribution
+        if (isset($dailyData['data']['technologies'])) {
+            return [
+                'distribution' => $dailyData['data']['technologies'],
+                'by_state' => [],
+                'by_provider' => [],
+            ];
+        }
+        
+        // Converter formato antigo: technologies (top-level) -> technology_metrics.distribution
+        if (isset($dailyData['technologies'])) {
+            return [
+                'distribution' => $dailyData['technologies'],
+                'by_state' => [],
+                'by_provider' => [],
+            ];
+        }
+        
+        // Se não encontrou, retornar vazio
+        return [
+            'distribution' => [],
+            'by_state' => [],
+            'by_provider' => [],
         ];
     }
 

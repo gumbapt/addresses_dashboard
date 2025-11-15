@@ -1,0 +1,308 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-08-01",
+        "report_period": {
+            "start": "2025-08-01 00:00:00",
+            "end": "2025-08-01 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:41",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 26,
+        "success_rate": 96.15,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 1.08,
+        "unique_providers": 41,
+        "unique_states": 2,
+        "unique_zip_codes": 23
+    },
+    "performance": {
+        "hourly_distribution": {
+            "02": 1,
+            "07": 1,
+            "10": 2,
+            "11": 2,
+            "12": 1,
+            "13": 3,
+            "14": 2,
+            "15": 1,
+            "16": 2,
+            "17": 2,
+            "20": 2,
+            "21": 2,
+            "22": 5
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 263,
+            "Fiber": 85,
+            "Cable": 72,
+            "Satellite": 70,
+            "DSL": 63,
+            "Fixed Wireless": 19,
+            "Unknown": 6
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 25,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 25,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 24,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 22,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 6,
+                "technology": "Cable"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Cox Communications",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Rural Telecommunications of America",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Hudson Valley Wireless",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Etheric Networks",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Fusion Cloud Services, Inc.",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 3,
+                "success_rate": 96.15,
+                "avg_speed": 2351.48
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 1,
+                "success_rate": 96.15,
+                "avg_speed": 159.44
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Madisonville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Rensselaer",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "92660",
+                "request_count": 2,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "33823",
+                "request_count": 2,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "90802",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "37354",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "12590",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "92027",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "14120",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "07018",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "10031",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "20019",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "80301",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "77511",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "15678",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "77076",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "12170",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "10474",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "94063",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "11951",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "79765",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "11206",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "94804",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "12144",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "38024",
+                "request_count": 1,
+                "percentage": 3.85
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:42+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-08-01"
+}

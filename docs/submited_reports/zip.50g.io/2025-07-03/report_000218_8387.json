@@ -1,0 +1,488 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-07-03",
+        "report_period": {
+            "start": "2025-07-03 00:00:00",
+            "end": "2025-07-03 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:18",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 35,
+        "success_rate": 91.43,
+        "failed_requests": 3,
+        "avg_requests_per_hour": 1.46,
+        "unique_providers": 58,
+        "unique_states": 10,
+        "unique_zip_codes": 32
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "01": 1,
+            "10": 3,
+            "11": 3,
+            "12": 1,
+            "14": 1,
+            "15": 5,
+            "16": 8,
+            "17": 4,
+            "18": 2,
+            "19": 4,
+            "21": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 474,
+            "DSL": 160,
+            "Fiber": 134,
+            "Satellite": 88,
+            "Cable": 81,
+            "Fixed Wireless": 34,
+            "Unknown": 14
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 32,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 32,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 32,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 32,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 31,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 28,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 12,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 10,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 5,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Bluebird Network LLC",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "DigitalPath Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Cal.net",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 6,
+                "success_rate": 91.43,
+                "avg_speed": 1125.02
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 5,
+                "success_rate": 91.43,
+                "avg_speed": 554.77
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 4,
+                "success_rate": 91.43,
+                "avg_speed": 622.12
+            },
+            {
+                "code": "IL",
+                "name": "Illinois",
+                "request_count": 2,
+                "success_rate": 91.43,
+                "avg_speed": 1446.29
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 2,
+                "success_rate": 91.43,
+                "avg_speed": 1181.71
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 91.43,
+                "avg_speed": 545.74
+            },
+            {
+                "code": "VA",
+                "name": "Virginia",
+                "request_count": 1,
+                "success_rate": 91.43,
+                "avg_speed": 83.33
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 1,
+                "success_rate": 91.43,
+                "avg_speed": 550.89
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 91.43,
+                "avg_speed": 114.29
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 1,
+                "success_rate": 91.43,
+                "avg_speed": 294.38
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Rockford",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Macon",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Odessa",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Lodi",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Citrus Heights",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Parkland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Roseville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Buffalo",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Alberta",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Los Angeles",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Gilroy",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Brooklyn",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Fort Worth",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Rochester",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Big Spring",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Charlotte",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Manchester",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Abbeville",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10456",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "61107",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "31201",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "95240",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "91755",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "95610",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33147",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33076",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "95747",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33034",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "14204",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "77632",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "14304",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "23821",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "90057",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "95020",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "11207",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "76164",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10801",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "34788",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33325",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "63106",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "95482",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "79720",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "34237",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "54980",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "95422",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "79762",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "28216",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "45144",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33176",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "29620",
+                "request_count": 1,
+                "percentage": 2.86
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:18+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-07-03"
+}

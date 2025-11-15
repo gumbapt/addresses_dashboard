@@ -1,0 +1,232 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-07-12",
+        "report_period": {
+            "start": "2025-07-12 00:00:00",
+            "end": "2025-07-12 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:25",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 7,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.29,
+        "unique_providers": 15,
+        "unique_states": 5,
+        "unique_zip_codes": 7
+    },
+    "performance": {
+        "hourly_distribution": {
+            "12": 1,
+            "13": 1,
+            "14": 1,
+            "16": 1,
+            "19": 1,
+            "20": 1,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 85,
+            "Fiber": 40,
+            "DSL": 20,
+            "Cable": 20,
+            "Satellite": 19,
+            "Fixed Wireless": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Sandhill Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "RiverStreet",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Breezeline",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Ultimate Internet Access Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 335.58
+            },
+            {
+                "code": "LA",
+                "name": "Louisiana",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 825.91
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 303.33
+            },
+            {
+                "code": "WV",
+                "name": "West Virginia",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 234.55
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1988.23
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Dayton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bogalusa",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bennettsville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tunnelton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Pomona",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "45417",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "70427",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "29512",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "10469",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "11003",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "26444",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "91767",
+                "request_count": 1,
+                "percentage": 14.29
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:26+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-07-12"
+}

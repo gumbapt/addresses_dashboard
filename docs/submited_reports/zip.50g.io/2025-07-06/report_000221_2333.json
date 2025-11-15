@@ -1,0 +1,400 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-07-06",
+        "report_period": {
+            "start": "2025-07-06 00:00:00",
+            "end": "2025-07-06 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:20",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 25,
+        "success_rate": 88,
+        "failed_requests": 3,
+        "avg_requests_per_hour": 1.04,
+        "unique_providers": 45,
+        "unique_states": 5,
+        "unique_zip_codes": 23
+    },
+    "performance": {
+        "hourly_distribution": {
+            "02": 2,
+            "14": 2,
+            "15": 2,
+            "16": 2,
+            "17": 5,
+            "18": 4,
+            "19": 3,
+            "20": 3,
+            "21": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 317,
+            "DSL": 159,
+            "Fiber": 92,
+            "Fixed Wireless": 68,
+            "Satellite": 64,
+            "Cable": 55,
+            "Unknown": 15
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 22,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 22,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 22,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 22,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 22,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 19,
+                "technology": "DSL"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 12,
+                "technology": "Cable"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 6,
+                "technology": "Cable"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 5,
+                "technology": "DSL"
+            },
+            {
+                "name": "Etheric Networks",
+                "total_count": 5,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Sail Internet",
+                "total_count": 4,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Unwired Ltd",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Tekify Fiber & Wireless",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "RobinsonHSS",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Sonic.net",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cal.net",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "unWired Broadband",
+                "total_count": 2,
+                "technology": "Unknown"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 8,
+                "success_rate": 88,
+                "avg_speed": 931.84
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 6,
+                "success_rate": 88,
+                "avg_speed": 555.82
+            },
+            {
+                "code": "WI",
+                "name": "Wisconsin",
+                "request_count": 1,
+                "success_rate": 88,
+                "avg_speed": 496.44
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 88,
+                "avg_speed": 1118.45
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 88,
+                "avg_speed": 1566.11
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Milwaukee",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Zavalla",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hayward",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Emeryville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Oakland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tomball",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Harris County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Santa Monica",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Porterville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Valley Stream",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Conroe",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Palm Coast",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "San Antonio",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Stockton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Pasadena",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Redwood City",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Vista",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "53209",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "75980",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "93706",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "95121",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "34743",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "24878",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "94608",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "20327",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "96084",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "90404",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "93257",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "13639",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "29924",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "94544",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "11552",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "11580",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "15818",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "32164",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "78240",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "95210",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "77502",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "94063",
+                "request_count": 1,
+                "percentage": 4
+            },
+            {
+                "zip_code": "92084",
+                "request_count": 1,
+                "percentage": 4
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:21+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-07-06"
+}

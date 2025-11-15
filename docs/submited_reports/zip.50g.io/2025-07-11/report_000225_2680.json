@@ -1,0 +1,449 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-07-11",
+        "report_period": {
+            "start": "2025-07-11 00:00:00",
+            "end": "2025-07-11 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:24",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 31,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 1.29,
+        "unique_providers": 35,
+        "unique_states": 8,
+        "unique_zip_codes": 27
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 1,
+            "13": 5,
+            "14": 3,
+            "15": 2,
+            "16": 6,
+            "17": 2,
+            "18": 2,
+            "20": 1,
+            "21": 2,
+            "22": 4,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 505,
+            "Fiber": 132,
+            "Cable": 95,
+            "Satellite": 78,
+            "DSL": 51,
+            "Fixed Wireless": 2,
+            "Unknown": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 31,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 31,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 31,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 31,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 31,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 28,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 17,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 9,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Planters Rural Telephone Cooperative",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 10,
+                "success_rate": 100,
+                "avg_speed": 875.93
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 276.36
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 404.26
+            },
+            {
+                "code": "PA",
+                "name": "Pennsylvania",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 584.71
+            },
+            {
+                "code": "VA",
+                "name": "Virginia",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 179.41
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 165.24
+            },
+            {
+                "code": "MA",
+                "name": "Massachusetts",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 334.71
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 357.04
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Buffalo",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Rincon",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Effingham County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Newport Beach",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Medford",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Groton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Reading",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Seneca Falls",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Chillicothe",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Syracuse",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Thaxton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bedford County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Marina Del Rey",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Philadelphia",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Menands",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Yonkers",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Newport",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Cocke County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "14224",
+                "request_count": 2,
+                "percentage": 6.45
+            },
+            {
+                "zip_code": "31326",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "20271",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "11763",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "01450",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "10462",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "19602",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "13148",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "45601",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "10467",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "14613",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "11375",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "13208",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "24174",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "90292",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "11427",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "10458",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "19104",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "10459",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "12204",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "11214",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "10031",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "11215",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "10701",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "11411",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "37821",
+                "request_count": 1,
+                "percentage": 3.23
+            },
+            {
+                "zip_code": "13126",
+                "request_count": 1,
+                "percentage": 3.23
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:25+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-07-11"
+}

@@ -35,6 +35,9 @@ class CreateReportUseCase
                 return $existingReport->toEntity();
             }
             
+            // Normalizar technology_metrics se necessário
+            $normalizedData = $this->normalizeTechnologyMetrics($reportData);
+            
             // Houve mudança, atualizar o relatório existente
             $existingReport->update([
                 'report_period_start' => new DateTime($metadata['report_period']['start']),
@@ -42,7 +45,7 @@ class CreateReportUseCase
                 'generated_at' => new DateTime($metadata['generated_at']),
                 'total_processing_time' => $metadata['total_processing_time'] ?? 0,
                 'data_version' => $metadata['data_version'],
-                'raw_data' => $reportData,
+                'raw_data' => $normalizedData,
                 'status' => 'pending', // Reset para pending para reprocessar
             ]);
             
@@ -56,6 +59,9 @@ class CreateReportUseCase
             return $existingReport->toEntity();
         }
         
+        // Normalizar technology_metrics se necessário
+        $normalizedData = $this->normalizeTechnologyMetrics($reportData);
+        
         return $this->reportRepository->create(
             domainId: $domainId,
             reportDate: $reportDate,
@@ -64,7 +70,7 @@ class CreateReportUseCase
             generatedAt: new DateTime($metadata['generated_at']),
             totalProcessingTime: $metadata['total_processing_time'] ?? 0,
             dataVersion: $metadata['data_version'],
-            rawData: $reportData,
+            rawData: $normalizedData,
             status: 'pending'
         );
     }
@@ -164,5 +170,63 @@ class CreateReportUseCase
                 $this->ksort_recursive($array[$key]);
             }
         }
+    }
+
+    /**
+     * Normaliza technology_metrics de diferentes formatos para o formato padrão
+     */
+    private function normalizeTechnologyMetrics(array $reportData): array
+    {
+        // Se já existe technology_metrics no formato novo, não precisa converter
+        if (isset($reportData['technology_metrics'])) {
+            return $reportData;
+        }
+        
+        // Converter formato antigo: data.technologies -> technology_metrics.distribution
+        if (isset($reportData['data']['technologies'])) {
+            $reportData['technology_metrics'] = [
+                'distribution' => $reportData['data']['technologies'],
+                'by_state' => [],
+                'by_provider' => [],
+            ];
+            return $reportData;
+        }
+        
+        // Converter formato antigo: technologies (top-level) -> technology_metrics.distribution
+        if (isset($reportData['technologies'])) {
+            $reportData['technology_metrics'] = [
+                'distribution' => $reportData['technologies'],
+                'by_state' => [],
+                'by_provider' => [],
+            ];
+            return $reportData;
+        }
+        
+        // CALCULAR a partir de providers.top_providers[].technology (último recurso)
+        if (isset($reportData['providers']['top_providers']) && is_array($reportData['providers']['top_providers'])) {
+            $technologyDistribution = [];
+            
+            foreach ($reportData['providers']['top_providers'] as $provider) {
+                $technology = $provider['technology'] ?? 'Unknown';
+                $count = $provider['total_count'] ?? 0;
+                
+                if (!isset($technologyDistribution[$technology])) {
+                    $technologyDistribution[$technology] = 0;
+                }
+                $technologyDistribution[$technology] += $count;
+            }
+            
+            if (!empty($technologyDistribution)) {
+                $reportData['technology_metrics'] = [
+                    'distribution' => $technologyDistribution,
+                    'by_state' => [],
+                    'by_provider' => [],
+                ];
+                return $reportData;
+            }
+        }
+        
+        // Se não encontrou, retornar sem modificar
+        return $reportData;
     }
 }

@@ -1,0 +1,103 @@
+{
+    "source": {
+        "domain": "zip.50g.io",
+        "site_id": "wp-zip-50g-io-prod",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-08-03",
+        "report_period": {
+            "start": "2025-08-03 00:00:00",
+            "end": "2025-08-03 23:59:59"
+        },
+        "generated_at": "2025-11-15 00:02:43",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 1,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.04,
+        "unique_providers": 9,
+        "unique_states": 0,
+        "unique_zip_codes": 1
+    },
+    "geographic": {
+        "states": [],
+        "top_cities": [],
+        "top_zip_codes": [
+            {
+                "zip_code": "43609",
+                "request_count": 1,
+                "percentage": 100
+            }
+        ]
+    },
+    "performance": {
+        "hourly_distribution": {
+            "13": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 9,
+            "DSL": 8,
+            "Fiber": 5,
+            "Satellite": 3,
+            "Cable": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "Amplex Wireless",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "BCI Mississippi Broadband LLC",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 1,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 1,
+                "technology": "Satellite"
+            },
+            {
+                "name": "ACD.net",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 1,
+                "technology": "DSL"
+            }
+        ]
+    },
+    "_saved_at": "2025-11-15T00:02:43+00:00",
+    "_domain": "zip.50g.io",
+    "_report_date": "2025-08-03"
+}

@@ -13,6 +13,7 @@ use App\Models\ReportState;
 use App\Models\ReportCity;
 use App\Models\ReportZipCode;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\QueryException;
 
 class ReportProcessor
 {
@@ -57,18 +58,46 @@ class ReportProcessor
         Log::debug('Processing summary', ['report_id' => $reportId]);
 
         // Use updateOrCreate to handle duplicate report_id (retry scenarios)
-        ReportSummary::updateOrCreate(
-            ['report_id' => $reportId], // Search criteria
-            [
-                'total_requests' => $summaryData['total_requests'] ?? 0,
-                'success_rate' => $summaryData['success_rate'] ?? 0,
-                'failed_requests' => $summaryData['failed_requests'] ?? 0,
-                'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
-                'unique_providers' => $summaryData['unique_providers'] ?? 0,  
-                'unique_states' => $summaryData['unique_states'] ?? 0,
-                'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
-            ]
-        );
+        // However, in high concurrency scenarios, a race condition can still occur where two workers
+        // try to create the same summary simultaneously. We handle this with a try-catch to retry.
+        try {
+            ReportSummary::updateOrCreate(
+                ['report_id' => $reportId], // Search criteria
+                [
+                    'total_requests' => $summaryData['total_requests'] ?? 0,
+                    'success_rate' => $summaryData['success_rate'] ?? 0,
+                    'failed_requests' => $summaryData['failed_requests'] ?? 0,
+                    'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
+                    'unique_providers' => $summaryData['unique_providers'] ?? 0,  
+                    'unique_states' => $summaryData['unique_states'] ?? 0,
+                    'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
+                ]
+            );
+        } catch (QueryException $e) {
+            // Handle race condition: if duplicate entry error (1062), try to find and update the existing record
+            if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
+                $summary = ReportSummary::where('report_id', $reportId)->first();
+                
+                if ($summary) {
+                    // Update the existing record
+                    $summary->update([
+                        'total_requests' => $summaryData['total_requests'] ?? 0,
+                        'success_rate' => $summaryData['success_rate'] ?? 0,
+                        'failed_requests' => $summaryData['failed_requests'] ?? 0,
+                        'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
+                        'unique_providers' => $summaryData['unique_providers'] ?? 0,  
+                        'unique_states' => $summaryData['unique_states'] ?? 0,
+                        'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
+                    ]);
+                } else {
+                    // If still not found, throw the original exception
+                    throw $e;
+                }
+            } else {
+                // For other database errors, re-throw
+                throw $e;
+            }
+        }
     }
 
     /**

@@ -1,0 +1,4 @@
+# Ignore all files and subdirectories in submitted reports
+*
+!.gitignore
+

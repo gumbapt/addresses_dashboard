@@ -5,6 +5,7 @@ namespace App\Infrastructure\Repositories;
 use App\Domain\Entities\City as CityEntity;
 use App\Domain\Repositories\CityRepositoryInterface;
 use App\Models\City as CityModel;
+use Illuminate\Database\QueryException;
 
 class CityRepository implements CityRepositoryInterface
 {
@@ -116,17 +117,34 @@ class CityRepository implements CityRepositoryInterface
         ?float $latitude = null,
         ?float $longitude = null
     ): CityEntity {
-        $city = CityModel::firstOrCreate(
-            [
-                'name' => $name,
-                'state_id' => $stateId,
-            ],
-            [
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'is_active' => true,
-            ]
-        );
+        try {
+            $city = CityModel::firstOrCreate(
+                [
+                    'name' => $name,
+                    'state_id' => $stateId,
+                ],
+                [
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'is_active' => true,
+                ]
+            );
+        } catch (QueryException $e) {
+            // Handle race condition: if duplicate entry error (1062), try to find the existing record
+            if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
+                $city = CityModel::where('name', $name)
+                    ->where('state_id', $stateId)
+                    ->first();
+                
+                if (!$city) {
+                    // If still not found, throw the original exception
+                    throw $e;
+                }
+            } else {
+                // For other database errors, re-throw
+                throw $e;
+            }
+        }
         
         return $city->toEntity();
     }
@@ -147,19 +165,37 @@ class CityRepository implements CityRepositoryInterface
         $defaultStateId = $firstState ? $firstState->id : 1;
         
         // Use firstOrCreate to avoid race conditions when multiple workers process reports simultaneously
-        // This is atomic and thread-safe, preventing duplicate entry errors
+        // However, in high concurrency scenarios, a race condition can still occur where two workers
+        // try to create the same city simultaneously. We handle this with a try-catch to retry.
         // Note: We use name + state_id as unique constraint, so we need to use firstOrCreate with both
-        $city = CityModel::firstOrCreate(
-            [
-                'name' => $name,
-                'state_id' => $defaultStateId,
-            ],
-            [
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'is_active' => true,
-            ]
-        );
+        try {
+            $city = CityModel::firstOrCreate(
+                [
+                    'name' => $name,
+                    'state_id' => $defaultStateId,
+                ],
+                [
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'is_active' => true,
+                ]
+            );
+        } catch (QueryException $e) {
+            // Handle race condition: if duplicate entry error (1062), try to find the existing record
+            if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
+                $city = CityModel::where('name', $name)
+                    ->where('state_id', $defaultStateId)
+                    ->first();
+                
+                if (!$city) {
+                    // If still not found, throw the original exception
+                    throw $e;
+                }
+            } else {
+                // For other database errors, re-throw
+                throw $e;
+            }
+        }
         
         return $city->toEntity();
     }

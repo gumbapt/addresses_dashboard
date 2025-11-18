@@ -6,6 +6,7 @@ use App\Domain\Entities\ZipCode as ZipCodeEntity;
 use App\Domain\Repositories\ZipCodeRepositoryInterface;
 use App\Models\ZipCode as ZipCodeModel;
 use App\Helpers\ZipCodeHelper;
+use Illuminate\Database\QueryException;
 
 class ZipCodeRepository implements ZipCodeRepositoryInterface
 {
@@ -189,11 +190,27 @@ class ZipCodeRepository implements ZipCodeRepositoryInterface
         }
         
         // Use firstOrCreate to avoid race conditions when multiple workers process reports simultaneously
-        // This is atomic and thread-safe, preventing duplicate entry errors
-        $zipCode = ZipCodeModel::firstOrCreate(
-            ['code' => $normalizedCode],
-            $defaults
-        );
+        // However, in high concurrency scenarios, a race condition can still occur where two workers
+        // try to create the same zip code simultaneously. We handle this with a try-catch to retry.
+        try {
+            $zipCode = ZipCodeModel::firstOrCreate(
+                ['code' => $normalizedCode],
+                $defaults
+            );
+        } catch (QueryException $e) {
+            // Handle race condition: if duplicate entry error (1062), try to find the existing record
+            if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
+                $zipCode = ZipCodeModel::where('code', $normalizedCode)->first();
+                
+                if (!$zipCode) {
+                    // If still not found, throw the original exception
+                    throw $e;
+                }
+            } else {
+                // For other database errors, re-throw
+                throw $e;
+            }
+        }
         
         return $zipCode->toEntity();
     }

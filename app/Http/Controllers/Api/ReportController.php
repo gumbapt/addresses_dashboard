@@ -148,7 +148,9 @@ class ReportController extends Controller
             if ($domain->name !== $sourceDomain) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Domain mismatch - authenticated domain does not match source domain'
+                    'message' => 'Domain mismatch - authenticated domain does not match source domain',
+                    "domain" => $domain->name,
+                    "source_domain" => $sourceDomain
                 ], 403);
             }
 

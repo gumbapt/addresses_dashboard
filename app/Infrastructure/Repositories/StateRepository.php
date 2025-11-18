@@ -32,16 +32,18 @@ class StateRepository implements StateRepositoryInterface
 
     public function findOrCreateByCode(string $code, ?string $name = null): StateEntity
     {
-        $state = StateModel::where('code', strtoupper($code))->first();
+        $normalizedCode = strtoupper($code);
         
-        if (!$state) {
-            $state = StateModel::create([
-                'code' => strtoupper($code),
-                'name' => $name ?? strtoupper($code),
+        // Use firstOrCreate to avoid race conditions when multiple workers process reports simultaneously
+        // This is atomic and thread-safe, preventing duplicate entry errors
+        $state = StateModel::firstOrCreate(
+            ['code' => $normalizedCode],
+            [
+                'name' => $name ?? $normalizedCode,
                 'timezone' => 'America/New_York', // Default timezone
                 'is_active' => true,
-            ]);
-        }
+            ]
+        );
         
         return $state->toEntity();
     }

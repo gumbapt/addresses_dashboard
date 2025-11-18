@@ -142,20 +142,24 @@ class CityRepository implements CityRepositoryInterface
             return $this->findOrCreate($name, $stateId, $latitude, $longitude);
         }
         
-        // Try to find existing city by name only (first match)
-        $city = CityModel::where('name', $name)->first();
+        // If stateId is not provided, get default state
+        $firstState = \App\Models\State::where('is_active', true)->first();
+        $defaultStateId = $firstState ? $firstState->id : 1;
         
-        if (!$city) {
-            // Create with minimal data (state_id can be null or use first state as placeholder)
-            $firstState = \App\Models\State::where('is_active', true)->first();
-            $city = CityModel::create([
+        // Use firstOrCreate to avoid race conditions when multiple workers process reports simultaneously
+        // This is atomic and thread-safe, preventing duplicate entry errors
+        // Note: We use name + state_id as unique constraint, so we need to use firstOrCreate with both
+        $city = CityModel::firstOrCreate(
+            [
                 'name' => $name,
-                'state_id' => $firstState ? $firstState->id : 1, // Fallback to ID 1
+                'state_id' => $defaultStateId,
+            ],
+            [
                 'latitude' => $latitude,
                 'longitude' => $longitude,
                 'is_active' => true,
-            ]);
-        }
+            ]
+        );
         
         return $city->toEntity();
     }

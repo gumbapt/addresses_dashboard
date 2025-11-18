@@ -35,10 +35,10 @@ class DatabaseSeeder extends Seeder
             
             // Outros seeders
             // ChatSeeder::class,
-            TestUserSeeder::class,
-            AssistantSeeder::class,
+            //TestUserSeeder::class,
+            //AssistantSeeder::class,
             DomainPermissionSeeder::class,
-            DomainSeeder::class,
+            //DomainSeeder::class,
             //SeedAllDomainsWithReports::class,
         ]);
     }

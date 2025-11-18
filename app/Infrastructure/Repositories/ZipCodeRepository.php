@@ -163,32 +163,37 @@ class ZipCodeRepository implements ZipCodeRepositoryInterface
     ): ZipCodeEntity {
         $normalizedCode = ZipCodeHelper::normalize($code);
         
-        // Try to find existing zipCode
-        $zipCode = ZipCodeModel::where('code', $normalizedCode)->first();
+        // Prepare default values for creation
+        $defaults = [
+            'is_active' => true,
+        ];
         
-        if (!$zipCode) {
-            // If stateId not provided, try to infer from zip code
-            if (!$stateId) {
-                $inferredStateCode = ZipCodeHelper::inferStateFromFirstDigit($normalizedCode);
-                if ($inferredStateCode) {
-                    $state = \App\Models\State::where('code', $inferredStateCode[0] ?? null)->first();
-                    $stateId = $state ? $state->id : null;
-                }
+        // If stateId not provided, try to infer from zip code
+        if (!$stateId) {
+            $inferredStateCode = ZipCodeHelper::inferStateFromFirstDigit($normalizedCode);
+            if ($inferredStateCode) {
+                $state = \App\Models\State::where('code', $inferredStateCode[0] ?? null)->first();
+                $stateId = $state ? $state->id : null;
             }
-            
-            // If still no stateId, use first available state
-            if (!$stateId) {
-                $firstState = \App\Models\State::where('is_active', true)->first();
-                $stateId = $firstState ? $firstState->id : 1;
-            }
-            
-            $zipCode = ZipCodeModel::create([
-                'code' => $normalizedCode,
-                'state_id' => $stateId,
-                'city_id' => $cityId,
-                'is_active' => true,
-            ]);
         }
+        
+        // If still no stateId, use first available state
+        if (!$stateId) {
+            $firstState = \App\Models\State::where('is_active', true)->first();
+            $stateId = $firstState ? $firstState->id : 1;
+        }
+        
+        $defaults['state_id'] = $stateId;
+        if ($cityId !== null) {
+            $defaults['city_id'] = $cityId;
+        }
+        
+        // Use firstOrCreate to avoid race conditions when multiple workers process reports simultaneously
+        // This is atomic and thread-safe, preventing duplicate entry errors
+        $zipCode = ZipCodeModel::firstOrCreate(
+            ['code' => $normalizedCode],
+            $defaults
+        );
         
         return $zipCode->toEntity();
     }

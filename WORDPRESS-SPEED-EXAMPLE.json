@@ -1,0 +1,143 @@
+{
+  "source": {
+    "domain": "zip.50g.io",
+    "site_id": "wp-zip-50g-io-prod",
+    "site_name": "SmarterHome.ai"
+  },
+  "metadata": {
+    "report_date": "2025-11-14",
+    "report_period": {
+      "start": "2025-11-14 00:00:00",
+      "end": "2025-11-14 23:59:59"
+    },
+    "generated_at": "2025-11-14 23:59:59",
+    "total_processing_time": 120,
+    "data_version": "2.0.0"
+  },
+  "summary": {
+    "total_requests": 1000,
+    "success_rate": 85.5,
+    "failed_requests": 145,
+    "avg_requests_per_hour": 41.67,
+    "unique_providers": 45,
+    "unique_states": 15,
+    "unique_zip_codes": 75,
+    "avg_speed_mbps": 1502.89,
+    "max_speed_mbps": 219000,
+    "min_speed_mbps": 10
+  },
+  "geographic": {
+    "states": [
+      {
+        "code": "CA",
+        "name": "California",
+        "request_count": 32,
+        "success_rate": 90.5,
+        "avg_speed": 1500.0
+      },
+      {
+        "code": "NY",
+        "name": "New York",
+        "request_count": 14,
+        "success_rate": 85.0,
+        "avg_speed": 1200.0
+      },
+      {
+        "code": "TX",
+        "name": "Texas",
+        "request_count": 13,
+        "success_rate": 88.0,
+        "avg_speed": 1100.0
+      }
+    ],
+    "top_cities": [
+      {
+        "name": "New York",
+        "request_count": 9,
+        "zip_codes": ["10001", "10038"]
+      }
+    ],
+    "top_zip_codes": [
+      {
+        "zip_code": "10600",
+        "request_count": 8,
+        "percentage": 7.02
+      }
+    ]
+  },
+  "providers": {
+    "top_providers": [
+      {
+        "name": "AT&T",
+        "total_count": 86,
+        "technology": "Fiber",  // ✅ IMPORTANTE: Adicionar para consistência
+        "success_rate": 95.0,
+        "avg_speed": 2000.0
+      },
+      {
+        "name": "Spectrum",
+        "total_count": 54,
+        "technology": "Cable",  // ✅ IMPORTANTE: Adicionar para consistência
+        "success_rate": 88.0,
+        "avg_speed": 1500.0
+      }
+    ]
+  },
+  "speed_metrics": {
+    "overall": {
+      "avg": 1502.89,
+      "max": 219000,
+      "min": 10,
+      "median": 1000
+    },
+    "by_state": {
+      "CA": {
+        "avg": 1500.0,
+        "max": 5000.0,
+        "min": 50.0
+      },
+      "NY": {
+        "avg": 1200.0,
+        "max": 4000.0,
+        "min": 40.0
+      },
+      "TX": {
+        "avg": 1100.0,
+        "max": 3500.0,
+        "min": 30.0
+      }
+    },
+    "by_provider": {
+      "AT&T": {
+        "avg": 2000.0,
+        "max": 5000.0,
+        "min": 100.0
+      },
+      "Spectrum": {
+        "avg": 1500.0,
+        "max": 4000.0,
+        "min": 80.0
+      }
+    }
+  },
+  "technology_metrics": {
+    "distribution": {
+      "Fiber": 560,
+      "Cable": 450,
+      "DSL": 320,
+      "Mobile Wireless": 1416,
+      "Fixed Wireless": 280,
+      "Satellite": 150
+    }
+    // ✅ WordPress já está enviando isso corretamente!
+    // ✅ O gráfico de tecnologia funciona perfeitamente
+  },
+  "performance": {
+    "hourly_distribution": {
+      "0": 5,
+      "12": 20,
+      "18": 25
+    }
+  }
+}
+

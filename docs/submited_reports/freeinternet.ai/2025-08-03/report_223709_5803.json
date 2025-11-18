@@ -1,0 +1,344 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-08-03",
+        "report_period": {
+            "start": "2025-08-03 00:00:00",
+            "end": "2025-08-03 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:37:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 28,
+        "success_rate": 96.43,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 1.17,
+        "unique_providers": 43,
+        "unique_states": 6,
+        "unique_zip_codes": 23
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 4,
+            "01": 4,
+            "13": 1,
+            "14": 3,
+            "15": 2,
+            "16": 4,
+            "17": 3,
+            "18": 2,
+            "19": 3,
+            "21": 1,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 261,
+            "DSL": 97,
+            "Fiber": 95,
+            "Satellite": 81,
+            "Cable": 66,
+            "Fixed Wireless": 11,
+            "Unknown": 3
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 27,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 27,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 25,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 25,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 24,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 16,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Central Link Broadband",
+                "total_count": 3,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Bertram Communications",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Bug Tussel Wireless",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "BCI Mississippi Broadband LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Breezeline",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "CarolinaConnect Cooperative Inc",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "WI",
+                "name": "Wisconsin",
+                "request_count": 2,
+                "success_rate": 96.43,
+                "avg_speed": 266.92
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 96.43,
+                "avg_speed": 350.33
+            },
+            {
+                "code": "AL",
+                "name": "Alabama",
+                "request_count": 1,
+                "success_rate": 96.43,
+                "avg_speed": 428.13
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 96.43,
+                "avg_speed": 693.1
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 1,
+                "success_rate": 96.43,
+                "avg_speed": 616.07
+            },
+            {
+                "code": "WA",
+                "name": "Washington",
+                "request_count": 1,
+                "success_rate": 96.43,
+                "avg_speed": 287.86
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Waco",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Enterprise",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Jonesboro",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Kent",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "76705",
+                "request_count": 3,
+                "percentage": 10.71
+            },
+            {
+                "zip_code": "29379",
+                "request_count": 2,
+                "percentage": 7.14
+            },
+            {
+                "zip_code": "53014",
+                "request_count": 2,
+                "percentage": 7.14
+            },
+            {
+                "zip_code": "29803",
+                "request_count": 2,
+                "percentage": 7.14
+            },
+            {
+                "zip_code": "63108",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "75180",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "40203",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "35630",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "36330",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "40502",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "24605",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "29356",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "43608",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "35453",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "13601",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "30752",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "64118",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "70726",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "27704",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "30236",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "77477",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "23814",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "80909",
+                "request_count": 1,
+                "percentage": 3.57
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:37:09+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-08-03"
+}

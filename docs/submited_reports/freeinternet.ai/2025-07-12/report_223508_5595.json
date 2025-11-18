@@ -1,0 +1,319 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-07-12",
+        "report_period": {
+            "start": "2025-07-12 00:00:00",
+            "end": "2025-07-12 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:35:08",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 20,
+        "success_rate": 90,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.83,
+        "unique_providers": 36,
+        "unique_states": 5,
+        "unique_zip_codes": 16
+    },
+    "performance": {
+        "hourly_distribution": {
+            "12": 4,
+            "13": 3,
+            "16": 3,
+            "17": 2,
+            "18": 1,
+            "20": 2,
+            "22": 1,
+            "23": 4
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 190,
+            "Fiber": 64,
+            "Satellite": 48,
+            "Cable": 44,
+            "DSL": 41,
+            "Fixed Wireless": 13,
+            "Unknown": 6
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 17,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 15,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 12,
+                "technology": "Cable"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 3,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "GoSEMO, LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "BPS Networks",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Midco",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "PAUL BUNYAN COMMUNICATIONS",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Logix Communications LP",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "PCs for People",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "WOW Internet, Cable & Phone",
+                "total_count": 1,
+                "technology": "Cable"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 4,
+                "success_rate": 90,
+                "avg_speed": 831.76
+            },
+            {
+                "code": "MO",
+                "name": "Missouri",
+                "request_count": 2,
+                "success_rate": 90,
+                "avg_speed": 305.3
+            },
+            {
+                "code": "MN",
+                "name": "Minnesota",
+                "request_count": 1,
+                "success_rate": 90,
+                "avg_speed": 415.63
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 1,
+                "success_rate": 90,
+                "avg_speed": 291.05
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 90,
+                "avg_speed": 1000.83
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Sikeston",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Richland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bemidji",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Austin",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Fort Worth",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Mt Airy",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Fort Myers",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Harris County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "71220",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "79928",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "63801",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "56601",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "78702",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "34698",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "76539",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "19320",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "11418",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "76107",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "27030",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "33905",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "78501",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "91767",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "27260",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "21727",
+                "request_count": 1,
+                "percentage": 5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:35:08+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-07-12"
+}

@@ -1,0 +1,270 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-06-28",
+        "report_period": {
+            "start": "2025-06-28 00:00:00",
+            "end": "2025-06-28 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:57:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 13,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.54,
+        "unique_providers": 28,
+        "unique_states": 4,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 1,
+            "15": 1,
+            "16": 3,
+            "17": 2,
+            "21": 3,
+            "22": 3
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 130,
+            "Fiber": 39,
+            "Satellite": 36,
+            "DSL": 33,
+            "Cable": 26,
+            "Fixed Wireless": 5,
+            "Unknown": 5
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 4,
+                "technology": "DSL"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "FOCUS BROADBAND",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "SimpleFiber Communications| SimpleFiber",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Troy Cablevision, Inc.",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "M-Pulse Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "BCI Mississippi Broadband LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Mercury Broadband",
+                "total_count": 1,
+                "technology": "Unknown"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "MS",
+                "name": "Mississippi",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 472.4
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 84.67
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 1002.07
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1164.2
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Plano",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hamilton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Monroe County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Thermal",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Leland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Brunswick County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10950",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "75075",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "10458",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "40148",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "23930",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "74023",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "92274",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "75704",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "07202",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "28451",
+                "request_count": 1,
+                "percentage": 7.69
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:57:05+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-06-28"
+}

@@ -1,0 +1,175 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-07-19",
+        "report_period": {
+            "start": "2025-07-19 00:00:00",
+            "end": "2025-07-19 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:59:06",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 7,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.29,
+        "unique_providers": 17,
+        "unique_states": 1,
+        "unique_zip_codes": 4
+    },
+    "performance": {
+        "hourly_distribution": {
+            "22": 3,
+            "23": 4
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 124,
+            "Fiber": 43,
+            "Cable": 29,
+            "Satellite": 16,
+            "DSL": 8,
+            "Fixed Wireless": 4,
+            "Unknown": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Resound Networks",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Rural Telecommunications of America",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Net Ops Communications LLC",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Oxford County Telephone Company d/b/a FirstLight Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optical Communications Group Inc",
+                "total_count": 2,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1220.52
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Brooklyn",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "11221",
+                "request_count": 3,
+                "percentage": 42.86
+            },
+            {
+                "zip_code": "79761",
+                "request_count": 2,
+                "percentage": 28.57
+            },
+            {
+                "zip_code": "10580",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "10801",
+                "request_count": 1,
+                "percentage": 14.29
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:59:06+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-07-19"
+}

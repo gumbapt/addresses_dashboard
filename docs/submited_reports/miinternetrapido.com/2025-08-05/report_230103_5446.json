@@ -1,0 +1,325 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-05",
+        "report_period": {
+            "start": "2025-08-05 00:00:00",
+            "end": "2025-08-05 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:01:02",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 17,
+        "success_rate": 82.35,
+        "failed_requests": 3,
+        "avg_requests_per_hour": 0.71,
+        "unique_providers": 29,
+        "unique_states": 6,
+        "unique_zip_codes": 12
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 4,
+            "04": 2,
+            "14": 3,
+            "15": 1,
+            "16": 2,
+            "23": 3
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 111,
+            "DSL": 45,
+            "Fiber": 44,
+            "Satellite": 43,
+            "Cable": 34,
+            "Fixed Wireless": 12,
+            "Unknown": 4
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 14,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 14,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 14,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 3,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Zirrus",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Mediacom Xtream",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "CDE Lightband",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "UPN",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Wi-Five Broadband",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Bug Tussel Wireless",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 1,
+                "technology": "Cable"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 6,
+                "success_rate": 82.35,
+                "avg_speed": 821.22
+            },
+            {
+                "code": "KY",
+                "name": "Kentucky",
+                "request_count": 2,
+                "success_rate": 82.35,
+                "avg_speed": 810.56
+            },
+            {
+                "code": "MI",
+                "name": "Michigan",
+                "request_count": 2,
+                "success_rate": 82.35,
+                "avg_speed": 222.31
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 2,
+                "success_rate": 82.35,
+                "avg_speed": 426.25
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 2,
+                "success_rate": 82.35,
+                "avg_speed": 522.37
+            },
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 1,
+                "success_rate": 82.35,
+                "avg_speed": 730.02
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Ridgeland",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Mocksville",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Austin",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Oak Grove",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Dallas",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Ferris",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Grayling",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Beaver Creek Township",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Owensboro",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Houston",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Azle",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tarrant County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "81108",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "78753",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "42262",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "75208",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "75125",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "71301",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "29936",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "42301",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "13919",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "27028",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "76020",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "27292",
+                "request_count": 1,
+                "percentage": 5.88
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:01:03+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-05"
+}

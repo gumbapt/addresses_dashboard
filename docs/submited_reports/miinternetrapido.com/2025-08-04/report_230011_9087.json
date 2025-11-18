@@ -1,0 +1,215 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-04",
+        "report_period": {
+            "start": "2025-08-04 00:00:00",
+            "end": "2025-08-04 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:00:11",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 8,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.33,
+        "unique_providers": 21,
+        "unique_states": 1,
+        "unique_zip_codes": 8
+    },
+    "performance": {
+        "hourly_distribution": {
+            "12": 1,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "18": 2,
+            "19": 1,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 75,
+            "DSL": 30,
+            "Fiber": 28,
+            "Satellite": 24,
+            "Cable": 14,
+            "Fixed Wireless": 5,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "BalsamWest FiberNET LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Skyrunner Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Unwired Ltd",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Etheric Networks",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Mercury Broadband",
+                "total_count": 1,
+                "technology": "Unknown"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 498.62
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Jacksonville",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "28734",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "94804",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "32216",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "60629",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "12344",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "75067",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "46807",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "42262",
+                "request_count": 1,
+                "percentage": 12.5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:00:11+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-04"
+}

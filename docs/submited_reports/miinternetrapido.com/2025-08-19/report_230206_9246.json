@@ -1,0 +1,221 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-19",
+        "report_period": {
+            "start": "2025-08-19 00:00:00",
+            "end": "2025-08-19 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:02:06",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 17,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.71,
+        "unique_providers": 19,
+        "unique_states": 1,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 1,
+            "02": 1,
+            "13": 1,
+            "15": 1,
+            "16": 1,
+            "19": 2,
+            "20": 6,
+            "23": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 133,
+            "Fiber": 66,
+            "Satellite": 40,
+            "Cable": 35,
+            "DSL": 5,
+            "Fixed Wireless": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 17,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 17,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 14,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 12,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Town of Islesboro",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Cox Communications",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "OzarksGo",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Etex Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Southern California Telephone Co",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Redzone Wireless LLC",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "ME",
+                "name": "Maine",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 322.86
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Islesboro",
+                "request_count": 2,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "07801",
+                "request_count": 6,
+                "percentage": 35.29
+            },
+            {
+                "zip_code": "10472",
+                "request_count": 2,
+                "percentage": 11.76
+            },
+            {
+                "zip_code": "07501",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "72764",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "75766",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "92587",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "11772",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "07093",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "75961",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "28658",
+                "request_count": 1,
+                "percentage": 5.88
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:02:06+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-19"
+}

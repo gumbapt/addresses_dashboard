@@ -1,0 +1,434 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-11-06",
+        "report_period": {
+            "start": "2025-11-06 00:00:00",
+            "end": "2025-11-06 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:47:04",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 32,
+        "success_rate": 96.88,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 1.33,
+        "unique_providers": 44,
+        "unique_states": 9,
+        "unique_zip_codes": 25
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 3,
+            "02": 1,
+            "03": 1,
+            "13": 2,
+            "14": 1,
+            "15": 6,
+            "17": 3,
+            "18": 8,
+            "19": 3,
+            "20": 4
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 280,
+            "DSL": 134,
+            "Satellite": 85,
+            "Fiber": 79,
+            "Cable": 74,
+            "Fixed Wireless": 22,
+            "Unknown": 13
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 31,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 29,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 27,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 26,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 26,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 23,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 17,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 9,
+                "technology": "DSL"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 9,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Michwave Technologies Inc",
+                "total_count": 3,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Resound Networks",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Brown Dog Networks",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Rapid Systems",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Newport Utilities",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 2,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 5,
+                "success_rate": 96.88,
+                "avg_speed": 546.65
+            },
+            {
+                "code": "IN",
+                "name": "Indiana",
+                "request_count": 2,
+                "success_rate": 96.88,
+                "avg_speed": 173.08
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 2,
+                "success_rate": 96.88,
+                "avg_speed": 879.91
+            },
+            {
+                "code": "WV",
+                "name": "West Virginia",
+                "request_count": 2,
+                "success_rate": 96.88,
+                "avg_speed": 1476.67
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 2,
+                "success_rate": 96.88,
+                "avg_speed": 853.56
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 2,
+                "success_rate": 96.88,
+                "avg_speed": 243.43
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 96.88,
+                "avg_speed": 1150.47
+            },
+            {
+                "code": "CT",
+                "name": "Connecticut",
+                "request_count": 1,
+                "success_rate": 96.88,
+                "avg_speed": 1310.54
+            },
+            {
+                "code": "IL",
+                "name": "Illinois",
+                "request_count": 1,
+                "success_rate": 96.88,
+                "avg_speed": 1355.83
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Odessa",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Wolfforth",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Eckerty",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Johnson",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tiffin",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Palm Springs",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Cleveland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Teays Valley",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Putnam County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tampa",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hartford",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "San Antonio",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Newport",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Cocke County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Carmi",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Jacksonville",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "49504",
+                "request_count": 3,
+                "percentage": 9.38
+            },
+            {
+                "zip_code": "63138",
+                "request_count": 2,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "44077",
+                "request_count": 2,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "79761",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "47116",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "44883",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "92262",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "44110",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "25560",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "33614",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "76085",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "38019",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "31027",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "40505",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "33781",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "06106",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "78219",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "37821",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "62821",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "32209",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "79382",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "79605",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "97537",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "48183",
+                "request_count": 1,
+                "percentage": 3.13
+            },
+            {
+                "zip_code": "30222",
+                "request_count": 1,
+                "percentage": 3.13
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:47:05+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-11-06"
+}

@@ -1,0 +1,222 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-06-29",
+        "report_period": {
+            "start": "2025-06-29 00:00:00",
+            "end": "2025-06-29 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:57:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 83.33,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 19,
+        "unique_states": 1,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 1,
+            "16": 4,
+            "17": 3,
+            "19": 3,
+            "20": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 102,
+            "Fiber": 35,
+            "Satellite": 26,
+            "Cable": 25,
+            "DSL": 23,
+            "Fixed Wireless": 5
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 10,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 10,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Smartcom Telephone LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Foremost Telecommunications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TWIN",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "DSL"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 83.33,
+                "avg_speed": 465.13
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Edcouch",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hidalgo County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "24534",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "27822",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "11933",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "78758",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "75633",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "06851",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "07960",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "08861",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "07105",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "07114",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:57:06+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-06-29"
+}

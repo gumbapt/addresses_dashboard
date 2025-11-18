@@ -1,0 +1,295 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-10-21",
+        "report_period": {
+            "start": "2025-10-21 00:00:00",
+            "end": "2025-10-21 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:08:08",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 22,
+        "success_rate": 95.45,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 0.92,
+        "unique_providers": 31,
+        "unique_states": 5,
+        "unique_zip_codes": 13
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 4,
+            "01": 2,
+            "15": 1,
+            "16": 5,
+            "17": 5,
+            "19": 2,
+            "20": 1,
+            "21": 1,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 283,
+            "Fiber": 119,
+            "Cable": 64,
+            "Satellite": 51,
+            "DSL": 33,
+            "Fixed Wireless": 9,
+            "Unknown": 4
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 21,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 21,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 21,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 17,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 8,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 6,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 6,
+                "technology": "Cable"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Ultimate Internet Access Inc",
+                "total_count": 4,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "CenturyLink",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Long Lines",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Mediacom Xtream",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Northwest Communications Cooperative Association",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "NET Broadband, Inc",
+                "total_count": 2,
+                "technology": "Unknown"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 5,
+                "success_rate": 95.45,
+                "avg_speed": 1391.64
+            },
+            {
+                "code": "IA",
+                "name": "Iowa",
+                "request_count": 2,
+                "success_rate": 95.45,
+                "avg_speed": 283.33
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 2,
+                "success_rate": 95.45,
+                "avg_speed": 1261.53
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 95.45,
+                "avg_speed": 502.43
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 1,
+                "success_rate": 95.45,
+                "avg_speed": 1088.33
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Colton",
+                "request_count": 4,
+                "zip_codes": []
+            },
+            {
+                "name": "Storm Lake",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Piñon Hills",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bronx",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hialeah",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Austin",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "92324",
+                "request_count": 4,
+                "percentage": 18.18
+            },
+            {
+                "zip_code": "07105",
+                "request_count": 3,
+                "percentage": 13.64
+            },
+            {
+                "zip_code": "50588",
+                "request_count": 2,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "10456",
+                "request_count": 2,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "11236",
+                "request_count": 2,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "19604",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "07108",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "07104",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "92372",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "10468",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "33014",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "11805",
+                "request_count": 1,
+                "percentage": 4.55
+            },
+            {
+                "zip_code": "07801",
+                "request_count": 1,
+                "percentage": 4.55
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:08:09+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-10-21"
+}

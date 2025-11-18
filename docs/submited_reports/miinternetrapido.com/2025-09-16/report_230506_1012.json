@@ -1,0 +1,351 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-16",
+        "report_period": {
+            "start": "2025-09-16 00:00:00",
+            "end": "2025-09-16 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:05:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 35,
+        "success_rate": 94.29,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 1.46,
+        "unique_providers": 31,
+        "unique_states": 6,
+        "unique_zip_codes": 22
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "12": 1,
+            "13": 1,
+            "14": 4,
+            "15": 4,
+            "16": 5,
+            "17": 1,
+            "18": 3,
+            "19": 2,
+            "20": 2,
+            "21": 7,
+            "22": 2,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 462,
+            "Fiber": 191,
+            "Cable": 139,
+            "Satellite": 76,
+            "DSL": 68,
+            "Fixed Wireless": 17,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 33,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 33,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 33,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 33,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 32,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 31,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 25,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 10,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optical Communications Group Inc",
+                "total_count": 7,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Stealth Communications",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Vexus Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Resound Networks",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Rural Telecommunications of America",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Blue Ridge Internet LLC",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Believe Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "DC",
+                "name": "DC",
+                "request_count": 2,
+                "success_rate": 94.29,
+                "avg_speed": 328.06
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 1,
+                "success_rate": 94.29,
+                "avg_speed": 268.1
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 94.29,
+                "avg_speed": 645.37
+            },
+            {
+                "code": "AR",
+                "name": "Arkansas",
+                "request_count": 1,
+                "success_rate": 94.29,
+                "avg_speed": 866.38
+            },
+            {
+                "code": "NJ",
+                "name": "New Jersey",
+                "request_count": 1,
+                "success_rate": 94.29,
+                "avg_speed": 622.43
+            },
+            {
+                "code": "IN",
+                "name": "Indiana",
+                "request_count": 1,
+                "success_rate": 94.29,
+                "avg_speed": 198.03
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Columbia",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "North Charleston",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Coral Springs",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "North Little Rock",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Plainfield",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "East Chicago",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "11237",
+                "request_count": 7,
+                "percentage": 20
+            },
+            {
+                "zip_code": "10452",
+                "request_count": 3,
+                "percentage": 8.57
+            },
+            {
+                "zip_code": "79701",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "20201",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "10528",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "29418",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "38111",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33065",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "07621",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "72118",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "07062",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10451",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10901",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10457",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "07052",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "11208",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "46312",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "07501",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "64850",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10453",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "27803",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "33055",
+                "request_count": 1,
+                "percentage": 2.86
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:05:06+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-16"
+}

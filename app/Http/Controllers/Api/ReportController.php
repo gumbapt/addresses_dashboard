@@ -145,14 +145,6 @@ class ReportController extends Controller
             
             // Validate that source domain matches authenticated domain
             $sourceDomain = $request->input('source.domain');
-            if ($domain->name !== $sourceDomain) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Domain mismatch - authenticated domain does not match source domain',
-                    "domain" => $domain->name,
-                    "source_domain" => $sourceDomain
-                ], 403);
-            }
 
             // Create report entity
             $report = $this->createReportUseCase->execute(

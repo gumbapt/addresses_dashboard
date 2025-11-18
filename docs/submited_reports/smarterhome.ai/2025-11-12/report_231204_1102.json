@@ -1,0 +1,274 @@
+{
+    "source": {
+        "domain": "smarterhome.ai",
+        "site_id": "SH-en",
+        "site_name": "SmarterHome.ai"
+    },
+    "metadata": {
+        "report_date": "2025-11-12",
+        "report_period": {
+            "start": "2025-11-12 00:00:00",
+            "end": "2025-11-12 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:12:03",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 11,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.46,
+        "unique_providers": 27,
+        "unique_states": 6,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "22": 6,
+            "23": 5
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 114,
+            "DSL": 55,
+            "Fiber": 46,
+            "Cable": 29,
+            "Satellite": 29,
+            "Fixed Wireless": 15
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 5,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "ARVIG",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Midco",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "MN FWA Buyer",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Snappy Internet & Telecom",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Chaparral CableVision",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Unwired Ltd",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Sonic.net",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "KY",
+                "name": "Kentucky",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 1027.75
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 561.76
+            },
+            {
+                "code": "IL",
+                "name": "Illinois",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 360.36
+            },
+            {
+                "code": "MN",
+                "name": "Minnesota",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 544.62
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 569.17
+            },
+            {
+                "code": "NJ",
+                "name": "New Jersey",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1696.95
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Lexington",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "El Paso",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Big Lake",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Miami",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Elizabeth",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "40511",
+                "request_count": 2,
+                "percentage": 18.18
+            },
+            {
+                "zip_code": "32405",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "17237",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "33147",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "07202",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "79925",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "77590",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "94608",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "11368",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "63107",
+                "request_count": 1,
+                "percentage": 9.09
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:12:04+00:00",
+    "_domain": "smarterhome.ai",
+    "_report_date": "2025-11-12"
+}

@@ -1,0 +1,321 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-08-21",
+        "report_period": {
+            "start": "2025-08-21 00:00:00",
+            "end": "2025-08-21 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:39:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 15,
+        "success_rate": 86.67,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.63,
+        "unique_providers": 30,
+        "unique_states": 6,
+        "unique_zip_codes": 13
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 1,
+            "13": 3,
+            "15": 1,
+            "16": 1,
+            "17": 3,
+            "19": 2,
+            "22": 3,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 127,
+            "DSL": 53,
+            "Fiber": 46,
+            "Satellite": 39,
+            "Cable": 23,
+            "Unknown": 10,
+            "Fixed Wireless": 9
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "OpenBroadband LLC",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Mercury Broadband",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "ACD.net",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cal.net",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "unWired Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Rapid Systems",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Lumos",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 3,
+                "success_rate": 86.67,
+                "avg_speed": 965.45
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 3,
+                "success_rate": 86.67,
+                "avg_speed": 468.49
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 2,
+                "success_rate": 86.67,
+                "avg_speed": 696.02
+            },
+            {
+                "code": "MI",
+                "name": "Michigan",
+                "request_count": 2,
+                "success_rate": 86.67,
+                "avg_speed": 1100.14
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 86.67,
+                "avg_speed": 1450.22
+            },
+            {
+                "code": "MA",
+                "name": "Massachusetts",
+                "request_count": 1,
+                "success_rate": 86.67,
+                "avg_speed": 295.8
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Lansing",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Arlington",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Selma",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Lakeland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Moore",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Spartanburg County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Worcester",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Rancho Cucamonga",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "New Caney",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Crestline",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "48910",
+                "request_count": 2,
+                "percentage": 13.33
+            },
+            {
+                "zip_code": "93662",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "33815",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "29369",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "89701",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "42211",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "48906",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "01603",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "76002",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "91701",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "80204",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "22888",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "23958",
+                "request_count": 1,
+                "percentage": 6.67
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:39:07+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-08-21"
+}

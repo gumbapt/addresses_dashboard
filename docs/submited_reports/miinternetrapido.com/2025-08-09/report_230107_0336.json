@@ -1,0 +1,259 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-09",
+        "report_period": {
+            "start": "2025-08-09 00:00:00",
+            "end": "2025-08-09 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:01:06",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 18,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.75,
+        "unique_providers": 27,
+        "unique_states": 2,
+        "unique_zip_codes": 15
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "01": 4,
+            "14": 1,
+            "15": 1,
+            "18": 2,
+            "19": 4,
+            "21": 2,
+            "22": 1,
+            "23": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 173,
+            "Fiber": 100,
+            "Cable": 46,
+            "Satellite": 44,
+            "DSL": 38,
+            "Fixed Wireless": 13,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 17,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Resound Networks",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "FiberFirst",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Zito Media",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Telespan LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Zion Broadband Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Uber Wireless LLP",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 532.44
+            },
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 373.66
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Aurora",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10950",
+                "request_count": 2,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "07002",
+                "request_count": 2,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "11553",
+                "request_count": 2,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "76541",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "13071",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "79424",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "06902",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "10467",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "08609",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "79360",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "10458",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "76040",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "28655",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "77075",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "80010",
+                "request_count": 1,
+                "percentage": 5.56
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:01:07+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-09"
+}

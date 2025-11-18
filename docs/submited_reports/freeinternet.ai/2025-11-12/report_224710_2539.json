@@ -1,0 +1,293 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-11-12",
+        "report_period": {
+            "start": "2025-11-12 00:00:00",
+            "end": "2025-11-12 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:47:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 91.67,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 21,
+        "unique_states": 7,
+        "unique_zip_codes": 9
+    },
+    "performance": {
+        "hourly_distribution": {
+            "03": 1,
+            "14": 2,
+            "15": 1,
+            "17": 2,
+            "18": 1,
+            "19": 3,
+            "21": 1,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 109,
+            "DSL": 71,
+            "Fiber": 44,
+            "Satellite": 32,
+            "Cable": 27,
+            "Fixed Wireless": 4,
+            "Unknown": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 10,
+                "technology": "DSL"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 9,
+                "technology": "DSL"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xiber LLC",
+                "total_count": 3,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "ACD.net",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "WOW Internet, Cable & Phone",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Mercury Broadband",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Surf Internet",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "US Signal Company",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Bertram Communications",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "CDE Lightband",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cox Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "MI",
+                "name": "Michigan",
+                "request_count": 2,
+                "success_rate": 91.67,
+                "avg_speed": 1219.74
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 91.67,
+                "avg_speed": 1130
+            },
+            {
+                "code": "AR",
+                "name": "Arkansas",
+                "request_count": 1,
+                "success_rate": 91.67,
+                "avg_speed": 80
+            },
+            {
+                "code": "CT",
+                "name": "Connecticut",
+                "request_count": 1,
+                "success_rate": 91.67,
+                "avg_speed": 2061.3
+            },
+            {
+                "code": "WI",
+                "name": "Wisconsin",
+                "request_count": 1,
+                "success_rate": 91.67,
+                "avg_speed": 832.22
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 1,
+                "success_rate": 91.67,
+                "avg_speed": 712.5
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 91.67,
+                "avg_speed": 653.57
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Haslett",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Carrollton",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Pine Bluff",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bristol",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Appleton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Clarksville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Cleveland",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "46205",
+                "request_count": 3,
+                "percentage": 25
+            },
+            {
+                "zip_code": "71601",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "48840",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "75007",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "06010",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "54911",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "95991",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "37042",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "44135",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:47:10+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-11-12"
+}

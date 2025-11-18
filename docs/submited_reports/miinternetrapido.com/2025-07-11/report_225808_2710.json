@@ -1,0 +1,290 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-07-11",
+        "report_period": {
+            "start": "2025-07-11 00:00:00",
+            "end": "2025-07-11 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:58:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 83.33,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 24,
+        "unique_states": 6,
+        "unique_zip_codes": 11
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "01": 2,
+            "13": 2,
+            "14": 2,
+            "15": 1,
+            "19": 2,
+            "20": 1,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 152,
+            "Fiber": 58,
+            "DSL": 43,
+            "Cable": 33,
+            "Satellite": 27,
+            "Fixed Wireless": 7
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 10,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 10,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Monmouth Telephone & Telegraph",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Smartcom Telephone LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Foremost Telecommunications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TWIN",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Greenlight Networks",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 3,
+                "success_rate": 83.33,
+                "avg_speed": 733.09
+            },
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 1,
+                "success_rate": 83.33,
+                "avg_speed": 1030.98
+            },
+            {
+                "code": "CT",
+                "name": "Connecticut",
+                "request_count": 1,
+                "success_rate": 83.33,
+                "avg_speed": 1213.7
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 1,
+                "success_rate": 83.33,
+                "avg_speed": 492.86
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 83.33,
+                "avg_speed": 1856.71
+            },
+            {
+                "code": "IL",
+                "name": "Illinois",
+                "request_count": 1,
+                "success_rate": 83.33,
+                "avg_speed": 527.74
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Pharr",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Danbury",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Wendell",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Rochester",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Austin",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Elgin",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "07753",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "60166",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "07104",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "10453",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "06810",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "27591",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "78577",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "14621",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "78741",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "60120",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "77304",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:58:08+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-07-11"
+}

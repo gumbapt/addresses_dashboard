@@ -56,16 +56,19 @@ class ReportProcessor
 
         Log::debug('Processing summary', ['report_id' => $reportId]);
 
-        ReportSummary::create([
-            'report_id' => $reportId,
-            'total_requests' => $summaryData['total_requests'] ?? 0,
-            'success_rate' => $summaryData['success_rate'] ?? 0,
-            'failed_requests' => $summaryData['failed_requests'] ?? 0,
-            'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
-            'unique_providers' => $summaryData['unique_providers'] ?? 0,  
-            'unique_states' => $summaryData['unique_states'] ?? 0,
-            'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
-        ]);
+        // Use updateOrCreate to handle duplicate report_id (retry scenarios)
+        ReportSummary::updateOrCreate(
+            ['report_id' => $reportId], // Search criteria
+            [
+                'total_requests' => $summaryData['total_requests'] ?? 0,
+                'success_rate' => $summaryData['success_rate'] ?? 0,
+                'failed_requests' => $summaryData['failed_requests'] ?? 0,
+                'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
+                'unique_providers' => $summaryData['unique_providers'] ?? 0,  
+                'unique_states' => $summaryData['unique_states'] ?? 0,
+                'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
+            ]
+        );
     }
 
     /**

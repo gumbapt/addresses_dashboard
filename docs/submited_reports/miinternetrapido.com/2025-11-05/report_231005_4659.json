@@ -1,0 +1,248 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-11-05",
+        "report_period": {
+            "start": "2025-11-05 00:00:00",
+            "end": "2025-11-05 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:10:04",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 20,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.83,
+        "unique_providers": 28,
+        "unique_states": 2,
+        "unique_zip_codes": 11
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 1,
+            "02": 3,
+            "13": 3,
+            "15": 6,
+            "16": 1,
+            "19": 3,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 217,
+            "Fiber": 65,
+            "Satellite": 58,
+            "Cable": 56,
+            "DSL": 31,
+            "Fixed Wireless": 30,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 20,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 20,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 8,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Foremost Telecommunications",
+                "total_count": 6,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TWIN",
+                "total_count": 6,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Smartcom Telephone LLC",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "FulAir",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Brazos WiFi",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 2,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 6,
+                "success_rate": 100,
+                "avg_speed": 394.82
+            },
+            {
+                "code": "MA",
+                "name": "Massachusetts",
+                "request_count": 3,
+                "success_rate": 100,
+                "avg_speed": 262.05
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Springfield",
+                "request_count": 3,
+                "zip_codes": []
+            },
+            {
+                "name": "Donna",
+                "request_count": 3,
+                "zip_codes": []
+            },
+            {
+                "name": "Hidalgo County",
+                "request_count": 3,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "01108",
+                "request_count": 3,
+                "percentage": 15
+            },
+            {
+                "zip_code": "78537",
+                "request_count": 3,
+                "percentage": 15
+            },
+            {
+                "zip_code": "70605",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "77801",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "07513",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "96161",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "10475",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "75961",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "06902",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "85705",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "12205",
+                "request_count": 1,
+                "percentage": 5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:10:05+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-11-05"
+}

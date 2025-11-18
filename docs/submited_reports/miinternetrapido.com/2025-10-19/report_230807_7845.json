@@ -1,0 +1,239 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-10-19",
+        "report_period": {
+            "start": "2025-10-19 00:00:00",
+            "end": "2025-10-19 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:08:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 91.67,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 22,
+        "unique_states": 1,
+        "unique_zip_codes": 11
+    },
+    "performance": {
+        "hourly_distribution": {
+            "17": 1,
+            "19": 2,
+            "20": 3,
+            "21": 3,
+            "22": 2,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 116,
+            "Fiber": 60,
+            "Cable": 27,
+            "Satellite": 27,
+            "DSL": 24,
+            "Fixed Wireless": 9,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Vast Networks",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Sun Valley Broadband",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "NetFortris",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Southern California Telephone Co",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "OACYS Technology",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Cal.net",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Applied Technology Group Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 3,
+                "success_rate": 91.67,
+                "avg_speed": 774.33
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "El Centro",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Los Angeles",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Delano",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "11003",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "92243",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "06516",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "14920",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "10472",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "79029",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "07502",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "19133",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "92220",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "93215",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "75901",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:08:07+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-10-19"
+}

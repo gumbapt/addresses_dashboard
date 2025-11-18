@@ -1,0 +1,290 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-08-18",
+        "report_period": {
+            "start": "2025-08-18 00:00:00",
+            "end": "2025-08-18 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:39:04",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 13,
+        "success_rate": 84.62,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.54,
+        "unique_providers": 22,
+        "unique_states": 6,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "11": 2,
+            "13": 1,
+            "17": 4,
+            "18": 3,
+            "20": 1,
+            "21": 1,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 89,
+            "DSL": 34,
+            "Satellite": 33,
+            "Cable": 32,
+            "Fiber": 29,
+            "Fixed Wireless": 10,
+            "Unknown": 3
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "Spectrum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 4,
+                "technology": "DSL"
+            },
+            {
+                "name": "CenturyLink",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Piedmont Rural Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Otelco Telephone LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Mediacom Xtream",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Airfiber Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "MN FWA Buyer",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Element8",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Rapid Systems",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "DECCA Digital Solutions",
+                "total_count": 1,
+                "technology": "Cable"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 84.62,
+                "avg_speed": 418.31
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 2,
+                "success_rate": 84.62,
+                "avg_speed": 1266
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 225
+            },
+            {
+                "code": "MA",
+                "name": "Massachusetts",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 361.07
+            },
+            {
+                "code": "MN",
+                "name": "Minnesota",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 375.74
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 1064.25
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Granbury",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Laurens",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Ludlow",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Duluth",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Plant City",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Ocala",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Ogdensburg",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "45506",
+                "request_count": 2,
+                "percentage": 15.38
+            },
+            {
+                "zip_code": "89506",
+                "request_count": 2,
+                "percentage": 15.38
+            },
+            {
+                "zip_code": "29360",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "01056",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "55802",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "76049",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "33563",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "10079",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "13669",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "45204",
+                "request_count": 1,
+                "percentage": 7.69
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:39:05+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-08-18"
+}

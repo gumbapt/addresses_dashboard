@@ -1,0 +1,233 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-12",
+        "report_period": {
+            "start": "2025-08-12 00:00:00",
+            "end": "2025-08-12 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:01:08",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 10,
+        "success_rate": 80,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.42,
+        "unique_providers": 27,
+        "unique_states": 2,
+        "unique_zip_codes": 9
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "01": 2,
+            "13": 1,
+            "14": 1,
+            "16": 1,
+            "18": 1,
+            "21": 2,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 85,
+            "Fiber": 36,
+            "Cable": 31,
+            "DSL": 23,
+            "Satellite": 21,
+            "Fixed Wireless": 9,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Stealth Communications",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nuvisions",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Skyrunner Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Element8",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "FiberFirst",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "West Carolina Rural Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 80,
+                "avg_speed": 3445.3
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 1,
+                "success_rate": 80,
+                "avg_speed": 663.26
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "New York",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Cumming",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "79735",
+                "request_count": 2,
+                "percentage": 20
+            },
+            {
+                "zip_code": "10033",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "28792",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "10026",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "76067",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "10463",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "29630",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "85225",
+                "request_count": 1,
+                "percentage": 10
+            },
+            {
+                "zip_code": "30041",
+                "request_count": 1,
+                "percentage": 10
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:01:09+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-12"
+}

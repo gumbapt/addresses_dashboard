@@ -1,0 +1,283 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-09-21",
+        "report_period": {
+            "start": "2025-09-21 00:00:00",
+            "end": "2025-09-21 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:42:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 13,
+        "success_rate": 84.62,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.54,
+        "unique_providers": 35,
+        "unique_states": 4,
+        "unique_zip_codes": 13
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "13": 1,
+            "16": 1,
+            "17": 1,
+            "19": 2,
+            "20": 2,
+            "21": 2,
+            "22": 2,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 156,
+            "DSL": 60,
+            "Fiber": 47,
+            "Satellite": 32,
+            "Cable": 30,
+            "Fixed Wireless": 16,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "BAI Connect",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Tekify Fiber & Wireless",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Sail Internet",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Etheric Networks",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Ridge Wireless Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Brown Dog Networks",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 4,
+                "success_rate": 84.62,
+                "avg_speed": 626.55
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 292.71
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 668.18
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 1060.78
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Los Angeles",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Houston",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Memphis",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Ontario",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Eureka",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "95054",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "63107",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "35443",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "77060",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "38127",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "90013",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "10458",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "77447",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "91762",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "90057",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "34769",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "04976",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "95501",
+                "request_count": 1,
+                "percentage": 7.69
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:42:08+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-09-21"
+}

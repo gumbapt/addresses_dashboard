@@ -1,0 +1,146 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-10-12",
+        "report_period": {
+            "start": "2025-10-12 00:00:00",
+            "end": "2025-10-12 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:07:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 4,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.17,
+        "unique_providers": 14,
+        "unique_states": 0,
+        "unique_zip_codes": 4
+    },
+    "geographic": {
+        "states": [],
+        "top_cities": [],
+        "top_zip_codes": [
+            {
+                "zip_code": "20850",
+                "request_count": 1,
+                "percentage": 25
+            },
+            {
+                "zip_code": "76705",
+                "request_count": 1,
+                "percentage": 25
+            },
+            {
+                "zip_code": "11218",
+                "request_count": 1,
+                "percentage": 25
+            },
+            {
+                "zip_code": "10459",
+                "request_count": 1,
+                "percentage": 25
+            }
+        ]
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "16": 1,
+            "17": 1,
+            "21": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 69,
+            "Fiber": 23,
+            "Cable": 20,
+            "Satellite": 10,
+            "Fixed Wireless": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 4,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 4,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Central Link Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:07:10+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-10-12"
+}

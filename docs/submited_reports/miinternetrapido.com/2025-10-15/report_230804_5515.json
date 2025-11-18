@@ -1,0 +1,185 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-10-15",
+        "report_period": {
+            "start": "2025-10-15 00:00:00",
+            "end": "2025-10-15 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:08:03",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 66.67,
+        "failed_requests": 4,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 14,
+        "unique_states": 1,
+        "unique_zip_codes": 9
+    },
+    "geographic": {
+        "top_cities": [],
+        "states": [
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 2,
+                "success_rate": 66.67,
+                "avg_speed": 611.93
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "00924",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "64037",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "08830",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "20743",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "01605",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "33010",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "76273",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "33868",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "10457",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 1,
+            "03": 1,
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "22": 4
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 79,
+            "Satellite": 21,
+            "Fiber": 20,
+            "Cable": 12,
+            "DSL": 4,
+            "Fixed Wireless": 1,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Citizens Telephone Company of Higginsville Missouri",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Nexus Air Fiber",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "ElektraFi",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:08:04+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-10-15"
+}

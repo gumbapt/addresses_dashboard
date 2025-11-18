@@ -1,0 +1,281 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-06",
+        "report_period": {
+            "start": "2025-09-06 00:00:00",
+            "end": "2025-09-06 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:04:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 23,
+        "success_rate": 86.96,
+        "failed_requests": 3,
+        "avg_requests_per_hour": 0.96,
+        "unique_providers": 28,
+        "unique_states": 3,
+        "unique_zip_codes": 15
+    },
+    "performance": {
+        "hourly_distribution": {
+            "14": 1,
+            "16": 6,
+            "17": 4,
+            "18": 1,
+            "19": 4,
+            "20": 1,
+            "21": 3,
+            "22": 1,
+            "23": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 272,
+            "Fiber": 109,
+            "DSL": 58,
+            "Cable": 58,
+            "Satellite": 49,
+            "Fixed Wireless": 10,
+            "Unknown": 6
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 20,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 20,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 13,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 8,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 6,
+                "technology": "Cable"
+            },
+            {
+                "name": "CenturyLink",
+                "total_count": 5,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optical Communications Group Inc",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Logix Communications LP",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Snappy Internet & Telecom",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Bluebird Broadband Services",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Uniti Fiber GulfCo LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "LTD Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "MN FWA Buyer",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 2,
+                "success_rate": 86.96,
+                "avg_speed": 1483.45
+            },
+            {
+                "code": "MN",
+                "name": "Minnesota",
+                "request_count": 1,
+                "success_rate": 86.96,
+                "avg_speed": 518.48
+            },
+            {
+                "code": "MD",
+                "name": "Maryland",
+                "request_count": 1,
+                "success_rate": 86.96,
+                "avg_speed": 279.38
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Burnsville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Baltimore",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Naples",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Collier County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "11221",
+                "request_count": 3,
+                "percentage": 13.04
+            },
+            {
+                "zip_code": "77041",
+                "request_count": 3,
+                "percentage": 13.04
+            },
+            {
+                "zip_code": "87557",
+                "request_count": 2,
+                "percentage": 8.7
+            },
+            {
+                "zip_code": "07107",
+                "request_count": 2,
+                "percentage": 8.7
+            },
+            {
+                "zip_code": "11356",
+                "request_count": 2,
+                "percentage": 8.7
+            },
+            {
+                "zip_code": "33013",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "71101",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "13636",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "80260",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "77328",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "10457",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "77040",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "79707",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "21218",
+                "request_count": 1,
+                "percentage": 4.35
+            },
+            {
+                "zip_code": "34104",
+                "request_count": 1,
+                "percentage": 4.35
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:04:05+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-06"
+}

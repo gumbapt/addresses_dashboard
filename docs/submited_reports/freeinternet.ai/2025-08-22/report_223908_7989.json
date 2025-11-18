@@ -1,0 +1,304 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-08-22",
+        "report_period": {
+            "start": "2025-08-22 00:00:00",
+            "end": "2025-08-22 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:39:08",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 13,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.54,
+        "unique_providers": 22,
+        "unique_states": 5,
+        "unique_zip_codes": 13
+    },
+    "performance": {
+        "hourly_distribution": {
+            "13": 1,
+            "14": 1,
+            "16": 1,
+            "17": 2,
+            "19": 3,
+            "20": 1,
+            "21": 3,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 103,
+            "DSL": 48,
+            "Cable": 37,
+            "Satellite": 37,
+            "Fiber": 30,
+            "Fixed Wireless": 17,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 12,
+                "technology": "DSL"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 12,
+                "technology": "DSL"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 11,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Vast Networks",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Wireless Internet Services",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "unWired Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Big Bend Telecom, LTD",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "123.NET Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "WOW Internet, Cable & Phone",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Element8",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Wisper ISP, LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "isp.net",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 4,
+                "success_rate": 100,
+                "avg_speed": 752.38
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 347.22
+            },
+            {
+                "code": "MA",
+                "name": "Massachusetts",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 462
+            },
+            {
+                "code": "NJ",
+                "name": "New Jersey",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 2037.19
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 781.36
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Orosi",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Pittsfield",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Del Rio",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Nutley",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Lake Mary",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Barstow",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Lynwood",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "San Elizario",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "30276",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "01201",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "78840",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "07110",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "48507",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "32746",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "93647",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "12784",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "76012",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "62206",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "92311",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "12021",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "13467",
+                "request_count": 1,
+                "percentage": 7.69
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:39:08+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-08-22"
+}

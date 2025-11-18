@@ -1,0 +1,244 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-11-09",
+        "report_period": {
+            "start": "2025-11-09 00:00:00",
+            "end": "2025-11-09 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:47:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 7,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.29,
+        "unique_providers": 26,
+        "unique_states": 4,
+        "unique_zip_codes": 7
+    },
+    "performance": {
+        "hourly_distribution": {
+            "16": 1,
+            "19": 1,
+            "21": 1,
+            "22": 2,
+            "23": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 69,
+            "DSL": 36,
+            "Fiber": 24,
+            "Satellite": 20,
+            "Cable": 15,
+            "Fixed Wireless": 10,
+            "Unknown": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 4,
+                "technology": "DSL"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Mediacom Xtream",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "SpringNet",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Total HighSpeed Internet Solutions",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "WON Communications LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Wisper ISP, LLC",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Velocity Wireless",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Allo Communications LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Kwikbit",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 601.6
+            },
+            {
+                "code": "AZ",
+                "name": "Arizona",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 412.67
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1369.86
+            },
+            {
+                "code": "IA",
+                "name": "Iowa",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 166.59
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Houston",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Kingman",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Huntington Beach",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Denison",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "77093",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "65809",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "86409",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "16395",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "65109",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "77021",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "47807",
+                "request_count": 1,
+                "percentage": 14.29
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:47:07+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-11-09"
+}

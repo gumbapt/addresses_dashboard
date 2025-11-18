@@ -1,0 +1,236 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-15",
+        "report_period": {
+            "start": "2025-08-15 00:00:00",
+            "end": "2025-08-15 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:02:03",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 15,
+        "success_rate": 86.67,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.63,
+        "unique_providers": 20,
+        "unique_states": 1,
+        "unique_zip_codes": 12
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "01": 2,
+            "16": 1,
+            "17": 1,
+            "18": 6,
+            "19": 2,
+            "22": 1,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 203,
+            "Fiber": 85,
+            "Cable": 34,
+            "Satellite": 30,
+            "DSL": 2,
+            "Fixed Wireless": 2,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 13,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 13,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 10,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Fybe",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "KwiKom",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Wake Wireless",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "BartNet IP LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 1,
+                "success_rate": 86.67,
+                "avg_speed": 294.62
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Elizabeth City",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10472",
+                "request_count": 3,
+                "percentage": 20
+            },
+            {
+                "zip_code": "10456",
+                "request_count": 2,
+                "percentage": 13.33
+            },
+            {
+                "zip_code": "75840",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "77360",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "07504",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "08610",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "27909",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "77318",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "07501",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "11207",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "74006",
+                "request_count": 1,
+                "percentage": 6.67
+            },
+            {
+                "zip_code": "07104",
+                "request_count": 1,
+                "percentage": 6.67
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:02:03+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-15"
+}

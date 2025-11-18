@@ -1,0 +1,361 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-10",
+        "report_period": {
+            "start": "2025-09-10 00:00:00",
+            "end": "2025-09-10 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:04:08",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 35,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 1.46,
+        "unique_providers": 36,
+        "unique_states": 6,
+        "unique_zip_codes": 21
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "03": 1,
+            "10": 2,
+            "11": 2,
+            "13": 2,
+            "16": 1,
+            "17": 1,
+            "18": 2,
+            "19": 3,
+            "20": 13,
+            "21": 3,
+            "22": 1,
+            "23": 3
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 347,
+            "Fiber": 171,
+            "Satellite": 87,
+            "Cable": 83,
+            "DSL": 73,
+            "Fixed Wireless": 11,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 35,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 35,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 34,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 32,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 29,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 28,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 17,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 10,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Believe Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Pacific Lightwave",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Telefonica",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cogent Communication",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 4,
+                "success_rate": 100,
+                "avg_speed": 526.79
+            },
+            {
+                "code": "MD",
+                "name": "Maryland",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 371
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 555
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1442.39
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 4848.42
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 765
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Houston",
+                "request_count": 3,
+                "zip_codes": []
+            },
+            {
+                "name": "Parkville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Coachella",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "New York",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Orlando",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hyattsville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Austin",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Prospect",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Goodspring",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "07950",
+                "request_count": 10,
+                "percentage": 28.57
+            },
+            {
+                "zip_code": "07522",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "08302",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "11946",
+                "request_count": 2,
+                "percentage": 5.71
+            },
+            {
+                "zip_code": "21234",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "53551",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "11311",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10038",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "12313",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "11096",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "02122",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10901",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "30044",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "75224",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "79761",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "20783",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "90023",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "10110",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "11717",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "78719",
+                "request_count": 1,
+                "percentage": 2.86
+            },
+            {
+                "zip_code": "25526",
+                "request_count": 1,
+                "percentage": 2.86
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:04:09+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-10"
+}

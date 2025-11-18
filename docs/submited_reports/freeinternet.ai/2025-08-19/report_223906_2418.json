@@ -1,0 +1,259 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-08-19",
+        "report_period": {
+            "start": "2025-08-19 00:00:00",
+            "end": "2025-08-19 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:39:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 9,
+        "success_rate": 88.89,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 0.38,
+        "unique_providers": 17,
+        "unique_states": 5,
+        "unique_zip_codes": 8
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "02": 1,
+            "03": 1,
+            "11": 1,
+            "12": 1,
+            "13": 1,
+            "16": 2,
+            "19": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 79,
+            "DSL": 33,
+            "Cable": 25,
+            "Fiber": 25,
+            "Satellite": 24,
+            "Fixed Wireless": 6,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 8,
+                "technology": "Cable"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 8,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 7,
+                "technology": "DSL"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "W A T C H TV",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Owensboro Municipal Utilities",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "EarthLink Business",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "SimpleFiber Communications| SimpleFiber",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Conexon Connect LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Hot Spot Broadband Inc",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Preferred Networks Inc.",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 88.89,
+                "avg_speed": 1327.76
+            },
+            {
+                "code": "KY",
+                "name": "Kentucky",
+                "request_count": 2,
+                "success_rate": 88.89,
+                "avg_speed": 649
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 219.81
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 529.1
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 566.67
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Canton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "South Gate",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Eagle Pass",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Garland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Gastonia",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Owensboro",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Daviess County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "97526",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "44705",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "90280",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "78852",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "75042",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "28052",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "42303",
+                "request_count": 1,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "89502",
+                "request_count": 1,
+                "percentage": 11.11
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:39:06+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-08-19"
+}

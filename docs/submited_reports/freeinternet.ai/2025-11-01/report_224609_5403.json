@@ -1,0 +1,290 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-11-01",
+        "report_period": {
+            "start": "2025-11-01 00:00:00",
+            "end": "2025-11-01 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:46:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 11,
+        "success_rate": 90.91,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 0.46,
+        "unique_providers": 23,
+        "unique_states": 6,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "13": 1,
+            "14": 1,
+            "15": 3,
+            "16": 2,
+            "17": 1,
+            "20": 1,
+            "22": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 100,
+            "DSL": 43,
+            "Fiber": 36,
+            "Cable": 29,
+            "Satellite": 29,
+            "Unknown": 5,
+            "Fixed Wireless": 3
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 10,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 10,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 8,
+                "technology": "DSL"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Cox Communications",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Troy Cablevision, Inc.",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "REV",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "CenturyLink",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "BCI Mississippi Broadband LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Oxford County Telephone Company d/b/a FirstLight Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 3,
+                "success_rate": 90.91,
+                "avg_speed": 961.8
+            },
+            {
+                "code": "LA",
+                "name": "Louisiana",
+                "request_count": 1,
+                "success_rate": 90.91,
+                "avg_speed": 746.81
+            },
+            {
+                "code": "KY",
+                "name": "Kentucky",
+                "request_count": 1,
+                "success_rate": 90.91,
+                "avg_speed": 489.58
+            },
+            {
+                "code": "IN",
+                "name": "Indiana",
+                "request_count": 1,
+                "success_rate": 90.91,
+                "avg_speed": 1137.74
+            },
+            {
+                "code": "NE",
+                "name": "Nebraska",
+                "request_count": 1,
+                "success_rate": 90.91,
+                "avg_speed": 395.52
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 90.91,
+                "avg_speed": 1646.72
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Baton Rouge",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Louisville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Indianapolis",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Omaha",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Schenectady",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Pomona",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bronx",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "35476",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "11555",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "40212",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "46235",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "28383",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "10545",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "71039",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "12304",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "91768",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "10466",
+                "request_count": 1,
+                "percentage": 9.09
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:46:09+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-11-01"
+}

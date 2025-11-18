@@ -1,0 +1,218 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-09",
+        "report_period": {
+            "start": "2025-09-09 00:00:00",
+            "end": "2025-09-09 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:04:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 7,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.29,
+        "unique_providers": 20,
+        "unique_states": 2,
+        "unique_zip_codes": 7
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 2,
+            "13": 3,
+            "19": 1,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 87,
+            "Fiber": 36,
+            "DSL": 20,
+            "Cable": 19,
+            "Satellite": 17,
+            "Fixed Wireless": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 7,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Cox Communications",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Accipiter Communications Inc DBA Zona Wyyerd",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Stealth Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "CenturyLink",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Midco",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Bluepeak",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NJ",
+                "name": "New Jersey",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 271.88
+            },
+            {
+                "code": "SD",
+                "name": "South Dakota",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 954.83
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Linden",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Sioux Falls",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "07036",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "91950",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "46038",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "11722",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "07660",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "10451",
+                "request_count": 1,
+                "percentage": 14.29
+            },
+            {
+                "zip_code": "57105",
+                "request_count": 1,
+                "percentage": 14.29
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:04:08+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-09"
+}

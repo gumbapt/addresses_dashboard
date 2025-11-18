@@ -1,0 +1,231 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-18",
+        "report_period": {
+            "start": "2025-09-18 00:00:00",
+            "end": "2025-09-18 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:05:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 20,
+        "success_rate": 80,
+        "failed_requests": 4,
+        "avg_requests_per_hour": 0.83,
+        "unique_providers": 21,
+        "unique_states": 1,
+        "unique_zip_codes": 11
+    },
+    "performance": {
+        "hourly_distribution": {
+            "12": 2,
+            "13": 2,
+            "14": 1,
+            "15": 2,
+            "16": 4,
+            "17": 2,
+            "18": 3,
+            "20": 3,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 188,
+            "Fiber": 79,
+            "Cable": 42,
+            "Satellite": 41,
+            "DSL": 22,
+            "Fixed Wireless": 6
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 16,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 16,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 14,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 13,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Metronet Holdings",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cloudwyze Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Skyrunner Inc",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Believe Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Stealth Communications",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "NITCO",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "IN",
+                "name": "Indiana",
+                "request_count": 1,
+                "success_rate": 80,
+                "avg_speed": 198.03
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "East Chicago",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "79706",
+                "request_count": 4,
+                "percentage": 20
+            },
+            {
+                "zip_code": "27804",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "07503",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "28792",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "77357",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "21224",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "10451",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "08619",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "46312",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "10573",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "10456",
+                "request_count": 1,
+                "percentage": 5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:05:07+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-18"
+}

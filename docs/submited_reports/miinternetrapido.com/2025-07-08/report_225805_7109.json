@@ -1,0 +1,157 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-07-08",
+        "report_period": {
+            "start": "2025-07-08 00:00:00",
+            "end": "2025-07-08 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:58:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 18,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.75,
+        "unique_providers": 13,
+        "unique_states": 0,
+        "unique_zip_codes": 7
+    },
+    "geographic": {
+        "states": [],
+        "top_cities": [],
+        "top_zip_codes": [
+            {
+                "zip_code": "11220",
+                "request_count": 8,
+                "percentage": 44.44
+            },
+            {
+                "zip_code": "77076",
+                "request_count": 3,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "10467",
+                "request_count": 3,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "12701",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "77074",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "79104",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "10805",
+                "request_count": 1,
+                "percentage": 5.56
+            }
+        ]
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 4,
+            "01": 9,
+            "02": 2,
+            "14": 3
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 322,
+            "Cable": 98,
+            "Fiber": 98,
+            "Satellite": 42,
+            "DSL": 42,
+            "Fixed Wireless": 5
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 13,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 9,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Vexus Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "AW Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Plains Internet LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:58:05+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-07-08"
+}

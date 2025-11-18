@@ -1,0 +1,315 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-06",
+        "report_period": {
+            "start": "2025-08-06 00:00:00",
+            "end": "2025-08-06 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:01:03",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 18,
+        "success_rate": 88.89,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.75,
+        "unique_providers": 22,
+        "unique_states": 5,
+        "unique_zip_codes": 17
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 1,
+            "02": 3,
+            "03": 1,
+            "15": 2,
+            "16": 2,
+            "19": 2,
+            "20": 1,
+            "22": 1,
+            "23": 5
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 190,
+            "Fiber": 71,
+            "DSL": 62,
+            "Cable": 52,
+            "Satellite": 40,
+            "Fixed Wireless": 6,
+            "Unknown": 5
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 16,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 16,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 15,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 15,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 14,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 6,
+                "technology": "Cable"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Smartburst",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "ElektraFi",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Open Infra",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Element8",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 4,
+                "success_rate": 88.89,
+                "avg_speed": 574.68
+            },
+            {
+                "code": "NJ",
+                "name": "New Jersey",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 1361.44
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 591
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 1649
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 1,
+                "success_rate": 88.89,
+                "avg_speed": 478.57
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Austin",
+                "request_count": 3,
+                "zip_codes": []
+            },
+            {
+                "name": "Morristown",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Fort Lauderdale",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Houston",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Upland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Savannah",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "78758",
+                "request_count": 2,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "11100",
+                "request_count": 2,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "75751",
+                "request_count": 2,
+                "percentage": 11.11
+            },
+            {
+                "zip_code": "10701",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "76227",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "07960",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "78717",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "07304",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "33317",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "28146",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "10954",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "07457",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "10555",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "11040",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "91786",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "38372",
+                "request_count": 1,
+                "percentage": 5.56
+            },
+            {
+                "zip_code": "11365",
+                "request_count": 1,
+                "percentage": 5.56
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:01:04+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-06"
+}

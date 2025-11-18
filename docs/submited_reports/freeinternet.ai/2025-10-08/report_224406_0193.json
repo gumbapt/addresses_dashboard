@@ -1,0 +1,393 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-10-08",
+        "report_period": {
+            "start": "2025-10-08 00:00:00",
+            "end": "2025-10-08 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:44:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 26,
+        "success_rate": 80.77,
+        "failed_requests": 5,
+        "avg_requests_per_hour": 1.08,
+        "unique_providers": 37,
+        "unique_states": 7,
+        "unique_zip_codes": 20
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 1,
+            "12": 4,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "16": 3,
+            "17": 1,
+            "19": 2,
+            "20": 4,
+            "21": 2,
+            "22": 2,
+            "23": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 217,
+            "Fiber": 97,
+            "Cable": 65,
+            "Satellite": 62,
+            "DSL": 52,
+            "Fixed Wireless": 21,
+            "Unknown": 13
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 21,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 21,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 21,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 17,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 16,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 8,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "UPN",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "DigitalC",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "PCs for People",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Everstream",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "SimpleFiber Communications| SimpleFiber",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Brown Dog Networks",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Wisper ISP, LLC",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Breezeline",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Peoples Telephone Cooperative",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 9,
+                "success_rate": 80.77,
+                "avg_speed": 1749.41
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 2,
+                "success_rate": 80.77,
+                "avg_speed": 593.33
+            },
+            {
+                "code": "MI",
+                "name": "Michigan",
+                "request_count": 2,
+                "success_rate": 80.77,
+                "avg_speed": 553.94
+            },
+            {
+                "code": "CT",
+                "name": "Connecticut",
+                "request_count": 1,
+                "success_rate": 80.77,
+                "avg_speed": 1598.5
+            },
+            {
+                "code": "MO",
+                "name": "Missouri",
+                "request_count": 1,
+                "success_rate": 80.77,
+                "avg_speed": 235.33
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 80.77,
+                "avg_speed": 1126.21
+            },
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 1,
+                "success_rate": 80.77,
+                "avg_speed": 629.21
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Dallas",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Haddam",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Irving",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Cleveland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "De Soto",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Columbus",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Caddo Mills",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Lewisville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tampa",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "San Marcos",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Belmont",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Jacksonville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Watauga",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Monterey",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Fort Worth",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "78840",
+                "request_count": 6,
+                "percentage": 23.08
+            },
+            {
+                "zip_code": "44103",
+                "request_count": 2,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "90802",
+                "request_count": 2,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "06441",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "75061",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "75235",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "63020",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "43223",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "75135",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "35640",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "75077",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "28092",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "33607",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "78666",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "49306",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "75766",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "76148",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "38106",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "38574",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "76104",
+                "request_count": 1,
+                "percentage": 3.85
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:44:06+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-10-08"
+}

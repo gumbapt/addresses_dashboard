@@ -1,0 +1,240 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-22",
+        "report_period": {
+            "start": "2025-09-22 00:00:00",
+            "end": "2025-09-22 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:05:10",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 17,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.71,
+        "unique_providers": 18,
+        "unique_states": 4,
+        "unique_zip_codes": 8
+    },
+    "performance": {
+        "hourly_distribution": {
+            "11": 1,
+            "13": 2,
+            "14": 3,
+            "16": 2,
+            "17": 7,
+            "18": 1,
+            "21": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 191,
+            "Fiber": 79,
+            "Satellite": 47,
+            "Cable": 44,
+            "Fixed Wireless": 36,
+            "DSL": 12
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 17,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 17,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 15,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 14,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 13,
+                "technology": "Cable"
+            },
+            {
+                "name": "Vexus Fiber",
+                "total_count": 7,
+                "technology": "Fiber"
+            },
+            {
+                "name": "AW Broadband",
+                "total_count": 7,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Plains Internet LLC",
+                "total_count": 7,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 3,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "Otelco Telephone LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Oxford County Telephone Company d/b/a FirstLight Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Quantum Internet & Telephone",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Ting",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 100,
+                "avg_speed": 625.42
+            },
+            {
+                "code": "MD",
+                "name": "Maryland",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 499
+            },
+            {
+                "code": "PA",
+                "name": "Pennsylvania",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 855.23
+            },
+            {
+                "code": "CT",
+                "name": "Connecticut",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 1463.18
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Amarillo",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Westminster",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Reading",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Waterbury",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "79107",
+                "request_count": 7,
+                "percentage": 41.18
+            },
+            {
+                "zip_code": "10458",
+                "request_count": 3,
+                "percentage": 17.65
+            },
+            {
+                "zip_code": "10566",
+                "request_count": 2,
+                "percentage": 11.76
+            },
+            {
+                "zip_code": "06606",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "07201",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "21157",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "19601",
+                "request_count": 1,
+                "percentage": 5.88
+            },
+            {
+                "zip_code": "06704",
+                "request_count": 1,
+                "percentage": 5.88
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:05:11+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-22"
+}

@@ -1,0 +1,201 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-10-22",
+        "report_period": {
+            "start": "2025-10-22 00:00:00",
+            "end": "2025-10-22 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:08:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 8,
+        "success_rate": 75,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.33,
+        "unique_providers": 17,
+        "unique_states": 3,
+        "unique_zip_codes": 6
+    },
+    "performance": {
+        "hourly_distribution": {
+            "12": 2,
+            "13": 1,
+            "14": 1,
+            "20": 4
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 72,
+            "Fiber": 32,
+            "Satellite": 16,
+            "Cable": 14,
+            "DSL": 11,
+            "Unknown": 2,
+            "Fixed Wireless": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 6,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 6,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 6,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Pathwayz",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "CenturyLink",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "MN FWA Buyer",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 75,
+                "avg_speed": 694.42
+            },
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 1,
+                "success_rate": 75,
+                "avg_speed": 819.39
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 75,
+                "avg_speed": 1234.03
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Fort Worth",
+                "request_count": 2,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "76111",
+                "request_count": 2,
+                "percentage": 25
+            },
+            {
+                "zip_code": "00924",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "17512",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "10462",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "11701",
+                "request_count": 1,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "55118",
+                "request_count": 1,
+                "percentage": 12.5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:08:10+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-10-22"
+}

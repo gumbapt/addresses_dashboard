@@ -1,0 +1,236 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-07-17",
+        "report_period": {
+            "start": "2025-07-17 00:00:00",
+            "end": "2025-07-17 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:59:04",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 20,
+        "success_rate": 90,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.83,
+        "unique_providers": 25,
+        "unique_states": 1,
+        "unique_zip_codes": 12
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 1,
+            "01": 4,
+            "02": 5,
+            "12": 4,
+            "13": 1,
+            "14": 1,
+            "15": 3,
+            "22": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 295,
+            "Fiber": 72,
+            "Cable": 55,
+            "Satellite": 46,
+            "DSL": 42,
+            "Fixed Wireless": 17,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "T-Mobile",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 18,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 17,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 15,
+                "technology": "Cable"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 14,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 6,
+                "technology": "Cable"
+            },
+            {
+                "name": "Nextlink",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Pine Cellular Phones",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "TDS Telecom",
+                "total_count": 4,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Valliant Telephone Company",
+                "total_count": 4,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Vyve Broadband",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Foremost Telecommunications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "TWIN",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Consolidated Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Tachus Fiber Internet",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 90,
+                "avg_speed": 247.73
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Middletown",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "74743",
+                "request_count": 4,
+                "percentage": 20
+            },
+            {
+                "zip_code": "07018",
+                "request_count": 4,
+                "percentage": 20
+            },
+            {
+                "zip_code": "11575",
+                "request_count": 3,
+                "percentage": 15
+            },
+            {
+                "zip_code": "79756",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "78542",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "77301",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "77840",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "06606",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "11520",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "45044",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "07460",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "46222",
+                "request_count": 1,
+                "percentage": 5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:59:04+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-07-17"
+}

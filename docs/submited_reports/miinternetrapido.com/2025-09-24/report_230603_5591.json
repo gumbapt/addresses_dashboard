@@ -1,0 +1,229 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-24",
+        "report_period": {
+            "start": "2025-09-24 00:00:00",
+            "end": "2025-09-24 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:06:03",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 100,
+        "failed_requests": 0,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 17,
+        "unique_states": 3,
+        "unique_zip_codes": 9
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "01": 1,
+            "02": 1,
+            "13": 3,
+            "14": 1,
+            "16": 1,
+            "17": 2,
+            "19": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 142,
+            "Fiber": 73,
+            "Cable": 37,
+            "Satellite": 27,
+            "DSL": 8,
+            "Fixed Wireless": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 12,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 12,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 9,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Comporium Brevard",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Skywire Networks",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optical Communications Group Inc",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "e-vergent",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 629.69
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 640.58
+            },
+            {
+                "code": "IL",
+                "name": "Illinois",
+                "request_count": 1,
+                "success_rate": 100,
+                "avg_speed": 286.82
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Lexington",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Jacksonville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Rolling Meadows",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10607",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "07208",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "10701",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "29073",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "32211",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "11207",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "10460",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "11590",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "60008",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:06:03+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-24"
+}

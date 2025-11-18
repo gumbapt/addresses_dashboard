@@ -1,0 +1,318 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-11-04",
+        "report_period": {
+            "start": "2025-11-04 00:00:00",
+            "end": "2025-11-04 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:10:04",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 26,
+        "success_rate": 80.77,
+        "failed_requests": 5,
+        "avg_requests_per_hour": 1.08,
+        "unique_providers": 29,
+        "unique_states": 5,
+        "unique_zip_codes": 16
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 3,
+            "04": 3,
+            "10": 1,
+            "12": 2,
+            "13": 1,
+            "14": 3,
+            "16": 1,
+            "17": 4,
+            "18": 1,
+            "20": 1,
+            "21": 5,
+            "23": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 268,
+            "Fiber": 101,
+            "Cable": 88,
+            "Satellite": 52,
+            "DSL": 48,
+            "Fixed Wireless": 13,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 21,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 21,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 18,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 13,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 5,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 4,
+                "technology": "Cable"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 3,
+                "technology": "DSL"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "TWIN",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Carolina West Wireless",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "OpenBroadband LLC",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cogent Communication",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 4,
+                "success_rate": 80.77,
+                "avg_speed": 1571.53
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 3,
+                "success_rate": 80.77,
+                "avg_speed": 553.47
+            },
+            {
+                "code": "SC",
+                "name": "South Carolina",
+                "request_count": 2,
+                "success_rate": 80.77,
+                "avg_speed": 337.14
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 2,
+                "success_rate": 80.77,
+                "avg_speed": 439.47
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 1,
+                "success_rate": 80.77,
+                "avg_speed": 855.59
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Austin",
+                "request_count": 3,
+                "zip_codes": []
+            },
+            {
+                "name": "Bronx",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Flowery Branch",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Elgin",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Richland County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hiddenite",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Alexander County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "78752",
+                "request_count": 3,
+                "percentage": 11.54
+            },
+            {
+                "zip_code": "11220",
+                "request_count": 3,
+                "percentage": 11.54
+            },
+            {
+                "zip_code": "08861",
+                "request_count": 2,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "10456",
+                "request_count": 2,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "30542",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "10278",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "29045",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "78572",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "11358",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "28636",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "78573",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "10453",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "10457",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "93117",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "75602",
+                "request_count": 1,
+                "percentage": 3.85
+            },
+            {
+                "zip_code": "79236",
+                "request_count": 1,
+                "percentage": 3.85
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:10:04+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-11-04"
+}

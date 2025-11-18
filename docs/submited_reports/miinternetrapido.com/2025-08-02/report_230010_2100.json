@@ -1,0 +1,172 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-08-02",
+        "report_period": {
+            "start": "2025-08-02 00:00:00",
+            "end": "2025-08-02 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:00:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 12,
+        "success_rate": 75,
+        "failed_requests": 3,
+        "avg_requests_per_hour": 0.5,
+        "unique_providers": 13,
+        "unique_states": 2,
+        "unique_zip_codes": 7
+    },
+    "geographic": {
+        "top_cities": [],
+        "states": [
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 1,
+                "success_rate": 75,
+                "avg_speed": 1253.43
+            },
+            {
+                "code": "NY",
+                "name": "New York",
+                "request_count": 1,
+                "success_rate": 75,
+                "avg_speed": 1405.94
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "07753",
+                "request_count": 4,
+                "percentage": 33.33
+            },
+            {
+                "zip_code": "10562",
+                "request_count": 2,
+                "percentage": 16.67
+            },
+            {
+                "zip_code": "75654",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "00778",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "10458",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "78612",
+                "request_count": 1,
+                "percentage": 8.33
+            },
+            {
+                "zip_code": "11550",
+                "request_count": 1,
+                "percentage": 8.33
+            }
+        ]
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 3,
+            "14": 6,
+            "15": 1,
+            "18": 1,
+            "19": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 92,
+            "Fiber": 46,
+            "Satellite": 23,
+            "Cable": 20,
+            "Fixed Wireless": 4
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 9,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 9,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 8,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 7,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Monmouth Telephone & Telegraph",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Pilot Fiber",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Rise Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:00:10+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-08-02"
+}

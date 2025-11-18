@@ -1,0 +1,239 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-07-23",
+        "report_period": {
+            "start": "2025-07-23 00:00:00",
+            "end": "2025-07-23 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:59:09",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 16,
+        "success_rate": 87.5,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.67,
+        "unique_providers": 30,
+        "unique_states": 0,
+        "unique_zip_codes": 15
+    },
+    "geographic": {
+        "states": [],
+        "top_cities": [],
+        "top_zip_codes": [
+            {
+                "zip_code": "21045",
+                "request_count": 2,
+                "percentage": 12.5
+            },
+            {
+                "zip_code": "79763",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "75638",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "11234",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "07821",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "10460",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "10472",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "54170",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "76010",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "13762",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "10965",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "77327",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "77801",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "93292",
+                "request_count": 1,
+                "percentage": 6.25
+            },
+            {
+                "zip_code": "27856",
+                "request_count": 1,
+                "percentage": 6.25
+            }
+        ]
+    },
+    "performance": {
+        "hourly_distribution": {
+            "01": 1,
+            "02": 1,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "16": 2,
+            "17": 1,
+            "19": 1,
+            "20": 5,
+            "21": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 133,
+            "Fiber": 44,
+            "Satellite": 37,
+            "Cable": 26,
+            "DSL": 20,
+            "Fixed Wireless": 14,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 14,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 14,
+                "technology": "Satellite"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 8,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Believe Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Brightspeed",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Reach Broadband",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Resound Networks",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Rural Telecommunications of America",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Net Ops Communications LLC",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Etex Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Planet Networks",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "DSL"
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:59:10+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-07-23"
+}

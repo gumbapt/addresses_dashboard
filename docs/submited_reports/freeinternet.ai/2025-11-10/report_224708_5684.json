@@ -1,0 +1,317 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-11-10",
+        "report_period": {
+            "start": "2025-11-10 00:00:00",
+            "end": "2025-11-10 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:47:08",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 13,
+        "success_rate": 84.62,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.54,
+        "unique_providers": 31,
+        "unique_states": 8,
+        "unique_zip_codes": 10
+    },
+    "performance": {
+        "hourly_distribution": {
+            "02": 1,
+            "15": 1,
+            "17": 1,
+            "18": 1,
+            "19": 9
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 133,
+            "Fiber": 60,
+            "DSL": 45,
+            "Satellite": 32,
+            "Fixed Wireless": 31,
+            "Cable": 19,
+            "Unknown": 1
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 11,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 11,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 10,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 6,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 3,
+                "technology": "Cable"
+            },
+            {
+                "name": "ZAYO GROUP LLC",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "unWired Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "OpenBroadband LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "DigitalPath Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Succeed.Net",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Hawaiian Telcom",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cal.net",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Vast Networks",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Kingsburg Media Foundation",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 2,
+                "success_rate": 84.62,
+                "avg_speed": 596.64
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 2,
+                "success_rate": 84.62,
+                "avg_speed": 698.82
+            },
+            {
+                "code": "KY",
+                "name": "Kentucky",
+                "request_count": 2,
+                "success_rate": 84.62,
+                "avg_speed": 461.8
+            },
+            {
+                "code": "OH",
+                "name": "Ohio",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 348.21
+            },
+            {
+                "code": "PA",
+                "name": "Pennsylvania",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 423.91
+            },
+            {
+                "code": "SF",
+                "name": "SF",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 670
+            },
+            {
+                "code": "MD",
+                "name": "Maryland",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 6878.93
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 84.62,
+                "avg_speed": 912.86
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Atlanta",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Sacramento",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Youngstown",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Philadelphia",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Hebron",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Boone County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "SF",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "San Francisco",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Baltimore",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Orlando",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "29376",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "95835",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "44507",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "79510",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "75290",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "19119",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "41048",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "75050",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "21201",
+                "request_count": 1,
+                "percentage": 7.69
+            },
+            {
+                "zip_code": "32827",
+                "request_count": 1,
+                "percentage": 7.69
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:47:08+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-11-10"
+}

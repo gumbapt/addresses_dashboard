@@ -1,0 +1,326 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-09-29",
+        "report_period": {
+            "start": "2025-09-29 00:00:00",
+            "end": "2025-09-29 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:06:07",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 28,
+        "success_rate": 78.57,
+        "failed_requests": 6,
+        "avg_requests_per_hour": 1.17,
+        "unique_providers": 28,
+        "unique_states": 5,
+        "unique_zip_codes": 17
+    },
+    "performance": {
+        "hourly_distribution": {
+            "11": 1,
+            "14": 2,
+            "15": 2,
+            "17": 1,
+            "18": 2,
+            "19": 5,
+            "20": 7,
+            "21": 5,
+            "22": 1,
+            "23": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 276,
+            "Fiber": 119,
+            "DSL": 78,
+            "Cable": 56,
+            "Satellite": 53,
+            "Fixed Wireless": 27,
+            "Unknown": 9
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 22,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 22,
+                "technology": "Satellite"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 20,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 19,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 10,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 9,
+                "technology": "Cable"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 7,
+                "technology": "Cable"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 5,
+                "technology": "DSL"
+            },
+            {
+                "name": "Starry Inc",
+                "total_count": 5,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Snappy Internet & Telecom",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Breezeline",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Rapid Systems",
+                "total_count": 2,
+                "technology": "Unknown"
+            },
+            {
+                "name": "TampaBay Fiber",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Vast Networks",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "unWired Broadband",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Andrena",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Hargray Communications",
+                "total_count": 1,
+                "technology": "Fiber"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 5,
+                "success_rate": 78.57,
+                "avg_speed": 918.58
+            },
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 2,
+                "success_rate": 78.57,
+                "avg_speed": 142.5
+            },
+            {
+                "code": "CO",
+                "name": "Colorado",
+                "request_count": 2,
+                "success_rate": 78.57,
+                "avg_speed": 965.54
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 2,
+                "success_rate": 78.57,
+                "avg_speed": 1028.11
+            },
+            {
+                "code": "NJ",
+                "name": "New Jersey",
+                "request_count": 1,
+                "success_rate": 78.57,
+                "avg_speed": 365
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Miami",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Tampa",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Trenton",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Midland",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Midland County",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Kendall West",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Firebaugh",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Fresno County",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "10453",
+                "request_count": 5,
+                "percentage": 17.86
+            },
+            {
+                "zip_code": "29000",
+                "request_count": 2,
+                "percentage": 7.14
+            },
+            {
+                "zip_code": "06513",
+                "request_count": 2,
+                "percentage": 7.14
+            },
+            {
+                "zip_code": "33142",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "33619",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "80723",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "08618",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "75604",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "07201",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "07206",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "79707",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "29045",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "33193",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "29550",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "24112",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "26261",
+                "request_count": 1,
+                "percentage": 3.57
+            },
+            {
+                "zip_code": "37339",
+                "request_count": 1,
+                "percentage": 3.57
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:06:07+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-09-29"
+}

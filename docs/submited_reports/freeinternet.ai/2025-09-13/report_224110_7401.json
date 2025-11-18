@@ -1,0 +1,347 @@
+{
+    "source": {
+        "domain": "freeinternet.ai",
+        "site_id": "wp-freeinternet.ai",
+        "site_name": "Free Internet AI"
+    },
+    "metadata": {
+        "report_date": "2025-09-13",
+        "report_period": {
+            "start": "2025-09-13 00:00:00",
+            "end": "2025-09-13 23:59:59"
+        },
+        "generated_at": "2025-11-18 14:41:10",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 20,
+        "success_rate": 95,
+        "failed_requests": 1,
+        "avg_requests_per_hour": 0.83,
+        "unique_providers": 31,
+        "unique_states": 9,
+        "unique_zip_codes": 13
+    },
+    "performance": {
+        "hourly_distribution": {
+            "12": 4,
+            "13": 1,
+            "16": 1,
+            "17": 6,
+            "18": 3,
+            "19": 3,
+            "20": 1,
+            "21": 1
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 154,
+            "Satellite": 56,
+            "Fiber": 48,
+            "DSL": 46,
+            "Cable": 45,
+            "Fixed Wireless": 3,
+            "Unknown": 2
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "HughesNet",
+                "total_count": 19,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 19,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 16,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 15,
+                "technology": "Cable"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 15,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 15,
+                "technology": "Mobile"
+            },
+            {
+                "name": "AT&T",
+                "total_count": 12,
+                "technology": "Mobile"
+            },
+            {
+                "name": "SVEConnect LLC",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 2,
+                "technology": "Fiber"
+            },
+            {
+                "name": "GeoLinks",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Ragland Telephone Co Inc",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Carolina West Wireless",
+                "total_count": 2,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Performance Broadband by Limestone Cable",
+                "total_count": 1,
+                "technology": "Cable"
+            },
+            {
+                "name": "Windstream Alabama, LLC",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Rapid Systems",
+                "total_count": 1,
+                "technology": "Unknown"
+            },
+            {
+                "name": "Sea Ranch Connect",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Cosmo Network Solutions, LLC",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 1,
+                "technology": "Mobile"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TN",
+                "name": "Tennessee",
+                "request_count": 4,
+                "success_rate": 95,
+                "avg_speed": 355.22
+            },
+            {
+                "code": "NC",
+                "name": "North Carolina",
+                "request_count": 3,
+                "success_rate": 95,
+                "avg_speed": 912.2
+            },
+            {
+                "code": "AL",
+                "name": "Alabama",
+                "request_count": 2,
+                "success_rate": 95,
+                "avg_speed": 85
+            },
+            {
+                "code": "CT",
+                "name": "Connecticut",
+                "request_count": 1,
+                "success_rate": 95,
+                "avg_speed": 1163.39
+            },
+            {
+                "code": "KY",
+                "name": "Kentucky",
+                "request_count": 1,
+                "success_rate": 95,
+                "avg_speed": 225.68
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 95,
+                "avg_speed": 963.42
+            },
+            {
+                "code": "GA",
+                "name": "Georgia",
+                "request_count": 1,
+                "success_rate": 95,
+                "avg_speed": 435.89
+            },
+            {
+                "code": "MA",
+                "name": "Massachusetts",
+                "request_count": 1,
+                "success_rate": 95,
+                "avg_speed": 300
+            },
+            {
+                "code": "CA",
+                "name": "California",
+                "request_count": 1,
+                "success_rate": 95,
+                "avg_speed": 669.27
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Morrisville",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Whitwell",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Marion County",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Ragland",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "West Haven",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Maysville",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Tampa",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Columbus",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Sandisfield",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Los Angeles",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "North Wilkesboro",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "27560",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "37397",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "35131",
+                "request_count": 2,
+                "percentage": 10
+            },
+            {
+                "zip_code": "32180",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "06516",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "41056",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "14611",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "92870",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "78237",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "31906",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "28655",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "90013",
+                "request_count": 1,
+                "percentage": 5
+            },
+            {
+                "zip_code": "28659",
+                "request_count": 1,
+                "percentage": 5
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T22:41:10+00:00",
+    "_domain": "freeinternet.ai",
+    "_report_date": "2025-09-13"
+}

@@ -1,0 +1,231 @@
+{
+    "source": {
+        "domain": "miinternetrapido.com",
+        "site_id": "MIIR",
+        "site_name": "Mi Internet Rapido"
+    },
+    "metadata": {
+        "report_date": "2025-11-15",
+        "report_period": {
+            "start": "2025-11-15 00:00:00",
+            "end": "2025-11-15 23:59:59"
+        },
+        "generated_at": "2025-11-18 15:11:05",
+        "total_processing_time": 0,
+        "data_version": "2.0.0"
+    },
+    "summary": {
+        "total_requests": 11,
+        "success_rate": 81.82,
+        "failed_requests": 2,
+        "avg_requests_per_hour": 0.46,
+        "unique_providers": 18,
+        "unique_states": 2,
+        "unique_zip_codes": 9
+    },
+    "performance": {
+        "hourly_distribution": {
+            "00": 2,
+            "03": 1,
+            "15": 2,
+            "16": 3,
+            "17": 1,
+            "20": 2
+        }
+    },
+    "technology_metrics": {
+        "distribution": {
+            "Mobile Wireless": 87,
+            "Fiber": 45,
+            "DSL": 36,
+            "Cable": 32,
+            "Satellite": 25,
+            "Fixed Wireless": 8,
+            "Unknown": 3
+        }
+    },
+    "providers": {
+        "top_providers": [
+            {
+                "name": "AT&T",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "HughesNet",
+                "total_count": 9,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Verizon",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Viasat Carrier Services Inc",
+                "total_count": 9,
+                "technology": "Satellite"
+            },
+            {
+                "name": "Earthlink",
+                "total_count": 9,
+                "technology": "Mobile"
+            },
+            {
+                "name": "T-Mobile",
+                "total_count": 8,
+                "technology": "Mobile"
+            },
+            {
+                "name": "Spectrum",
+                "total_count": 5,
+                "technology": "Cable"
+            },
+            {
+                "name": "Google Fiber",
+                "total_count": 4,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Astound Broadband",
+                "total_count": 3,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Valley Telephone Cooperative Inc",
+                "total_count": 2,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Xfinity",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "Optimum",
+                "total_count": 2,
+                "technology": "Cable"
+            },
+            {
+                "name": "TPx Communications",
+                "total_count": 2,
+                "technology": "DSL"
+            },
+            {
+                "name": "Neubeam",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Ziply Fiber",
+                "total_count": 1,
+                "technology": "DSL"
+            },
+            {
+                "name": "Autophone",
+                "total_count": 1,
+                "technology": "Fixed Wireless"
+            },
+            {
+                "name": "Frontier",
+                "total_count": 1,
+                "technology": "Fiber"
+            },
+            {
+                "name": "Rapid Systems",
+                "total_count": 1,
+                "technology": "Unknown"
+            }
+        ]
+    },
+    "geographic": {
+        "states": [
+            {
+                "code": "TX",
+                "name": "Texas",
+                "request_count": 4,
+                "success_rate": 81.82,
+                "avg_speed": 803.46
+            },
+            {
+                "code": "FL",
+                "name": "Florida",
+                "request_count": 1,
+                "success_rate": 81.82,
+                "avg_speed": 1499
+            }
+        ],
+        "top_cities": [
+            {
+                "name": "Balcones Heights",
+                "request_count": 2,
+                "zip_codes": []
+            },
+            {
+                "name": "Laredo",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Bartow",
+                "request_count": 1,
+                "zip_codes": []
+            },
+            {
+                "name": "Austin",
+                "request_count": 1,
+                "zip_codes": []
+            }
+        ],
+        "top_zip_codes": [
+            {
+                "zip_code": "78201",
+                "request_count": 2,
+                "percentage": 18.18
+            },
+            {
+                "zip_code": "79735",
+                "request_count": 2,
+                "percentage": 18.18
+            },
+            {
+                "zip_code": "78758",
+                "request_count": 2,
+                "percentage": 18.18
+            },
+            {
+                "zip_code": "98264",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "78044",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "33830",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "07960",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "11746",
+                "request_count": 1,
+                "percentage": 9.09
+            },
+            {
+                "zip_code": "11100",
+                "request_count": 1,
+                "percentage": 9.09
+            }
+        ]
+    },
+    "_saved_at": "2025-11-18T23:11:05+00:00",
+    "_domain": "miinternetrapido.com",
+    "_report_date": "2025-11-15"
+}

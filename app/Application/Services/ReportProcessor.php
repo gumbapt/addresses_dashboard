@@ -14,6 +14,8 @@ use App\Models\ReportCity;
 use App\Models\ReportZipCode;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\UniqueConstraintViolationException;
+use PDOException;
 
 class ReportProcessor
 {
@@ -73,7 +75,7 @@ class ReportProcessor
                     'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
                 ]
             );
-        } catch (QueryException $e) {
+        } catch (QueryException|UniqueConstraintViolationException|PDOException $e) {
             // Handle race condition: if duplicate entry error (1062), try to find and update the existing record
             if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
                 $summary = ReportSummary::where('report_id', $reportId)->first();

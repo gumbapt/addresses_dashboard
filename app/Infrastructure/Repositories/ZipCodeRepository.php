@@ -7,6 +7,7 @@ use App\Domain\Repositories\ZipCodeRepositoryInterface;
 use App\Models\ZipCode as ZipCodeModel;
 use App\Helpers\ZipCodeHelper;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\UniqueConstraintViolationException;
 
 class ZipCodeRepository implements ZipCodeRepositoryInterface
 {
@@ -197,7 +198,7 @@ class ZipCodeRepository implements ZipCodeRepositoryInterface
                 ['code' => $normalizedCode],
                 $defaults
             );
-        } catch (QueryException $e) {
+        } catch (QueryException|UniqueConstraintViolationException $e) {
             // Handle race condition: if duplicate entry error (1062), try to find the existing record
             if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
                 $zipCode = ZipCodeModel::where('code', $normalizedCode)->first();

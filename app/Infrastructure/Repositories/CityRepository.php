@@ -6,6 +6,7 @@ use App\Domain\Entities\City as CityEntity;
 use App\Domain\Repositories\CityRepositoryInterface;
 use App\Models\City as CityModel;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\UniqueConstraintViolationException;
 
 class CityRepository implements CityRepositoryInterface
 {
@@ -129,7 +130,7 @@ class CityRepository implements CityRepositoryInterface
                     'is_active' => true,
                 ]
             );
-        } catch (QueryException $e) {
+        } catch (QueryException|UniqueConstraintViolationException $e) {
             // Handle race condition: if duplicate entry error (1062), try to find the existing record
             if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
                 $city = CityModel::where('name', $name)
@@ -180,7 +181,7 @@ class CityRepository implements CityRepositoryInterface
                     'is_active' => true,
                 ]
             );
-        } catch (QueryException $e) {
+        } catch (QueryException|UniqueConstraintViolationException $e) {
             // Handle race condition: if duplicate entry error (1062), try to find the existing record
             if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
                 $city = CityModel::where('name', $name)

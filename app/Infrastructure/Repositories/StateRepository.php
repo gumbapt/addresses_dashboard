@@ -6,6 +6,7 @@ use App\Domain\Entities\State as StateEntity;
 use App\Domain\Repositories\StateRepositoryInterface;
 use App\Models\State as StateModel;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\UniqueConstraintViolationException;
 
 class StateRepository implements StateRepositoryInterface
 {
@@ -39,7 +40,7 @@ class StateRepository implements StateRepositoryInterface
         // However, in high concurrency scenarios, a race condition can still occur where two workers
         // try to create the same state simultaneously. We handle this with a try-catch to retry.
         try {
-            $state = StateModel::firstOrCreate(
+            $state = StateModel::firstOrCreate( 
                 ['code' => $normalizedCode],
                 [
                     'name' => $name ?? $normalizedCode,
@@ -47,7 +48,7 @@ class StateRepository implements StateRepositoryInterface
                     'is_active' => true,
                 ]
             );
-        } catch (QueryException $e) {
+        } catch (QueryException|UniqueConstraintViolationException $e) {
             // Handle race condition: if duplicate entry error (1062), try to find the existing record
             if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
                 $state = StateModel::where('code', $normalizedCode)->first();

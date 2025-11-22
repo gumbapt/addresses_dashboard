@@ -17,6 +17,7 @@ class GetProviderRankingUseCase
      * @param string $sortBy Sort criteria: total_requests, success_rate, avg_speed, total_reports
      * @param int|null $limit Maximum results to return (deprecated, use pagination)
      * @param array|null $accessibleDomainIds Filter by accessible domain IDs (null = all)
+     * @param bool $aggregateByProvider If true, aggregate all technologies for the same provider+domain
      * @return array Array of ProviderRankingDTO
      */
     public function execute(
@@ -26,7 +27,8 @@ class GetProviderRankingUseCase
         ?string $dateTo = null,
         string $sortBy = 'total_requests',
         ?int $limit = null,
-        ?array $accessibleDomainIds = null
+        ?array $accessibleDomainIds = null,
+        bool $aggregateByProvider = false
     ): array {
         $query = DB::table('report_providers as rp')
             ->join('providers as p', 'rp.provider_id', '=', 'p.id')
@@ -57,22 +59,35 @@ class GetProviderRankingUseCase
         }
         
         // Agregar por domínio e provider
+        $selectFields = [
+            'd.id as domain_id',
+            'd.name as domain_name',
+            'd.slug as domain_slug',
+            'p.id as provider_id',
+            'p.name as provider_name',
+            DB::raw('SUM(rp.total_count) as total_requests'),
+            DB::raw('AVG(rp.success_rate) as avg_success_rate'),
+            DB::raw('AVG(rp.avg_speed) as avg_speed'),
+            DB::raw('COUNT(DISTINCT r.id) as total_reports'),
+            DB::raw('MIN(r.report_date) as period_start'),
+            DB::raw('MAX(r.report_date) as period_end')
+        ];
+        
+        $groupByFields = ['d.id', 'd.name', 'd.slug', 'p.id', 'p.name'];
+        
+        if ($aggregateByProvider) {
+            // Quando agregar por provider, listar todas as tecnologias
+            $selectFields[] = DB::raw('GROUP_CONCAT(DISTINCT rp.technology ORDER BY rp.technology SEPARATOR ", ") as technologies');
+            // Não incluir technology no groupBy
+        } else {
+            // Comportamento normal: agrupar por tecnologia também
+            $selectFields[] = 'rp.technology';
+            $groupByFields[] = 'rp.technology';
+        }
+        
         $rankings = $query
-            ->select(
-                'd.id as domain_id',
-                'd.name as domain_name',
-                'd.slug as domain_slug',
-                'p.id as provider_id',
-                'p.name as provider_name',
-                'rp.technology',
-                DB::raw('SUM(rp.total_count) as total_requests'),
-                DB::raw('AVG(rp.success_rate) as avg_success_rate'),
-                DB::raw('AVG(rp.avg_speed) as avg_speed'),
-                DB::raw('COUNT(DISTINCT r.id) as total_reports'),
-                DB::raw('MIN(r.report_date) as period_start'),
-                DB::raw('MAX(r.report_date) as period_end')
-            )
-            ->groupBy('d.id', 'd.name', 'd.slug', 'p.id', 'p.name', 'rp.technology')
+            ->select($selectFields)
+            ->groupBy($groupByFields)
             ->orderByRaw($this->getOrderByClause($sortBy))
             ->when($limit, fn($q) => $q->limit($limit))
             ->get()
@@ -90,10 +105,15 @@ class GetProviderRankingUseCase
         }, $rankings);
         
         // Converter para DTOs com rank
-        return array_map(function($item, $index) {
+        return array_map(function($item, $index) use ($aggregateByProvider) {
             $periodStart = new \DateTime($item->period_start);
             $periodEnd = new \DateTime($item->period_end);
             $daysCovered = $periodStart->diff($periodEnd)->days + 1;
+            
+            // Quando agregado, usar null ou a lista de tecnologias
+            $technology = $aggregateByProvider 
+                ? ($item->technologies ?? null)
+                : ($item->technology ?? null);
             
             return new ProviderRankingDTO(
                 rank: $index + 1,
@@ -102,7 +122,7 @@ class GetProviderRankingUseCase
                 domainSlug: $item->domain_slug,
                 providerId: $item->provider_id,
                 providerName: $item->provider_name,
-                technology: $item->technology,
+                technology: $technology,
                 totalRequests: (int) $item->total_requests,
                 avgSuccessRate: (float) $item->avg_success_rate,
                 avgSpeed: (float) $item->avg_speed,
@@ -129,7 +149,8 @@ class GetProviderRankingUseCase
         ?string $dateFrom = null,
         ?string $dateTo = null,
         string $sortBy = 'total_requests',
-        ?array $accessibleDomainIds = null
+        ?array $accessibleDomainIds = null,
+        bool $aggregateByProvider = false
     ): array {
         // Get all results (without limit)
         $allResults = $this->execute(
@@ -139,7 +160,8 @@ class GetProviderRankingUseCase
             $dateTo,
             $sortBy,
             null, // No limit
-            $accessibleDomainIds
+            $accessibleDomainIds,
+            $aggregateByProvider
         );
         
         $total = count($allResults);

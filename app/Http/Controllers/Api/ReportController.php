@@ -653,6 +653,8 @@ class ReportController extends Controller
             $limit = $request->query('limit') ? (int) $request->query('limit') : null;
             $page = $request->query('page') ? (int) $request->query('page') : 1;
             $perPage = $request->query('per_page') ? (int) $request->query('per_page') : 15;
+            $aggregateByProvider = $request->query('aggregate_by_provider', false);
+            $aggregateByProvider = filter_var($aggregateByProvider, FILTER_VALIDATE_BOOLEAN);
 
             // Validate sort_by parameter
             if (!in_array($sortBy, ['total_requests', 'success_rate', 'avg_speed', 'total_reports'])) {
@@ -694,7 +696,8 @@ class ReportController extends Controller
                     $dateFrom,
                     $dateTo,
                     $sortBy,
-                    $accessibleDomains
+                    $accessibleDomains,
+                    $aggregateByProvider
                 );
                 
                 // Calculate aggregated stats
@@ -720,6 +723,7 @@ class ReportController extends Controller
                         'date_from' => $dateFrom,
                         'date_to' => $dateTo,
                         'sort_by' => $sortBy,
+                        'aggregate_by_provider' => $aggregateByProvider,
                     ],
                 ]);
             } else {
@@ -731,7 +735,8 @@ class ReportController extends Controller
                     $dateTo,
                     $sortBy,
                     $limit,
-                    $accessibleDomains
+                    $accessibleDomains,
+                    $aggregateByProvider
                 );
                 
                 // Calculate aggregated stats
@@ -756,6 +761,7 @@ class ReportController extends Controller
                             'date_to' => $dateTo,
                             'sort_by' => $sortBy,
                             'limit' => $limit,
+                            'aggregate_by_provider' => $aggregateByProvider,
                         ],
                     ],
                     'available_providers' => $availableProviders,

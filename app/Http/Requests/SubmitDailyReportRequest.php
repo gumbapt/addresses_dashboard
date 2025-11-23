@@ -50,7 +50,20 @@ class SubmitDailyReportRequest extends FormRequest
             
             // Geographic data
             'data.geographic.states' => 'required|array',
-            'data.geographic.states.*' => 'integer|min:0',
+            // Suporta tanto objeto chave-valor quanto array de objetos
+            'data.geographic.states.*' => 'nullable',
+            // Se for array de objetos (novo formato)
+            'data.geographic.states.*.code' => 'required_with:data.geographic.states.*.name|string|size:2',
+            'data.geographic.states.*.name' => 'nullable|string|max:100',
+            'data.geographic.states.*.request_count' => 'required_with:data.geographic.states.*.code|integer|min:0',
+            'data.geographic.states.*.success_rate' => 'nullable|numeric|min:0|max:100',
+            'data.geographic.states.*.avg_speed' => 'nullable|numeric|min:0',
+            // Campo opcional providers dentro de cada estado
+            'data.geographic.states.*.providers' => 'nullable|array',
+            'data.geographic.states.*.providers.*.name' => 'required_with:data.geographic.states.*.providers|string|max:255',
+            'data.geographic.states.*.providers.*.count' => 'required_with:data.geographic.states.*.providers|integer|min:0',
+            'data.geographic.states.*.providers.*.success_rate' => 'nullable|numeric|min:0|max:100',
+            'data.geographic.states.*.providers.*.avg_speed' => 'nullable|numeric|min:0',
             'data.geographic.cities' => 'required|array',
             'data.geographic.cities.*' => 'integer|min:0',
             'data.geographic.zipcodes' => 'required|array',

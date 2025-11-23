@@ -53,6 +53,7 @@ class CreateReportUseCase
             \App\Models\ReportSummary::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportProvider::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportState::where('report_id', $existingReport->id)->delete();
+            \App\Models\ReportStateProvider::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportCity::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportZipCode::where('report_id', $existingReport->id)->delete();
             

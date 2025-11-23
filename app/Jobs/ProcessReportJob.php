@@ -35,18 +35,28 @@ class ProcessReportJob implements ShouldQueue
         ReportProcessor $processor,
         ReportRepository $reportRepository
     ): void {
+        // Get the report to access raw_data (converted format)
+        $reportModel = \App\Models\Report::find($this->reportId);
+        if (!$reportModel) {
+            Log::error('Report not found for processing', ['report_id' => $this->reportId]);
+            throw new \Exception("Report with ID {$this->reportId} not found");
+        }
+
+        // Use raw_data (converted format) instead of original reportData
+        $reportData = $reportModel->raw_data ?? $this->reportData;
+
         Log::info('Starting report processing', [
             'report_id' => $this->reportId,
-            'data_version' => $this->reportData['metadata']['data_version'] ?? 'unknown'
+            'data_version' => $reportData['metadata']['data_version'] ?? $reportData['data_version'] ?? 'unknown'
         ]);
 
         try {
             // Update status to processing
             $reportRepository->updateStatus($this->reportId, 'processing');
             
-            DB::transaction(function () use ($processor) {
-                // Process the report data
-                $processor->process($this->reportId, $this->reportData);
+            DB::transaction(function () use ($processor, $reportData) {
+                // Process the report data (using converted format from raw_data)
+                $processor->process($this->reportId, $reportData);
             });
             
             // Update status to processed

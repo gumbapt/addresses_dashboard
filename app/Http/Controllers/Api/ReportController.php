@@ -12,6 +12,7 @@ use App\Application\UseCases\Report\CreateDailyReportUseCase;
 use App\Application\UseCases\Report\Global\GetGlobalDomainRankingUseCase;
 use App\Application\UseCases\Report\Global\CompareDomainsUseCase;
 use App\Application\UseCases\Report\Global\GetProviderRankingUseCase;
+use App\Application\UseCases\Report\Global\GetProviderRankingByStateUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReportRequest;
 use App\Http\Requests\SubmitDailyReportRequest;
@@ -35,7 +36,8 @@ class ReportController extends Controller
         private CreateDailyReportUseCase $createDailyReportUseCase,
         private GetGlobalDomainRankingUseCase $getGlobalDomainRankingUseCase,
         private CompareDomainsUseCase $compareDomainsUseCase,
-        private GetProviderRankingUseCase $getProviderRankingUseCase
+        private GetProviderRankingUseCase $getProviderRankingUseCase,
+        private GetProviderRankingByStateUseCase $getProviderRankingByStateUseCase
     ) {}
 
     /**
@@ -773,6 +775,100 @@ class ReportController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error getting provider ranking',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    /**
+     * Get provider ranking by state (precise data)
+     * 
+     * @group Global Reports
+     * @queryParam state_id integer required State ID to filter by
+     * @queryParam provider_id integer optional Provider ID to filter by
+     * @queryParam period string optional Period filter: today, yesterday, last_week, last_month, last_year, all_time
+     * @queryParam date_from string optional Start date (YYYY-MM-DD)
+     * @queryParam date_to string optional End date (YYYY-MM-DD)
+     * @queryParam sort_by string optional Sort criteria: total_requests, success_rate, avg_speed, total_reports (default: total_requests)
+     * @return JsonResponse
+     */
+    public function providerRankingByState(Request $request): JsonResponse
+    {
+        try {
+            $stateId = $request->query('state_id');
+            $providerId = $request->query('provider_id') ? (int) $request->query('provider_id') : null;
+            $period = $request->query('period');
+            $dateFrom = $request->query('date_from');
+            $dateTo = $request->query('date_to');
+            $sortBy = $request->query('sort_by', 'total_requests');
+
+            // Validate state_id
+            if (!$stateId) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'state_id parameter is required',
+                ], 400);
+            }
+
+            $stateId = (int) $stateId;
+
+            // Validate sort_by parameter
+            if (!in_array($sortBy, ['total_requests', 'success_rate', 'avg_speed', 'total_reports'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid sort_by parameter. Must be one of: total_requests, success_rate, avg_speed, total_reports',
+                ], 400);
+            }
+
+            // Convert period to date range
+            if ($period) {
+                $dateRange = $this->getPeriodDateRange($period);
+                if (!$dateRange) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid period parameter. Must be one of: today, yesterday, last_week, last_month, last_year, all_time',
+                    ], 400);
+                }
+                
+                // Period overrides manual dates
+                $dateFrom = $dateRange['from'];
+                $dateTo = $dateRange['to'];
+            }
+
+            // Get accessible domains for this admin
+            $admin = $request->user();
+            $accessibleDomains = $admin->getAccessibleDomains();
+
+            // Get ranking
+            $ranking = $this->getProviderRankingByStateUseCase->execute(
+                $stateId,
+                $providerId,
+                $dateFrom,
+                $dateTo,
+                $sortBy,
+                $accessibleDomains
+            );
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'ranking' => $ranking,
+                    'total_entries' => count($ranking),
+                    'filters' => [
+                        'state_id' => $stateId,
+                        'provider_id' => $providerId,
+                        'period' => $period,
+                        'date_from' => $dateFrom,
+                        'date_to' => $dateTo,
+                        'sort_by' => $sortBy,
+                    ],
+                ],
+                'note' => 'Data is precise (from report_state_providers table), not approximated',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error getting provider ranking by state',
                 'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }

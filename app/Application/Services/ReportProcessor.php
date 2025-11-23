@@ -10,6 +10,7 @@ use App\Helpers\ProviderHelper;
 use App\Models\ReportSummary;
 use App\Models\ReportProvider;
 use App\Models\ReportState;
+use App\Models\ReportStateProvider;
 use App\Models\ReportCity;
 use App\Models\ReportZipCode;
 use Illuminate\Support\Facades\Log;
@@ -185,6 +186,11 @@ class ReportProcessor
                 'success_rate' => $stateData['success_rate'] ?? 0,
                 'avg_speed' => $stateData['avg_speed'] ?? 0,
             ]);
+            
+            // Process providers for this state (if provided)
+            if (isset($stateData['providers']) && is_array($stateData['providers']) && !empty($stateData['providers'])) {
+                $this->processStateProviders($reportId, $state->getId(), $stateData['providers']);
+            }
         }
     }
 
@@ -242,5 +248,80 @@ class ReportProcessor
                 'percentage' => $zipData['percentage'] ?? 0,
             ]);
         }
+    }
+
+    /**
+     * Process providers for a specific state
+     */
+    private function processStateProviders(int $reportId, int $stateId, array $providersData): void
+    {
+        if (empty($providersData)) {
+            return;
+        }
+
+        Log::debug('Processing state providers', [
+            'report_id' => $reportId,
+            'state_id' => $stateId,
+            'provider_count' => count($providersData)
+        ]);
+
+        foreach ($providersData as $providerData) {
+            $providerName = $providerData['name'] ?? null;
+            $requestCount = $providerData['count'] ?? 0;
+            
+            if (!$providerName || $requestCount <= 0) {
+                continue; // Skip invalid providers
+            }
+            
+            // Normalize provider name (use same helper as processProviders)
+            $normalizedName = ProviderHelper::normalizeName($providerName);
+            
+            // Find or create provider (use same repository)
+            $provider = $this->providerRepository->findOrCreate(
+                name: $normalizedName,
+                technologies: [] // Technology not provided in state providers field
+            );
+            
+            // Create state-provider cross-reference record
+            try {
+                ReportStateProvider::create([
+                    'report_id' => $reportId,
+                    'state_id' => $stateId,
+                    'provider_id' => $provider->getId(),
+                    'original_name' => $providerName,
+                    'request_count' => $requestCount,
+                    'success_rate' => $providerData['success_rate'] ?? null,
+                    'avg_speed' => $providerData['avg_speed'] ?? null,
+                ]);
+            } catch (QueryException|UniqueConstraintViolationException|PDOException $e) {
+                // Handle race condition: if duplicate entry, try to update existing record
+                if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
+                    $existing = ReportStateProvider::where('report_id', $reportId)
+                        ->where('state_id', $stateId)
+                        ->where('provider_id', $provider->getId())
+                        ->first();
+                    
+                    if ($existing) {
+                        $existing->update([
+                            'request_count' => $requestCount,
+                            'success_rate' => $providerData['success_rate'] ?? null,
+                            'avg_speed' => $providerData['avg_speed'] ?? null,
+                        ]);
+                    } else {
+                        // If still not found, throw the original exception
+                        throw $e;
+                    }
+                } else {
+                    // For other database errors, re-throw
+                    throw $e;
+                }
+            }
+        }
+
+        Log::debug('State providers processing completed', [
+            'report_id' => $reportId,
+            'state_id' => $stateId,
+            'processed_count' => count($providersData)
+        ]);
     }
 }

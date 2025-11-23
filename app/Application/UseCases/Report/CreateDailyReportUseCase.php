@@ -17,10 +17,15 @@ class CreateDailyReportUseCase
         int $domainId,
         array $dailyData
     ): Report {
-        // Extrair dados do formato diário
-        $reportDate = $dailyData['data']['date'];
+        // Extrair dados do formato diário - suporta tanto data.date quanto metadata.report_date
+        $reportDate = $dailyData['data']['date'] ?? $dailyData['metadata']['report_date'] ?? null;
+        if (!$reportDate) {
+            throw new \InvalidArgumentException('Report date not found. Expected either data.date or metadata.report_date');
+        }
+        
         $source = $dailyData['source'];
-        $summary = $dailyData['data']['summary'];
+        // Suporta tanto data.summary quanto summary no nível raiz
+        $summary = $dailyData['data']['summary'] ?? $dailyData['summary'] ?? [];
         
         // Verificar se já existe um relatório para esta data+domínio
         $existingReport = \App\Models\Report::where('domain_id', $domainId)
@@ -44,9 +49,9 @@ class CreateDailyReportUseCase
             $existingReport->update([
                 'report_period_start' => Carbon::parse($reportDate)->startOfDay(),
                 'report_period_end' => Carbon::parse($reportDate)->endOfDay(),
-                'generated_at' => Carbon::parse($dailyData['timestamp']),
+                'generated_at' => Carbon::parse($dailyData['timestamp'] ?? $dailyData['metadata']['generated_at'] ?? now()),
                 'total_processing_time' => 0,
-                'data_version' => $dailyData['api_version'],
+                'data_version' => $dailyData['api_version'] ?? $dailyData['metadata']['data_version'] ?? '2.0.0',
                 'raw_data' => $convertedData,
                 'status' => 'pending', // Reset para pending para reprocessar
             ]);
@@ -55,6 +60,7 @@ class CreateDailyReportUseCase
             \App\Models\ReportSummary::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportProvider::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportState::where('report_id', $existingReport->id)->delete();
+            \App\Models\ReportStateProvider::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportCity::where('report_id', $existingReport->id)->delete();
             \App\Models\ReportZipCode::where('report_id', $existingReport->id)->delete();
             
@@ -69,9 +75,9 @@ class CreateDailyReportUseCase
             reportDate: $reportDate,
             reportPeriodStart: Carbon::parse($reportDate)->startOfDay(),
             reportPeriodEnd: Carbon::parse($reportDate)->endOfDay(),
-            generatedAt: Carbon::parse($dailyData['timestamp']),
+            generatedAt: Carbon::parse($dailyData['timestamp'] ?? $dailyData['metadata']['generated_at'] ?? now()),
             totalProcessingTime: 0,
-            dataVersion: $dailyData['api_version'],
+            dataVersion: $dailyData['api_version'] ?? $dailyData['metadata']['data_version'] ?? '2.0.0',
             rawData: $convertedData,
             status: 'pending'
         );
@@ -79,19 +85,25 @@ class CreateDailyReportUseCase
 
     private function convertDailyToSystemFormat(array $dailyData): array
     {
-        $reportDate = $dailyData['data']['date'];
-        $summary = $dailyData['data']['summary'];
+        // Suporta tanto data.date quanto metadata.report_date
+        $reportDate = $dailyData['data']['date'] ?? $dailyData['metadata']['report_date'] ?? null;
+        if (!$reportDate) {
+            throw new \InvalidArgumentException('Report date not found. Expected either data.date or metadata.report_date');
+        }
+        
+        // Suporta tanto data.summary quanto summary no nível raiz
+        $summary = $dailyData['data']['summary'] ?? $dailyData['summary'] ?? [];
         
         return [
             'source' => [
-                'domain' => $dailyData['source']['site_url'] ?? 'zip.50g.io',
+                'domain' => $dailyData['source']['site_url'] ?? $dailyData['source']['domain'] ?? 'zip.50g.io',
                 'site_id' => $dailyData['source']['site_id'],
                 'site_name' => $dailyData['source']['site_name'],
             ],
             'metadata' => [
                 'report_date' => $reportDate,
-                'data_version' => $dailyData['api_version'],
-                'generated_at' => $dailyData['timestamp'],
+                'data_version' => $dailyData['api_version'] ?? $dailyData['metadata']['data_version'] ?? '2.0.0',
+                'generated_at' => $dailyData['timestamp'] ?? $dailyData['metadata']['generated_at'] ?? now()->toISOString(),
                 'report_period' => [
                     'start' => Carbon::parse($reportDate)->startOfDay()->toISOString(),
                     'end' => Carbon::parse($reportDate)->endOfDay()->toISOString(),
@@ -99,13 +111,13 @@ class CreateDailyReportUseCase
                 'total_processing_time' => 0,
             ],
             'summary' => [
-                'total_requests' => $summary['total_requests'],
-                'failed_requests' => $summary['failed_requests'],
-                'success_rate' => $summary['success_rate'],
-                'unique_providers' => $summary['unique_providers'],
-                'unique_states' => $summary['unique_states'],
-                'unique_zip_codes' => $summary['unique_zipcodes'],
-                'avg_requests_per_hour' => $summary['total_requests'] / 24,
+                'total_requests' => $summary['total_requests'] ?? 0,
+                'failed_requests' => $summary['failed_requests'] ?? 0,
+                'success_rate' => $summary['success_rate'] ?? 0,
+                'unique_providers' => $summary['unique_providers'] ?? 0,
+                'unique_states' => $summary['unique_states'] ?? 0,
+                'unique_zip_codes' => $summary['unique_zipcodes'] ?? $summary['unique_zip_codes'] ?? 0,
+                'avg_requests_per_hour' => isset($summary['total_requests']) ? ($summary['total_requests'] / 24) : 0,
             ],
             'providers' => $this->convertProviders($dailyData),
             'geographic' => $this->convertGeographic($dailyData),
@@ -120,8 +132,29 @@ class CreateDailyReportUseCase
     {
         $providers = [];
         
+        // Suporta tanto data.providers quanto providers no nível raiz
+        $providersData = null;
         if (isset($dailyData['data']['providers']['available'])) {
-            foreach ($dailyData['data']['providers']['available'] as $name => $count) {
+            $providersData = $dailyData['data']['providers']['available'];
+        } elseif (isset($dailyData['providers']['top_providers'])) {
+            // Formato novo: providers.top_providers (array de objetos)
+            foreach ($dailyData['providers']['top_providers'] as $provider) {
+                $providers[] = [
+                    'name' => $provider['name'] ?? '',
+                    'technology' => $provider['technology'] ?? $this->inferTechnology($provider['name'] ?? ''),
+                    'total_count' => $provider['total_count'] ?? 0,
+                    'success_rate' => 0,
+                    'avg_speed' => 0,
+                ];
+            }
+            return [
+                'top_providers' => $providers,
+                'by_state' => [],
+            ];
+        }
+        
+        if ($providersData) {
+            foreach ($providersData as $name => $count) {
                 // Pegar avg_speed do speed_metrics.by_provider se existir
                 $avgSpeed = 0;
                 if (isset($dailyData['speed_metrics']['by_provider'][$name]['avg_speed'])) {
@@ -150,44 +183,130 @@ class CreateDailyReportUseCase
         $cities = [];
         $zipCodes = [];
 
-        // Converter estados
+        // Converter estados - suporta tanto data.geographic quanto geographic direto
+        $statesData = null;
         if (isset($dailyData['data']['geographic']['states'])) {
-            foreach ($dailyData['data']['geographic']['states'] as $code => $count) {
-                // Pegar avg_speed do speed_metrics.by_state se existir
-                $avgSpeed = 0;
-                if (isset($dailyData['speed_metrics']['by_state'][$code]['avg_speed'])) {
-                    $avgSpeed = $dailyData['speed_metrics']['by_state'][$code]['avg_speed'];
+            $statesData = $dailyData['data']['geographic']['states'];
+        } elseif (isset($dailyData['geographic']['states'])) {
+            // Formato novo: geographic no nível raiz
+            $statesData = $dailyData['geographic']['states'];
+        }
+        
+        if ($statesData) {
+            
+            // Verificar se é array de objetos (novo formato) ou objeto chave-valor (formato antigo)
+            if (isset($statesData[0]) && is_array($statesData[0])) {
+                // Novo formato: array de objetos
+                foreach ($statesData as $stateData) {
+                    $code = $stateData['code'] ?? null;
+                    if (!$code) {
+                        continue;
+                    }
+                    
+                    // Pegar avg_speed do speed_metrics.by_state se existir
+                    $avgSpeed = $stateData['avg_speed'] ?? 0;
+                    if ($avgSpeed == 0 && isset($dailyData['speed_metrics']['by_state'][$code]['avg_speed'])) {
+                        $avgSpeed = $dailyData['speed_metrics']['by_state'][$code]['avg_speed'];
+                    }
+                    
+                    $stateItem = [
+                        'code' => $code,
+                        'name' => $stateData['name'] ?? $this->getStateName($code),
+                        'request_count' => $stateData['request_count'] ?? 0,
+                        'success_rate' => $stateData['success_rate'] ?? 0,
+                        'avg_speed' => $avgSpeed,
+                    ];
+                    
+                    // Preservar campo providers se existir
+                    if (isset($stateData['providers']) && is_array($stateData['providers'])) {
+                        $stateItem['providers'] = $stateData['providers'];
+                    }
+                    
+                    $states[] = $stateItem;
                 }
-                
-                $states[] = [
-                    'code' => $code,
-                    'name' => $this->getStateName($code),
-                    'request_count' => $count,
-                    'success_rate' => 0,
-                    'avg_speed' => $avgSpeed,
-                ];
+            } else {
+                // Formato antigo: objeto chave-valor (code => count)
+                foreach ($statesData as $code => $count) {
+                    // Pegar avg_speed do speed_metrics.by_state se existir
+                    $avgSpeed = 0;
+                    if (isset($dailyData['speed_metrics']['by_state'][$code]['avg_speed'])) {
+                        $avgSpeed = $dailyData['speed_metrics']['by_state'][$code]['avg_speed'];
+                    }
+                    
+                    $states[] = [
+                        'code' => $code,
+                        'name' => $this->getStateName($code),
+                        'request_count' => $count,
+                        'success_rate' => 0,
+                        'avg_speed' => $avgSpeed,
+                    ];
+                }
             }
         }
 
-        // Converter cidades
+        // Converter cidades - suporta tanto data.geographic quanto geographic direto
+        $citiesData = null;
         if (isset($dailyData['data']['geographic']['cities'])) {
-            foreach ($dailyData['data']['geographic']['cities'] as $name => $count) {
-                $cities[] = [
-                    'name' => $name,
-                    'request_count' => $count,
-                    'zip_codes' => [],
-                ];
+            $citiesData = $dailyData['data']['geographic']['cities'];
+        } elseif (isset($dailyData['geographic']['top_cities'])) {
+            $citiesData = $dailyData['geographic']['top_cities'];
+        } elseif (isset($dailyData['data']['geographic']['top_cities'])) {
+            $citiesData = $dailyData['data']['geographic']['top_cities'];
+        }
+        
+        if ($citiesData) {
+            // Verificar se é array de objetos ou objeto chave-valor
+            if (isset($citiesData[0]) && is_array($citiesData[0])) {
+                // Array de objetos (formato novo)
+                foreach ($citiesData as $cityData) {
+                    $cities[] = [
+                        'name' => $cityData['name'] ?? '',
+                        'request_count' => $cityData['request_count'] ?? 0,
+                        'zip_codes' => $cityData['zip_codes'] ?? [],
+                    ];
+                }
+            } else {
+                // Objeto chave-valor (formato antigo)
+                foreach ($citiesData as $name => $count) {
+                    $cities[] = [
+                        'name' => $name,
+                        'request_count' => is_array($count) ? ($count['request_count'] ?? 0) : $count,
+                        'zip_codes' => [],
+                    ];
+                }
             }
         }
 
-        // Converter CEPs
+        // Converter CEPs - suporta tanto data.geographic quanto geographic direto
+        $zipCodesData = null;
         if (isset($dailyData['data']['geographic']['zipcodes'])) {
-            foreach ($dailyData['data']['geographic']['zipcodes'] as $zip => $count) {
-                $zipCodes[] = [
-                    'zip_code' => $zip,
-                    'request_count' => $count,
-                    'percentage' => 0,
-                ];
+            $zipCodesData = $dailyData['data']['geographic']['zipcodes'];
+        } elseif (isset($dailyData['geographic']['top_zip_codes'])) {
+            $zipCodesData = $dailyData['geographic']['top_zip_codes'];
+        } elseif (isset($dailyData['data']['geographic']['top_zip_codes'])) {
+            $zipCodesData = $dailyData['data']['geographic']['top_zip_codes'];
+        }
+        
+        if ($zipCodesData) {
+            // Verificar se é array de objetos ou objeto chave-valor
+            if (isset($zipCodesData[0]) && is_array($zipCodesData[0])) {
+                // Array de objetos (formato novo)
+                foreach ($zipCodesData as $zipData) {
+                    $zipCodes[] = [
+                        'zip_code' => $zipData['zip_code'] ?? '',
+                        'request_count' => $zipData['request_count'] ?? 0,
+                        'percentage' => $zipData['percentage'] ?? 0,
+                    ];
+                }
+            } else {
+                // Objeto chave-valor (formato antigo)
+                foreach ($zipCodesData as $zip => $count) {
+                    $zipCodes[] = [
+                        'zip_code' => $zip,
+                        'request_count' => is_array($count) ? ($count['request_count'] ?? 0) : $count,
+                        'percentage' => 0,
+                    ];
+                }
             }
         }
 
@@ -200,7 +319,14 @@ class CreateDailyReportUseCase
 
     private function convertPerformance(array $dailyData): array
     {
-        $totalRequests = $dailyData['data']['summary']['total_requests'] ?? 0;
+        $summary = $dailyData['data']['summary'] ?? $dailyData['summary'] ?? [];
+        $totalRequests = $summary['total_requests'] ?? 0;
+        
+        // Se já existe performance.hourly_distribution, usar ele
+        $hourlyDistribution = null;
+        if (isset($dailyData['performance']['hourly_distribution'])) {
+            $hourlyDistribution = $dailyData['performance']['hourly_distribution'];
+        }
         
         return [
             'search_types' => [
@@ -215,13 +341,13 @@ class CreateDailyReportUseCase
                     'avg_response_time' => 0,
                 ],
             ],
-            'hourly_distribution' => $this->generateHourlyDistribution($dailyData),
+            'hourly_distribution' => $hourlyDistribution ?? $this->generateHourlyDistribution($dailyData),
         ];
     }
 
     private function convertSpeedMetrics(array $dailyData): array
     {
-        $summary = $dailyData['data']['summary'];
+        $summary = $dailyData['data']['summary'] ?? $dailyData['summary'] ?? [];
         
         // Se já existem speed_metrics no dailyData (dados sintéticos), use-os
         if (isset($dailyData['speed_metrics'])) {
@@ -291,7 +417,21 @@ class CreateDailyReportUseCase
 
     private function generateHourlyDistribution(array $dailyData): array
     {
-        $totalRequests = $dailyData['data']['summary']['total_requests'] ?? 0;
+        $summary = $dailyData['data']['summary'] ?? $dailyData['summary'] ?? [];
+        $totalRequests = $summary['total_requests'] ?? 0;
+        
+        // Se já existe performance.hourly_distribution, usar ele
+        if (isset($dailyData['performance']['hourly_distribution'])) {
+            $hourlyData = [];
+            foreach ($dailyData['performance']['hourly_distribution'] as $hour => $count) {
+                $hourlyData[] = [
+                    'hour' => (string) $hour,
+                    'count' => $count,
+                ];
+            }
+            return $hourlyData;
+        }
+        
         $hourlyData = [];
         
         // Gerar distribuição simulada baseada no total
@@ -362,7 +502,7 @@ class CreateDailyReportUseCase
             'MI' => 'Michigan', 'CT' => 'Connecticut', 'PA' => 'Pennsylvania', 'WA' => 'Washington',
             'KY' => 'Kentucky', 'GA' => 'Georgia', 'NC' => 'North Carolina', 'SC' => 'South Carolina',
             'VA' => 'Virginia', 'MD' => 'Maryland', 'DE' => 'Delaware', 'NJ' => 'New Jersey',
-            'RI' => 'Rhode Island', 'VT' => 'Vermont', 'ME' => 'Maine', 'NH' => 'New Hampshire',
+            'RI' => 'Rhode Island', 'VT' => 'Vermont', 'ME' => 'Maine',
         ];
 
         return $states[$code] ?? $code;

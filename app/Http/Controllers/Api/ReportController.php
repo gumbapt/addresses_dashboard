@@ -78,35 +78,111 @@ class ReportController extends Controller
      */
     public function submitDaily(SubmitDailyReportRequest $request): JsonResponse
     {
+        // Log no início para garantir que a função está sendo executada
+        \Log::debug('🚀 submitDaily chamado', [
+            'method' => $request->method(),
+            'url' => $request->fullUrl(),
+            'content_type' => $request->header('Content-Type'),
+            'is_json' => $request->isJson(),
+        ]);
+        
         try {
             $domain = $this->getAuthenticatedDomain($request);
+            
+            // Salvar report em JSON ANTES da validação para preservar todos os campos (incluindo providers nos states)
+            // IMPORTANTE: Usar getContent() para pegar o JSON raw e parsear manualmente
+            // Isso garante que TODOS os campos sejam preservados, mesmo os que não estão nas regras de validação
+            $rawJsonContent = $request->getContent();
+            
+            // Log do conteúdo raw recebido
+            \Log::debug('📥 Conteúdo raw recebido', [
+                'is_json' => $request->isJson(),
+                'content_length' => strlen($rawJsonContent),
+                'content_preview' => substr($rawJsonContent, 0, 1000), // Aumentar para ver mais
+            ]);
+            
+            // Se o conteúdo é JSON, parsear diretamente
+            if (!empty($rawJsonContent) && $request->isJson()) {
+                $rawReportData = json_decode($rawJsonContent, true);
+                
+                // Verificar se parseou corretamente e tem a estrutura esperada
+                if (json_last_error() === JSON_ERROR_NONE && isset($rawReportData['geographic'])) {
+                    // Log simples: verificar se providers está presente no primeiro estado
+                    if (isset($rawReportData['geographic']['states'][0])) {
+                        $firstState = $rawReportData['geographic']['states'][0];
+                        $hasProviders = isset($firstState['providers']) && is_array($firstState['providers']);
+                        
+                        if ($hasProviders) {
+                            // Se tem providers, logar o array completo
+                            \Log::debug('✅ Providers encontrado no primeiro estado', [
+                                'state_code' => $firstState['code'] ?? 'unknown',
+                                'providers' => $firstState['providers'],
+                            ]);
+                        } else {
+                            // Se não tem providers, apenas informar
+                            \Log::debug('❌ Providers NÃO encontrado no primeiro estado', [
+                                'state_code' => $firstState['code'] ?? 'unknown',
+                                'keys_disponiveis' => array_keys($firstState),
+                            ]);
+                        }
+                    }
+                } else {
+                    // Fallback para all() se parse falhou
+                    \Log::warning('⚠️ JSON parse falhou, usando request->all()', [
+                        'json_error' => json_last_error_msg(),
+                        'has_geographic' => isset($rawReportData['geographic']),
+                    ]);
+                    $rawReportData = $request->all();
+                }
+            } else {
+                // Se não é JSON, usar all()
+                \Log::warning('⚠️ Request não é JSON, usando request->all()', [
+                    'content_type' => $request->header('Content-Type'),
+                    'is_json' => $request->isJson(),
+                    'content_empty' => empty($rawJsonContent),
+                ]);
+                $rawReportData = $request->all();
+            }
+            
+            $reportDateForFile = $rawReportData['data']['date'] ?? $rawReportData['metadata']['report_date'] ?? null;
+            $this->saveReportToJson($domain->name, $rawReportData, $reportDateForFile);
+            
+            // Validar dados para processamento
             $dailyData = $request->validated();
-
+            
             // Criar relatório diário
             $report = $this->createDailyReportUseCase->execute($domain->id, $dailyData);
-
-            // Salvar report em JSON
-            $this->saveReportToJson($domain->name, $dailyData, $dailyData['data']['date'] ?? null);
 
             // Enfileirar processamento
             ProcessReportJob::dispatch($report->getId(), $dailyData);
 
+            // Handle report date (can be string or DateTime)
+            $reportDate = $report->getReportDate();
+            $reportDateFormatted = is_string($reportDate) ? $reportDate : $reportDate->format('Y-m-d');
             return response()->json([
                 'success' => true,
                 'message' => 'Daily report submitted successfully',
                 'data' => [
                     'id' => $report->getId(),
                     'domain_id' => $domain->id,
-                    'report_date' => $report->getReportDate()->format('Y-m-d'),
+                    'report_date' => $reportDateFormatted,
                     'status' => $report->getStatus(),
                 ]
             ], 201);
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            \Log::error('Error in submitDaily', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]);
             return response()->json([
                 'success' => false,
                 'message' => 'Error submitting daily report',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage() ?? 'Unknown error',
+                'file' => $e->getFile() ?? null,
+                'line' => $e->getLine() ?? null,
             ], 500);
         }
     }
@@ -141,22 +217,84 @@ class ReportController extends Controller
      */
     public function submit(SubmitReportRequest $request): JsonResponse
     {
+        // Log no início para garantir que a função está sendo executada
+        \Log::debug('🚀 submit chamado', [
+            'method' => $request->method(),
+            'url' => $request->fullUrl(),
+            'content_type' => $request->header('Content-Type'),
+            'is_json' => $request->isJson(),
+        ]);
+        
         try {
             // Get authenticated domain (via API key middleware)
             $domain = $this->getAuthenticatedDomain($request);
             
+            // Salvar report em JSON ANTES da validação para preservar todos os campos (incluindo providers nos states)
+            // IMPORTANTE: Usar getContent() para pegar o JSON raw e parsear manualmente
+            $rawJsonContent = $request->getContent();
+            
+            // Log do conteúdo raw recebido
+            \Log::debug('📥 Conteúdo raw recebido (submit)', [
+                'is_json' => $request->isJson(),
+                'content_length' => strlen($rawJsonContent),
+                'content_preview' => substr($rawJsonContent, 0, 1000),
+            ]);
+            
+            // Se o conteúdo é JSON, parsear diretamente
+            if (!empty($rawJsonContent) && $request->isJson()) {
+                $rawReportData = json_decode($rawJsonContent, true);
+                
+                // Verificar se parseou corretamente e tem a estrutura esperada
+                if (json_last_error() === JSON_ERROR_NONE && isset($rawReportData['geographic'])) {
+                    // Log simples: verificar se providers está presente no primeiro estado
+                    if (isset($rawReportData['geographic']['states'][0])) {
+                        $firstState = $rawReportData['geographic']['states'][0];
+                        $hasProviders = isset($firstState['providers']) && is_array($firstState['providers']);
+                        
+                        if ($hasProviders) {
+                            // Se tem providers, logar o array completo
+                            \Log::debug('✅ Providers encontrado no primeiro estado (submit)', [
+                                'state_code' => $firstState['code'] ?? 'unknown',
+                                'providers' => $firstState['providers'],
+                            ]);
+                        } else {
+                            // Se não tem providers, apenas informar
+                            \Log::debug('❌ Providers NÃO encontrado no primeiro estado (submit)', [
+                                'state_code' => $firstState['code'] ?? 'unknown',
+                                'keys_disponiveis' => array_keys($firstState),
+                            ]);
+                        }
+                    }
+                } else {
+                    // Fallback para all() se parse falhou
+                    \Log::warning('⚠️ JSON parse falhou (submit), usando request->all()', [
+                        'json_error' => json_last_error_msg(),
+                        'has_geographic' => isset($rawReportData['geographic']),
+                    ]);
+                    $rawReportData = $request->all();
+                }
+            } else {
+                // Se não é JSON, usar all()
+                \Log::warning('⚠️ Request não é JSON (submit), usando request->all()', [
+                    'content_type' => $request->header('Content-Type'),
+                    'is_json' => $request->isJson(),
+                    'content_empty' => empty($rawJsonContent),
+                ]);
+                $rawReportData = $request->all();
+            }
+            
             // Validate that source domain matches authenticated domain
             $sourceDomain = $request->input('source.domain');
 
-            // Create report entity
+            // Create report entity - usar rawReportData (não validado) para preservar providers
             $report = $this->createReportUseCase->execute(
                 $domain->id,
-                $request->validated()
+                $rawReportData // Usar rawReportData em vez de validated() para preservar providers
             );
             
-            // Salvar report em JSON
-            $reportDate = $request->input('metadata.report_date') ?? $request->input('metadata.report_period.start');
-            $this->saveReportToJson($domain->name, $request->validated(), $reportDate);
+            // Salvar report em JSON usando dados raw (não validados)
+            $reportDate = $rawReportData['metadata']['report_date'] ?? $rawReportData['metadata']['report_period']['start'] ?? null;
+            $this->saveReportToJson($domain->name, $rawReportData, $reportDate);
             
             // Queue for async processing
             ProcessReportJob::dispatch($report->getId(), $request->validated());
@@ -472,12 +610,56 @@ class ReportController extends Controller
             $filename = "report_{$timestamp}.json";
             $filePath = $datePath . '/' . $filename;
             
-            // Add metadata to the JSON
-            $jsonData = array_merge($reportData, [
-                '_saved_at' => now()->toIso8601String(),
-                '_domain' => $domainName,
-                '_report_date' => $reportDate,
-            ]);
+            // Add metadata to the JSON (preservar estrutura original)
+            $jsonData = $reportData;
+            $jsonData['_saved_at'] = now()->toIso8601String();
+            $jsonData['_domain'] = $domainName;
+            $jsonData['_report_date'] = $reportDate;
+            
+            // Log ANTES de processar - verificar o que chegou na função
+            if (isset($jsonData['geographic']['states'][0])) {
+                \Log::debug('🔍 ANTES de processar - primeiro estado recebido', [
+                    'state_code' => $jsonData['geographic']['states'][0]['code'] ?? 'unknown',
+                    'has_providers' => isset($jsonData['geographic']['states'][0]['providers']),
+                    'providers_count' => isset($jsonData['geographic']['states'][0]['providers']) 
+                        ? count($jsonData['geographic']['states'][0]['providers']) 
+                        : 0,
+                    'providers_type' => isset($jsonData['geographic']['states'][0]['providers']) 
+                        ? gettype($jsonData['geographic']['states'][0]['providers'])
+                        : 'not_set',
+                    'all_keys' => array_keys($jsonData['geographic']['states'][0]),
+                ]);
+            }
+            
+            // Garantir que todos os estados tenham o campo providers
+            if (isset($jsonData['geographic']['states']) && is_array($jsonData['geographic']['states'])) {
+                foreach ($jsonData['geographic']['states'] as &$state) {
+                    // Se o estado não tem providers, criar array vazio
+                    if (!isset($state['providers']) || !is_array($state['providers'])) {
+                        $state['providers'] = [];
+                        \Log::debug('➕ Campo providers criado para estado sem providers', [
+                            'state_code' => $state['code'] ?? 'unknown',
+                        ]);
+                    } else {
+                        \Log::debug('✅ Estado já tem providers', [
+                            'state_code' => $state['code'] ?? 'unknown',
+                            'providers_count' => count($state['providers']),
+                        ]);
+                    }
+                }
+                unset($state); // Liberar referência
+            }
+            
+            // Log DEPOIS de processar - verificar o que será salvo
+            if (isset($jsonData['geographic']['states'][0])) {
+                \Log::debug('💾 DEPOIS de processar - primeiro estado antes de salvar', [
+                    'state_code' => $jsonData['geographic']['states'][0]['code'] ?? 'unknown',
+                    'has_providers' => isset($jsonData['geographic']['states'][0]['providers']),
+                    'providers_count' => isset($jsonData['geographic']['states'][0]['providers']) 
+                        ? count($jsonData['geographic']['states'][0]['providers']) 
+                        : 0,
+                ]);
+            }
             
             // Save JSON file with pretty print
             File::put($filePath, json_encode($jsonData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

@@ -15,7 +15,15 @@ echo "   Host: ${HOST}:${PORT}"
 echo "   Usuário: ${USER}"
 echo ""
 
-# Tentar sem senha primeiro
+# Criar diretório se não existir
+mkdir -p "${OUTPUT_DIR}"
+
+# Pedir senha de forma segura
+echo "🔐 Digite a senha do banco (não será exibida):"
+read -s PASSWORD
+echo ""
+
+# Fazer dump com senha
 /opt/homebrew/Cellar/mysql/9.5.0_2/bin/mysqldump \
   --protocol=TCP \
   --skip-lock-tables \
@@ -24,6 +32,7 @@ echo ""
   --disable-keys \
   --extended-insert \
   -u "${USER}" \
+  -p"${PASSWORD}" \
   --host="${HOST}" \
   --port="${PORT}" \
   "${DATABASE}" > "${OUTPUT_FILE}" 2>&1
@@ -38,8 +47,9 @@ if [ $? -eq 0 ]; then
     echo "   ./docs/dumps/import_to_docker.sh ${OUTPUT_FILE}"
 else
     echo "❌ Erro ao criar dump."
+    echo "   Verifique a senha e se o banco está acessível."
     echo ""
-    echo "💡 Se precisar de senha, execute:"
+    echo "💡 Para tentar manualmente:"
     echo "   /opt/homebrew/Cellar/mysql/9.5.0_2/bin/mysqldump \\"
     echo "     --protocol=TCP \\"
     echo "     -u ${USER} -p \\"

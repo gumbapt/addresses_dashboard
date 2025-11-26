@@ -65,6 +65,12 @@ class SubmitReportRequest extends FormRequest
             'geographic.states.*.request_count' => 'required_with:geographic.states|integer|min:0',
             'geographic.states.*.success_rate' => 'sometimes|numeric|min:0|max:100',
             'geographic.states.*.avg_speed' => 'sometimes|numeric|min:0',
+            // Campo opcional providers dentro de cada estado
+            'geographic.states.*.providers' => 'nullable|array',
+            'geographic.states.*.providers.*.name' => 'required_with:geographic.states.*.providers|string|max:255',
+            'geographic.states.*.providers.*.count' => 'required_with:geographic.states.*.providers|integer|min:0',
+            'geographic.states.*.providers.*.success_rate' => 'nullable|numeric|min:0|max:100',
+            'geographic.states.*.providers.*.avg_speed' => 'nullable|numeric|min:0',
             'geographic.top_cities' => 'sometimes|array',
             'geographic.top_cities.*.name' => 'required_with:geographic.top_cities|string|max:255',
             'geographic.top_cities.*.request_count' => 'required_with:geographic.top_cities|integer|min:0',

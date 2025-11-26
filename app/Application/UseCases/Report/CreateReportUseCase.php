@@ -35,8 +35,30 @@ class CreateReportUseCase
                 return $existingReport->toEntity();
             }
             
+            // Log ANTES de normalizar - verificar se providers está presente
+            if (isset($reportData['geographic']['states'][0])) {
+                $firstState = $reportData['geographic']['states'][0];
+                \Illuminate\Support\Facades\Log::debug('📋 CreateReportUseCase - Atualizando report existente - ANTES', [
+                    'report_id' => $existingReport->id,
+                    'first_state_code' => $firstState['code'] ?? 'unknown',
+                    'first_state_has_providers' => isset($firstState['providers']),
+                    'first_state_providers_count' => isset($firstState['providers']) ? count($firstState['providers']) : 0,
+                ]);
+            }
+            
             // Normalizar technology_metrics se necessário
             $normalizedData = $this->normalizeTechnologyMetrics($reportData);
+            
+            // Log DEPOIS de normalizar
+            if (isset($normalizedData['geographic']['states'][0])) {
+                $firstState = $normalizedData['geographic']['states'][0];
+                \Illuminate\Support\Facades\Log::debug('📋 CreateReportUseCase - Atualizando report existente - DEPOIS', [
+                    'report_id' => $existingReport->id,
+                    'first_state_code' => $firstState['code'] ?? 'unknown',
+                    'first_state_has_providers' => isset($firstState['providers']),
+                    'first_state_providers_count' => isset($firstState['providers']) ? count($firstState['providers']) : 0,
+                ]);
+            }
             
             // Houve mudança, atualizar o relatório existente
             $existingReport->update([
@@ -60,10 +82,38 @@ class CreateReportUseCase
             return $existingReport->toEntity();
         }
         
+        // Log ANTES de normalizar - verificar se providers está presente
+        if (isset($reportData['geographic']['states'][0])) {
+            $firstState = $reportData['geographic']['states'][0];
+            \Illuminate\Support\Facades\Log::debug('📋 CreateReportUseCase - ANTES de normalizar', [
+                'domain_id' => $domainId,
+                'report_date' => $reportDate,
+                'has_geographic' => isset($reportData['geographic']),
+                'has_states' => isset($reportData['geographic']['states']),
+                'first_state_code' => $firstState['code'] ?? 'unknown',
+                'first_state_has_providers' => isset($firstState['providers']),
+                'first_state_providers_count' => isset($firstState['providers']) ? count($firstState['providers']) : 0,
+            ]);
+        }
+        
         // Normalizar technology_metrics se necessário
         $normalizedData = $this->normalizeTechnologyMetrics($reportData);
         
-        return $this->reportRepository->create(
+        // Log DEPOIS de normalizar - verificar se providers ainda está presente
+        if (isset($normalizedData['geographic']['states'][0])) {
+            $firstState = $normalizedData['geographic']['states'][0];
+            \Illuminate\Support\Facades\Log::debug('📋 CreateReportUseCase - DEPOIS de normalizar', [
+                'domain_id' => $domainId,
+                'report_date' => $reportDate,
+                'has_geographic' => isset($normalizedData['geographic']),
+                'has_states' => isset($normalizedData['geographic']['states']),
+                'first_state_code' => $firstState['code'] ?? 'unknown',
+                'first_state_has_providers' => isset($firstState['providers']),
+                'first_state_providers_count' => isset($firstState['providers']) ? count($firstState['providers']) : 0,
+            ]);
+        }
+        
+        $report = $this->reportRepository->create(
             domainId: $domainId,
             reportDate: $reportDate,
             reportPeriodStart: new DateTime($metadata['report_period']['start']),
@@ -74,6 +124,20 @@ class CreateReportUseCase
             rawData: $normalizedData,
             status: 'pending'
         );
+        
+        // Log DEPOIS de salvar - verificar se providers está no raw_data do banco
+        $savedReport = \App\Models\Report::find($report->getId());
+        if ($savedReport && isset($savedReport->raw_data['geographic']['states'][0])) {
+            $firstState = $savedReport->raw_data['geographic']['states'][0];
+            \Illuminate\Support\Facades\Log::debug('📋 CreateReportUseCase - DEPOIS de salvar no banco', [
+                'report_id' => $report->getId(),
+                'first_state_code' => $firstState['code'] ?? 'unknown',
+                'first_state_has_providers' => isset($firstState['providers']),
+                'first_state_providers_count' => isset($firstState['providers']) ? count($firstState['providers']) : 0,
+            ]);
+        }
+        
+        return $report;
     }
 
     public function executeWithStatus(

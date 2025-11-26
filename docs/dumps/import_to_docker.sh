@@ -33,23 +33,28 @@ DB_USER="${DB_USERNAME:-dashboard_addresses}"
 DB_PASS="${DB_PASSWORD:-password}"
 DB_NAME="dash3"
 
-# Copiar arquivo para o container e importar
+# Copiar arquivo para o container
+echo "📦 Copiando arquivo para o container..."
 docker cp "${SQL_FILE}" "${CONTAINER_NAME}:/tmp/dump.sql"
 
+# Criar banco se não existir
+echo "🗄️  Criando banco de dados se não existir..."
 docker exec -i "${CONTAINER_NAME}" mysql \
   -u root \
   -p"${DB_PASS}" \
-  -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+  -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" 2>&1
 
-docker exec -i "${CONTAINER_NAME}" mysql \
-  -u root \
-  -p"${DB_PASS}" \
-  "${DB_NAME}" < "${SQL_FILE}"
+# Importar dump (usar arquivo dentro do container)
+echo "📥 Importando dump..."
+docker exec "${CONTAINER_NAME}" sh -c "cat /tmp/dump.sql | mysql -u root -p'${DB_PASS}' ${DB_NAME}" 2>&1
+
+# Verificar se importou com sucesso
+IMPORT_STATUS=$?
 
 # Limpar arquivo temporário
 docker exec "${CONTAINER_NAME}" rm -f /tmp/dump.sql
 
-if [ $? -eq 0 ]; then
+if [ $IMPORT_STATUS -eq 0 ]; then
     echo ""
     echo "✅ Importação concluída com sucesso!"
     echo "   Banco: ${DB_NAME}"

@@ -70,6 +70,15 @@ class CreateDailyReportUseCase
         // Converter formato diário para formato do sistema
         $convertedData = $this->convertDailyToSystemFormat($dailyData);
         
+        // Log do raw_data convertido
+        \Illuminate\Support\Facades\Log::info('💾 Raw data convertido (ANTES de salvar)', [
+            'has_geographic' => isset($convertedData['geographic']),
+            'has_geographic_states' => isset($convertedData['geographic']['states']),
+            'first_state_has_providers' => isset($convertedData['geographic']['states'][0]['providers']),
+            'providers_count' => isset($convertedData['geographic']['states'][0]['providers']) ? count($convertedData['geographic']['states'][0]['providers']) : 0,
+            'geographic_states_structure' => isset($convertedData['geographic']['states'][0]) ? array_keys($convertedData['geographic']['states'][0]) : [],
+        ]);
+        
         return $this->reportRepository->create(
             domainId: $domainId,
             reportDate: $reportDate,
@@ -192,6 +201,14 @@ class CreateDailyReportUseCase
             $statesData = $dailyData['geographic']['states'];
         }
         
+        \Illuminate\Support\Facades\Log::debug('🔄 convertGeographic - Estados encontrados', [
+            'has_data_geographic' => isset($dailyData['data']['geographic']['states']),
+            'has_geographic' => isset($dailyData['geographic']['states']),
+            'states_count' => $statesData ? count($statesData) : 0,
+            'first_state_has_providers' => isset($statesData[0]['providers']),
+            'first_state_keys' => isset($statesData[0]) ? array_keys($statesData[0]) : [],
+        ]);
+        
         if ($statesData) {
             
             // Verificar se é array de objetos (novo formato) ou objeto chave-valor (formato antigo)
@@ -220,6 +237,15 @@ class CreateDailyReportUseCase
                     // Preservar campo providers se existir
                     if (isset($stateData['providers']) && is_array($stateData['providers'])) {
                         $stateItem['providers'] = $stateData['providers'];
+                        \Illuminate\Support\Facades\Log::debug('✅ Campo providers preservado no stateItem', [
+                            'state_code' => $code,
+                            'providers_count' => count($stateData['providers']),
+                        ]);
+                    } else {
+                        \Illuminate\Support\Facades\Log::warning('⚠️ Campo providers NÃO encontrado no stateData', [
+                            'state_code' => $code,
+                            'stateData_keys' => array_keys($stateData),
+                        ]);
                     }
                     
                     $states[] = $stateItem;

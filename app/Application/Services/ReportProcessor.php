@@ -172,12 +172,24 @@ class ReportProcessor
         ]);
 
         foreach ($statesData as $stateData) {
+            // Log para debug - verificar se providers está presente
+            $stateCode = $stateData['code'] ?? 'unknown';
+            $hasProviders = isset($stateData['providers']) && is_array($stateData['providers']);
+            $providersCount = $hasProviders ? count($stateData['providers']) : 0;
+            
+            Log::debug('Processing state', [
+                'report_id' => $reportId,
+                'state_code' => $stateCode,
+                'has_providers' => $hasProviders,
+                'providers_count' => $providersCount,
+                'state_data_keys' => array_keys($stateData),
+            ]);
+            
             // Find or create state
             $state = $this->stateRepository->findOrCreateByCode(
                 $stateData['code'],
                 $stateData['name'] ?? null
             );
-            
             // Create report state record
             ReportState::create([
                 'report_id' => $reportId,
@@ -188,8 +200,21 @@ class ReportProcessor
             ]);
             
             // Process providers for this state (if provided)
-            if (isset($stateData['providers']) && is_array($stateData['providers']) && !empty($stateData['providers'])) {
+            if ($hasProviders && !empty($stateData['providers'])) {
+                Log::debug('Calling processStateProviders', [
+                    'report_id' => $reportId,
+                    'state_id' => $state->getId(),
+                    'state_code' => $stateCode,
+                    'providers_count' => $providersCount,
+                ]);
                 $this->processStateProviders($reportId, $state->getId(), $stateData['providers']);
+            } else {
+                Log::debug('Skipping processStateProviders', [
+                    'report_id' => $reportId,
+                    'state_code' => $stateCode,
+                    'has_providers' => $hasProviders,
+                    'providers_empty' => $hasProviders && empty($stateData['providers']),
+                ]);
             }
         }
     }
@@ -256,25 +281,53 @@ class ReportProcessor
     private function processStateProviders(int $reportId, int $stateId, array $providersData): void
     {
         if (empty($providersData)) {
+            Log::debug('processStateProviders: providersData está vazio', [
+                'report_id' => $reportId,
+                'state_id' => $stateId,
+            ]);
             return;
         }
 
-        Log::debug('Processing state providers', [
+        Log::debug('🔵 ANTES de processar state providers', [
             'report_id' => $reportId,
             'state_id' => $stateId,
-            'provider_count' => count($providersData)
+            'provider_count' => count($providersData),
+            'providers_data' => $providersData, // Log completo dos dados
         ]);
 
-        foreach ($providersData as $providerData) {
+        $processedCount = 0;
+        foreach ($providersData as $index => $providerData) {
             $providerName = $providerData['name'] ?? null;
             $requestCount = $providerData['count'] ?? 0;
             
+            Log::debug('🔵 Processando provider individual', [
+                'report_id' => $reportId,
+                'state_id' => $stateId,
+                'index' => $index,
+                'provider_name' => $providerName,
+                'request_count' => $requestCount,
+                'provider_data' => $providerData,
+            ]);
+            
             if (!$providerName || $requestCount <= 0) {
+                Log::debug('⚠️ Provider inválido, pulando', [
+                    'report_id' => $reportId,
+                    'state_id' => $stateId,
+                    'provider_name' => $providerName,
+                    'request_count' => $requestCount,
+                ]);
                 continue; // Skip invalid providers
             }
             
             // Normalize provider name (use same helper as processProviders)
             $normalizedName = ProviderHelper::normalizeName($providerName);
+            
+            Log::debug('🔵 ANTES de findOrCreate provider', [
+                'report_id' => $reportId,
+                'state_id' => $stateId,
+                'original_name' => $providerName,
+                'normalized_name' => $normalizedName,
+            ]);
             
             // Find or create provider (use same repository)
             $provider = $this->providerRepository->findOrCreate(
@@ -282,9 +335,16 @@ class ReportProcessor
                 technologies: [] // Technology not provided in state providers field
             );
             
+            Log::debug('🔵 Provider encontrado/criado', [
+                'report_id' => $reportId,
+                'state_id' => $stateId,
+                'provider_id' => $provider->getId(),
+                'provider_name' => $provider->getName(),
+            ]);
+            
             // Create state-provider cross-reference record
             try {
-                ReportStateProvider::create([
+                Log::debug('🔵 ANTES de criar ReportStateProvider', [
                     'report_id' => $reportId,
                     'state_id' => $stateId,
                     'provider_id' => $provider->getId(),
@@ -293,7 +353,38 @@ class ReportProcessor
                     'success_rate' => $providerData['success_rate'] ?? null,
                     'avg_speed' => $providerData['avg_speed'] ?? null,
                 ]);
+                
+                $created = ReportStateProvider::firstOrCreate([
+                    'report_id' => $reportId,
+                    'state_id' => $stateId,
+                    'provider_id' => $provider->getId(),
+                ], [
+                    'original_name' => $providerName,
+                    'request_count' => $requestCount,
+                    'success_rate' => $providerData['success_rate'] ?? null,
+                    'avg_speed' => $providerData['avg_speed'] ?? null,
+                ]);
+
+                Log::debug('✅ DEPOIS de criar ReportStateProvider', [
+                    'report_id' => $reportId,
+                    'state_id' => $stateId,
+                    'provider_id' => $provider->getId(),
+                    'was_recently_created' => $created->wasRecentlyCreated,
+                    'id' => $created->id,
+                    'request_count' => $created->request_count,
+                ]);
+                
+                $processedCount++;
+
             } catch (QueryException|UniqueConstraintViolationException|PDOException $e) {
+                Log::error('❌ Erro ao criar ReportStateProvider', [
+                    'report_id' => $reportId,
+                    'state_id' => $stateId,
+                    'provider_id' => $provider->getId(),
+                    'error_code' => $e->getCode(),
+                    'error_message' => $e->getMessage(),
+                ]);
+                
                 // Handle race condition: if duplicate entry, try to update existing record
                 if ($e->getCode() === '23000' || str_contains($e->getMessage(), 'Duplicate entry')) {
                     $existing = ReportStateProvider::where('report_id', $reportId)
@@ -302,11 +393,20 @@ class ReportProcessor
                         ->first();
                     
                     if ($existing) {
+                        Log::debug('🔄 Atualizando ReportStateProvider existente', [
+                            'report_id' => $reportId,
+                            'state_id' => $stateId,
+                            'provider_id' => $provider->getId(),
+                            'existing_id' => $existing->id,
+                        ]);
+                        
                         $existing->update([
                             'request_count' => $requestCount,
                             'success_rate' => $providerData['success_rate'] ?? null,
                             'avg_speed' => $providerData['avg_speed'] ?? null,
                         ]);
+                        
+                        $processedCount++;
                     } else {
                         // If still not found, throw the original exception
                         throw $e;
@@ -318,10 +418,11 @@ class ReportProcessor
             }
         }
 
-        Log::debug('State providers processing completed', [
+        Log::debug('✅ DEPOIS de processar state providers', [
             'report_id' => $reportId,
             'state_id' => $stateId,
-            'processed_count' => count($providersData)
+            'processed_count' => $processedCount,
+            'total_providers' => count($providersData),
         ]);
     }
 }

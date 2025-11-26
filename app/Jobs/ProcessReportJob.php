@@ -44,7 +44,41 @@ class ProcessReportJob implements ShouldQueue
 
         // Use raw_data (converted format) instead of original reportData
         $reportData = $reportModel->raw_data ?? $this->reportData;
-
+        
+        // Log para verificar se providers está presente no raw_data
+        if (isset($reportData['geographic']['states'][0])) {
+            $firstState = $reportData['geographic']['states'][0];
+            Log::debug('📋 ProcessReportJob - Verificando raw_data', [
+                'report_id' => $this->reportId,
+                'has_geographic' => isset($reportData['geographic']),
+                'has_states' => isset($reportData['geographic']['states']),
+                'states_count' => count($reportData['geographic']['states'] ?? []),
+                'first_state_code' => $firstState['code'] ?? 'unknown',
+                'first_state_has_providers' => isset($firstState['providers']),
+                'first_state_providers_count' => isset($firstState['providers']) ? count($firstState['providers']) : 0,
+                'first_state_keys' => array_keys($firstState),
+            ]);
+            
+            if (isset($firstState['providers'])) {
+                Log::debug('✅ ProcessReportJob - Providers encontrado no raw_data', [
+                    'report_id' => $this->reportId,
+                    'state_code' => $firstState['code'] ?? 'unknown',
+                    'providers' => $firstState['providers'],
+                ]);
+            } else {
+                Log::warning('❌ ProcessReportJob - Providers NÃO encontrado no raw_data', [
+                    'report_id' => $this->reportId,
+                    'state_code' => $firstState['code'] ?? 'unknown',
+                ]);
+            }
+        } else {
+            Log::warning('⚠️ ProcessReportJob - geographic.states não encontrado no raw_data', [
+                'report_id' => $this->reportId,
+                'has_geographic' => isset($reportData['geographic']),
+                'raw_data_keys' => array_keys($reportData),
+            ]);
+        }
+        
         Log::info('Starting report processing', [
             'report_id' => $this->reportId,
             'data_version' => $reportData['metadata']['data_version'] ?? $reportData['data_version'] ?? 'unknown'

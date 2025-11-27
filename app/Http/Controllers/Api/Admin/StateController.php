@@ -111,6 +111,34 @@ class StateController extends Controller
         }
     }
 
+    /**
+     * Get all active states (public endpoint for frontend)
+     * No authentication required - states are reference data
+     */
+    public function allPublic(): JsonResponse
+    {
+        try {
+            // Get all active states (without pagination - for dropdowns, etc)
+            $states = $this->getAllStatesUseCase->executeActive();
+            
+            // Convert entities to DTOs
+            $statesArray = array_map(function ($state) {
+                return $state->toDto()->toArray();
+            }, $states);
+            
+            return response()->json([
+                'success' => true,
+                'data' => $statesArray
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching states',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
+            ], 500);
+        }
+    }
+
     public function showByCode(Request $request, string $code): JsonResponse
     {
         try {

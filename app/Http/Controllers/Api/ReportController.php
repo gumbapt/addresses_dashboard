@@ -983,6 +983,14 @@ class ReportController extends Controller
             $dateFrom = $request->query('date_from');
             $dateTo = $request->query('date_to');
             $sortBy = $request->query('sort_by', 'total_requests');
+            $aggregateByProvider = $request->query('aggregate_by_provider', false);
+            
+            // Convert string 'true'/'false' to boolean
+            if (is_string($aggregateByProvider)) {
+                $aggregateByProvider = filter_var($aggregateByProvider, FILTER_VALIDATE_BOOLEAN);
+            } else {
+                $aggregateByProvider = (bool) $aggregateByProvider;
+            }
 
             // Validate state_id
             if (!$stateId) {
@@ -1028,7 +1036,8 @@ class ReportController extends Controller
                 $dateFrom,
                 $dateTo,
                 $sortBy,
-                $accessibleDomains
+                $accessibleDomains,
+                $aggregateByProvider
             );
 
             return response()->json([
@@ -1043,6 +1052,7 @@ class ReportController extends Controller
                         'date_from' => $dateFrom,
                         'date_to' => $dateTo,
                         'sort_by' => $sortBy,
+                        'aggregate_by_provider' => $aggregateByProvider,
                     ],
                 ],
                 'note' => 'Data is precise (from report_state_providers table), not approximated',

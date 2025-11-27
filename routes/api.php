@@ -45,6 +45,9 @@ Route::post('/register', RegisterController::class);
 Route::post('/verify-email', VerifyEmailController::class);
 Route::post('/resend-verification-code', ResendVerificationCodeController::class);
 
+// Public reference data routes (for frontend dropdowns, selects, etc)
+Route::get('/states', [StateController::class, 'allPublic']); // Lista todos os estados ativos (público)
+
 // Chat routes
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/chat/create-private', [ChatController::class, 'createPrivateChat']);

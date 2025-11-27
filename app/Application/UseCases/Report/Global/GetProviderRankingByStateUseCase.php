@@ -61,8 +61,8 @@ class GetProviderRankingByStateUseCase
             's.code as state_code',
             's.name as state_name',
             DB::raw('SUM(rsp.request_count) as total_requests'),
-            DB::raw('AVG(rsp.success_rate) as avg_success_rate'),
-            DB::raw('AVG(rsp.avg_speed) as avg_speed'),
+            DB::raw('AVG(COALESCE(rsp.success_rate, 0)) as avg_success_rate'),
+            DB::raw('AVG(COALESCE(rsp.avg_speed, 0)) as avg_speed'),
             DB::raw('COUNT(DISTINCT r.id) as total_reports'),
             DB::raw('MIN(r.report_date) as period_start'),
             DB::raw('MAX(r.report_date) as period_end')

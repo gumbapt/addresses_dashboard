@@ -253,16 +253,16 @@ class ReportController extends Controller
                         
                         if ($hasProviders) {
                             // Se tem providers, logar o array completo
-                            \Log::debug('✅ Providers encontrado no primeiro estado (submit)', [
-                                'state_code' => $firstState['code'] ?? 'unknown',
-                                'providers' => $firstState['providers'],
-                            ]);
+                            // Log::debug('✅ Providers encontrado no primeiro estado (submit)', [
+                            //     'state_code' => $firstState['code'] ?? 'unknown',
+                            //     'providers' => $firstState['providers'],
+                            // ]);
                         } else {
                             // Se não tem providers, apenas informar
-                            \Log::debug('❌ Providers NÃO encontrado no primeiro estado (submit)', [
-                                'state_code' => $firstState['code'] ?? 'unknown',
-                                'keys_disponiveis' => array_keys($firstState),
-                            ]);
+                            // Log::debug('❌ Providers NÃO encontrado no primeiro estado (submit)', [
+                            //     'state_code' => $firstState['code'] ?? 'unknown',
+                            //     'keys_disponiveis' => array_keys($firstState),
+                            // ]);
                         }
                     }
                 } else {
@@ -637,14 +637,14 @@ class ReportController extends Controller
                     // Se o estado não tem providers, criar array vazio
                     if (!isset($state['providers']) || !is_array($state['providers'])) {
                         $state['providers'] = [];
-                        \Log::debug('➕ Campo providers criado para estado sem providers', [
-                            'state_code' => $state['code'] ?? 'unknown',
-                        ]);
+                        // Log::debug('➕ Campo providers criado para estado sem providers', [
+                        //     'state_code' => $state['code'] ?? 'unknown',
+                        // ]);
                     } else {
-                        \Log::debug('✅ Estado já tem providers', [
-                            'state_code' => $state['code'] ?? 'unknown',
-                            'providers_count' => count($state['providers']),
-                        ]);
+                        // Log::debug('✅ Estado já tem providers', [
+                        //     'state_code' => $state['code'] ?? 'unknown',
+                        //     'providers_count' => count($state['providers']),
+                        // ]);
                     }
                 }
                 unset($state); // Liberar referência
@@ -652,13 +652,13 @@ class ReportController extends Controller
             
             // Log DEPOIS de processar - verificar o que será salvo
             if (isset($jsonData['geographic']['states'][0])) {
-                \Log::debug('💾 DEPOIS de processar - primeiro estado antes de salvar', [
-                    'state_code' => $jsonData['geographic']['states'][0]['code'] ?? 'unknown',
-                    'has_providers' => isset($jsonData['geographic']['states'][0]['providers']),
-                    'providers_count' => isset($jsonData['geographic']['states'][0]['providers']) 
-                        ? count($jsonData['geographic']['states'][0]['providers']) 
-                        : 0,
-                ]);
+                // Log::debug('💾 DEPOIS de processar - primeiro estado antes de salvar', [
+                //     'state_code' => $jsonData['geographic']['states'][0]['code'] ?? 'unknown',
+                //     'has_providers' => isset($jsonData['geographic']['states'][0]['providers']),
+                //     'providers_count' => isset($jsonData['geographic']['states'][0]['providers']) 
+                //         ? count($jsonData['geographic']['states'][0]['providers']) 
+                //         : 0,
+                // ]);
             }
             
             // Save JSON file with pretty print

@@ -207,7 +207,14 @@ class ReportProcessor
                     'state_code' => $stateCode,
                     'providers_count' => $providersCount,
                 ]);
-                $this->processStateProviders($reportId, $state->getId(), $stateData['providers']);
+                // Pass state success_rate and avg_speed as fallback for providers
+                $this->processStateProviders(
+                    $reportId, 
+                    $state->getId(), 
+                    $stateData['providers'],
+                    $stateData['success_rate'] ?? null,
+                    $stateData['avg_speed'] ?? null
+                );
             } else {
                 Log::debug('Skipping processStateProviders', [
                     'report_id' => $reportId,
@@ -277,8 +284,14 @@ class ReportProcessor
 
     /**
      * Process providers for a specific state
+     * 
+     * @param int $reportId
+     * @param int $stateId
+     * @param array $providersData
+     * @param float|null $stateSuccessRate Fallback success_rate from state if provider doesn't have it
+     * @param float|null $stateAvgSpeed Fallback avg_speed from state if provider doesn't have it
      */
-    private function processStateProviders(int $reportId, int $stateId, array $providersData): void
+    private function processStateProviders(int $reportId, int $stateId, array $providersData, ?float $stateSuccessRate = null, ?float $stateAvgSpeed = null): void
     {
         if (empty($providersData)) {
             Log::debug('processStateProviders: providersData está vazio', [
@@ -288,12 +301,12 @@ class ReportProcessor
             return;
         }
 
-        Log::debug('🔵 ANTES de processar state providers', [
-            'report_id' => $reportId,
-            'state_id' => $stateId,
-            'provider_count' => count($providersData),
-            'providers_data' => $providersData, // Log completo dos dados
-        ]);
+        // Log::debug('🔵 ANTES de processar state providers', [
+        //     'report_id' => $reportId,
+        //     'state_id' => $stateId,
+        //     'provider_count' => count($providersData),
+        //     'providers_data' => $providersData, // Log completo dos dados
+        // ]);
 
         $processedCount = 0;
         foreach ($providersData as $index => $providerData) {
@@ -344,14 +357,22 @@ class ReportProcessor
             
             // Create state-provider cross-reference record
             try {
+                // Use provider's success_rate if available, otherwise fallback to state's success_rate
+                $successRate = $providerData['success_rate'] ?? $stateSuccessRate ?? null;
+                $avgSpeed = $providerData['avg_speed'] ?? $stateAvgSpeed ?? null;
+                
                 Log::debug('🔵 ANTES de criar ReportStateProvider', [
                     'report_id' => $reportId,
                     'state_id' => $stateId,
                     'provider_id' => $provider->getId(),
                     'original_name' => $providerName,
                     'request_count' => $requestCount,
-                    'success_rate' => $providerData['success_rate'] ?? null,
-                    'avg_speed' => $providerData['avg_speed'] ?? null,
+                    'provider_success_rate' => $providerData['success_rate'] ?? null,
+                    'state_success_rate' => $stateSuccessRate,
+                    'final_success_rate' => $successRate,
+                    'provider_avg_speed' => $providerData['avg_speed'] ?? null,
+                    'state_avg_speed' => $stateAvgSpeed,
+                    'final_avg_speed' => $avgSpeed,
                 ]);
                 
                 $created = ReportStateProvider::firstOrCreate([
@@ -361,18 +382,18 @@ class ReportProcessor
                 ], [
                     'original_name' => $providerName,
                     'request_count' => $requestCount,
-                    'success_rate' => $providerData['success_rate'] ?? null,
-                    'avg_speed' => $providerData['avg_speed'] ?? null,
+                    'success_rate' => $successRate,
+                    'avg_speed' => $avgSpeed,
                 ]);
 
-                Log::debug('✅ DEPOIS de criar ReportStateProvider', [
-                    'report_id' => $reportId,
-                    'state_id' => $stateId,
-                    'provider_id' => $provider->getId(),
-                    'was_recently_created' => $created->wasRecentlyCreated,
-                    'id' => $created->id,
-                    'request_count' => $created->request_count,
-                ]);
+                // Log::debug('✅ DEPOIS de criar ReportStateProvider', [
+                //     'report_id' => $reportId,
+                //     'state_id' => $stateId,
+                //     'provider_id' => $provider->getId(),
+                //     'was_recently_created' => $created->wasRecentlyCreated,
+                //     'id' => $created->id,
+                //     'request_count' => $created->request_count,
+                // ]);
                 
                 $processedCount++;
 
@@ -400,10 +421,14 @@ class ReportProcessor
                             'existing_id' => $existing->id,
                         ]);
                         
+                        // Use provider's success_rate if available, otherwise fallback to state's success_rate
+                        $successRate = $providerData['success_rate'] ?? $stateSuccessRate ?? null;
+                        $avgSpeed = $providerData['avg_speed'] ?? $stateAvgSpeed ?? null;
+                        
                         $existing->update([
                             'request_count' => $requestCount,
-                            'success_rate' => $providerData['success_rate'] ?? null,
-                            'avg_speed' => $providerData['avg_speed'] ?? null,
+                            'success_rate' => $successRate,
+                            'avg_speed' => $avgSpeed,
                         ]);
                         
                         $processedCount++;

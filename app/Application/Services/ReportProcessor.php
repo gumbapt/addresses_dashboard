@@ -58,7 +58,7 @@ class ReportProcessor
             return;
         }
 
-        Log::debug('Processing summary', ['report_id' => $reportId]);
+        // Log::debug('Processing summary', ['report_id' => $reportId]);
 
         // Use updateOrCreate to handle duplicate report_id (retry scenarios)
         // However, in high concurrency scenarios, a race condition can still occur where two workers
@@ -112,10 +112,10 @@ class ReportProcessor
             return;
         }
 
-        Log::debug('Processing providers', [
-            'report_id' => $reportId,
-            'provider_count' => count($providersData['top_providers'])
-        ]);
+        // Log::debug('Processing providers', [
+        //     'report_id' => $reportId,
+        //     'provider_count' => count($providersData['top_providers'])
+        // ]);
 
         foreach ($providersData['top_providers'] as $index => $providerData) {
             // Normalize provider name
@@ -141,10 +141,10 @@ class ReportProcessor
             ]);
         }
 
-        Log::debug('Provider processing completed', [
-            'report_id' => $reportId,
-            'processed_count' => count($providersData['top_providers'])
-        ]);
+        // Log::debug('Provider processing completed', [
+        //     'report_id' => $reportId,
+        //     'processed_count' => count($providersData['top_providers'])
+        // ]);
     }
 
     /**
@@ -166,10 +166,10 @@ class ReportProcessor
             return;
         }
 
-        Log::debug('Processing states', [
-            'report_id' => $reportId,
-            'state_count' => count($statesData)
-        ]);
+        // Log::debug('Processing states', [
+        //     'report_id' => $reportId,
+        //     'state_count' => count($statesData)
+        // ]);
 
         foreach ($statesData as $stateData) {
             // Log para debug - verificar se providers está presente
@@ -177,13 +177,13 @@ class ReportProcessor
             $hasProviders = isset($stateData['providers']) && is_array($stateData['providers']);
             $providersCount = $hasProviders ? count($stateData['providers']) : 0;
             
-            Log::debug('Processing state', [
-                'report_id' => $reportId,
-                'state_code' => $stateCode,
-                'has_providers' => $hasProviders,
-                'providers_count' => $providersCount,
-                'state_data_keys' => array_keys($stateData),
-            ]);
+            // Log::debug('Processing state', [
+            //     'report_id' => $reportId,
+            //     'state_code' => $stateCode,
+            //     'has_providers' => $hasProviders,
+            //     'providers_count' => $providersCount,
+            //     'state_data_keys' => array_keys($stateData),
+            // ]);
             
             // Find or create state
             $state = $this->stateRepository->findOrCreateByCode(
@@ -201,12 +201,12 @@ class ReportProcessor
             
             // Process providers for this state (if provided)
             if ($hasProviders && !empty($stateData['providers'])) {
-                Log::debug('Calling processStateProviders', [
-                    'report_id' => $reportId,
-                    'state_id' => $state->getId(),
-                    'state_code' => $stateCode,
-                    'providers_count' => $providersCount,
-                ]);
+                // Log::debug('Calling processStateProviders', [
+                //     'report_id' => $reportId,
+                //     'state_id' => $state->getId(),
+                //     'state_code' => $stateCode,
+                //     'providers_count' => $providersCount,
+                // ]);
                 // Pass state success_rate and avg_speed as fallback for providers
                 $this->processStateProviders(
                     $reportId, 
@@ -313,14 +313,14 @@ class ReportProcessor
             $providerName = $providerData['name'] ?? null;
             $requestCount = $providerData['count'] ?? 0;
             
-            Log::debug('🔵 Processando provider individual', [
-                'report_id' => $reportId,
-                'state_id' => $stateId,
-                'index' => $index,
-                'provider_name' => $providerName,
-                'request_count' => $requestCount,
-                'provider_data' => $providerData,
-            ]);
+            // Log::debug('🔵 Processando provider individual', [
+            //     'report_id' => $reportId,
+            //     'state_id' => $stateId,
+            //     'index' => $index,
+            //     'provider_name' => $providerName,
+            //     'request_count' => $requestCount,
+            //     'provider_data' => $providerData,
+            // ]);
             
             if (!$providerName || $requestCount <= 0) {
                 Log::debug('⚠️ Provider inválido, pulando', [
@@ -335,12 +335,12 @@ class ReportProcessor
             // Normalize provider name (use same helper as processProviders)
             $normalizedName = ProviderHelper::normalizeName($providerName);
             
-            Log::debug('🔵 ANTES de findOrCreate provider', [
-                'report_id' => $reportId,
-                'state_id' => $stateId,
-                'original_name' => $providerName,
-                'normalized_name' => $normalizedName,
-            ]);
+            // Log::debug('🔵 ANTES de findOrCreate provider', [
+            //     'report_id' => $reportId,
+            //     'state_id' => $stateId,
+            //     'original_name' => $providerName,
+            //     'normalized_name' => $normalizedName,
+            // ]);
             
             // Find or create provider (use same repository)
             $provider = $this->providerRepository->findOrCreate(
@@ -361,19 +361,19 @@ class ReportProcessor
                 $successRate = $providerData['success_rate'] ?? $stateSuccessRate ?? null;
                 $avgSpeed = $providerData['avg_speed'] ?? $stateAvgSpeed ?? null;
                 
-                Log::debug('🔵 ANTES de criar ReportStateProvider', [
-                    'report_id' => $reportId,
-                    'state_id' => $stateId,
-                    'provider_id' => $provider->getId(),
-                    'original_name' => $providerName,
-                    'request_count' => $requestCount,
-                    'provider_success_rate' => $providerData['success_rate'] ?? null,
-                    'state_success_rate' => $stateSuccessRate,
-                    'final_success_rate' => $successRate,
-                    'provider_avg_speed' => $providerData['avg_speed'] ?? null,
-                    'state_avg_speed' => $stateAvgSpeed,
-                    'final_avg_speed' => $avgSpeed,
-                ]);
+                // Log::debug('🔵 ANTES de criar ReportStateProvider', [
+                //     'report_id' => $reportId,
+                //     'state_id' => $stateId,
+                //     'provider_id' => $provider->getId(),
+                //     'original_name' => $providerName,
+                //     'request_count' => $requestCount,
+                //     'provider_success_rate' => $providerData['success_rate'] ?? null,
+                //     'state_success_rate' => $stateSuccessRate,
+                //     'final_success_rate' => $successRate,
+                //     'provider_avg_speed' => $providerData['avg_speed'] ?? null,
+                //     'state_avg_speed' => $stateAvgSpeed,
+                //     'final_avg_speed' => $avgSpeed,
+                // ]);
                 
                 $created = ReportStateProvider::firstOrCreate([
                     'report_id' => $reportId,
@@ -443,11 +443,11 @@ class ReportProcessor
             }
         }
 
-        Log::debug('✅ DEPOIS de processar state providers', [
-            'report_id' => $reportId,
-            'state_id' => $stateId,
-            'processed_count' => $processedCount,
-            'total_providers' => count($providersData),
-        ]);
+        // Log::debug('✅ DEPOIS de processar state providers', [
+        //     'report_id' => $reportId,
+        //     'state_id' => $stateId,
+        //     'processed_count' => $processedCount,
+        //     'total_providers' => count($providersData),
+        // ]);
     }
 }

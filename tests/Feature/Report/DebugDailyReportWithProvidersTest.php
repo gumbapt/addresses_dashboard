@@ -7,12 +7,13 @@ use App\Models\Report;
 use App\Models\ReportStateProvider;
 use App\Jobs\ProcessReportJob;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DebugDailyReportWithProvidersTest extends TestCase
 {
     // Usando banco real - sem RefreshDatabase
-
+    use RefreshDatabase;
     private Domain $testDomain;
     private array $wordpressReportData;
 
@@ -26,10 +27,17 @@ class DebugDailyReportWithProvidersTest extends TestCase
             [
                 'slug' => 'zip-50g-io',
                 'domain_url' => 'https://zip.50g.io',
+                'site_id' => 'wp-zip.50g.io',
                 'api_key' => str_repeat('a', 64),
+                'status' => 'active',
+                'timezone' => 'America/New_York',
+                'wordpress_version' => '6.8.3',
+                'plugin_version' => '1.0.0',
+                'settings' => [],
                 'is_active' => true,
             ]
         );
+        
 
         // JSON no formato esperado pela rota /api/reports/submit
         $this->wordpressReportData = [

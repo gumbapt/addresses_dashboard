@@ -348,12 +348,12 @@ class ReportProcessor
                 technologies: [] // Technology not provided in state providers field
             );
             
-            Log::debug('🔵 Provider encontrado/criado', [
-                'report_id' => $reportId,
-                'state_id' => $stateId,
-                'provider_id' => $provider->getId(),
-                'provider_name' => $provider->getName(),
-            ]);
+            // Log::debug('🔵 Provider encontrado/criado', [
+            //     'report_id' => $reportId,
+            //     'state_id' => $stateId,
+            //     'provider_id' => $provider->getId(),
+            //     'provider_name' => $provider->getName(),
+            // ]);
             
             // Create state-provider cross-reference record
             try {

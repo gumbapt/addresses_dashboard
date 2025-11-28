@@ -107,14 +107,22 @@ class GetProviderRankingByStateUseCase
                 return $item;
             }, $rankings);
         } else {
-            // Comportamento normal: calcular total por domínio no estado
+            // Comportamento normal: calcular total por domínio no estado E total do provider no estado
             $domainTotals = $this->getDomainTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds);
+            $providerTotals = $this->getProviderTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds);
             
-            // Adicionar porcentagem a cada ranking
-            $rankings = array_map(function($item) use ($domainTotals) {
+            // Adicionar ambas as porcentagens a cada ranking
+            $rankings = array_map(function($item) use ($domainTotals, $providerTotals) {
+                // Porcentagem do domínio (quanto o provider representa do domínio no estado)
                 $domainTotal = $domainTotals[$item->domain_id] ?? 1; // Evitar divisão por zero
                 $item->percentage_of_domain = ($item->total_requests / $domainTotal) * 100;
                 $item->domain_total_requests = $domainTotal;
+                
+                // Porcentagem do provider no estado (quanto esta row representa do total do provider no estado)
+                $providerTotal = $providerTotals[$item->provider_id] ?? $item->total_requests;
+                $item->provider_total_requests = $providerTotal;
+                $item->percentage_of_provider_in_state = $providerTotal > 0 ? ($item->total_requests / $providerTotal) * 100 : 0;
+                
                 return $item;
             }, $rankings);
         }
@@ -148,12 +156,16 @@ class GetProviderRankingByStateUseCase
                 $result['provider_total_requests'] = isset($item->provider_total_requests) ? (int) $item->provider_total_requests : (int) $item->total_requests;
                 $result['percentage_of_state'] = isset($item->percentage_of_state) ? round((float) $item->percentage_of_state, 2) : 0;
             } else {
-                // Comportamento normal: incluir informações de domínio
+                // Comportamento normal: incluir informações de domínio E porcentagens separadas
                 $result['domain_id'] = $item->domain_id;
                 $result['domain_name'] = $item->domain_name;
                 $result['domain_slug'] = $item->domain_slug;
                 $result['domain_total_requests'] = isset($item->domain_total_requests) ? (int) $item->domain_total_requests : 0;
                 $result['percentage_of_domain'] = isset($item->percentage_of_domain) ? round((float) $item->percentage_of_domain, 2) : 0;
+                
+                // Porcentagem do provider no estado (quanto esta row representa do total do provider)
+                $result['provider_total_requests'] = isset($item->provider_total_requests) ? (int) $item->provider_total_requests : 0;
+                $result['percentage_of_provider_in_state'] = isset($item->percentage_of_provider_in_state) ? round((float) $item->percentage_of_provider_in_state, 2) : 0;
             }
             
             return $result;

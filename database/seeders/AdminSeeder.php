@@ -18,17 +18,17 @@ class AdminSeeder extends Seeder
         // First create the Super Admin
         $this->call(SudoAdminSeeder::class);
         
-        $faker = Faker::create();
+        // $faker = Faker::create();
         
-        // Create 20 regular admins with Faker
-        for ($i = 1; $i <= 20; $i++) {
-            Admin::create([
-                'name' => $faker->name(),
-                'email' => $faker->unique()->safeEmail(),
-                'password' => Hash::make('password123'),
-                'is_active' => $faker->boolean(85), // 85% chance of being active
-                'is_super_admin' => false,
-            ]);
-        }
+        // // Create 20 regular admins with Faker
+        // for ($i = 1; $i <= 20; $i++) {
+        //     Admin::create([
+        //         'name' => $faker->name(),
+        //         'email' => $faker->unique()->safeEmail(),
+        //         'password' => Hash::make('password123'),
+        //         'is_active' => $faker->boolean(85), // 85% chance of being active
+        //         'is_super_admin' => false,
+        //     ]);
+        // }
     }
 }

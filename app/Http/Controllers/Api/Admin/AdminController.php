@@ -51,12 +51,13 @@ class AdminController extends Controller
             $perPage = min(max($perPage, 1), 100); // Entre 1 e 100
             $page = max($page, 1);
             
-            // Executar use case com paginação
+            // Executar use case com paginação (excluindo super admins e o próprio usuário)
             $result = $this->getAllAdminsUseCase->executePaginated(
                 $page, 
                 $perPage,
                 $search,
-                $isActive
+                $isActive,
+                $admin->getId() // Excluir o próprio usuário requisitante
             );
             
             return response()->json([

@@ -23,9 +23,10 @@ class GetAllAdminsUseCase
         int $page = 1, 
         int $perPage = 15,
         ?string $search = null,
-        ?bool $isActive = null
+        ?bool $isActive = null,
+        ?int $excludeAdminId = null
     ): array {
-        $result = $this->adminRepository->findAllPaginated($page, $perPage, $search, $isActive);
+        $result = $this->adminRepository->findAllPaginated($page, $perPage, $search, $isActive, $excludeAdminId);
         
         // Converter entidades para DTOs
         $result['data'] = array_map(function ($admin) {

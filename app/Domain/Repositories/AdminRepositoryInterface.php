@@ -14,7 +14,8 @@ interface AdminRepositoryInterface
         int $page = 1, 
         int $perPage = 15,
         ?string $search = null,
-        ?bool $isActive = null
+        ?bool $isActive = null,
+        ?int $excludeAdminId = null
     ): array;
     public function create(string $name, string $email, string $password, bool $isActive = true): Admin;
     public function update(

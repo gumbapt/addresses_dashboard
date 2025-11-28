@@ -40,9 +40,18 @@ class AdminRepository implements AdminRepositoryInterface
         int $page = 1, 
         int $perPage = 15,
         ?string $search = null,
-        ?bool $isActive = null
+        ?bool $isActive = null,
+        ?int $excludeAdminId = null
     ): array {
         $query = AdminModel::query();
+        
+        // Excluir super admins (is_super_admin = true)
+        $query->where('is_super_admin', false);
+        
+        // Excluir o próprio usuário requisitante
+        if ($excludeAdminId !== null) {
+            $query->where('id', '!=', $excludeAdminId);
+        }
         
         // Aplicar filtro de busca
         if ($search) {

@@ -83,6 +83,10 @@ class GetDomainStateStatsUseCase
             'provider_distribution' => $this->getProviderDistribution($reportIds, $stateId, $sortBy),
             // Top cities no estado (do aggregate)
             'top_cities' => $this->getTopCities($reportIds, $stateId),
+            // Cities chart data - formatado para gráfico de barras (ordenado da mais comum para menos comum)
+            'cities_chart_data' => $this->getCitiesChartData($reportIds, $stateId),
+            // Dados de gráficos por cidade (providers e tecnologias por cidade)
+            'cities_detailed_charts' => $this->getCitiesDetailedCharts($reportIds, $stateId),
             // Top zip codes no estado (do aggregate)
             'top_zip_codes' => $this->getTopZipCodes($reportIds, $stateId),
             // Hourly distribution (do dashboard)
@@ -123,6 +127,8 @@ class GetDomainStateStatsUseCase
             ],
             'provider_distribution' => [],
             'top_cities' => [],
+            'cities_chart_data' => [],
+            'cities_detailed_charts' => [],
             'top_zip_codes' => [],
             'hourly_distribution' => [],
             'technology_distribution' => [],
@@ -217,6 +223,11 @@ class GetDomainStateStatsUseCase
 
     private function getTopCities(array $reportIds, int $stateId): array
     {
+        if (empty($reportIds)) {
+            return [];
+        }
+
+        // Primeiro, tentar buscar cidades que estão associadas ao estado na tabela cities
         $cities = DB::table('report_cities')
             ->join('cities', 'cities.id', '=', 'report_cities.city_id')
             ->whereIn('report_cities.report_id', $reportIds)
@@ -228,9 +239,33 @@ class GetDomainStateStatsUseCase
                 DB::raw('COUNT(DISTINCT report_cities.report_id) as report_count')
             )
             ->groupBy('cities.id', 'cities.name')
+            ->havingRaw('SUM(report_cities.request_count) > 0')
             ->orderByDesc('total_requests')
             ->limit(20)
             ->get();
+
+        // Se não encontrou cidades com state_id, buscar todas as cidades dos reports
+        // (pode ser que as cidades não tenham state_id associado)
+        if ($cities->isEmpty()) { 
+            $cities = DB::table('report_cities')
+                ->join('cities', 'cities.id', '=', 'report_cities.city_id')
+                ->whereIn('report_cities.report_id', $reportIds)
+                ->select(
+                    'cities.id',
+                    'cities.name',
+                    DB::raw('SUM(report_cities.request_count) as total_requests'),
+                    DB::raw('COUNT(DISTINCT report_cities.report_id) as report_count')
+                )
+                ->groupBy('cities.id', 'cities.name')
+                ->havingRaw('SUM(report_cities.request_count) > 0')
+                ->orderByDesc('total_requests')
+                ->limit(20)
+                ->get();
+        }
+
+        if ($cities->isEmpty()) {
+            return [];
+        }
 
         return $cities->map(fn($c) => [
             'city_id' => $c->id,
@@ -240,8 +275,392 @@ class GetDomainStateStatsUseCase
         ])->toArray();
     }
 
+    /**
+     * Get cities data formatted for bar chart (ordered from most common to least common)
+     * 
+     * @param array $reportIds
+     * @param int $stateId
+     * @return array
+     */
+    private function getCitiesChartData(array $reportIds, int $stateId): array
+    {
+        if (empty($reportIds)) {
+            return [
+                'labels' => [],
+                'datasets' => [
+                    [
+                        'label' => 'Requisições por Cidade',
+                        'data' => [],
+                        'backgroundColor' => [],
+                    ]
+                ],
+                'raw_data' => [],
+            ];
+        }
+
+        // Primeiro, tentar buscar cidades que estão associadas ao estado
+        $cities = DB::table('report_cities')
+            ->join('cities', 'cities.id', '=', 'report_cities.city_id')
+            ->whereIn('report_cities.report_id', $reportIds)
+            ->where('cities.state_id', $stateId)
+            ->select(
+                'cities.id',
+                'cities.name',
+                DB::raw('SUM(report_cities.request_count) as total_requests'),
+                DB::raw('COUNT(DISTINCT report_cities.report_id) as report_count')
+            )
+            ->groupBy('cities.id', 'cities.name')
+            ->havingRaw('SUM(report_cities.request_count) > 0')
+            ->orderByDesc('total_requests') // Ordenado da mais comum para menos comum
+            ->get();
+
+        // Se não encontrou, buscar todas as cidades dos reports (fallback)
+        if ($cities->isEmpty()) {
+            $cities = DB::table('report_cities')
+                ->join('cities', 'cities.id', '=', 'report_cities.city_id')
+                ->whereIn('report_cities.report_id', $reportIds)
+                ->select(
+                    'cities.id',
+                    'cities.name',
+                    DB::raw('SUM(report_cities.request_count) as total_requests'),
+                    DB::raw('COUNT(DISTINCT report_cities.report_id) as report_count')
+                )
+                ->groupBy('cities.id', 'cities.name')
+                ->havingRaw('SUM(report_cities.request_count) > 0')
+                ->orderByDesc('total_requests')
+                ->get();
+        }
+
+        if ($cities->isEmpty()) {
+            return [
+                'labels' => [],
+                'datasets' => [
+                    [
+                        'label' => 'Requisições por Cidade',
+                        'data' => [],
+                        'backgroundColor' => [],
+                    ]
+                ],
+                'raw_data' => [],
+            ];
+        }
+
+        // Calcular total para porcentagem
+        $totalRequests = $cities->sum('total_requests');
+
+        // Preparar dados para gráfico
+        $labels = [];
+        $data = [];
+        $percentages = [];
+        $backgroundColor = [];
+        $rawData = [];
+
+        // Cores para as barras (gradiente de azul)
+        $colors = [
+            '#3B82F6', '#2563EB', '#1D4ED8', '#1E40AF', '#1E3A8A',
+            '#3B82F6', '#2563EB', '#1D4ED8', '#1E40AF', '#1E3A8A',
+        ];
+
+        foreach ($cities as $index => $city) {
+            $totalRequestsCity = (int) $city->total_requests;
+            $percentage = $totalRequests > 0 ? round(($totalRequestsCity / $totalRequests) * 100, 2) : 0;
+
+            $labels[] = $city->name;
+            $data[] = $totalRequestsCity;
+            $percentages[] = $percentage;
+            $backgroundColor[] = $colors[$index % count($colors)];
+
+            $rawData[] = [
+                'city_id' => $city->id,
+                'name' => $city->name,
+                'total_requests' => $totalRequestsCity,
+                'percentage' => $percentage,
+                'report_count' => (int) $city->report_count,
+            ];
+        }
+
+        return [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => 'Requisições por Cidade',
+                    'data' => $data,
+                    'backgroundColor' => $backgroundColor,
+                    'borderColor' => array_map(fn($color) => $this->darkenColor($color, 0.1), $backgroundColor),
+                    'borderWidth' => 1,
+                ]
+            ],
+            'percentages' => $percentages, // Porcentagens para exibir nas barras se necessário
+            'total' => $totalRequests,
+            'raw_data' => $rawData, // Dados completos para uso adicional
+        ];
+    }
+
+    /**
+     * Get detailed charts data for cities (providers and technologies by city)
+     * 
+     * @param array $reportIds
+     * @param int $stateId
+     * @return array
+     */
+    private function getCitiesDetailedCharts(array $reportIds, int $stateId): array
+    {
+        if (empty($reportIds)) {
+            return [];
+        }
+
+        // Buscar cidades do estado
+        $cities = DB::table('report_cities')
+            ->join('cities', 'cities.id', '=', 'report_cities.city_id')
+            ->whereIn('report_cities.report_id', $reportIds)
+            ->where('cities.state_id', $stateId)
+            ->select(
+                'cities.id',
+                'cities.name',
+                DB::raw('SUM(report_cities.request_count) as total_requests')
+            )
+            ->groupBy('cities.id', 'cities.name')
+            ->havingRaw('SUM(report_cities.request_count) > 0')
+            ->orderByDesc('total_requests')
+            ->limit(10) // Top 10 cidades
+            ->get();
+
+        // Se não encontrou cidades com state_id, buscar todas as cidades dos reports (fallback)
+        if ($cities->isEmpty()) {
+            $cities = DB::table('report_cities')
+                ->join('cities', 'cities.id', '=', 'report_cities.city_id')
+                ->whereIn('report_cities.report_id', $reportIds)
+                ->select(
+                    'cities.id',
+                    'cities.name',
+                    DB::raw('SUM(report_cities.request_count) as total_requests')
+                )
+                ->groupBy('cities.id', 'cities.name')
+                ->havingRaw('SUM(report_cities.request_count) > 0')
+                ->orderByDesc('total_requests')
+                ->limit(10)
+                ->get();
+        }
+
+        if ($cities->isEmpty()) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($cities as $city) {
+            $cityId = $city->id;
+            $cityName = $city->name;
+
+            // Buscar reports que têm essa cidade
+            $cityReportIds = DB::table('report_cities')
+                ->whereIn('report_id', $reportIds)
+                ->where('city_id', $cityId)
+                ->pluck('report_id')
+                ->unique()
+                ->toArray();
+
+            if (empty($cityReportIds)) {
+                continue;
+            }
+
+            // Providers por cidade (aproximação através de report_id - pode não ser 100% preciso)
+            $providersByCity = $this->getProvidersByCity($cityReportIds, $stateId);
+            
+            // Tecnologias por cidade
+            $technologiesByCity = $this->getTechnologiesByCity($cityReportIds, $stateId);
+
+            $result[] = [
+                'city_id' => $cityId,
+                'city_name' => $cityName,
+                'total_requests' => (int) $city->total_requests,
+                'providers_chart' => $providersByCity,
+                'technologies_chart' => $technologiesByCity,
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get providers chart data for a specific city
+     * 
+     * @param array $reportIds
+     * @param int $stateId
+     * @return array
+     */
+    private function getProvidersByCity(array $reportIds, int $stateId): array
+    {
+        // Buscar providers através de report_state_providers que estão nos reports desta cidade
+        // Isso é uma aproximação - pode não refletir exatamente os providers desta cidade específica
+        $providers = DB::table('report_state_providers')
+            ->join('providers', 'providers.id', '=', 'report_state_providers.provider_id')
+            ->where('report_state_providers.state_id', $stateId)
+            ->whereIn('report_state_providers.report_id', $reportIds)
+            ->select(
+                'providers.id',
+                'providers.name',
+                DB::raw('SUM(report_state_providers.request_count) as total_count')
+            )
+            ->groupBy('providers.id', 'providers.name')
+            ->orderByDesc('total_count')
+            ->limit(10)
+            ->get();
+
+        if ($providers->isEmpty()) {
+            return [
+                'labels' => [],
+                'datasets' => [],
+                'raw_data' => [],
+            ];
+        }
+
+        $totalRequests = $providers->sum('total_count');
+        $labels = [];
+        $data = [];
+        $percentages = [];
+        $colors = ['#3B82F6', '#2563EB', '#1D4ED8', '#1E40AF', '#1E3A8A', '#60A5FA', '#3B82F6', '#2563EB', '#1D4ED8', '#1E40AF'];
+        $backgroundColor = [];
+        $rawData = [];
+
+        foreach ($providers as $index => $provider) {
+            $totalCount = (int) $provider->total_count;
+            $percentage = $totalRequests > 0 ? round(($totalCount / $totalRequests) * 100, 2) : 0;
+
+            $labels[] = $provider->name;
+            $data[] = $totalCount;
+            $percentages[] = $percentage;
+            $backgroundColor[] = $colors[$index % count($colors)];
+
+            $rawData[] = [
+                'provider_id' => $provider->id,
+                'name' => $provider->name,
+                'total_count' => $totalCount,
+                'percentage' => $percentage,
+            ];
+        }
+
+        return [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => 'Requisições por Provider',
+                    'data' => $data,
+                    'backgroundColor' => $backgroundColor,
+                    'borderColor' => array_map(fn($color) => $this->darkenColor($color, 0.1), $backgroundColor),
+                    'borderWidth' => 1,
+                ]
+            ],
+            'percentages' => $percentages,
+            'total' => $totalRequests,
+            'raw_data' => $rawData,
+        ];
+    }
+
+    /**
+     * Get technologies chart data for a specific city
+     * 
+     * @param array $reportIds
+     * @param int $stateId
+     * @return array
+     */
+    private function getTechnologiesByCity(array $reportIds, int $stateId): array
+    {
+        // Buscar tecnologias através de report_state_providers
+        $technologies = DB::table('report_state_providers')
+            ->join('report_providers', function($join) use ($reportIds) {
+                $join->on('report_providers.provider_id', '=', 'report_state_providers.provider_id')
+                     ->on('report_providers.report_id', '=', 'report_state_providers.report_id')
+                     ->whereIn('report_providers.report_id', $reportIds);
+            })
+            ->where('report_state_providers.state_id', $stateId)
+            ->select(
+                'report_providers.technology',
+                DB::raw('SUM(report_state_providers.request_count) as total_count')
+            )
+            ->groupBy('report_providers.technology')
+            ->orderByDesc('total_count')
+            ->get();
+
+        if ($technologies->isEmpty()) {
+            return [
+                'labels' => [],
+                'datasets' => [],
+                'raw_data' => [],
+            ];
+        }
+
+        $totalRequests = $technologies->sum('total_count');
+        $labels = [];
+        $data = [];
+        $percentages = [];
+        $colors = ['#10B981', '#059669', '#047857', '#065F46', '#064E3B', '#34D399', '#10B981', '#059669', '#047857', '#065F46'];
+        $backgroundColor = [];
+        $rawData = [];
+
+        foreach ($technologies as $index => $tech) {
+            $totalCount = (int) $tech->total_count;
+            $percentage = $totalRequests > 0 ? round(($totalCount / $totalRequests) * 100, 2) : 0;
+            $technology = $tech->technology ?: 'Unknown';
+
+            $labels[] = $technology;
+            $data[] = $totalCount;
+            $percentages[] = $percentage;
+            $backgroundColor[] = $colors[$index % count($colors)];
+
+            $rawData[] = [
+                'technology' => $technology,
+                'total_count' => $totalCount,
+                'percentage' => $percentage,
+            ];
+        }
+
+        return [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => 'Requisições por Tecnologia',
+                    'data' => $data,
+                    'backgroundColor' => $backgroundColor,
+                    'borderColor' => array_map(fn($color) => $this->darkenColor($color, 0.1), $backgroundColor),
+                    'borderWidth' => 1,
+                ]
+            ],
+            'percentages' => $percentages,
+            'total' => $totalRequests,
+            'raw_data' => $rawData,
+        ];
+    }
+
+    /**
+     * Darken a hex color by a percentage
+     * 
+     * @param string $hexColor
+     * @param float $percent
+     * @return string
+     */
+    private function darkenColor(string $hexColor, float $percent): string
+    {
+        $hexColor = ltrim($hexColor, '#');
+        $rgb = [
+            hexdec(substr($hexColor, 0, 2)),
+            hexdec(substr($hexColor, 2, 2)),
+            hexdec(substr($hexColor, 4, 2)),
+        ];
+
+        foreach ($rgb as &$color) {
+            $color = max(0, min(255, floor($color * (1 - $percent))));
+        }
+
+        return '#' . sprintf('%02x%02x%02x', $rgb[0], $rgb[1], $rgb[2]);
+    }
+
     private function getTopZipCodes(array $reportIds, int $stateId): array
     {
+        if (empty($reportIds)) {
+            return [];
+        }
+
         $zipCodes = DB::table('report_zip_codes')
             ->join('zip_codes', 'zip_codes.id', '=', 'report_zip_codes.zip_code_id')
             ->join('cities', 'cities.id', '=', 'zip_codes.city_id')
@@ -254,9 +673,14 @@ class GetDomainStateStatsUseCase
                 DB::raw('COUNT(DISTINCT report_zip_codes.report_id) as report_count')
             )
             ->groupBy('zip_codes.id', 'zip_codes.code')
+            ->havingRaw('SUM(report_zip_codes.request_count) > 0') // Garantir que há requisições
             ->orderByDesc('total_requests')
             ->limit(20)
             ->get();
+
+        if ($zipCodes->isEmpty()) {
+            return [];
+        }
 
         return $zipCodes->map(fn($z) => [
             'zip_code_id' => $z->id,

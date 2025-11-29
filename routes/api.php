@@ -167,6 +167,7 @@ Route::middleware(['auth:sanctum', 'admin.auth'])->prefix('admin/reports')->grou
     Route::middleware('check.domain.access')->group(function () {
         Route::get('/domain/{domainId}/dashboard', [ReportController::class, 'dashboard'])->name('admin.reports.dashboard');
         Route::get('/domain/{domainId}/aggregate', [ReportController::class, 'aggregate'])->name('admin.reports.aggregate');
+        Route::get('/domain/{domainId}/state-stats', [ReportController::class, 'domainStateStats'])->name('admin.reports.domain-state-stats');
         Route::get('/{id}', [ReportController::class, 'show'])->name('admin.reports.show');
     });
     

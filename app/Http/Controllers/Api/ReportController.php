@@ -13,6 +13,7 @@ use App\Application\UseCases\Report\Global\GetGlobalDomainRankingUseCase;
 use App\Application\UseCases\Report\Global\CompareDomainsUseCase;
 use App\Application\UseCases\Report\Global\GetProviderRankingUseCase;
 use App\Application\UseCases\Report\Global\GetProviderRankingByStateUseCase;
+use App\Application\UseCases\Report\GetDomainStateStatsUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitReportRequest;
 use App\Http\Requests\SubmitDailyReportRequest;
@@ -37,7 +38,8 @@ class ReportController extends Controller
         private GetGlobalDomainRankingUseCase $getGlobalDomainRankingUseCase,
         private CompareDomainsUseCase $compareDomainsUseCase,
         private GetProviderRankingUseCase $getProviderRankingUseCase,
-        private GetProviderRankingByStateUseCase $getProviderRankingByStateUseCase
+        private GetProviderRankingByStateUseCase $getProviderRankingByStateUseCase,
+        private GetDomainStateStatsUseCase $getDomainStateStatsUseCase
     ) {}
 
     /**
@@ -512,6 +514,141 @@ class ReportController extends Controller
     }
 
     /**
+     * Get dashboard and aggregate statistics filtered by state and domain
+     * 
+     * @group Admin Reports
+     * @queryParam state_id integer required State ID to filter by
+     * @queryParam period string optional Period filter: today, yesterday, last_week, last_month, last_year, all_time. When period=all_time, date_from/date_to can be used to limit the range.
+     * @queryParam date_from string optional Start date (YYYY-MM-DD). Used when period is not provided or when period=all_time
+     * @queryParam date_to string optional End date (YYYY-MM-DD). Used when period is not provided or when period=all_time
+     * @queryParam sort_by string optional Sort criteria for providers: total_count, success_rate, avg_speed (default: total_count)
+     * @urlParam domain_id integer required The domain ID Example: 1
+     * @return JsonResponse
+     */
+    public function domainStateStats(int $domainId, Request $request): JsonResponse
+    {
+        try {
+            $stateId = $request->query('state_id');
+            $period = $request->query('period');
+            $dateFrom = $request->query('date_from');
+            $dateTo = $request->query('date_to');
+            $sortBy = $request->query('sort_by', 'total_count');
+
+            // Validate state_id
+            if (!$stateId) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'state_id parameter is required',
+                ], 400);
+            }
+
+            $stateId = (int) $stateId;
+
+            // Validate sort_by parameter
+            if (!in_array($sortBy, ['total_count', 'total_requests', 'success_rate', 'avg_speed'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid sort_by parameter. Must be one of: total_count, total_requests, success_rate, avg_speed',
+                ], 400);
+            }
+
+            // Convert period to date range
+            if ($period) {
+                $dateRange = $this->getPeriodDateRange($period);
+                if (!$dateRange) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid period parameter. Must be one of: today, yesterday, last_week, last_month, last_year, all_time',
+                    ], 400);
+                }
+                
+                // If period is all_time and custom dates are provided, use custom dates
+                if ($period === 'all_time' && ($dateFrom || $dateTo)) {
+                    // Validate custom dates if provided
+                    if (!$dateFrom || !$dateTo) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                        ], 400);
+                    }
+                    
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-11-01)',
+                        ], 400);
+                    }
+                    
+                    // Validate that date_from is not after date_to
+                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'date_from must be before or equal to date_to',
+                        ], 400);
+                    }
+                } else {
+                    // Period overrides manual dates for non-all_time periods
+                    $dateFrom = $dateRange['from'];
+                    $dateTo = $dateRange['to'];
+                }
+            } else {
+                // If no period, validate custom date range if provided
+                if ($dateFrom || $dateTo) {
+                    // If one is provided, both must be provided
+                    if (!$dateFrom || !$dateTo) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                        ], 400);
+                    }
+                    
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-11-01)',
+                        ], 400);
+                    }
+                    
+                    // Validate that date_from is not after date_to
+                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'date_from must be before or equal to date_to',
+                        ], 400);
+                    }
+                }
+            }
+
+            // Get stats filtered by state and domain
+            $stats = $this->getDomainStateStatsUseCase->execute(
+                $domainId,
+                $stateId,
+                $dateFrom,
+                $dateTo,
+                $sortBy
+            );
+
+            return response()->json([
+                'success' => true,
+                'data' => $stats,
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Domain or State not found',
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error loading domain state statistics',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    /**
      * Get authenticated domain from API key
      */
     private function getAuthenticatedDomain(Request $request): Domain
@@ -968,9 +1105,9 @@ class ReportController extends Controller
      * @group Global Reports
      * @queryParam state_id integer required State ID to filter by
      * @queryParam provider_id integer optional Provider ID to filter by
-     * @queryParam period string optional Period filter: today, yesterday, last_week, last_month, last_year, all_time
-     * @queryParam date_from string optional Start date (YYYY-MM-DD)
-     * @queryParam date_to string optional End date (YYYY-MM-DD)
+     * @queryParam period string optional Period filter: today, yesterday, last_week, last_month, last_year, all_time. When period=all_time, date_from/date_to can be used to limit the range.
+     * @queryParam date_from string optional Start date (YYYY-MM-DD). Used when period is not provided or when period=all_time
+     * @queryParam date_to string optional End date (YYYY-MM-DD). Used when period is not provided or when period=all_time
      * @queryParam sort_by string optional Sort criteria: total_requests, success_rate, avg_speed, total_reports (default: total_requests)
      * @return JsonResponse
      */
@@ -1020,9 +1157,65 @@ class ReportController extends Controller
                     ], 400);
                 }
                 
-                // Period overrides manual dates
-                $dateFrom = $dateRange['from'];
-                $dateTo = $dateRange['to'];
+                // If period is all_time and custom dates are provided, use custom dates (allow override)
+                if ($period === 'all_time' && ($dateFrom || $dateTo)) {
+                    // Validate custom dates if provided
+                    if (!$dateFrom || !$dateTo) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                        ], 400);
+                    }
+                    
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-11-01)',
+                        ], 400);
+                    }
+                    
+                    // Validate that date_from is not after date_to
+                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'date_from must be before or equal to date_to',
+                        ], 400);
+                    }
+                    
+                    // Use custom dates (ignore all_time)
+                } else {
+                    // Period overrides manual dates for non-all_time periods
+                    $dateFrom = $dateRange['from'];
+                    $dateTo = $dateRange['to'];
+                }
+            } else {
+                // If no period, validate custom date range if provided
+                if ($dateFrom || $dateTo) {
+                    // If one is provided, both must be provided
+                    if (!$dateFrom || !$dateTo) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                        ], 400);
+                    }
+                    
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-11-01)',
+                        ], 400);
+                    }
+                    
+                    // Validate that date_from is not after date_to
+                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'date_from must be before or equal to date_to',
+                        ], 400);
+                    }
+                }
             }
 
             // Get accessible domains for this admin

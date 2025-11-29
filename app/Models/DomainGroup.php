@@ -78,6 +78,37 @@ class DomainGroup extends Model
     }
 
     /**
+     * Relacionamento: Admins que têm acesso a este grupo (apenas ativos)
+     */
+    public function admins()
+    {
+        return $this->belongsToMany(Admin::class, 'admin_domain_groups')
+                    ->using(AdminDomainGroup::class)
+                    ->withPivot(['assigned_at', 'assigned_by', 'is_active'])
+                    ->wherePivot('is_active', true)
+                    ->withTimestamps();
+    }
+
+    /**
+     * Relacionamento: Todos os admins (incluindo inativos - para histórico)
+     */
+    public function allAdmins()
+    {
+        return $this->belongsToMany(Admin::class, 'admin_domain_groups')
+                    ->using(AdminDomainGroup::class)
+                    ->withPivot(['assigned_at', 'assigned_by', 'is_active'])
+                    ->withTimestamps();
+    }
+
+    /**
+     * Relacionamento: Associações admin-domain-group (com todos os dados do pivot)
+     */
+    public function adminDomainGroups()
+    {
+        return $this->hasMany(AdminDomainGroup::class);
+    }
+
+    /**
      * Scope: Apenas grupos ativos
      */
     public function scopeActive($query)

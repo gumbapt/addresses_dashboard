@@ -27,7 +27,7 @@ class Admin extends Authenticatable implements ChatUser
         'is_active',
         'is_super_admin',
         'last_login_at',
-        'is_super_admin',
+        'created_by',
     ];
 
     /**
@@ -95,6 +95,83 @@ class Admin extends Authenticatable implements ChatUser
     {
         return $this->roles()->with('permissions')->get()
                     ->pluck('permissions')->flatten()->unique('id');
+    }
+
+    /**
+     * Relacionamento: Grupos de domínios atribuídos a este admin
+     */
+    public function domainGroups()
+    {
+        return $this->belongsToMany(DomainGroup::class, 'admin_domain_groups')
+                    ->using(AdminDomainGroup::class)
+                    ->withPivot(['assigned_at', 'assigned_by', 'is_active'])
+                    ->wherePivot('is_active', true)
+                    ->withTimestamps();
+    }
+
+    /**
+     * Relacionamento: Associações admin-domain-group (com todos os dados do pivot)
+     */
+    public function adminDomainGroups()
+    {
+        return $this->hasMany(AdminDomainGroup::class);
+    }
+
+    /**
+     * Relacionamento: Admins criados por este admin (hierarquia)
+     */
+    public function createdAdmins()
+    {
+        return $this->hasMany(Admin::class, 'created_by');
+    }
+
+    /**
+     * Relacionamento: Admin que criou este admin (hierarquia)
+     */
+    public function creator()
+    {
+        return $this->belongsTo(Admin::class, 'created_by');
+    }
+
+    /**
+     * Obter grupos de domínios acessíveis (incluindo herança)
+     */
+    public function getAccessibleDomainGroups(): array
+    {
+        // Se for sudo admin, retorna todos os grupos
+        if ($this->is_super_admin) {
+            return DomainGroup::active()->pluck('id')->toArray();
+        }
+
+        // Retorna grupos atribuídos diretamente
+        return $this->domainGroups()->pluck('domain_groups.id')->toArray();
+    }
+
+    /**
+     * Verificar se admin pode acessar um grupo específico
+     */
+    public function canAccessDomainGroup(int $domainGroupId): bool
+    {
+        // Sudo admin tem acesso a todos
+        if ($this->is_super_admin) {
+            return true;
+        }
+
+        return $this->domainGroups()->where('domain_groups.id', $domainGroupId)->exists();
+    }
+
+    /**
+     * Obter grupos que este admin pode atribuir a outros (para herança)
+     */
+    public function getAssignableDomainGroups(): array
+    {
+        // Sudo admin pode atribuir todos os grupos
+        if ($this->is_super_admin) {
+            return DomainGroup::active()->pluck('id')->toArray();
+        }
+
+        // Admin nível 2 pode atribuir apenas os grupos que possui
+        return $this->getAccessibleDomainGroups();
     }
 
     /**

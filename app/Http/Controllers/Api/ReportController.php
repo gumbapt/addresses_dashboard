@@ -522,6 +522,7 @@ class ReportController extends Controller
      * @queryParam date_from string optional Start date (YYYY-MM-DD). Used when period is not provided or when period=all_time
      * @queryParam date_to string optional End date (YYYY-MM-DD). Used when period is not provided or when period=all_time
      * @queryParam sort_by string optional Sort criteria for providers: total_count, success_rate, avg_speed (default: total_count)
+     * @queryParam cities_limit integer optional Number of top cities to return (default: 10, max: 100)
      * @urlParam domain_id integer required The domain ID Example: 1
      * @return JsonResponse
      */
@@ -533,6 +534,7 @@ class ReportController extends Controller
             $dateFrom = $request->query('date_from');
             $dateTo = $request->query('date_to');
             $sortBy = $request->query('sort_by', 'total_count');
+            $citiesLimit = $request->query('cities_limit') ? (int) $request->query('cities_limit') : 10;
 
             // Validate state_id
             if (!$stateId) {
@@ -549,6 +551,14 @@ class ReportController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Invalid sort_by parameter. Must be one of: total_count, total_requests, success_rate, avg_speed',
+                ], 400);
+            }
+
+            // Validate cities_limit parameter
+            if ($citiesLimit < 1 || $citiesLimit > 100) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid cities_limit parameter. Must be between 1 and 100',
                 ], 400);
             }
 
@@ -627,7 +637,8 @@ class ReportController extends Controller
                 $stateId,
                 $dateFrom,
                 $dateTo,
-                $sortBy
+                $sortBy,
+                $citiesLimit
             );
 
             return response()->json([

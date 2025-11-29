@@ -18,7 +18,8 @@ class GetDomainStateStatsUseCase
         int $stateId,
         ?string $dateFrom = null,
         ?string $dateTo = null,
-        ?string $sortBy = null
+        ?string $sortBy = null,
+        int $citiesLimit = 10
     ): array {
         $domain = Domain::findOrFail($domainId);
         
@@ -46,7 +47,7 @@ class GetDomainStateStatsUseCase
         $reports = $reports->whereIn('id', $reportIdsWithState);
 
         if ($reports->isEmpty()) {
-            return $this->emptyStats($domainId, $domain->name, $stateId);
+            return $this->emptyStats($domainId, $domain->name, $stateId, $citiesLimit);
         }
 
         $reportIds = $reports->pluck('id')->toArray();
@@ -77,16 +78,20 @@ class GetDomainStateStatsUseCase
                 'date_from' => $dateFrom,
                 'date_to' => $dateTo,
             ],
+            'filters' => [
+                'cities_limit' => $citiesLimit,
+                'sort_by' => $sortBy,
+            ],
             // KPIs (do dashboard)
             'kpis' => $this->getKPIs($reportIds, $stateId),
             // Provider distribution (do dashboard) - filtrado por estado
             'provider_distribution' => $this->getProviderDistribution($reportIds, $stateId, $sortBy),
             // Top cities no estado (do aggregate)
-            'top_cities' => $this->getTopCities($reportIds, $stateId),
+            'top_cities' => $this->getTopCities($reportIds, $stateId, $citiesLimit),
             // Cities chart data - formatado para gráfico de barras (ordenado da mais comum para menos comum)
-            'cities_chart_data' => $this->getCitiesChartData($reportIds, $stateId),
+            'cities_chart_data' => $this->getCitiesChartData($reportIds, $stateId, $citiesLimit),
             // Dados de gráficos por cidade (providers e tecnologias por cidade)
-            'cities_detailed_charts' => $this->getCitiesDetailedCharts($reportIds, $stateId),
+            'cities_detailed_charts' => $this->getCitiesDetailedCharts($reportIds, $stateId, $citiesLimit),
             // Top zip codes no estado (do aggregate)
             'top_zip_codes' => $this->getTopZipCodes($reportIds, $stateId),
             // Hourly distribution (do dashboard)
@@ -102,7 +107,7 @@ class GetDomainStateStatsUseCase
         return $stats;
     }
 
-    private function emptyStats(int $domainId, string $domainName, int $stateId): array
+    private function emptyStats(int $domainId, string $domainName, int $stateId, int $citiesLimit = 10): array
     {
         $state = DB::table('states')->where('id', $stateId)->first();
         
@@ -130,6 +135,10 @@ class GetDomainStateStatsUseCase
             'cities_chart_data' => [],
             'cities_detailed_charts' => [],
             'top_zip_codes' => [],
+            'filters' => [
+                'cities_limit' => $citiesLimit,
+                'sort_by' => null,
+            ],
             'hourly_distribution' => [],
             'technology_distribution' => [],
             'state_stats' => [
@@ -221,7 +230,7 @@ class GetDomainStateStatsUseCase
         })->toArray();
     }
 
-    private function getTopCities(array $reportIds, int $stateId): array
+    private function getTopCities(array $reportIds, int $stateId, int $limit = 10): array
     {
         if (empty($reportIds)) {
             return [];
@@ -241,7 +250,7 @@ class GetDomainStateStatsUseCase
             ->groupBy('cities.id', 'cities.name')
             ->havingRaw('SUM(report_cities.request_count) > 0')
             ->orderByDesc('total_requests')
-            ->limit(20)
+            ->limit($limit)
             ->get();
 
         // Se não encontrou cidades com state_id, buscar todas as cidades dos reports
@@ -259,7 +268,7 @@ class GetDomainStateStatsUseCase
                 ->groupBy('cities.id', 'cities.name')
                 ->havingRaw('SUM(report_cities.request_count) > 0')
                 ->orderByDesc('total_requests')
-                ->limit(20)
+                ->limit($limit)
                 ->get();
         }
 
@@ -282,7 +291,7 @@ class GetDomainStateStatsUseCase
      * @param int $stateId
      * @return array
      */
-    private function getCitiesChartData(array $reportIds, int $stateId): array
+    private function getCitiesChartData(array $reportIds, int $stateId, int $limit = 10): array
     {
         if (empty($reportIds)) {
             return [
@@ -312,6 +321,7 @@ class GetDomainStateStatsUseCase
             ->groupBy('cities.id', 'cities.name')
             ->havingRaw('SUM(report_cities.request_count) > 0')
             ->orderByDesc('total_requests') // Ordenado da mais comum para menos comum
+            ->limit($limit)
             ->get();
 
         // Se não encontrou, buscar todas as cidades dos reports (fallback)
@@ -328,6 +338,7 @@ class GetDomainStateStatsUseCase
                 ->groupBy('cities.id', 'cities.name')
                 ->havingRaw('SUM(report_cities.request_count) > 0')
                 ->orderByDesc('total_requests')
+                ->limit($limit)
                 ->get();
         }
 
@@ -403,7 +414,7 @@ class GetDomainStateStatsUseCase
      * @param int $stateId
      * @return array
      */
-    private function getCitiesDetailedCharts(array $reportIds, int $stateId): array
+    private function getCitiesDetailedCharts(array $reportIds, int $stateId, int $limit = 10): array
     {
         if (empty($reportIds)) {
             return [];
@@ -422,7 +433,7 @@ class GetDomainStateStatsUseCase
             ->groupBy('cities.id', 'cities.name')
             ->havingRaw('SUM(report_cities.request_count) > 0')
             ->orderByDesc('total_requests')
-            ->limit(10) // Top 10 cidades
+            ->limit($limit) // Limitado pelo parâmetro cities_limit
             ->get();
 
         // Se não encontrou cidades com state_id, buscar todas as cidades dos reports (fallback)
@@ -438,7 +449,7 @@ class GetDomainStateStatsUseCase
                 ->groupBy('cities.id', 'cities.name')
                 ->havingRaw('SUM(report_cities.request_count) > 0')
                 ->orderByDesc('total_requests')
-                ->limit(10)
+                ->limit($limit)
                 ->get();
         }
 

@@ -19,17 +19,22 @@ class DomainPermissionService
             return true;
         }
 
-        // 1. Verificar se tem permissão global
+        // 1. Verificar se tem permissão global (domain.access.all)
         if ($this->hasGlobalDomainAccess($admin)) {
             return true;
         }
 
-        // 2. Verificar se tem acesso ao domínio específico
+        // 2. Verificar se tem permissão de leitura global (domain-read)
+        if ($this->hasDomainReadPermission($admin)) {
+            return true;
+        }
+
+        // 3. Verificar se tem acesso ao domínio específico
         return $this->hasAssignedDomainAccess($admin, $domainId);
     }
 
     /**
-     * Verifica se admin tem acesso global a todos os domínios
+     * Verifica se admin tem acesso global a todos os domínios (domain.access.all)
      */
     public function hasGlobalDomainAccess(Admin $admin): bool
     {
@@ -41,6 +46,21 @@ class DomainPermissionService
         foreach ($admin->roles as $role) {
             $permissions = $role->permissions->pluck('slug');
             if ($permissions->contains('domain.access.all')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifica se admin tem permissão de leitura global (domain-read)
+     */
+    public function hasDomainReadPermission(Admin $admin): bool
+    {
+        foreach ($admin->roles as $role) {
+            $permissions = $role->permissions->pluck('slug');
+            if ($permissions->contains('domain-read')) {
                 return true;
             }
         }
@@ -72,8 +92,13 @@ class DomainPermissionService
             return Domain::where('is_active', true)->pluck('id')->toArray();
         }
 
-        // Se tem acesso global via permissão, retorna todos
+        // Se tem acesso global via permissão (domain.access.all), retorna todos
         if ($this->hasGlobalDomainAccess($admin)) {
+            return Domain::where('is_active', true)->pluck('id')->toArray();
+        }
+
+        // Se tem permissão de leitura global (domain-read), retorna todos
+        if ($this->hasDomainReadPermission($admin)) {
             return Domain::where('is_active', true)->pluck('id')->toArray();
         }
 
@@ -132,13 +157,23 @@ class DomainPermissionService
             ];
         }
 
-        // Se tem acesso global via permissão, retorna todas as permissões
+        // Se tem acesso global via permissão (domain.access.all), retorna todas as permissões
         if ($this->hasGlobalDomainAccess($admin)) {
             return [
                 'can_view' => true,
                 'can_edit' => true,
                 'can_delete' => true,
                 'can_submit_reports' => true,
+            ];
+        }
+
+        // Se tem permissão de leitura global (domain-read), retorna apenas leitura
+        if ($this->hasDomainReadPermission($admin)) {
+            return [
+                'can_view' => true,
+                'can_edit' => false,
+                'can_delete' => false,
+                'can_submit_reports' => false,
             ];
         }
 

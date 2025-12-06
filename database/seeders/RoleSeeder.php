@@ -41,17 +41,17 @@ class RoleSeeder extends Seeder
             ]
         );
 
-        // Analytics User - Acesso apenas para visualizar (read-only)
+        // Analytics User - Read-only access for viewing
         $analyticsUser = Role::firstOrCreate(
             ['slug' => 'analytics-user'],
             [
                 'name' => 'Analytics User',
-                'description' => 'Acesso apenas de leitura para visualizar relatórios, analytics, domains, providers e dashboards',
+                'description' => 'Read-only access to view reports, analytics, domains, providers and dashboards',
                 'is_active' => true,
             ]
-        );
+        );  
 
-        // Criar permissões de leitura se não existirem
+        // Create read-only permissions if they don't exist
         $readPermissions = [
             [
                 'slug' => 'report-read',
@@ -83,7 +83,7 @@ class RoleSeeder extends Seeder
             ],
         ];
 
-        // Criar ou buscar permissões e atribuir à role
+        // Create or find permissions and assign to role
         $permissionIds = [];
         foreach ($readPermissions as $permData) {
             $permission = Permission::firstOrCreate(
@@ -99,7 +99,7 @@ class RoleSeeder extends Seeder
             $permissionIds[] = $permission->id;
         }
 
-        // Sincronizar todas as permissões de leitura com a role (substitui as existentes)
+        // Sync all read permissions with the role (replaces existing ones)
         $analyticsUser->permissions()->sync($permissionIds);
     }
 }

@@ -69,6 +69,9 @@ Route::prefix('admin')->group(function () {
     
     // Protected admin routes
     Route::middleware(['auth:sanctum', 'admin.auth'])->group(function () {
+        // Admin profile routes (authenticated admin only)
+        Route::post('/change-password', [AdminController::class, 'changeMyPassword'])->name('admin.change-password');
+        
         // Role management routes
         Route::get('/roles', [RoleController::class, 'index']);
         Route::post('/role/create', [RoleController::class, 'create']);

@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Application\Services\AdminFactory;
 use App\Application\UseCases\Admin\AssignRoleToAdminUseCase;
 use App\Application\UseCases\Admin\Authorization\AuthorizeActionUseCase;
+use App\Application\UseCases\Admin\ChangeMyPasswordUseCase;
 use App\Application\UseCases\Admin\CreateAdminUseCase;
 use App\Application\UseCases\Admin\DeleteAdminUseCase;
 use App\Application\UseCases\Admin\GetAllAdminsUseCase;
 use App\Application\UseCases\Admin\UpdateAdminUseCase;
+use App\Domain\Exceptions\AuthenticationException;
 use App\Domain\Services\DomainPermissionService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\CreateAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use Illuminate\Http\JsonResponse;
@@ -24,7 +27,8 @@ class AdminController extends Controller
         private UpdateAdminUseCase $updateAdminUseCase,
         private DeleteAdminUseCase $deleteAdminUseCase,
         private AssignRoleToAdminUseCase $assignRoleToAdminUseCase,
-        private AuthorizeActionUseCase $authorizeActionUseCase
+        private AuthorizeActionUseCase $authorizeActionUseCase,
+        private ChangeMyPasswordUseCase $changeMyPasswordUseCase
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -211,6 +215,42 @@ class AdminController extends Controller
                 'success' => false,
                 'message' => 'Error getting accessible domains',
                 'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
+            ], 500);
+        }
+    }
+
+    /**
+     * Change the authenticated admin's own password
+     * 
+     * @param ChangePasswordRequest $request
+     * @return JsonResponse
+     */
+    public function changeMyPassword(ChangePasswordRequest $request): JsonResponse
+    {
+        try {
+            $admin = $request->user();
+
+            $updatedAdmin = $this->changeMyPasswordUseCase->execute(
+                $admin->id,
+                $request->input('current_password'),
+                $request->input('new_password')
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Senha alterada com sucesso',
+                'data' => $updatedAdmin
+            ], 200);
+        } catch (AuthenticationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage() ?: 'Senha atual incorreta'
+            ], 401);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao alterar senha',
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error'
             ], 500);
         }
     }

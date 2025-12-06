@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         // Executar seeders na ordem correta
         $this->call([
-            // Primeiro criar roles e permissões
-            RoleSeeder::class,
+            // Primeiro criar permissões, depois roles (roles podem criar algumas permissões)
             PermissionSeeder::class,
+            RoleSeeder::class,
             
             // Depois criar admins
             AdminSeeder::class,

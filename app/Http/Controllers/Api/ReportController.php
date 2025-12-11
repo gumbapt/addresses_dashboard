@@ -473,8 +473,8 @@ class ReportController extends Controller
      * 
      * @group Admin Reports
      * @queryParam period string optional Period filter: today, yesterday, last_week, last_month, last_year, all_time. When period=all_time, date_from/date_to can be used to limit the range.
-     * @queryParam date_from string optional Start date (YYYY-MM-DD). Used when period is not provided or when period=all_time
-     * @queryParam date_to string optional End date (YYYY-MM-DD). Used when period is not provided or when period=all_time
+     * @queryParam date_from string optional Start date (YYYY-MM-DD). Can be provided alone or with date_to. Used when period is not provided or when period=all_time
+     * @queryParam date_to string optional End date (YYYY-MM-DD). Can be provided alone or with date_from. Used when period is not provided or when period=all_time
      * @urlParam domain_id integer required The domain ID Example: 1
      * @response 200 {
      *   "success": true,
@@ -512,24 +512,23 @@ class ReportController extends Controller
                 
                 // If period is all_time and custom dates are provided, use custom dates
                 if ($period === 'all_time' && ($dateFrom || $dateTo)) {
-                    // Validate custom dates if provided
-                    if (!$dateFrom || !$dateTo) {
+                    // Validate date format if provided (each can be provided independently)
+                    if ($dateFrom && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom)) {
                         return response()->json([
                             'success' => false,
-                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                            'message' => 'Invalid date_from format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
                         ], 400);
                     }
                     
-                    // Validate date format (YYYY-MM-DD)
-                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                    if ($dateTo && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
                         return response()->json([
                             'success' => false,
-                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
+                            'message' => 'Invalid date_to format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
                         ], 400);
                     }
                     
-                    // Validate that date_from is not after date_to
-                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                    // If both dates are provided, validate that date_from is not after date_to
+                    if ($dateFrom && $dateTo && strtotime($dateFrom) > strtotime($dateTo)) {
                         return response()->json([
                             'success' => false,
                             'message' => 'date_from must be before or equal to date_to',
@@ -541,31 +540,33 @@ class ReportController extends Controller
                     $dateTo = $dateRange['to'];
                 }
             } else {
-                // If no period, validate custom date range if provided
-                if ($dateFrom || $dateTo) {
-                    // If one is provided, both must be provided
-                    if (!$dateFrom || !$dateTo) {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Both date_from and date_to must be provided when using custom date range',
-                        ], 400);
-                    }
-                    
+                // If no period, validate custom dates if provided (each can be provided independently)
+                if ($dateFrom) {
                     // Validate date format (YYYY-MM-DD)
-                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom)) {
                         return response()->json([
                             'success' => false,
-                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
+                            'message' => 'Invalid date_from format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
                         ], 400);
                     }
-                    
-                    // Validate that date_from is not after date_to
-                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                }
+                
+                if ($dateTo) {
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
                         return response()->json([
                             'success' => false,
-                            'message' => 'date_from must be before or equal to date_to',
+                            'message' => 'Invalid date_to format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
                         ], 400);
                     }
+                }
+                
+                // If both dates are provided, validate that date_from is not after date_to
+                if ($dateFrom && $dateTo && strtotime($dateFrom) > strtotime($dateTo)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'date_from must be before or equal to date_to',
+                    ], 400);
                 }
             }
 

@@ -14,15 +14,23 @@ use Illuminate\Support\Facades\DB;
 
 class GetAggregatedReportStatsUseCase
 {
-    public function execute(int $domainId): AggregatedReportStatsDTO
+    public function execute(int $domainId, ?string $dateFrom = null, ?string $dateTo = null): AggregatedReportStatsDTO
     {
         $domain = Domain::findOrFail($domainId);
         
-        // Buscar todos os relatórios processados do domínio
-        $reports = Report::where('domain_id', $domainId)
-            ->where('status', 'processed')
-            ->orderBy('report_date')
-            ->get();
+        // Buscar relatórios processados do domínio, filtrados por data se fornecido
+        $reportsQuery = Report::where('domain_id', $domainId)
+            ->where('status', 'processed');
+        
+        if ($dateFrom) {
+            $reportsQuery->where('report_date', '>=', $dateFrom);
+        }
+        
+        if ($dateTo) {
+            $reportsQuery->where('report_date', '<=', $dateTo);
+        }
+        
+        $reports = $reportsQuery->orderBy('report_date')->get();
 
         if ($reports->isEmpty()) {
             return $this->emptyStats($domainId, $domain->name);

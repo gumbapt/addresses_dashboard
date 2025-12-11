@@ -472,6 +472,9 @@ class ReportController extends Controller
      * Get aggregated statistics for a specific domain
      * 
      * @group Admin Reports
+     * @queryParam period string optional Period filter: today, yesterday, last_week, last_month, last_year, all_time. When period=all_time, date_from/date_to can be used to limit the range.
+     * @queryParam date_from string optional Start date (YYYY-MM-DD). Used when period is not provided or when period=all_time
+     * @queryParam date_to string optional End date (YYYY-MM-DD). Used when period is not provided or when period=all_time
      * @urlParam domain_id integer required The domain ID Example: 1
      * @response 200 {
      *   "success": true,
@@ -490,10 +493,83 @@ class ReportController extends Controller
      *   }
      * }
      */
-    public function aggregate(int $domainId): JsonResponse
+    public function aggregate(int $domainId, Request $request): JsonResponse
     {
         try {
-            $stats = $this->getAggregatedReportStatsUseCase->execute($domainId);
+            $period = $request->query('period');
+            $dateFrom = $request->query('date_from');
+            $dateTo = $request->query('date_to');
+
+            // Convert period to date range
+            if ($period) {
+                $dateRange = $this->getPeriodDateRange($period);
+                if (!$dateRange) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid period parameter. Must be one of: today, yesterday, last_week, last_month, last_year, all_time',
+                    ], 400);
+                }
+                
+                // If period is all_time and custom dates are provided, use custom dates
+                if ($period === 'all_time' && ($dateFrom || $dateTo)) {
+                    // Validate custom dates if provided
+                    if (!$dateFrom || !$dateTo) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                        ], 400);
+                    }
+                    
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
+                        ], 400);
+                    }
+                    
+                    // Validate that date_from is not after date_to
+                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'date_from must be before or equal to date_to',
+                        ], 400);
+                    }
+                } else {
+                    // Period overrides manual dates for non-all_time periods
+                    $dateFrom = $dateRange['from'];
+                    $dateTo = $dateRange['to'];
+                }
+            } else {
+                // If no period, validate custom date range if provided
+                if ($dateFrom || $dateTo) {
+                    // If one is provided, both must be provided
+                    if (!$dateFrom || !$dateTo) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Both date_from and date_to must be provided when using custom date range',
+                        ], 400);
+                    }
+                    
+                    // Validate date format (YYYY-MM-DD)
+                    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Invalid date format. Use YYYY-MM-DD format (e.g., 2025-12-01)',
+                        ], 400);
+                    }
+                    
+                    // Validate that date_from is not after date_to
+                    if (strtotime($dateFrom) > strtotime($dateTo)) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'date_from must be before or equal to date_to',
+                        ], 400);
+                    }
+                }
+            }
+
+            $stats = $this->getAggregatedReportStatsUseCase->execute($domainId, $dateFrom, $dateTo);
 
             return response()->json([
                 'success' => true,
@@ -508,7 +584,7 @@ class ReportController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error aggregating report statistics',
-                'error' => $e->getMessage(),
+                'error' => config('app.debug') ? $e->getMessage() : 'Internal server error',
             ], 500);
         }
     }

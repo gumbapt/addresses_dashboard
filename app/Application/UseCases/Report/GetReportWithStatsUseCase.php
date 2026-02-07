@@ -41,7 +41,7 @@ class GetReportWithStatsUseCase
             'generated_at' => $report->generated_at?->format('Y-m-d H:i:s'),
             'data_version' => $report->data_version,
             'status' => $report->status,
-            'summary' => $summary ? [
+            'summary' => $summary ? array_merge([
                 'total_requests' => $summary->total_requests,
                 'failed_requests' => $summary->failed_requests,
                 'success_rate' => round($summary->success_rate, 2),
@@ -49,7 +49,7 @@ class GetReportWithStatsUseCase
                 'unique_providers' => $summary->unique_providers ?? 0,
                 'unique_states' => $summary->unique_states ?? 0,
                 'unique_zip_codes' => $summary->unique_zip_codes ?? 0,
-            ] : null,
+            ], $this->computeBusinessResidentialPercentages($summary)) : null,
             'providers' => $providers,
             'geographic' => [
                 'states' => $states,
@@ -59,6 +59,24 @@ class GetReportWithStatsUseCase
             'raw_data' => $report->raw_data, // Ainda disponível se necessário
             'created_at' => $report->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $report->updated_at->format('Y-m-d H:i:s'),
+        ];
+    }
+
+    private function computeBusinessResidentialPercentages(ReportSummary $summary): array
+    {
+        $countR = (int) ($summary->count_r ?? 0);
+        $countB = (int) ($summary->count_b ?? 0);
+        $countX = (int) ($summary->count_x ?? 0);
+        $total = $countR + $countB + $countX;
+        if ($total <= 0) {
+            return ['count_r' => null, 'count_b' => null, 'count_x' => null, 'percentage_r' => null, 'percentage_b' => null];
+        }
+        return [
+            'count_r' => $summary->count_r,
+            'count_b' => $summary->count_b,
+            'count_x' => $summary->count_x,
+            'percentage_r' => round((($countR + $countX) / $total) * 100, 1),
+            'percentage_b' => round((($countB + $countX) / $total) * 100, 1),
         ];
     }
 

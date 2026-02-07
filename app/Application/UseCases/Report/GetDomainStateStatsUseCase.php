@@ -25,10 +25,19 @@ class GetDomainStateStatsUseCase
     ): array {
         $domain = Domain::findOrFail($domainId);
 
+        // Filter R: count_r > 0 OR count_x > 0 (X = both). Filter B: count_b > 0 OR count_x > 0
         $reportsQuery = Report::where('domain_id', $domainId)
             ->where('status', 'processed')
             ->when($businessResidentialFilter && $businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
-                $q->whereHas('summary', fn ($sq) => $sq->where("count_{$businessResidentialFilter}", '>', 0));
+                $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                    if ($businessResidentialFilter === 'R') {
+                        $sq->where(function ($q) { $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0); });
+                    } elseif ($businessResidentialFilter === 'B') {
+                        $sq->where(function ($q) { $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0); });
+                    } else {
+                        $sq->where('count_x', '>', 0);
+                    }
+                });
             });
         
         if ($dateFrom) {
@@ -88,7 +97,7 @@ class GetDomainStateStatsUseCase
                 'business_residential_filter' => $businessResidentialFilter,
             ],
             // KPIs (do dashboard)
-            'kpis' => $this->getKPIs($reportIds, $stateId),
+            'kpis' => $this->getKPIs($reportIds, $stateId, $businessResidentialFilter),
             // Provider distribution (do dashboard) - filtrado por estado
             'provider_distribution' => $this->getProviderDistribution($reportIds, $stateId, $sortBy),
             // Top cities no estado (do aggregate)
@@ -106,7 +115,7 @@ class GetDomainStateStatsUseCase
             // State-specific stats
             'state_stats' => $this->getStateStats($reportIds, $stateId),
             // Daily trends (do aggregate)
-            'daily_trends' => $this->getDailyTrends($reports),
+            'daily_trends' => $this->getDailyTrends($reports, $businessResidentialFilter),
         ];
 
         return $stats;
@@ -134,6 +143,8 @@ class GetDomainStateStatsUseCase
                 'success_rate' => 0,
                 'daily_average' => 0,
                 'unique_providers' => 0,
+                'percentage_r' => null,
+                'percentage_b' => null,
             ],
             'provider_distribution' => [],
             'top_cities' => [],
@@ -155,7 +166,7 @@ class GetDomainStateStatsUseCase
         ];
     }
 
-    private function getKPIs(array $reportIds, int $stateId): array
+    private function getKPIs(array $reportIds, int $stateId, ?string $businessResidentialFilter = 'all'): array
     {
         // KPIs baseados nos dados do estado específico
         $stateReports = ReportState::where('state_id', $stateId)
@@ -168,6 +179,8 @@ class GetDomainStateStatsUseCase
                 'success_rate' => 0,
                 'daily_average' => 0,
                 'unique_providers' => 0,
+                'percentage_r' => null,
+                'percentage_b' => null,
             ];
         }
 
@@ -183,11 +196,21 @@ class GetDomainStateStatsUseCase
             ->distinct('provider_id')
             ->count('provider_id');
 
+        $summaries = ReportSummary::whereIn('report_id', $reportIds)->get();
+        $sumR = (int) $summaries->sum('count_r');
+        $sumB = (int) $summaries->sum('count_b');
+        $sumX = (int) $summaries->sum('count_x');
+        $totalWithCodes = $sumR + $sumB + $sumX;
+        $percentageR = $totalWithCodes > 0 ? round((($sumR + $sumX) / $totalWithCodes) * 100, 1) : null;
+        $percentageB = $totalWithCodes > 0 ? round((($sumB + $sumX) / $totalWithCodes) * 100, 1) : null;
+
         return [
             'total_requests' => $totalRequests,
             'success_rate' => round($avgSuccessRate, 1),
             'daily_average' => $dailyAverage,
             'unique_providers' => $uniqueProviders,
+            'percentage_r' => $percentageR,
+            'percentage_b' => $percentageB,
         ];
     }
 
@@ -807,21 +830,37 @@ class GetDomainStateStatsUseCase
         ];
     }
 
-    private function getDailyTrends(mixed $reports): array
+    private function getDailyTrends(mixed $reports, ?string $businessResidentialFilter = 'all'): array
     {
         $trends = [];
 
         foreach ($reports as $report) {
             $summary = ReportSummary::where('report_id', $report->id)->first();
-            
+
             if ($summary) {
+                $countR = (int) ($summary->count_r ?? 0);
+                $countB = (int) ($summary->count_b ?? 0);
+                $countX = (int) ($summary->count_x ?? 0);
+                $totalWithCodes = $countR + $countB + $countX;
+                $percentageR = $totalWithCodes > 0 ? round((($countR + $countX) / $totalWithCodes) * 100, 1) : null;
+                $percentageB = $totalWithCodes > 0 ? round((($countB + $countX) / $totalWithCodes) * 100, 1) : null;
+
+                $totalRequests = match ($businessResidentialFilter) {
+                    'R' => $countR + $countX,
+                    'B' => $countB + $countX,
+                    'X' => $countX,
+                    default => $summary->total_requests,
+                };
+
                 $trends[] = [
                     'date' => $report->report_date->format('Y-m-d'),
                     'report_id' => $report->id,
-                    'total_requests' => $summary->total_requests,
+                    'total_requests' => (int) ($totalRequests ?? 0),
                     'success_rate' => round($summary->success_rate, 2),
                     'failed_requests' => $summary->failed_requests,
                     'avg_requests_per_hour' => round($summary->avg_requests_per_hour, 2),
+                    'percentage_r' => $percentageR,
+                    'percentage_b' => $percentageB,
                 ];
             }
         }

@@ -23,12 +23,23 @@ class GetAggregatedReportStatsUseCase
     ): AggregatedReportStatsDTO {
         $domain = Domain::findOrFail($domainId);
 
+        // Filter R = Residential: include count_r > 0 OR count_x > 0 (X = both R+B)
+        // Filter B = Business: include count_b > 0 OR count_x > 0 (X = both R+B)
         $reportsQuery = Report::where('domain_id', $domainId)
             ->where('status', 'processed')
             ->when($businessResidentialFilter && $businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
                 $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
-                    $sq->whereNotNull("count_{$businessResidentialFilter}")
-                        ->where("count_{$businessResidentialFilter}", '>', 0);
+                    if ($businessResidentialFilter === 'R') {
+                        $sq->where(function ($q) {
+                            $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0);
+                        });
+                    } elseif ($businessResidentialFilter === 'B') {
+                        $sq->where(function ($q) {
+                            $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0);
+                        });
+                    } else {
+                        $sq->where('count_x', '>', 0);
+                    }
                 });
             });
 
@@ -133,16 +144,25 @@ class GetAggregatedReportStatsUseCase
             ];
         }
 
+        $sumR = (int) $summaries->sum('count_r');
+        $sumB = (int) $summaries->sum('count_b');
+        $sumX = (int) $summaries->sum('count_x');
+        $totalWithCodes = $sumR + $sumB + $sumX;
+
         $totalRequests = match ($businessResidentialFilter) {
-            'R' => $summaries->sum('count_r') ?? $summaries->sum('total_requests'),
-            'B' => $summaries->sum('count_b') ?? $summaries->sum('total_requests'),
-            'X' => $summaries->sum('count_x') ?? $summaries->sum('total_requests'),
+            'R' => $sumR + $sumX, // R + X (X = both, inclui residential)
+            'B' => $sumB + $sumX, // B + X (X = both, inclui business)
+            'X' => $sumX,
             default => $summaries->sum('total_requests'),
         };
+        $totalRequests = (int) ($totalRequests ?: $summaries->sum('total_requests'));
         $totalFailed = $summaries->sum('failed_requests');
 
+        $percentageR = $totalWithCodes > 0 ? round((($sumR + $sumX) / $totalWithCodes) * 100, 1) : null;
+        $percentageB = $totalWithCodes > 0 ? round((($sumB + $sumX) / $totalWithCodes) * 100, 1) : null;
+
         return [
-            'total_requests' => (int) $totalRequests,
+            'total_requests' => $totalRequests,
             'total_failed' => $totalFailed,
             'avg_success_rate' => round($summaries->avg('success_rate'), 2),
             'avg_requests_per_hour' => round($summaries->avg('avg_requests_per_hour'), 2),
@@ -156,6 +176,8 @@ class GetAggregatedReportStatsUseCase
                 ->distinct('zip_code_id')
                 ->count('zip_code_id'),
             'business_residential_filter' => $businessResidentialFilter,
+            'percentage_r' => $percentageR,
+            'percentage_b' => $percentageB,
         ];
     }
 
@@ -326,12 +348,20 @@ class GetAggregatedReportStatsUseCase
             $summary = ReportSummary::where('report_id', $report->id)->first();
 
             if ($summary) {
+                $countR = (int) ($summary->count_r ?? 0);
+                $countB = (int) ($summary->count_b ?? 0);
+                $countX = (int) ($summary->count_x ?? 0);
+                $totalWithCodes = $countR + $countB + $countX;
+
                 $totalRequests = match ($businessResidentialFilter) {
-                    'R' => $summary->count_r ?? $summary->total_requests,
-                    'B' => $summary->count_b ?? $summary->total_requests,
-                    'X' => $summary->count_x ?? $summary->total_requests,
+                    'R' => $countR + $countX,
+                    'B' => $countB + $countX,
+                    'X' => $countX,
                     default => $summary->total_requests,
                 };
+
+                $percentageR = $totalWithCodes > 0 ? round((($countR + $countX) / $totalWithCodes) * 100, 1) : null;
+                $percentageB = $totalWithCodes > 0 ? round((($countB + $countX) / $totalWithCodes) * 100, 1) : null;
 
                 $trends[] = [
                     'date' => $report->report_date->format('Y-m-d'),
@@ -343,6 +373,8 @@ class GetAggregatedReportStatsUseCase
                     'count_r' => $summary->count_r,
                     'count_b' => $summary->count_b,
                     'count_x' => $summary->count_x,
+                    'percentage_r' => $percentageR,
+                    'percentage_b' => $percentageB,
                 ];
             }
         }

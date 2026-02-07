@@ -355,9 +355,29 @@ class ReportController extends Controller
             $endDate
         );
 
+        $reportIds = array_map(fn($r) => $r->getId(), $result['data']);
+        $summaries = \App\Models\ReportSummary::whereIn('report_id', $reportIds)->get()->keyBy('report_id');
+
+        $data = array_map(function ($report) use ($summaries) {
+            $arr = $report->toDto()->toArray();
+            $summary = $summaries->get($report->getId());
+            if ($summary) {
+                $countR = (int) ($summary->count_r ?? 0);
+                $countB = (int) ($summary->count_b ?? 0);
+                $countX = (int) ($summary->count_x ?? 0);
+                $total = $countR + $countB + $countX;
+                $arr['percentage_r'] = $total > 0 ? round((($countR + $countX) / $total) * 100, 1) : null;
+                $arr['percentage_b'] = $total > 0 ? round((($countB + $countX) / $total) * 100, 1) : null;
+            } else {
+                $arr['percentage_r'] = null;
+                $arr['percentage_b'] = null;
+            }
+            return $arr;
+        }, $result['data']);
+
         return response()->json([
             'success' => true,
-            'data' => array_map(fn($report) => $report->toDto()->toArray(), $result['data']),
+            'data' => $data,
             'meta' => [
                 'total' => $result['total'],
                 'per_page' => $result['per_page'],

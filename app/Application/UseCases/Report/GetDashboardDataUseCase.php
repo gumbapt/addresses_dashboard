@@ -19,10 +19,19 @@ class GetDashboardDataUseCase
     {
         $domain = Domain::findOrFail($domainId);
 
+        // Filter R: count_r > 0 OR count_x > 0 (X = both). Filter B: count_b > 0 OR count_x > 0
         $reportsQuery = Report::where('domain_id', $domainId)
             ->where('status', 'processed')
             ->when($businessResidentialFilter && $businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
-                $q->whereHas('summary', fn ($sq) => $sq->where("count_{$businessResidentialFilter}", '>', 0));
+                $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                    if ($businessResidentialFilter === 'R') {
+                        $sq->where(function ($q) { $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0); });
+                    } elseif ($businessResidentialFilter === 'B') {
+                        $sq->where(function ($q) { $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0); });
+                    } else {
+                        $sq->where('count_x', '>', 0);
+                    }
+                });
             });
 
         $reports = $reportsQuery->orderBy('report_date')->get();
@@ -69,6 +78,8 @@ class GetDashboardDataUseCase
                 'success_rate' => 0,
                 'daily_average' => 0,
                 'unique_providers' => 0,
+                'percentage_r' => null,
+                'percentage_b' => null,
             ],
             'provider_distribution' => [],
             'top_states' => [],
@@ -92,21 +103,34 @@ class GetDashboardDataUseCase
             ];
         }
 
+        $sumR = (int) $summaries->sum('count_r');
+        $sumB = (int) $summaries->sum('count_b');
+        $sumX = (int) $summaries->sum('count_x');
+        $totalWithCodes = $sumR + $sumB + $sumX;
+
         $totalRequests = match ($businessResidentialFilter) {
-            'R', 'B', 'X' => $summaries->sum("count_{$businessResidentialFilter}") ?? $summaries->sum('total_requests'),
+            'R' => $sumR + $sumX,
+            'B' => $sumB + $sumX,
+            'X' => $sumX,
             default => $summaries->sum('total_requests'),
         };
+        $totalRequests = $totalRequests ?: $summaries->sum('total_requests');
         $avgSuccessRate = $summaries->avg('success_rate');
         $daysCount = count($reportIds);
         $dailyAverage = $daysCount > 0 ? round($totalRequests / $daysCount) : 0;
 
+        $percentageR = $totalWithCodes > 0 ? round((($sumR + $sumX) / $totalWithCodes) * 100, 1) : null;
+        $percentageB = $totalWithCodes > 0 ? round((($sumB + $sumX) / $totalWithCodes) * 100, 1) : null;
+
         return [
-            'total_requests' => $totalRequests,
+            'total_requests' => (int) $totalRequests,
             'success_rate' => round($avgSuccessRate, 1),
             'daily_average' => $dailyAverage,
             'unique_providers' => ReportProvider::whereIn('report_id', $reportIds)
                 ->distinct('provider_id')
                 ->count('provider_id'),
+            'percentage_r' => $percentageR,
+            'percentage_b' => $percentageB,
         ];
     }
 

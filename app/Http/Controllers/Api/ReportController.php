@@ -445,10 +445,14 @@ class ReportController extends Controller
      *   }
      * }
      */
-    public function dashboard(int $domainId): JsonResponse
+    public function dashboard(int $domainId, Request $request): JsonResponse
     {
         try {
-            $dashboardData = $this->getDashboardDataUseCase->execute($domainId);
+            $businessResidentialFilter = $request->query('business_residential_filter', 'all');
+            if (!in_array($businessResidentialFilter, ['all', 'R', 'B', 'X'])) {
+                $businessResidentialFilter = 'all';
+            }
+            $dashboardData = $this->getDashboardDataUseCase->execute($domainId, $businessResidentialFilter);
 
             return response()->json([
                 'success' => true,
@@ -570,7 +574,20 @@ class ReportController extends Controller
                 }
             }
 
-            $stats = $this->getAggregatedReportStatsUseCase->execute($domainId, $dateFrom, $dateTo);
+            $businessResidentialFilter = $request->query('business_residential_filter', 'all');
+            if (!in_array($businessResidentialFilter, ['all', 'R', 'B', 'X'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid business_residential_filter. Must be: all, R, B, or X',
+                ], 400);
+            }
+
+            $stats = $this->getAggregatedReportStatsUseCase->execute(
+                $domainId,
+                $dateFrom,
+                $dateTo,
+                $businessResidentialFilter
+            );
 
             return response()->json([
                 'success' => true,
@@ -708,14 +725,19 @@ class ReportController extends Controller
                 }
             }
 
-            // Get stats filtered by state and domain
+            $businessResidentialFilter = $request->query('business_residential_filter', 'all');
+            if (!in_array($businessResidentialFilter, ['all', 'R', 'B', 'X'])) {
+                $businessResidentialFilter = 'all';
+            }
+
             $stats = $this->getDomainStateStatsUseCase->execute(
                 $domainId,
                 $stateId,
                 $dateFrom,
                 $dateTo,
                 $sortBy,
-                $citiesLimit
+                $citiesLimit,
+                $businessResidentialFilter
             );
 
             return response()->json([

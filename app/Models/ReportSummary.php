@@ -20,6 +20,9 @@ class ReportSummary extends Model
         'unique_providers',
         'unique_states',
         'unique_zip_codes',
+        'count_r',
+        'count_b',
+        'count_x',
     ];
 
     protected $casts = [
@@ -30,6 +33,9 @@ class ReportSummary extends Model
         'unique_providers' => 'integer',
         'unique_states' => 'integer',
         'unique_zip_codes' => 'integer',
+        'count_r' => 'integer',
+        'count_b' => 'integer',
+        'count_x' => 'integer',
     ];
 
     // Relationships

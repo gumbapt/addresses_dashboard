@@ -98,6 +98,7 @@ class CreateReportUseCase
         
         // Normalizar technology_metrics se necessário
         $normalizedData = $this->normalizeTechnologyMetrics($reportData);
+        $normalizedData = $this->mergeBusinessResidentialCodes($normalizedData);
         
         // Log DEPOIS de normalizar - verificar se providers ainda está presente
         if (isset($normalizedData['geographic']['states'][0])) {
@@ -292,6 +293,18 @@ class CreateReportUseCase
         }
         
         // Se não encontrou, retornar sem modificar
+        return $reportData;
+    }
+
+    private function mergeBusinessResidentialCodes(array $reportData): array
+    {
+        $codes = $reportData['business_residential_codes'] ?? null;
+        if (is_array($codes) && !empty($codes)) {
+            if (!isset($reportData['summary'])) {
+                $reportData['summary'] = [];
+            }
+            $reportData['summary']['business_residential_codes'] = $codes;
+        }
         return $reportData;
     }
 }

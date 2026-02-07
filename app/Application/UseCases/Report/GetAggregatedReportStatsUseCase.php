@@ -14,32 +14,41 @@ use Illuminate\Support\Facades\DB;
 
 class GetAggregatedReportStatsUseCase
 {
-    public function execute(int $domainId, ?string $dateFrom = null, ?string $dateTo = null): AggregatedReportStatsDTO
-    {
+    /** @param string|null $businessResidentialFilter 'all' | 'R' | 'B' | 'X' - Filter by Residential/Business/Unknown */
+    public function execute(
+        int $domainId,
+        ?string $dateFrom = null,
+        ?string $dateTo = null,
+        ?string $businessResidentialFilter = 'all'
+    ): AggregatedReportStatsDTO {
         $domain = Domain::findOrFail($domainId);
-        
-        // Buscar relatórios processados do domínio, filtrados por data se fornecido
+
         $reportsQuery = Report::where('domain_id', $domainId)
-            ->where('status', 'processed');
-        
+            ->where('status', 'processed')
+            ->when($businessResidentialFilter && $businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                    $sq->whereNotNull("count_{$businessResidentialFilter}")
+                        ->where("count_{$businessResidentialFilter}", '>', 0);
+                });
+            });
+
         if ($dateFrom) {
             $reportsQuery->where('report_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $reportsQuery->where('report_date', '<=', $dateTo);
         }
-        
+
         $reports = $reportsQuery->orderBy('report_date')->get();
 
         if ($reports->isEmpty()) {
-            return $this->emptyStats($domainId, $domain->name);
+            return $this->emptyStats($domainId, $domain->name, $businessResidentialFilter);
         }
 
         $reportIds = $reports->pluck('id')->toArray();
 
-        // Agregar Summary
-        $summary = $this->aggregateSummary($reportIds);
+        $summary = $this->aggregateSummary($reportIds, $businessResidentialFilter);
 
         // Agregar Providers
         $providers = $this->aggregateProviders($reportIds);
@@ -53,8 +62,7 @@ class GetAggregatedReportStatsUseCase
         // Agregar ZipCodes
         $zipCodes = $this->aggregateZipCodes($reportIds);
 
-        // Trends diários
-        $dailyTrends = $this->getDailyTrends($reports);
+        $dailyTrends = $this->getDailyTrends($reports, $businessResidentialFilter);
 
         return new AggregatedReportStatsDTO(
             domainId: $domainId,
@@ -68,10 +76,12 @@ class GetAggregatedReportStatsUseCase
             cities: $cities,
             zipCodes: $zipCodes,
             dailyTrends: $dailyTrends,
+            businessResidentialFilter: $businessResidentialFilter,
+            businessResidentialCodes: $this->getAvailableCodes($reportIds),
         );
     }
 
-    private function emptyStats(int $domainId, string $domainName): AggregatedReportStatsDTO
+    private function emptyStats(int $domainId, string $domainName, ?string $filter = 'all'): AggregatedReportStatsDTO
     {
         return new AggregatedReportStatsDTO(
             domainId: $domainId,
@@ -92,10 +102,22 @@ class GetAggregatedReportStatsUseCase
             cities: [],
             zipCodes: [],
             dailyTrends: [],
+            businessResidentialFilter: $filter,
+            businessResidentialCodes: ['R' => false, 'B' => false, 'X' => false],
         );
     }
 
-    private function aggregateSummary(array $reportIds): array
+    private function getAvailableCodes(array $reportIds): array
+    {
+        $summaries = ReportSummary::whereIn('report_id', $reportIds)->get();
+        return [
+            'R' => $summaries->where('count_r', '>', 0)->isNotEmpty(),
+            'B' => $summaries->where('count_b', '>', 0)->isNotEmpty(),
+            'X' => $summaries->where('count_x', '>', 0)->isNotEmpty(),
+        ];
+    }
+
+    private function aggregateSummary(array $reportIds, ?string $businessResidentialFilter = 'all'): array
     {
         $summaries = ReportSummary::whereIn('report_id', $reportIds)->get();
 
@@ -107,17 +129,23 @@ class GetAggregatedReportStatsUseCase
                 'total_unique_providers' => 0,
                 'total_unique_states' => 0,
                 'total_unique_zip_codes' => 0,
+                'business_residential_filter' => $businessResidentialFilter,
             ];
         }
 
-        $totalRequests = $summaries->sum('total_requests');
+        $totalRequests = match ($businessResidentialFilter) {
+            'R' => $summaries->sum('count_r') ?? $summaries->sum('total_requests'),
+            'B' => $summaries->sum('count_b') ?? $summaries->sum('total_requests'),
+            'X' => $summaries->sum('count_x') ?? $summaries->sum('total_requests'),
+            default => $summaries->sum('total_requests'),
+        };
         $totalFailed = $summaries->sum('failed_requests');
 
         return [
-            'total_requests' => $totalRequests,
+            'total_requests' => (int) $totalRequests,
             'total_failed' => $totalFailed,
-            'avg_success_rate' => $summaries->avg('success_rate'),
-            'avg_requests_per_hour' => $summaries->avg('avg_requests_per_hour'),
+            'avg_success_rate' => round($summaries->avg('success_rate'), 2),
+            'avg_requests_per_hour' => round($summaries->avg('avg_requests_per_hour'), 2),
             'total_unique_providers' => ReportProvider::whereIn('report_id', $reportIds)
                 ->distinct('provider_id')
                 ->count('provider_id'),
@@ -127,6 +155,7 @@ class GetAggregatedReportStatsUseCase
             'total_unique_zip_codes' => ReportZipCode::whereIn('report_id', $reportIds)
                 ->distinct('zip_code_id')
                 ->count('zip_code_id'),
+            'business_residential_filter' => $businessResidentialFilter,
         ];
     }
 
@@ -289,21 +318,31 @@ class GetAggregatedReportStatsUseCase
         ])->toArray();
     }
 
-    private function getDailyTrends(mixed $reports): array
+    private function getDailyTrends(mixed $reports, ?string $businessResidentialFilter = 'all'): array
     {
         $trends = [];
 
         foreach ($reports as $report) {
             $summary = ReportSummary::where('report_id', $report->id)->first();
-            
+
             if ($summary) {
+                $totalRequests = match ($businessResidentialFilter) {
+                    'R' => $summary->count_r ?? $summary->total_requests,
+                    'B' => $summary->count_b ?? $summary->total_requests,
+                    'X' => $summary->count_x ?? $summary->total_requests,
+                    default => $summary->total_requests,
+                };
+
                 $trends[] = [
                     'date' => $report->report_date->format('Y-m-d'),
                     'report_id' => $report->id,
-                    'total_requests' => $summary->total_requests,
+                    'total_requests' => (int) ($totalRequests ?? 0),
                     'success_rate' => round($summary->success_rate, 2),
                     'failed_requests' => $summary->failed_requests,
                     'avg_requests_per_hour' => round($summary->avg_requests_per_hour, 2),
+                    'count_r' => $summary->count_r,
+                    'count_b' => $summary->count_b,
+                    'count_x' => $summary->count_x,
                 ];
             }
         }

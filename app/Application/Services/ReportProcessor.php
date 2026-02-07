@@ -58,7 +58,10 @@ class ReportProcessor
             return;
         }
 
-        // Log::debug('Processing summary', ['report_id' => $reportId]);
+        $codes = $summaryData['business_residential_codes'] ?? [];
+        $countR = is_array($codes) ? (int) ($codes['R'] ?? 0) : 0;
+        $countB = is_array($codes) ? (int) ($codes['B'] ?? 0) : 0;
+        $countX = is_array($codes) ? (int) ($codes['X'] ?? 0) : 0;
 
         // Use updateOrCreate to handle duplicate report_id (retry scenarios)
         // However, in high concurrency scenarios, a race condition can still occur where two workers
@@ -71,9 +74,12 @@ class ReportProcessor
                     'success_rate' => $summaryData['success_rate'] ?? 0,
                     'failed_requests' => $summaryData['failed_requests'] ?? 0,
                     'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
-                    'unique_providers' => $summaryData['unique_providers'] ?? 0,  
+                    'unique_providers' => $summaryData['unique_providers'] ?? 0,
                     'unique_states' => $summaryData['unique_states'] ?? 0,
                     'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
+                    'count_r' => $countR > 0 ? $countR : null,
+                    'count_b' => $countB > 0 ? $countB : null,
+                    'count_x' => $countX > 0 ? $countX : null,
                 ]
             );
         } catch (QueryException|UniqueConstraintViolationException|PDOException $e) {
@@ -88,9 +94,12 @@ class ReportProcessor
                         'success_rate' => $summaryData['success_rate'] ?? 0,
                         'failed_requests' => $summaryData['failed_requests'] ?? 0,
                         'avg_requests_per_hour' => $summaryData['avg_requests_per_hour'] ?? 0,
-                        'unique_providers' => $summaryData['unique_providers'] ?? 0,  
+                        'unique_providers' => $summaryData['unique_providers'] ?? 0,
                         'unique_states' => $summaryData['unique_states'] ?? 0,
                         'unique_zip_codes' => $summaryData['unique_zip_codes'] ?? 0,
+                        'count_r' => $countR > 0 ? $countR : null,
+                        'count_b' => $countB > 0 ? $countB : null,
+                        'count_x' => $countX > 0 ? $countX : null,
                     ]);
                 } else {
                     // If still not found, throw the original exception

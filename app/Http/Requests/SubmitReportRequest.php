@@ -107,6 +107,12 @@ class SubmitReportRequest extends FormRequest
             'exclusion_metrics.by_state' => 'sometimes|array',
             'exclusion_metrics.by_provider' => 'sometimes|array',
             
+            // Business/Residential codes (optional) - R=Residential, B=Business, X=Unknown
+            'business_residential_codes' => 'sometimes|array',
+            'business_residential_codes.R' => 'sometimes|integer|min:0',
+            'business_residential_codes.B' => 'sometimes|integer|min:0',
+            'business_residential_codes.X' => 'sometimes|integer|min:0',
+
             // Health (optional)
             'health' => 'sometimes|array',
             'health.status' => 'sometimes|string|max:20',

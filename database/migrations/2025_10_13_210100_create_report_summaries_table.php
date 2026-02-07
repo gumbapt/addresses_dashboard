@@ -21,6 +21,9 @@ return new class extends Migration
             $table->integer('unique_providers')->default(0);
             $table->integer('unique_states')->default(0);
             $table->integer('unique_zip_codes')->default(0);
+            $table->unsignedInteger('count_r')->nullable()->comment('Residential (R) request count');
+            $table->unsignedInteger('count_b')->nullable()->comment('Business (B) request count');
+            $table->unsignedInteger('count_x')->nullable()->comment('Unknown/Other (X) request count');
             $table->timestamps();
             
             // Unique constraint - one summary per report

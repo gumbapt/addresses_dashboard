@@ -127,6 +127,9 @@ class CreateDailyReportUseCase
                 'unique_states' => $summary['unique_states'] ?? 0,
                 'unique_zip_codes' => $summary['unique_zipcodes'] ?? $summary['unique_zip_codes'] ?? 0,
                 'avg_requests_per_hour' => isset($summary['total_requests']) ? ($summary['total_requests'] / 24) : 0,
+                'business_residential_codes' => $dailyData['business_residential_codes']
+                    ?? $dailyData['data']['business_residential_codes']
+                    ?? [],
             ],
             'providers' => $this->convertProviders($dailyData),
             'geographic' => $this->convertGeographic($dailyData),

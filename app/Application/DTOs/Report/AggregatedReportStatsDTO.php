@@ -16,6 +16,8 @@ class AggregatedReportStatsDTO
         public readonly array $cities,
         public readonly array $zipCodes,
         public readonly array $dailyTrends,
+        public readonly ?string $businessResidentialFilter = 'all',
+        public readonly array $businessResidentialCodes = [],
     ) {}
 
     public function toArray(): array
@@ -29,7 +31,7 @@ class AggregatedReportStatsDTO
                 'total_reports' => $this->totalReports,
                 'first_report' => $this->firstReportDate,
                 'last_report' => $this->lastReportDate,
-                'days_covered' => $this->totalReports > 0 ? 
+                'days_covered' => $this->totalReports > 0 ?
                     (strtotime($this->lastReportDate ?? 'now') - strtotime($this->firstReportDate ?? 'now')) / 86400 + 1 : 0,
             ],
             'summary' => $this->summary,
@@ -40,6 +42,10 @@ class AggregatedReportStatsDTO
                 'zip_codes' => $this->zipCodes,
             ],
             'trends' => $this->dailyTrends,
+            'business_residential' => [
+                'filter' => $this->businessResidentialFilter,
+                'available' => $this->businessResidentialCodes,
+            ],
         ];
     }
 }

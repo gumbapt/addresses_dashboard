@@ -13,19 +13,23 @@ use Illuminate\Support\Facades\DB;
 
 class GetDomainStateStatsUseCase
 {
+    /** @param string|null $businessResidentialFilter 'all' | 'R' | 'B' | 'X' */
     public function execute(
         int $domainId,
         int $stateId,
         ?string $dateFrom = null,
         ?string $dateTo = null,
         ?string $sortBy = null,
-        int $citiesLimit = 10
+        int $citiesLimit = 10,
+        ?string $businessResidentialFilter = 'all'
     ): array {
         $domain = Domain::findOrFail($domainId);
-        
-        // Buscar relatórios do domínio processados e filtrados por data se fornecido
+
         $reportsQuery = Report::where('domain_id', $domainId)
-            ->where('status', 'processed');
+            ->where('status', 'processed')
+            ->when($businessResidentialFilter && $businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->whereHas('summary', fn ($sq) => $sq->where("count_{$businessResidentialFilter}", '>', 0));
+            });
         
         if ($dateFrom) {
             $reportsQuery->where('report_date', '>=', $dateFrom);
@@ -81,6 +85,7 @@ class GetDomainStateStatsUseCase
             'filters' => [
                 'cities_limit' => $citiesLimit,
                 'sort_by' => $sortBy,
+                'business_residential_filter' => $businessResidentialFilter,
             ],
             // KPIs (do dashboard)
             'kpis' => $this->getKPIs($reportIds, $stateId),

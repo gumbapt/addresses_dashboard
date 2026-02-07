@@ -135,6 +135,16 @@ class SubmitDailyReportRequest extends FormRequest
             'providers.top_providers.*.total_count' => 'required_with:providers.top_providers|integer|min:0',
             'providers.top_providers.*.technology' => 'nullable|string|max:50',
             'providers.excluded' => 'nullable|array',
+
+            // Business/Residential codes (optional) - R=Residential, B=Business, X=Unknown
+            'business_residential_codes' => 'nullable|array',
+            'business_residential_codes.R' => 'nullable|integer|min:0',
+            'business_residential_codes.B' => 'nullable|integer|min:0',
+            'business_residential_codes.X' => 'nullable|integer|min:0',
+            'data.business_residential_codes' => 'nullable|array',
+            'data.business_residential_codes.R' => 'nullable|integer|min:0',
+            'data.business_residential_codes.B' => 'nullable|integer|min:0',
+            'data.business_residential_codes.X' => 'nullable|integer|min:0',
         ];
     }
 

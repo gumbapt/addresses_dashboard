@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\DB;
 
 class GetDashboardDataUseCase
 {
-    public function execute(int $domainId): array
+    /** @param string|null $businessResidentialFilter 'all' | 'R' | 'B' | 'X' */
+    public function execute(int $domainId, ?string $businessResidentialFilter = 'all'): array
     {
         $domain = Domain::findOrFail($domainId);
-        
-        // Buscar todos os relatórios processados do domínio
-        $reports = Report::where('domain_id', $domainId)
+
+        $reportsQuery = Report::where('domain_id', $domainId)
             ->where('status', 'processed')
-            ->orderBy('report_date')
-            ->get();
+            ->when($businessResidentialFilter && $businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->whereHas('summary', fn ($sq) => $sq->where("count_{$businessResidentialFilter}", '>', 0));
+            });
+
+        $reports = $reportsQuery->orderBy('report_date')->get();
 
         if ($reports->isEmpty()) {
             return $this->emptyDashboard($domainId, $domain->name);
@@ -30,7 +33,7 @@ class GetDashboardDataUseCase
 
         $reportIds = $reports->pluck('id')->toArray();
 
-        return [
+        $result = [
             'domain' => [
                 'id' => $domainId,
                 'name' => $domain->name,
@@ -42,7 +45,7 @@ class GetDashboardDataUseCase
                 'days_covered' => $reports->count() > 0 ? 
                     (strtotime($reports->last()->report_date ?? 'now') - strtotime($reports->first()->report_date ?? 'now')) / 86400 + 1 : 0,
             ],
-            'kpis' => $this->getKPIs($reportIds),
+            'kpis' => $this->getKPIs($reportIds, $businessResidentialFilter),
             'provider_distribution' => $this->getProviderDistribution($reportIds),
             'top_states' => $this->getTopStates($reportIds),
             'hourly_distribution' => $this->getHourlyDistribution($reports),
@@ -50,6 +53,10 @@ class GetDashboardDataUseCase
             'technology_distribution' => $this->getTechnologyDistribution($reportIds),
             'exclusion_by_provider' => $this->getExclusionByProvider($reportIds),
         ];
+
+        $result['business_residential_filter'] = $businessResidentialFilter;
+
+        return $result;
     }
 
     private function emptyDashboard(int $domainId, string $domainName): array
@@ -72,7 +79,7 @@ class GetDashboardDataUseCase
         ];
     }
 
-    private function getKPIs(array $reportIds): array
+    private function getKPIs(array $reportIds, ?string $businessResidentialFilter = 'all'): array
     {
         $summaries = ReportSummary::whereIn('report_id', $reportIds)->get();
 
@@ -85,7 +92,10 @@ class GetDashboardDataUseCase
             ];
         }
 
-        $totalRequests = $summaries->sum('total_requests');
+        $totalRequests = match ($businessResidentialFilter) {
+            'R', 'B', 'X' => $summaries->sum("count_{$businessResidentialFilter}") ?? $summaries->sum('total_requests'),
+            default => $summaries->sum('total_requests'),
+        };
         $avgSuccessRate = $summaries->avg('success_rate');
         $daysCount = count($reportIds);
         $dailyAverage = $daysCount > 0 ? round($totalRequests / $daysCount) : 0;

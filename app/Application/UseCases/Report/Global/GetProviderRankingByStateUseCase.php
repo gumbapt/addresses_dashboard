@@ -8,7 +8,7 @@ class GetProviderRankingByStateUseCase
 {
     /**
      * Get provider ranking by state (precise data from report_state_providers)
-     * 
+     *
      * @param int $stateId State ID to filter by
      * @param int|null $providerId Optional provider filter
      * @param string|null $dateFrom Date range start (YYYY-MM-DD)
@@ -16,6 +16,7 @@ class GetProviderRankingByStateUseCase
      * @param string $sortBy Sort criteria: total_requests, success_rate, avg_speed, total_reports
      * @param array|null $accessibleDomainIds Filter by accessible domain IDs (null = all)
      * @param bool $aggregateByProvider If true, aggregate all domains for the same provider (ranking by provider only)
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' - R = residential + X, B = business + X
      * @return array Array of ranking results
      */
     public function execute(
@@ -25,17 +26,32 @@ class GetProviderRankingByStateUseCase
         ?string $dateTo = null,
         string $sortBy = 'total_requests',
         ?array $accessibleDomainIds = null,
-        bool $aggregateByProvider = false
+        bool $aggregateByProvider = false,
+        string $businessResidentialFilter = 'all'
     ): array {
         $query = DB::table('report_state_providers as rsp')
             ->join('providers as p', 'rsp.provider_id', '=', 'p.id')
             ->join('reports as r', 'rsp.report_id', '=', 'r.id')
             ->join('domains as d', 'r.domain_id', '=', 'd.id')
             ->join('states as s', 'rsp.state_id', '=', 's.id')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->join('report_summaries as rs', 'r.id', '=', 'rs.report_id');
+                if ($businessResidentialFilter === 'R') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_r', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } elseif ($businessResidentialFilter === 'B') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_b', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } else {
+                    $q->where('rs.count_x', '>', 0);
+                }
+            })
             ->where('r.status', 'processed')
             ->where('d.is_active', true)
             ->where('s.id', $stateId);
-        
+
         // Filtros
         if ($providerId) {
             $query->where('rsp.provider_id', $providerId);
@@ -96,9 +112,9 @@ class GetProviderRankingByStateUseCase
         // Calcular totais para porcentagem
         if ($aggregateByProvider) {
             // Quando agregado, calcular total de requests do provider no estado (soma de todos os domínios)
-            $providerTotals = $this->getProviderTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds);
-            $stateTotal = $this->getStateTotalRequests($stateId, $dateFrom, $dateTo, $accessibleDomainIds);
-            
+            $providerTotals = $this->getProviderTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds, $businessResidentialFilter);
+            $stateTotal = $this->getStateTotalRequests($stateId, $dateFrom, $dateTo, $accessibleDomainIds, $businessResidentialFilter);
+
             // Adicionar porcentagem baseada no total do estado
             $rankings = array_map(function($item) use ($providerTotals, $stateTotal) {
                 $providerTotal = $providerTotals[$item->provider_id] ?? $item->total_requests;
@@ -108,8 +124,8 @@ class GetProviderRankingByStateUseCase
             }, $rankings);
         } else {
             // Comportamento normal: calcular total por domínio no estado E total do provider no estado
-            $domainTotals = $this->getDomainTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds);
-            $providerTotals = $this->getProviderTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds);
+            $domainTotals = $this->getDomainTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds, $businessResidentialFilter);
+            $providerTotals = $this->getProviderTotalRequestsByState($stateId, $dateFrom, $dateTo, $accessibleDomainIds, $businessResidentialFilter);
             
             // Adicionar ambas as porcentagens a cada ranking
             $rankings = array_map(function($item) use ($domainTotals, $providerTotals) {
@@ -174,24 +190,39 @@ class GetProviderRankingByStateUseCase
     
     /**
      * Get total requests per domain in a specific state for percentage calculation
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X'
      */
-    private function getDomainTotalRequestsByState(int $stateId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds): array
+    private function getDomainTotalRequestsByState(int $stateId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds, string $businessResidentialFilter = 'all'): array
     {
         $query = DB::table('report_state_providers as rsp')
             ->join('reports as r', 'rsp.report_id', '=', 'r.id')
             ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->join('report_summaries as rs', 'r.id', '=', 'rs.report_id');
+                if ($businessResidentialFilter === 'R') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_r', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } elseif ($businessResidentialFilter === 'B') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_b', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } else {
+                    $q->where('rs.count_x', '>', 0);
+                }
+            })
             ->where('r.status', 'processed')
             ->where('d.is_active', true)
             ->where('rsp.state_id', $stateId);
-        
+
         if ($dateFrom) {
             $query->where('r.report_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $query->where('r.report_date', '<=', $dateTo);
         }
-        
+
         if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
             $query->whereIn('d.id', $accessibleDomainIds);
         }
@@ -215,25 +246,40 @@ class GetProviderRankingByStateUseCase
     
     /**
      * Get total requests per provider in a specific state (for aggregation)
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X'
      */
-    private function getProviderTotalRequestsByState(int $stateId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds): array
+    private function getProviderTotalRequestsByState(int $stateId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds, string $businessResidentialFilter = 'all'): array
     {
         $query = DB::table('report_state_providers as rsp')
             ->join('reports as r', 'rsp.report_id', '=', 'r.id')
             ->join('domains as d', 'r.domain_id', '=', 'd.id')
             ->join('providers as p', 'rsp.provider_id', '=', 'p.id')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->join('report_summaries as rs', 'r.id', '=', 'rs.report_id');
+                if ($businessResidentialFilter === 'R') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_r', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } elseif ($businessResidentialFilter === 'B') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_b', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } else {
+                    $q->where('rs.count_x', '>', 0);
+                }
+            })
             ->where('r.status', 'processed')
             ->where('d.is_active', true)
             ->where('rsp.state_id', $stateId);
-        
+
         if ($dateFrom) {
             $query->where('r.report_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $query->where('r.report_date', '<=', $dateTo);
         }
-        
+
         if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
             $query->whereIn('d.id', $accessibleDomainIds);
         }
@@ -258,29 +304,44 @@ class GetProviderRankingByStateUseCase
     /**
      * Get total requests in a specific state (for percentage calculation when aggregated)
      */
-    private function getStateTotalRequests(int $stateId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds): int
+    /** @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' */
+    private function getStateTotalRequests(int $stateId, ?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds, string $businessResidentialFilter = 'all'): int
     {
         $query = DB::table('report_state_providers as rsp')
             ->join('reports as r', 'rsp.report_id', '=', 'r.id')
             ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->join('report_summaries as rs', 'r.id', '=', 'rs.report_id');
+                if ($businessResidentialFilter === 'R') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_r', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } elseif ($businessResidentialFilter === 'B') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_b', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } else {
+                    $q->where('rs.count_x', '>', 0);
+                }
+            })
             ->where('r.status', 'processed')
             ->where('d.is_active', true)
             ->where('rsp.state_id', $stateId);
-        
+
         if ($dateFrom) {
             $query->where('r.report_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $query->where('r.report_date', '<=', $dateTo);
         }
-        
+
         if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
             $query->whereIn('d.id', $accessibleDomainIds);
         }
-        
+
         $total = $query->sum('rsp.request_count');
-        
+
         return (int) $total;
     }
     

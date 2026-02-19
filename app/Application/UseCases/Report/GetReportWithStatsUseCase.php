@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class GetReportWithStatsUseCase
 {
-    public function execute(int $reportId): array
+    /** @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' - R = residential + X, B = business + X */
+    public function execute(int $reportId, string $businessResidentialFilter = 'all'): array
     {
         $report = Report::with(['domain'])->findOrFail($reportId);
 
@@ -26,6 +27,20 @@ class GetReportWithStatsUseCase
         $states = $this->getStates($reportId);
         $cities = $this->getCities($reportId);
         $zipCodes = $this->getZipCodes($reportId);
+
+        $summaryData = null;
+        if ($summary) {
+            $totals = $this->totalsForFilter($summary, $businessResidentialFilter);
+            $summaryData = array_merge([
+                'total_requests' => $totals['total_requests'],
+                'failed_requests' => $summary->failed_requests,
+                'success_rate' => round($summary->success_rate, 2),
+                'avg_requests_per_hour' => round($summary->avg_requests_per_hour, 2),
+                'unique_providers' => $summary->unique_providers ?? 0,
+                'unique_states' => $summary->unique_states ?? 0,
+                'unique_zip_codes' => $summary->unique_zip_codes ?? 0,
+            ], $this->computeBusinessResidentialPercentages($summary, $businessResidentialFilter));
+        }
 
         return [
             'id' => $report->id,
@@ -41,15 +56,7 @@ class GetReportWithStatsUseCase
             'generated_at' => $report->generated_at?->format('Y-m-d H:i:s'),
             'data_version' => $report->data_version,
             'status' => $report->status,
-            'summary' => $summary ? array_merge([
-                'total_requests' => $summary->total_requests,
-                'failed_requests' => $summary->failed_requests,
-                'success_rate' => round($summary->success_rate, 2),
-                'avg_requests_per_hour' => round($summary->avg_requests_per_hour, 2),
-                'unique_providers' => $summary->unique_providers ?? 0,
-                'unique_states' => $summary->unique_states ?? 0,
-                'unique_zip_codes' => $summary->unique_zip_codes ?? 0,
-            ], $this->computeBusinessResidentialPercentages($summary)) : null,
+            'summary' => $summaryData,
             'providers' => $providers,
             'geographic' => [
                 'states' => $states,
@@ -62,14 +69,29 @@ class GetReportWithStatsUseCase
         ];
     }
 
-    private function computeBusinessResidentialPercentages(ReportSummary $summary): array
+    /** Total requests for the given filter: R = count_r+count_x, B = count_b+count_x, all = full total */
+    private function totalsForFilter(ReportSummary $summary, string $businessResidentialFilter): array
+    {
+        $countR = (int) ($summary->count_r ?? 0);
+        $countB = (int) ($summary->count_b ?? 0);
+        $countX = (int) ($summary->count_x ?? 0);
+        $totalRequests = match ($businessResidentialFilter) {
+            'R' => $countR + $countX,
+            'B' => $countB + $countX,
+            'X' => $countX,
+            default => (int) $summary->total_requests,
+        };
+        return ['total_requests' => $totalRequests];
+    }
+
+    private function computeBusinessResidentialPercentages(ReportSummary $summary, string $businessResidentialFilter = 'all'): array
     {
         $countR = (int) ($summary->count_r ?? 0);
         $countB = (int) ($summary->count_b ?? 0);
         $countX = (int) ($summary->count_x ?? 0);
         $total = $countR + $countB + $countX;
         if ($total <= 0) {
-            return ['count_r' => null, 'count_b' => null, 'count_x' => null, 'percentage_r' => null, 'percentage_b' => null];
+            return ['count_r' => null, 'count_b' => null, 'count_x' => null, 'percentage_r' => null, 'percentage_b' => null, 'business_residential_filter' => $businessResidentialFilter];
         }
         return [
             'count_r' => $summary->count_r,
@@ -77,6 +99,7 @@ class GetReportWithStatsUseCase
             'count_x' => $summary->count_x,
             'percentage_r' => round((($countR + $countX) / $total) * 100, 1),
             'percentage_b' => round((($countB + $countX) / $total) * 100, 1),
+            'business_residential_filter' => $businessResidentialFilter,
         ];
     }
 

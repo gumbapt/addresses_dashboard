@@ -409,10 +409,11 @@ class ReportController extends Controller
      * }
      * @response 404 {"success": false, "message": "Report not found"}
      */
-    public function show(int $id): JsonResponse
+    public function show(int $id, Request $request): JsonResponse
     {
         try {
-            $reportData = $this->getReportWithStatsUseCase->execute($id);
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
+            $reportData = $this->getReportWithStatsUseCase->execute($id, $businessResidentialFilter);
             
             return response()->json([
                 'success' => true,
@@ -468,10 +469,7 @@ class ReportController extends Controller
     public function dashboard(int $domainId, Request $request): JsonResponse
     {
         try {
-            $businessResidentialFilter = $request->query('business_residential_filter', 'all');
-            if (!in_array($businessResidentialFilter, ['all', 'R', 'B', 'X'])) {
-                $businessResidentialFilter = 'all';
-            }
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
             $dashboardData = $this->getDashboardDataUseCase->execute($domainId, $businessResidentialFilter);
 
             return response()->json([
@@ -594,13 +592,7 @@ class ReportController extends Controller
                 }
             }
 
-            $businessResidentialFilter = $request->query('business_residential_filter', 'all');
-            if (!in_array($businessResidentialFilter, ['all', 'R', 'B', 'X'])) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Invalid business_residential_filter. Must be: all, R, B, or X',
-                ], 400);
-            }
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
 
             $stats = $this->getAggregatedReportStatsUseCase->execute(
                 $domainId,
@@ -745,10 +737,7 @@ class ReportController extends Controller
                 }
             }
 
-            $businessResidentialFilter = $request->query('business_residential_filter', 'all');
-            if (!in_array($businessResidentialFilter, ['all', 'R', 'B', 'X'])) {
-                $businessResidentialFilter = 'all';
-            }
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
 
             $stats = $this->getDomainStateStatsUseCase->execute(
                 $domainId,
@@ -954,6 +943,7 @@ class ReportController extends Controller
             $dateFrom = $request->query('date_from');
             $dateTo = $request->query('date_to');
             $minReports = $request->query('min_reports') ? (int) $request->query('min_reports') : null;
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
 
             // Validate sort_by parameter
             if (!in_array($sortBy, ['score', 'volume', 'success', 'speed'])) {
@@ -972,7 +962,8 @@ class ReportController extends Controller
                 $dateFrom,
                 $dateTo,
                 $minReports,
-                $accessibleDomains // Filter by accessible domains
+                $accessibleDomains,
+                $businessResidentialFilter
             );
 
             return response()->json([
@@ -985,6 +976,7 @@ class ReportController extends Controller
                         'date_from' => $dateFrom,
                         'date_to' => $dateTo,
                         'min_reports' => $minReports,
+                        'business_residential_filter' => $businessResidentialFilter,
                     ],
                 ],
             ]);
@@ -1042,12 +1034,14 @@ class ReportController extends Controller
             $metric = $request->query('metric');
             $dateFrom = $request->query('date_from');
             $dateTo = $request->query('date_to');
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
 
             $comparison = $this->compareDomainsUseCase->execute(
                 $domainIds,
                 $metric,
                 $dateFrom,
-                $dateTo
+                $dateTo,
+                $businessResidentialFilter
             );
 
             if (empty($comparison)) {
@@ -1061,7 +1055,8 @@ class ReportController extends Controller
             $providerData = $this->compareDomainsUseCase->getAggregatedProviderData(
                 $domainIds,
                 $dateFrom,
-                $dateTo
+                $dateTo,
+                $businessResidentialFilter
             );
 
             return response()->json([
@@ -1074,6 +1069,7 @@ class ReportController extends Controller
                         'metric' => $metric,
                         'date_from' => $dateFrom,
                         'date_to' => $dateTo,
+                        'business_residential_filter' => $businessResidentialFilter,
                     ],
                 ],
             ]);
@@ -1106,6 +1102,7 @@ class ReportController extends Controller
             $perPage = $request->query('per_page') ? (int) $request->query('per_page') : 15;
             $aggregateByProvider = $request->query('aggregate_by_provider', false);
             $aggregateByProvider = filter_var($aggregateByProvider, FILTER_VALIDATE_BOOLEAN);
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
 
             // Validate sort_by parameter
             if (!in_array($sortBy, ['total_requests', 'success_rate', 'avg_speed', 'total_reports'])) {
@@ -1148,7 +1145,8 @@ class ReportController extends Controller
                     $dateTo,
                     $sortBy,
                     $accessibleDomains,
-                    $aggregateByProvider
+                    $aggregateByProvider,
+                    $businessResidentialFilter
                 );
                 
                 // Calculate aggregated stats
@@ -1175,6 +1173,7 @@ class ReportController extends Controller
                         'date_to' => $dateTo,
                         'sort_by' => $sortBy,
                         'aggregate_by_provider' => $aggregateByProvider,
+                        'business_residential_filter' => $businessResidentialFilter,
                     ],
                 ]);
             } else {
@@ -1187,7 +1186,8 @@ class ReportController extends Controller
                     $sortBy,
                     $limit,
                     $accessibleDomains,
-                    $aggregateByProvider
+                    $aggregateByProvider,
+                    $businessResidentialFilter
                 );
                 
                 // Calculate aggregated stats
@@ -1213,6 +1213,7 @@ class ReportController extends Controller
                             'sort_by' => $sortBy,
                             'limit' => $limit,
                             'aggregate_by_provider' => $aggregateByProvider,
+                            'business_residential_filter' => $businessResidentialFilter,
                         ],
                     ],
                     'available_providers' => $availableProviders,
@@ -1352,6 +1353,7 @@ class ReportController extends Controller
             // Get accessible domains for this admin
             $admin = $request->user();
             $accessibleDomains = $admin->getAccessibleDomains();
+            $businessResidentialFilter = $this->resolveBusinessResidentialFilter($request);
 
             // Get ranking
             $ranking = $this->getProviderRankingByStateUseCase->execute(
@@ -1361,7 +1363,8 @@ class ReportController extends Controller
                 $dateTo,
                 $sortBy,
                 $accessibleDomains,
-                $aggregateByProvider
+                $aggregateByProvider,
+                $businessResidentialFilter
             );
 
             return response()->json([
@@ -1375,6 +1378,7 @@ class ReportController extends Controller
                         'period' => $period,
                         'date_from' => $dateFrom,
                         'date_to' => $dateTo,
+                        'business_residential_filter' => $businessResidentialFilter,
                         'sort_by' => $sortBy,
                         'aggregate_by_provider' => $aggregateByProvider,
                     ],
@@ -1393,6 +1397,32 @@ class ReportController extends Controller
     /**
      * Convert period string to date range
      */
+    /**
+     * Resolve business/residential filter from query params.
+     * Accepts: r=1 and/or b=1 (R = residential + X, B = business + X; both or neither = all).
+     * Falls back to business_residential_filter (all, R, B, X) if present.
+     */
+    private function resolveBusinessResidentialFilter(Request $request): string
+    {
+        $r = $request->query('r');
+        $b = $request->query('b');
+        $rTruthy = $r === '1' || $r === 'true' || $r === true || $r === 'R' || ($r !== null && $r !== '');
+        $bTruthy = $b === '1' || $b === 'true' || $b === true || $b === 'B' || ($b !== null && $b !== '');
+
+        if ($rTruthy && !$bTruthy) {
+            return 'R';
+        }
+        if ($bTruthy && !$rTruthy) {
+            return 'B';
+        }
+        if ($rTruthy && $bTruthy) {
+            return 'all';
+        }
+
+        $explicit = $request->query('business_residential_filter', 'all');
+        return in_array($explicit, ['all', 'R', 'B', 'X'], true) ? $explicit : 'all';
+    }
+
     private function getPeriodDateRange(string $period): ?array
     {
         $now = now();

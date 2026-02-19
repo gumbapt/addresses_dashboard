@@ -9,7 +9,7 @@ class GetProviderRankingUseCase
 {
     /**
      * Get provider ranking across domains
-     * 
+     *
      * @param int|null $providerId Filter by specific provider
      * @param string|null $technology Filter by technology (Fiber, Cable, DSL, etc)
      * @param string|null $dateFrom Date range start (YYYY-MM-DD)
@@ -18,6 +18,7 @@ class GetProviderRankingUseCase
      * @param int|null $limit Maximum results to return (deprecated, use pagination)
      * @param array|null $accessibleDomainIds Filter by accessible domain IDs (null = all)
      * @param bool $aggregateByProvider If true, aggregate all technologies for the same provider+domain
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' - R = residential + X, B = business + X
      * @return array Array of ProviderRankingDTO
      */
     public function execute(
@@ -28,15 +29,30 @@ class GetProviderRankingUseCase
         string $sortBy = 'total_requests',
         ?int $limit = null,
         ?array $accessibleDomainIds = null,
-        bool $aggregateByProvider = false
+        bool $aggregateByProvider = false,
+        string $businessResidentialFilter = 'all'
     ): array {
         $query = DB::table('report_providers as rp')
             ->join('providers as p', 'rp.provider_id', '=', 'p.id')
             ->join('reports as r', 'rp.report_id', '=', 'r.id')
             ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->join('report_summaries as rs', 'r.id', '=', 'rs.report_id');
+                if ($businessResidentialFilter === 'R') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_r', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } elseif ($businessResidentialFilter === 'B') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_b', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } else {
+                    $q->where('rs.count_x', '>', 0);
+                }
+            })
             ->where('r.status', 'processed')
             ->where('d.is_active', true);
-        
+
         // Filtros
         if ($providerId) {
             $query->where('rp.provider_id', $providerId);
@@ -94,7 +110,7 @@ class GetProviderRankingUseCase
             ->toArray();
         
         // Calcular total de requests por domínio (para calcular porcentagem)
-        $domainTotals = $this->getDomainTotalRequests($dateFrom, $dateTo, $accessibleDomainIds);
+        $domainTotals = $this->getDomainTotalRequests($dateFrom, $dateTo, $accessibleDomainIds, $businessResidentialFilter);
         
         // Adicionar porcentagem a cada ranking
         $rankings = array_map(function($item) use ($domainTotals) {
@@ -138,7 +154,7 @@ class GetProviderRankingUseCase
 
     /**
      * Get provider ranking with pagination
-     * 
+     *
      * @return array ['data' => ProviderRankingDTO[], 'pagination' => [...]]
      */
     public function executePaginated(
@@ -150,7 +166,8 @@ class GetProviderRankingUseCase
         ?string $dateTo = null,
         string $sortBy = 'total_requests',
         ?array $accessibleDomainIds = null,
-        bool $aggregateByProvider = false
+        bool $aggregateByProvider = false,
+        string $businessResidentialFilter = 'all'
     ): array {
         // Get all results (without limit)
         $allResults = $this->execute(
@@ -161,7 +178,8 @@ class GetProviderRankingUseCase
             $sortBy,
             null, // No limit
             $accessibleDomainIds,
-            $aggregateByProvider
+            $aggregateByProvider,
+            $businessResidentialFilter
         );
         
         $total = count($allResults);
@@ -188,23 +206,38 @@ class GetProviderRankingUseCase
     
     /**
      * Get total requests per domain for percentage calculation
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X'
      */
-    private function getDomainTotalRequests(?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds): array
+    private function getDomainTotalRequests(?string $dateFrom, ?string $dateTo, ?array $accessibleDomainIds, string $businessResidentialFilter = 'all'): array
     {
         $query = DB::table('report_providers as rp')
             ->join('reports as r', 'rp.report_id', '=', 'r.id')
             ->join('domains as d', 'r.domain_id', '=', 'd.id')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->join('report_summaries as rs', 'r.id', '=', 'rs.report_id');
+                if ($businessResidentialFilter === 'R') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_r', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } elseif ($businessResidentialFilter === 'B') {
+                    $q->where(function ($q) {
+                        $q->where('rs.count_b', '>', 0)->orWhere('rs.count_x', '>', 0);
+                    });
+                } else {
+                    $q->where('rs.count_x', '>', 0);
+                }
+            })
             ->where('r.status', 'processed')
             ->where('d.is_active', true);
-        
+
         if ($dateFrom) {
             $query->where('r.report_date', '>=', $dateFrom);
         }
-        
+
         if ($dateTo) {
             $query->where('r.report_date', '<=', $dateTo);
         }
-        
+
         if ($accessibleDomainIds && !empty($accessibleDomainIds)) {
             $query->whereIn('d.id', $accessibleDomainIds);
         }

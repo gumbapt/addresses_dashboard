@@ -12,18 +12,20 @@ class CompareDomainsUseCase
 {
     /**
      * Compare metrics between domains
-     * 
+     *
      * @param array $domainIds Array of domain IDs to compare
      * @param string|null $metric Specific metric to compare (null = all metrics)
      * @param string|null $dateFrom Filter by date range start
      * @param string|null $dateTo Filter by date range end
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' - R = residential + X, B = business + X
      * @return array Array of DomainComparisonDTO
      */
     public function execute(
         array $domainIds,
         ?string $metric = null,
         ?string $dateFrom = null,
-        ?string $dateTo = null
+        ?string $dateTo = null,
+        string $businessResidentialFilter = 'all'
     ): array {
         if (empty($domainIds)) {
             return [];
@@ -44,7 +46,22 @@ class CompareDomainsUseCase
         foreach ($domains as $index => $domain) {
             // Build query for reports
             $reportsQuery = Report::where('domain_id', $domain->id)
-                ->where('status', 'processed');
+                ->where('status', 'processed')
+                ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                    $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                        if ($businessResidentialFilter === 'R') {
+                            $sq->where(function ($q) {
+                                $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0);
+                            });
+                        } elseif ($businessResidentialFilter === 'B') {
+                            $sq->where(function ($q) {
+                                $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0);
+                            });
+                        } else {
+                            $sq->where('count_x', '>', 0);
+                        }
+                    });
+                });
 
             // Apply date filters
             if ($dateFrom) {
@@ -62,8 +79,8 @@ class CompareDomainsUseCase
 
             $reportIds = $reports->pluck('id')->toArray();
 
-            // Aggregate metrics
-            $metrics = $this->aggregateMetrics($reportIds, $metric);
+            // Aggregate metrics (with R/B filter for total_requests when applicable)
+            $metrics = $this->aggregateMetrics($reportIds, $metric, $businessResidentialFilter);
 
             // First domain is the base for comparison
             if ($index === 0) {
@@ -89,20 +106,36 @@ class CompareDomainsUseCase
 
     /**
      * Get aggregated provider data across all compared domains
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X'
      */
-    public function getAggregatedProviderData(array $domainIds, ?string $dateFrom = null, ?string $dateTo = null): array
+    public function getAggregatedProviderData(array $domainIds, ?string $dateFrom = null, ?string $dateTo = null, string $businessResidentialFilter = 'all'): array
     {
         // Get all report IDs for these domains
         $reportsQuery = Report::whereIn('domain_id', $domainIds)
-            ->where('status', 'processed');
-        
+            ->where('status', 'processed')
+            ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                    if ($businessResidentialFilter === 'R') {
+                        $sq->where(function ($q) {
+                            $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0);
+                        });
+                    } elseif ($businessResidentialFilter === 'B') {
+                        $sq->where(function ($q) {
+                            $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0);
+                        });
+                    } else {
+                        $sq->where('count_x', '>', 0);
+                    }
+                });
+            });
+
         if ($dateFrom) {
             $reportsQuery->where('report_date', '>=', $dateFrom);
         }
         if ($dateTo) {
             $reportsQuery->where('report_date', '<=', $dateTo);
         }
-        
+
         $reportIds = $reportsQuery->pluck('id')->toArray();
         
         if (empty($reportIds)) {
@@ -145,12 +178,26 @@ class CompareDomainsUseCase
         $providersByDomain = [];
         
         foreach ($domainIds as $domainId) {
-            $domainReportIds = Report::where('domain_id', $domainId)
+            $domainReportsQuery = Report::where('domain_id', $domainId)
                 ->where('status', 'processed')
+                ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                    $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                        if ($businessResidentialFilter === 'R') {
+                            $sq->where(function ($q) {
+                                $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0);
+                            });
+                        } elseif ($businessResidentialFilter === 'B') {
+                            $sq->where(function ($q) {
+                                $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0);
+                            });
+                        } else {
+                            $sq->where('count_x', '>', 0);
+                        }
+                    });
+                })
                 ->when($dateFrom, fn($q) => $q->where('report_date', '>=', $dateFrom))
-                ->when($dateTo, fn($q) => $q->where('report_date', '<=', $dateTo))
-                ->pluck('id')
-                ->toArray();
+                ->when($dateTo, fn($q) => $q->where('report_date', '<=', $dateTo));
+            $domainReportIds = $domainReportsQuery->pluck('id')->toArray();
             
             if (!empty($domainReportIds)) {
                 $providers = DB::table('report_providers')
@@ -180,21 +227,30 @@ class CompareDomainsUseCase
         ];
     }
 
-    private function aggregateMetrics(array $reportIds, ?string $specificMetric): array
+    /** @param string|null $specificMetric Metric to compare. @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' */
+    private function aggregateMetrics(array $reportIds, ?string $specificMetric, string $businessResidentialFilter = 'all'): array
     {
-        // Base aggregation
         $summary = DB::table('report_summaries')
             ->whereIn('report_id', $reportIds)
             ->select(
                 DB::raw('SUM(total_requests) as total_requests'),
+                DB::raw('SUM(COALESCE(count_r,0) + COALESCE(count_x,0)) as total_r_x'),
+                DB::raw('SUM(COALESCE(count_b,0) + COALESCE(count_x,0)) as total_b_x'),
                 DB::raw('AVG(success_rate) as avg_success_rate'),
                 DB::raw('SUM(failed_requests) as total_failed'),
                 DB::raw('COUNT(*) as total_reports')
             )
             ->first();
 
+        $totalRequests = (int) ($summary->total_requests ?? 0);
+        if ($businessResidentialFilter === 'R') {
+            $totalRequests = (int) ($summary->total_r_x ?? 0);
+        } elseif ($businessResidentialFilter === 'B') {
+            $totalRequests = (int) ($summary->total_b_x ?? 0);
+        }
+
         $metrics = [
-            'total_requests' => (int) ($summary->total_requests ?? 0),
+            'total_requests' => $totalRequests,
             'success_rate' => round($summary->avg_success_rate ?? 0, 2),
             'total_failed' => (int) ($summary->total_failed ?? 0),
             'total_reports' => (int) ($summary->total_reports ?? 0),

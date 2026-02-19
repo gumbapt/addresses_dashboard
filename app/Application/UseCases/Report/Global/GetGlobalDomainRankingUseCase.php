@@ -13,12 +13,13 @@ class GetGlobalDomainRankingUseCase
 {
     /**
      * Get global domain ranking
-     * 
+     *
      * @param string $sortBy Options: 'score', 'volume', 'success', 'speed'
      * @param string|null $dateFrom Filter by date range start
      * @param string|null $dateTo Filter by date range end
      * @param int|null $minReports Minimum number of reports required
      * @param array|null $accessibleDomainIds Filter by accessible domain IDs (null = all)
+     * @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' - R = residential + X, B = business + X
      * @return array Array of DomainRankingDTO
      */
     public function execute(
@@ -26,7 +27,8 @@ class GetGlobalDomainRankingUseCase
         ?string $dateFrom = null,
         ?string $dateTo = null,
         ?int $minReports = null,
-        ?array $accessibleDomainIds = null
+        ?array $accessibleDomainIds = null,
+        string $businessResidentialFilter = 'all'
     ): array {
         // Get domains (filtered by accessible if provided)
         $query = Domain::where('is_active', true);
@@ -46,7 +48,22 @@ class GetGlobalDomainRankingUseCase
         foreach ($domains as $domain) {
             // Build query for reports
             $reportsQuery = Report::where('domain_id', $domain->id)
-                ->where('status', 'processed');
+                ->where('status', 'processed')
+                ->when($businessResidentialFilter !== 'all', function ($q) use ($businessResidentialFilter) {
+                    $q->whereHas('summary', function ($sq) use ($businessResidentialFilter) {
+                        if ($businessResidentialFilter === 'R') {
+                            $sq->where(function ($q) {
+                                $q->where('count_r', '>', 0)->orWhere('count_x', '>', 0);
+                            });
+                        } elseif ($businessResidentialFilter === 'B') {
+                            $sq->where(function ($q) {
+                                $q->where('count_b', '>', 0)->orWhere('count_x', '>', 0);
+                            });
+                        } else {
+                            $sq->where('count_x', '>', 0);
+                        }
+                    });
+                });
 
             // Apply date filters
             if ($dateFrom) {
@@ -70,8 +87,8 @@ class GetGlobalDomainRankingUseCase
 
             $reportIds = $reports->pluck('id')->toArray();
 
-            // Aggregate metrics
-            $metrics = $this->aggregateMetrics($reportIds);
+            // Aggregate metrics (with R/B filter for total_requests when applicable)
+            $metrics = $this->aggregateMetrics($reportIds, $businessResidentialFilter);
 
             // Calculate score (weighted combination)
             $score = $this->calculateScore(
@@ -116,19 +133,28 @@ class GetGlobalDomainRankingUseCase
         }, $rankings, array_keys($rankings));
     }
 
-    private function aggregateMetrics(array $reportIds): array
+    /** @param string $businessResidentialFilter 'all' | 'R' | 'B' | 'X' */
+    private function aggregateMetrics(array $reportIds, string $businessResidentialFilter = 'all'): array
     {
-        // Aggregate from report_summaries
         $summary = DB::table('report_summaries')
             ->whereIn('report_id', $reportIds)
             ->select(
                 DB::raw('SUM(total_requests) as total_requests'),
+                DB::raw('SUM(COALESCE(count_r,0) + COALESCE(count_x,0)) as total_r_x'),
+                DB::raw('SUM(COALESCE(count_b,0) + COALESCE(count_x,0)) as total_b_x'),
                 DB::raw('AVG(success_rate) as avg_success_rate'),
                 DB::raw('COUNT(*) as total_reports'),
                 DB::raw('SUM(unique_providers) as total_unique_providers'),
                 DB::raw('SUM(unique_states) as total_unique_states')
             )
             ->first();
+
+        $totalRequests = (int) ($summary->total_requests ?? 0);
+        if ($businessResidentialFilter === 'R') {
+            $totalRequests = (int) ($summary->total_r_x ?? 0);
+        } elseif ($businessResidentialFilter === 'B') {
+            $totalRequests = (int) ($summary->total_b_x ?? 0);
+        }
 
         // Get average speed from raw_data
         $reports = Report::whereIn('id', $reportIds)->get();
@@ -152,7 +178,7 @@ class GetGlobalDomainRankingUseCase
             ->count('state_id');
 
         return [
-            'total_requests' => (int) ($summary->total_requests ?? 0),
+            'total_requests' => $totalRequests,
             'avg_success_rate' => (float) ($summary->avg_success_rate ?? 0),
             'avg_speed' => (float) $avgSpeed,
             'total_reports' => (int) ($summary->total_reports ?? 0),

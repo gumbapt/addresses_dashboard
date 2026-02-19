@@ -1399,24 +1399,38 @@ class ReportController extends Controller
      */
     /**
      * Resolve business/residential filter from query params.
-     * Accepts: r=1 and/or b=1 (R = residential + X, B = business + X; both or neither = all).
-     * Falls back to business_residential_filter (all, R, B, X) if present.
+     * Frontend sends: r and/or b, or both. Both present => merged data (all).
+     * - Only r => R (residential + X). Only b => B (business + X). Both r and b => all (R+B+X merged).
      */
     private function resolveBusinessResidentialFilter(Request $request): string
     {
-        $r = $request->query('r');
-        $b = $request->query('b');
-        $rTruthy = $r === '1' || $r === 'true' || $r === true || $r === 'R' || ($r !== null && $r !== '');
-        $bTruthy = $b === '1' || $b === 'true' || $b === true || $b === 'B' || ($b !== null && $b !== '');
+        $hasR = $request->has('r');
+        $hasB = $request->has('b');
 
-        if ($rTruthy && !$bTruthy) {
+        // Fallback: raw query string has both r= and b= (handles proxy/middleware dropping one param)
+        $queryString = $request->getQueryString() ?? '';
+        $rawHasBoth = str_contains($queryString, 'r=') && str_contains($queryString, 'b=');
+
+        if ($hasR && $hasB || $rawHasBoth) {
+            return 'all';
+        }
+
+        $rVal = $request->query('r');
+        $bVal = $request->query('b');
+        if (is_array($rVal)) {
+            $rVal = $rVal[0] ?? null;
+        }
+        if (is_array($bVal)) {
+            $bVal = $bVal[0] ?? null;
+        }
+        $rOn = in_array($rVal, [1, '1', true, 'true', 'R'], true);
+        $bOn = in_array($bVal, [1, '1', true, 'true', 'B'], true);
+
+        if ($hasR && $rOn) {
             return 'R';
         }
-        if ($bTruthy && !$rTruthy) {
+        if ($hasB && $bOn) {
             return 'B';
-        }
-        if ($rTruthy && $bTruthy) {
-            return 'all';
         }
 
         $explicit = $request->query('business_residential_filter', 'all');

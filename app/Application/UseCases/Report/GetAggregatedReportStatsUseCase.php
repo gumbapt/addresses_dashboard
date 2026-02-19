@@ -149,13 +149,14 @@ class GetAggregatedReportStatsUseCase
         $sumX = (int) $summaries->sum('count_x');
         $totalWithCodes = $sumR + $sumB + $sumX;
 
+        // All = merged R+B+X (each request once). Use count_r+count_b+count_x so "both" matches sum of R and B views.
         $totalRequests = match ($businessResidentialFilter) {
-            'R' => $sumR + $sumX, // R + X (X = both, inclui residential)
-            'B' => $sumB + $sumX, // B + X (X = both, inclui business)
+            'R' => $sumR + $sumX,
+            'B' => $sumB + $sumX,
             'X' => $sumX,
-            default => $summaries->sum('total_requests'),
+            default => $totalWithCodes > 0 ? $totalWithCodes : (int) $summaries->sum('total_requests'),
         };
-        $totalRequests = (int) ($totalRequests ?: $summaries->sum('total_requests'));
+        $totalRequests = (int) $totalRequests;
         $totalFailed = $summaries->sum('failed_requests');
 
         $percentageR = $totalWithCodes > 0 ? round((($sumR + $sumX) / $totalWithCodes) * 100, 1) : null;

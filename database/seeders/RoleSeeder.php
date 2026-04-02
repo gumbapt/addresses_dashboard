@@ -2,104 +2,89 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\Permission;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * Three fixed roles:
+     * - super-admin (Sudo Admin): full access, including all domain permissions (create/read/update/delete/manage),
+     *   all domain-group permissions, providers, reports, dashboards, roles, users, etc.—every active permission.
+     * - admin: cannot create domains, providers, or domain groups; can manage users within their scope.
+     * - manager: full operational access except adding/removing users and assigning/unassigning roles.
      */
     public function run(): void
     {
-        Role::firstOrCreate(
+        $superAdmin = Role::firstOrCreate(
             ['slug' => 'super-admin'],
             [
-                'name' => 'Super Admin',
-                'description' => 'System Super Administrator',
+                'name' => 'Sudo Admin',
+                'description' => 'Full access: create and manage domains, providers, and domain groups (categories), plus every other permission in the system.',
                 'is_active' => true,
             ]
         );
 
-        Role::firstOrCreate(
+        $adminRole = Role::firstOrCreate(
             ['slug' => 'admin'],
             [
-                'name' => 'Administrator',
-                'description' => 'System Administrator',
+                'name' => 'Admin',
+                'description' => 'Cannot create domains, providers, or domain groups; can add and manage users for their domains and groups.',
                 'is_active' => true,
             ]
         );
 
-        Role::firstOrCreate(
-            ['slug' => 'user'],
+        $managerRole = Role::firstOrCreate(
+            ['slug' => 'manager'],
             [
-                'name' => 'User',
-                'description' => 'Regular user',
+                'name' => 'Category Manager',
+                'description' => 'Can perform all actions except adding or removing users and assigning or unassigning roles. Can view dashboards for all domains in their category (domain groups).',
                 'is_active' => true,
             ]
         );
 
-        // Analytics User - Read-only access for viewing
-        $analyticsUser = Role::firstOrCreate(
-            ['slug' => 'analytics-user'],
-            [
-                'name' => 'Analytics User',
-                'description' => 'Read-only access to view reports, analytics, domains, providers and dashboards',
-                'is_active' => true,
-            ]
-        );  
+        // Sudo Admin: sync every active permission, including the full domain set:
+        // domain-create, domain-read, domain-update, domain-delete, domain-manage, and all domain-group-* slugs.
+        // Extra domain scopes (e.g. domain.access.all) are attached when DomainPermissionSeeder runs afterward.
+        $allPermissionIds = Permission::query()->where('is_active', true)->pluck('id')->all();
+        $superAdmin->permissions()->sync($allPermissionIds);
 
-        // Create read-only permissions if they don't exist
-        $readPermissions = [
-            [
-                'slug' => 'report-read',
-                'name' => 'View Reports',
-                'description' => 'Allows viewing reports and analytics',
-                'resource' => 'report',
-                'action' => 'read',
-            ],
-            [
-                'slug' => 'domain-read',
-                'name' => 'View Domain',
-                'description' => 'Allows viewing domain information',
-                'resource' => 'domain',
-                'action' => 'read',
-            ],
-            [
-                'slug' => 'provider-read',
-                'name' => 'View Provider',
-                'description' => 'Allows viewing provider information',
-                'resource' => 'provider',
-                'action' => 'read',
-            ],
-            [
-                'slug' => 'dashboard-view',
-                'name' => 'View Dashboard',
-                'description' => 'Allows viewing dashboards',
-                'resource' => 'dashboard',
-                'action' => 'view',
-            ],
+        // Admin: cannot create domains/providers/domain groups; cannot delete admins or manage role definitions.
+        $adminExcludedSlugs = [
+            'domain-create',
+            'provider-create',
+            'domain-group-create',
+            'domain-group-update',
+            'domain-group-delete',
+            'admin-delete',
+            'role-manage',
+            'role-create',
+            'role-update',
+            'role-delete',
         ];
+        $adminPermissionIds = Permission::query()
+            ->where('is_active', true)
+            ->whereNotIn('slug', $adminExcludedSlugs)
+            ->pluck('id')
+            ->all();
+        $adminRole->permissions()->sync($adminPermissionIds);
 
-        // Create or find permissions and assign to role
-        $permissionIds = [];
-        foreach ($readPermissions as $permData) {
-            $permission = Permission::firstOrCreate(
-                ['slug' => $permData['slug']],
-                [
-                    'name' => $permData['name'],
-                    'description' => $permData['description'],
-                    'resource' => $permData['resource'],
-                    'action' => $permData['action'],
-                    'is_active' => true,
-                ]
-            );
-            $permissionIds[] = $permission->id;
-        }
-
-        // Sync all read permissions with the role (replaces existing ones)
-        $analyticsUser->permissions()->sync($permissionIds);
+        $managerExcludedSlugs = [
+            'admin-create',
+            'admin-delete',
+            'user-create',
+            'user-delete',
+            'role-assign',
+            'role-unassign',
+        ];
+        $managerPermissionIds = Permission::query()
+            ->where('is_active', true)
+            ->whereNotIn('slug', $managerExcludedSlugs)
+            ->pluck('id')
+            ->all();
+        $managerRole->permissions()->sync($managerPermissionIds);
     }
 }

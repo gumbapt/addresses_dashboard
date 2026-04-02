@@ -265,6 +265,54 @@ class PermissionSeeder extends Seeder
                 'resource' => 'dashboard',
                 'action' => 'view',
             ],
+            [
+                'slug' => 'dashboard-view-all',
+                'name' => 'View All Domain Group Dashboards',
+                'description' => 'Allows viewing dashboards for all domains in the assigned domain groups (category)',
+                'resource' => 'dashboard',
+                'action' => 'view_all',
+            ],
+            // Domain group ("category") permissions
+            [
+                'slug' => 'domain-group-create',
+                'name' => 'Create Domain Group',
+                'description' => 'Allows creating domain groups',
+                'resource' => 'domain-group',
+                'action' => 'create',
+                'route' => 'domain-group/create',
+            ],
+            [
+                'slug' => 'domain-group-read',
+                'name' => 'View Domain Group',
+                'description' => 'Allows viewing domain groups',
+                'resource' => 'domain-group',
+                'action' => 'read',
+                'route' => 'domain-group/read',
+            ],
+            [
+                'slug' => 'domain-group-update',
+                'name' => 'Update Domain Group',
+                'description' => 'Allows updating domain groups',
+                'resource' => 'domain-group',
+                'action' => 'update',
+                'route' => 'domain-group/update',
+            ],
+            [
+                'slug' => 'domain-group-delete',
+                'name' => 'Delete Domain Group',
+                'description' => 'Allows deleting domain groups',
+                'resource' => 'domain-group',
+                'action' => 'delete',
+                'route' => 'domain-group/delete',
+            ],
+            [
+                'slug' => 'admin-assign-users',
+                'name' => 'Assign Users To Domains',
+                'description' => 'Allows assigning admins/users to domain groups and domains within scope',
+                'resource' => 'admin',
+                'action' => 'assign_users',
+                'route' => 'admin/assign-users',
+            ],
         ];
 
         foreach ($permissions as $perm) {

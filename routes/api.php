@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\ZipCodeController;
 use App\Http\Controllers\Api\Admin\ProviderController;
+use App\Http\Controllers\Api\Admin\BackupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
@@ -121,6 +122,16 @@ Route::prefix('admin')->group(function () {
             Route::put('/domains/{id}', [DomainController::class, 'update']);
             Route::delete('/domains/{id}', [DomainController::class, 'destroy']);
             Route::post('/domains/{id}/regenerate-api-key', [DomainController::class, 'regenerateApiKey']);
+
+            // Backups (Sudo Admin / super.admin only)
+            Route::get('/backups', [BackupController::class, 'index']);
+            Route::post('/backups', [BackupController::class, 'store']);
+            Route::get('/backups/{id}', [BackupController::class, 'show']);
+            Route::post('/backups/{id}/restore', [BackupController::class, 'restore']);
+            Route::get('/backups/{backupId}/files/{fileId}', [BackupController::class, 'download']);
+            Route::get('/backup-config', [BackupController::class, 'getConfig']);
+            Route::put('/backup-config', [BackupController::class, 'putConfig']);
+            Route::get('/backup-audit', [BackupController::class, 'audit']);
         });
         
         // Geographic reference data routes

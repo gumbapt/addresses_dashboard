@@ -10,6 +10,9 @@ class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * Default permission catalogue (including backup-read, backup-create, backup-restore, backup-config-manage,
+     * backup-audit-read). Run before RoleSeeder so the Sudo Admin role (super-admin) sync includes all rows.
      */
     public function run(): void
     {
@@ -312,6 +315,48 @@ class PermissionSeeder extends Seeder
                 'resource' => 'admin',
                 'action' => 'assign_users',
                 'route' => 'admin/assign-users',
+            ],
+            // Backup permissions (default catalogue). The Sudo Admin role (super-admin) receives all of these
+            // via RoleSeeder; admin and manager roles exclude backup-* slugs explicitly.
+            [
+                'slug' => 'backup-read',
+                'name' => 'View Backups',
+                'description' => 'Allows listing and viewing backup metadata and files',
+                'resource' => 'backup',
+                'action' => 'read',
+                'route' => 'backup/read',
+            ],
+            [
+                'slug' => 'backup-create',
+                'name' => 'Create Backups',
+                'description' => 'Allows triggering manual or automatic backup jobs',
+                'resource' => 'backup',
+                'action' => 'create',
+                'route' => 'backup/create',
+            ],
+            [
+                'slug' => 'backup-restore',
+                'name' => 'Restore Backups',
+                'description' => 'Allows restoring application state from a backup',
+                'resource' => 'backup',
+                'action' => 'restore',
+                'route' => 'backup/restore',
+            ],
+            [
+                'slug' => 'backup-config-manage',
+                'name' => 'Manage Backup Configuration',
+                'description' => 'Allows viewing and updating periodic backup settings',
+                'resource' => 'backup',
+                'action' => 'config',
+                'route' => 'backup/config',
+            ],
+            [
+                'slug' => 'backup-audit-read',
+                'name' => 'View Backup Audit Log',
+                'description' => 'Allows viewing backup audit entries',
+                'resource' => 'backup',
+                'action' => 'audit',
+                'route' => 'backup/audit',
             ],
         ];
 

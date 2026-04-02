@@ -13,7 +13,9 @@ class RoleSeeder extends Seeder
      *
      * Three fixed roles:
      * - super-admin (Sudo Admin): full access, including all domain permissions (create/read/update/delete/manage),
-     *   all domain-group permissions, providers, reports, dashboards, roles, users, etc.—every active permission.
+     *   all domain-group permissions, providers, reports, dashboards, roles, users, backups, etc.—every active
+     *   permission in PermissionSeeder (including backup-read, backup-create, backup-restore, backup-config-manage,
+     *   backup-audit-read).
      * - admin: cannot create domains, providers, or domain groups; can manage users within their scope.
      * - manager: full operational access except adding/removing users and assigning/unassigning roles.
      */
@@ -23,7 +25,7 @@ class RoleSeeder extends Seeder
             ['slug' => 'super-admin'],
             [
                 'name' => 'Sudo Admin',
-                'description' => 'Full access: create and manage domains, providers, and domain groups (categories), plus every other permission in the system.',
+                'description' => 'Full access: domains, providers, domain groups, backups (list, create, restore policy, config, audit), and every other permission.',
                 'is_active' => true,
             ]
         );
@@ -46,8 +48,9 @@ class RoleSeeder extends Seeder
             ]
         );
 
-        // Sudo Admin: sync every active permission, including the full domain set:
-        // domain-create, domain-read, domain-update, domain-delete, domain-manage, and all domain-group-* slugs.
+        // Sudo Admin: sync every active permission (requires PermissionSeeder to run before this seeder).
+        // Includes domain + domain-group + backup-* (backup-read, backup-create, backup-restore,
+        // backup-config-manage, backup-audit-read) and everything else in the permissions table.
         // Extra domain scopes (e.g. domain.access.all) are attached when DomainPermissionSeeder runs afterward.
         $allPermissionIds = Permission::query()->where('is_active', true)->pluck('id')->all();
         $superAdmin->permissions()->sync($allPermissionIds);
@@ -64,6 +67,11 @@ class RoleSeeder extends Seeder
             'role-create',
             'role-update',
             'role-delete',
+            'backup-read',
+            'backup-create',
+            'backup-restore',
+            'backup-config-manage',
+            'backup-audit-read',
         ];
         $adminPermissionIds = Permission::query()
             ->where('is_active', true)
@@ -79,6 +87,11 @@ class RoleSeeder extends Seeder
             'user-delete',
             'role-assign',
             'role-unassign',
+            'backup-read',
+            'backup-create',
+            'backup-restore',
+            'backup-config-manage',
+            'backup-audit-read',
         ];
         $managerPermissionIds = Permission::query()
             ->where('is_active', true)

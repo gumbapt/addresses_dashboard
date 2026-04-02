@@ -24,6 +24,12 @@ use App\Domain\Repositories\ProviderRepositoryInterface;
 use App\Infrastructure\Repositories\ProviderRepository;
 use App\Domain\Repositories\ReportRepositoryInterface;
 use App\Infrastructure\Repositories\ReportRepository;
+use App\Domain\Repositories\BackupRepositoryInterface;
+use App\Infrastructure\Repositories\BackupRepository;
+use App\Domain\Repositories\BackupConfigRepositoryInterface;
+use App\Infrastructure\Repositories\BackupConfigRepository;
+use App\Domain\Repositories\BackupAuditRepositoryInterface;
+use App\Infrastructure\Repositories\BackupAuditRepository;
 use App\Domain\Services\AuthServiceInterface;
 use App\Infrastructure\Services\AuthService;
 use App\Domain\Services\RegistrationServiceInterface;
@@ -47,6 +53,9 @@ class DomainServiceProvider extends ServiceProvider
         $this->app->bind(ZipCodeRepositoryInterface::class, ZipCodeRepository::class);
         $this->app->bind(ProviderRepositoryInterface::class, ProviderRepository::class);
         $this->app->bind(ReportRepositoryInterface::class, ReportRepository::class);
+        $this->app->bind(BackupRepositoryInterface::class, BackupRepository::class);
+        $this->app->bind(BackupConfigRepositoryInterface::class, BackupConfigRepository::class);
+        $this->app->bind(BackupAuditRepositoryInterface::class, BackupAuditRepository::class);
 
          // Services
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
